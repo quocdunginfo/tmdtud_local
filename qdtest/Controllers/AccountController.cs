@@ -17,6 +17,7 @@ namespace qdtest.Controllers
 
         public ActionResult LogOn()
         {
+            //thu nghiem github
             return View();
         }
 
