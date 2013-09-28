@@ -16,6 +16,7 @@ namespace qdtest.Controllers
         public BlogDBContext _db = null;
         public AdminController()
         {
+            //vi du về sự thay đổi
             this._db = new BlogDBContext();
             this._permission = new List<String>();
         }
