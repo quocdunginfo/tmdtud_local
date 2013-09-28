@@ -1,0 +1,19 @@
+﻿@model IEnumerable<qdtest.Models.UserModel>
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+<h2>Index</h2>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.username
+        </td>
+        <td>
+            @item.password
+        </td>
+        
+    </tr>
+}
+

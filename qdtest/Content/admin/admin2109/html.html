@@ -1,0 +1,752 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 lt-ie6 " lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie7" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> <html lang="fr" class="no-js ie9" lang="en"> <![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+	<meta name="robots" content="NOFOLLOW, NOINDEX" />
+	<title>Products - PrestaShop&trade;</title>
+	<script type="text/javascript">
+		var help_class_name = 'AdminProducts';
+		var iso_user = 'en';
+		var country_iso_code = 'US';
+		var _PS_VERSION_ = '1.5.5.0';
+
+		var helpboxes = 1;
+		var roundMode = 2;
+						var youEditFieldFor = '';
+					
+		var autorefresh_notifications = '';
+		var new_order_msg = 'A new order has been placed on your shop.';
+		var order_number_msg = 'Order number:';
+		var total_msg = 'Total:';
+		var from_msg = 'From:';
+		var see_order_msg = 'View this order';
+		var new_customer_msg = 'A new customer registered on your shop.';
+		var customer_name_msg = 'Customer name:';
+		var see_customer_msg = 'View this customer';
+		var new_msg = 'A new message posted on your shop.';
+		var excerpt_msg = 'Excerpt:';
+		var see_msg = 'Read this message';
+		var token_admin_orders = '03b97c0470d2242e7ad0b01a281a087b';
+		var token_admin_customers = 'a63897f6b09f19ea042c44d7f543b6b6';
+		var token_admin_customer_threads = '2ca6e722bbb83b079663baeb78896005';
+		var currentIndex = 'index.php?controller=AdminProducts';
+		var choose_language_translate = "Choose language";
+	</script>
+
+			<link href="../modules/gamification/views/css/gamification.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/../js/jquery/plugins/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../css/admin.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/themes/default/css/admin.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/../js/jquery/plugins/cluetip/jquery.cluetip.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/../js/jquery/plugins/alerts/jquery.alerts.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/../js/jquery/plugins/chosen/jquery.chosen.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../js/jquery/plugins/treeview-categories/jquery.treeview-categories.css" rel="stylesheet" type="text/css" media="all" />
+				<script type="text/javascript" src="../admin2109/../js/jquery/jquery-1.7.2.min.js"></script>
+			<script type="text/javascript" src="../modules/gamification/views/js/gamification.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/fancybox/jquery.fancybox.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/cluetip/jquery.cluetip.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/jquery.hoverIntent.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/jquery.scrollTo.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/alerts/jquery.alerts.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/chosen/jquery.chosen.js"></script>
+			<script type="text/javascript" src="../js/admin.js"></script>
+			<script type="text/javascript" src="../js/toggle.js"></script>
+			<script type="text/javascript" src="../js/tools.js"></script>
+			<script type="text/javascript" src="../js/ajax.js"></script>
+			<script type="text/javascript" src="../js/toolbar.js"></script>
+			<script type="text/javascript" src="../js/notifications.js"></script>
+			<script type="text/javascript" src="../js/helpAccess.js"></script>
+			<script type="text/javascript" src="../js/jquery/plugins/treeview-categories/jquery.treeview-categories.js"></script>
+			<script type="text/javascript" src="../js/jquery/plugins/treeview-categories/jquery.treeview-categories.async.js"></script>
+			<script type="text/javascript" src="../js/jquery/plugins/treeview-categories/jquery.treeview-categories.edit.js"></script>
+			<script type="text/javascript" src="../js/admin-categories-tree.js"></script>
+		<link rel="icon" type="image/vnd.microsoft.icon" href="/ps/img/favicon.ico" />
+	<link rel="shortcut icon" type="image/x-icon" href="/ps/img/favicon.ico" />
+	<script>
+				var admin_gamification_ajax_url = 'index.php?controller=AdminGamification&token=ed4504a18ef6ead39695897d952cd543';
+				var current_id_tab = 21;
+			</script>
+	<!--[if IE]>
+	<link type="text/css" rel="stylesheet" href="http://localhost/ps/css/admin-ie.css" />
+	<![endif]-->
+	<style type="text/css">
+		div#header_infos, div#header_infos a#header_shopname, div#header_infos a#header_logout, div#header_infos a#header_foaccess {color:#383838}
+	</style>
+</head>
+<body style="">
+<div id="ajax_running">
+	<img src="../img/admin/ajax-loader-yellow.gif" alt=""> Loading...
+</div>
+<div id="top_container">
+	<div id="container">
+		<div id="header">
+			<div id="header_infos">
+				<a id="header_shopname" href="index.php?controller=AdminHome&amp;token=129cfa7948bc6446d4dfb5d3779f1260"><span>Demo Store</span></a>
+				<div id="employee_box">
+					<div id="employee_infos">
+						<div class="employee_name">
+							Welcome, <strong>D&nbsp;Demo</strong>
+						</div>
+						<div class="clear">
+						</div>
+						<ul id="employee_links">
+							<li><a href="index.php?controller=AdminEmployees&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08&amp;id_employee=1&amp;updateemployee">My preferences</a></li>
+							<li class="separator">&nbsp;</li>
+							<li><a id="header_logout" href="index.php?logout">logout</a></li>
+							<li class="separator">&nbsp;</li>
+							<a href="http://demo-bo.prestashop.com/" id="header_foaccess" target="_blank" title="View my shop">View my shop</a>
+						</ul>
+					</div>
+				</div>
+				<div id="header_search">
+					<form method="post" action="index.php?controller=AdminSearch&amp;token=1282adcdd5442b5cdc52ad0624100f98">
+						<input name="bo_query" id="bo_query" value="" type="text">
+						<select style="display: none;" name="bo_search_type" id="bo_search_type" class="chosen no-search chzn-done">
+							<option value="0">everywhere</option>
+							<option value="1">catalog</option>
+							<optgroup label="customers:">
+							<option value="2">by name</option>
+							<option value="6">by ip address</option>
+							</optgroup>
+							<option value="3">orders</option>
+							<option value="4">invoices</option>
+							<option value="5">carts</option>
+							<option value="7">modules</option>
+						</select>
+						<div style="width: 115px;" class="chzn-container chzn-container-single" id="bo_search_type_chzn">
+							<a tabindex="0" href="javascript:void(0)" class="chzn-single"><span>everywhere</span>
+							<div>
+								<b></b>
+							</div>
+							</a>
+							<div class="chzn-drop" style="left: -9000px; width: 113px; top: 26px;">
+								<div style="display: none;" class="chzn-search">
+									<input tabindex="-1" style="width: 78px;" autocomplete="off" type="text">
+								</div>
+								<ul class="chzn-results">
+									<li id="bo_search_type_chzn_o_0" class="active-result result-selected" style="">everywhere</li>
+									<li id="bo_search_type_chzn_o_1" class="active-result" style="">catalog</li>
+									<li style="display: list-item;" id="bo_search_type_chzn_g_2" class="group-result ">customers:</li>
+									<li id="bo_search_type_chzn_o_3" class="active-result group-option" style="">by name</li>
+									<li id="bo_search_type_chzn_o_4" class="active-result group-option" style="">by ip address</li>
+									<li id="bo_search_type_chzn_o_5" class="active-result" style="">orders</li>
+									<li id="bo_search_type_chzn_o_6" class="active-result" style="">invoices</li>
+									<li id="bo_search_type_chzn_o_7" class="active-result" style="">carts</li>
+									<li id="bo_search_type_chzn_o_8" class="active-result" style="">modules</li>
+								</ul>
+							</div>
+						</div>
+						<input id="bo_search_submit" class="button" value="Search" type="submit">
+					</form>
+				</div>
+				<div id="header_quick">
+					<select style="display: none;" onchange="quickSelect(this);" id="quick_select" class="chosen no-search chzn-done">
+						<option value="0">Quick Access</option>
+						<option value="index.php">» Home</option>
+						<option value="http://demo-bo.prestashop.com/_blank">» My Shop</option>
+						<option value="index.php?controller=AdminCategories&amp;addcategory&amp;token=41bc65e5fdebe2e81b7b99a5df88f1f8">» New category</option>
+						<option value="index.php?controller=AdminProducts&amp;addproduct&amp;token=cfb287e4d4e554da95d8413f39bee1ff">» New product</option>
+						<option value="index.php?controller=AdminCartRules&amp;addcart_rule&amp;token=07118229fcf17823f4ac3509bbe272ca">» New voucher</option>
+					</select>
+					<div style="width: 103px;" class="chzn-container chzn-container-single" id="quick_select_chzn">
+						<a tabindex="0" href="javascript:void(0)" class="chzn-single"><span>Quick Access</span>
+						<div>
+							<b></b>
+						</div>
+						</a>
+						<div class="chzn-drop" style="left: -9000px; width: 101px; top: 24px;">
+							<div style="display: none;" class="chzn-search">
+								<input tabindex="-1" style="width: 66px;" autocomplete="off" type="text">
+							</div>
+							<ul class="chzn-results">
+								<li id="quick_select_chzn_o_0" class="active-result result-selected" style="">Quick Access</li>
+								<li id="quick_select_chzn_o_1" class="active-result" style="">» Home</li>
+								<li id="quick_select_chzn_o_2" class="active-result" style="">» My Shop</li>
+								<li id="quick_select_chzn_o_3" class="active-result" style="">» New category</li>
+								<li id="quick_select_chzn_o_4" class="active-result" style="">» New product</li>
+								<li id="quick_select_chzn_o_5" class="active-result" style="">» New voucher</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul id="menu">
+				<li class="submenu_size maintab " id="maintab9">
+				<a href="#" class="title">
+				<img src="../img/t/AdminCatalog.gif" alt="">Catalog </a>
+				<ul class="submenu">
+					<li><a href="index.php?controller=AdminProducts&amp;token=cfb287e4d4e554da95d8413f39bee1ff">Products</a></li>
+					<li><a href="index.php?controller=AdminCategories&amp;token=41bc65e5fdebe2e81b7b99a5df88f1f8">Categories</a></li>
+					<li><a href="index.php?controller=AdminFeatures&amp;token=ca481210d16b0849ccaf8eed1603202a">Features</a></li>
+					<li><a href="index.php?controller=AdminManufacturers&amp;token=4e4ff38a29b100085769164a19d80de0">Manufacturers</a></li>
+					<li><a href="index.php?controller=AdminSuppliers&amp;token=0806289500d5387f1b649b328246567d">Suppliers</a></li>
+					<li><a href="index.php?controller=AdminScenes&amp;token=b6a96dd74694c6ec487011457b5a809a">Image Mapping</a></li>
+					<li><a href="index.php?controller=AdminTags&amp;token=0c4c69c3222710a49e002ebdbbc0044f">Tags</a></li>
+					<li><a href="index.php?controller=AdminAttachments&amp;token=b03f8a660ec96cefa9c714f954086d67">Attachments</a></li>
+				</ul>
+				</li>
+				<li class="submenu_size maintab " id="maintab10">
+				<a href="#" class="title">
+				<img src="../img/t/AdminParentOrders.gif" alt="">Orders </a>
+				<ul class="submenu">
+					<li><a href="index.php?controller=AdminOrders&amp;token=a144464ab71338ef87b31a5ebe66f308">Orders</a></li>
+					<li><a href="index.php?controller=AdminInvoices&amp;token=4ea759fbe8de0e7ceb7da05a605a129d">Invoices</a></li>
+					<li><a href="index.php?controller=AdminReturn&amp;token=41a913d2729b1c3dc626afcd096dcf0d">Merchandise Returns</a></li>
+					<li><a href="index.php?controller=AdminDeliverySlip&amp;token=841f38beeac97bc94b6b86b5831606d9">Delivery Slips</a></li>
+					<li><a href="index.php?controller=AdminSlip&amp;token=e38a0ffa4e623b51df31345d87349ce7">Credit Slips</a></li>
+					<li><a href="index.php?controller=AdminStatuses&amp;token=80aa0a79048dde586143cfeb76f15bc5">Statuses</a></li>
+					<li><a href="index.php?controller=AdminOrderMessage&amp;token=e044701f002d12eeadf966f195518ee7">Order Messages</a></li>
+				</ul>
+				</li>
+				<li class="submenu_size maintab " id="maintab11">
+				<a href="#" class="title">
+				<img src="../img/t/AdminParentCustomer.gif" alt="">Customers </a>
+				<ul class="submenu">
+					<li><a href="index.php?controller=AdminCustomers&amp;token=b311b3c19d146d996f475f9e8f90ffc9">Customers</a></li>
+					<li><a href="index.php?controller=AdminAddresses&amp;token=07611ba6a0979a3612897567ba6529fd">Addresses</a></li>
+					<li><a href="index.php?controller=AdminGroups&amp;token=9789580f2fb3d6585b1218affe2d567e">Groups</a></li>
+					<li><a href="index.php?controller=AdminCarts&amp;token=06301e180b758086f347c0cb02715d26">Shopping Carts</a></li>
+					<li><a href="index.php?controller=AdminCustomerThreads&amp;token=e840120aeef4e424817a21be594e4715">Customer Service</a></li>
+					<li><a href="index.php?controller=AdminContacts&amp;token=8ec35bc2e1705504f30684532f1b96bc">Contacts</a></li>
+					<li><a href="index.php?controller=AdminGenders&amp;token=46928e15f8f67e913c5d19e3854ff95f">Titles</a></li>
+				</ul>
+				</li>
+				<li class="submenu_size maintab " id="maintab12">
+				<ul class="submenu">
+					<li><a href="index.php?controller=AdminCartRules&amp;token=07118229fcf17823f4ac3509bbe272ca">Cart Rules</a></li>
+					<li><a href="index.php?controller=AdminSpecificPriceRule&amp;token=45401103a957458a024379e989f34f5b">Catalog Price Rules</a></li>
+				</ul>
+				</li>
+				<li class="submenu_size maintab " id="maintab13">
+				<a href="#" class="title">
+				<img src="../img/t/AdminParentShipping.gif" alt="">Shipping </a>
+				<ul class="submenu">
+					<li><a href="index.php?controller=AdminShipping&amp;token=314d15392b5b611bb1b87a683adcd402">Shipping</a></li>
+					<li><a href="index.php?controller=AdminCarriers&amp;token=4db25b075d7db171dac55ec39d90045e">Carriers</a></li>
+					<li><a href="index.php?controller=AdminRangePrice&amp;token=aa8c4e3e3365883ea77b3268099d9b16">Price Ranges</a></li>
+					<li><a href="index.php?controller=AdminRangeWeight&amp;token=3d0b96f93119173c8c552a97f32593e3">Weight Ranges</a></li>
+				</ul>
+				</li>
+				<li class="submenu_size maintab " id="maintab14">
+				<ul class="submenu">
+					<li><a href="index.php?controller=AdminLocalization&amp;token=1591499acca9f7663c3eb4a6a273558c">Localization</a></li>
+					<li><a href="index.php?controller=AdminLanguages&amp;token=d9ef0a483a3a7e1edc6bd3ac79f08424">Languages</a></li>
+					<li><a href="index.php?controller=AdminZones&amp;token=fa26842bffab44ab3e8122b442908920">Zones</a></li>
+					<li><a href="index.php?controller=AdminCountries&amp;token=ec04a0d1aad8d6a1a96e4cc5f5a48bb7">Countries</a></li>
+					<li><a href="index.php?controller=AdminStates&amp;token=edcd3fab09763beb8cc43bc6e16c9dd4">States</a></li>
+					<li><a href="index.php?controller=AdminCurrencies&amp;token=1cd1339f69a65a46672a407ea63e0d75">Currencies</a></li>
+					<li><a href="index.php?controller=AdminTaxes&amp;token=16508bb0c70889d52838ad14e0a91d87">Taxes</a></li>
+					<li><a href="index.php?controller=AdminTaxRulesGroup&amp;token=dad826a175b6581e99cdd63647b09c0f">Tax Rules</a></li>
+					<li><a href="index.php?controller=AdminTranslations&amp;token=1c9bfdb20b72a475c862e4af4ae2296f">Translations</a></li>
+				</ul>
+				</li>
+				<li class="submenu_size maintab " id="maintab15">
+				<ul class="submenu">
+					<li><a href="index.php?controller=AdminModules&amp;token=6f7bdb8af08c0f7444f06501f3b0b13d">Modules</a></li>
+					<li><a href="index.php?controller=AdminAddonsCatalog&amp;token=7ba1a4dce2ea06b59ec116a55656ad2a">Modules &amp; Themes Catalog</a></li>
+					<li><a href="index.php?controller=AdminModulesPositions&amp;token=75b8b401d2caa7d8706526660870411b">Positions</a></li>
+					<li><a href="index.php?controller=AdminPayment&amp;token=72489f850378fa289ad9387894ae6ebc">Payment</a></li>
+				</ul>
+				</li>
+				<li class="submenu_size maintab " id="maintab16">
+				<a href="#" class="title">
+				<img src="../img/t/AdminParentPreferences.gif" alt="">Preferences </a>
+				<ul class="submenu">
+					<li><a href="index.php?controller=AdminPreferences&amp;token=15bd4164905de3bcef195b775409b123">General</a></li>
+					<li><a href="index.php?controller=AdminOrderPreferences&amp;token=979338d047bd22cbaabf2120f8abe335">Orders</a></li>
+					<li><a href="index.php?controller=AdminPPreferences&amp;token=5c10874ee7919c57c3aa2dbf77bdae67">Products</a></li>
+					<li><a href="index.php?controller=AdminCustomerPreferences&amp;token=53cd511b05f6edc58349c8b7e84737c4">Customers</a></li>
+					<li><a href="index.php?controller=AdminThemes&amp;token=1fd3779ed6cee5cca50976cf5b845ed4">Themes</a></li>
+					<li><a href="index.php?controller=AdminMeta&amp;token=b6a492842b5255461f37328e5f64692c">SEO &amp; URLs</a></li>
+					<li><a href="index.php?controller=AdminCmsContent&amp;token=7283f28dab7e3dfe066578d28d7fc478">CMS</a></li>
+					<li><a href="index.php?controller=AdminImages&amp;token=93c05066c50f2f4f143aa67a29ef3c7d">Images</a></li>
+					<li><a href="index.php?controller=AdminStores&amp;token=873c827ed3da4285a79a5301037fd67c">Store Contacts</a></li>
+					<li><a href="index.php?controller=AdminSearchConf&amp;token=d76fd07032913831d0d6dabd3d477fa1">Search</a></li>
+					<li><a href="index.php?controller=AdminMaintenance&amp;token=3cf88729f2b6e7d421eba429b4b0a306">Maintenance</a></li>
+					<li><a href="index.php?controller=AdminGeolocation&amp;token=4748f66281467ac806058adff249755a">Geolocation</a></li>
+				</ul>
+				</li>
+				<li class="submenu_size maintab " id="maintab17">
+				<ul class="submenu">
+					<li><a href="index.php?controller=AdminInformation&amp;token=a59dcc293b870cf14d890d159a10f51a">Configuration Information</a></li>
+					<li><a href="index.php?controller=AdminPerformance&amp;token=7d1362bd35e60cd6a3a3f1e48cf226c4">Performance</a></li>
+					<li><a href="index.php?controller=AdminEmails&amp;token=3493e7876cc1207d2556d2a257b71143">E-mail</a></li>
+					<li><a href="index.php?controller=AdminImport&amp;token=f5063259e8eb5837dc8ddcf925ec35da">CSV Import</a></li>
+					<li><a href="index.php?controller=AdminBackup&amp;token=0457f1508afcd336db3fee338a074070">DB Backup</a></li>
+					<li><a href="index.php?controller=AdminRequestSql&amp;token=a99b18f7d433c696b42b6b9586f9052f">SQL Manager</a></li>
+					<li><a href="index.php?controller=AdminLogs&amp;token=e9699d296c36c431eb27ec0def6ef414">Logs</a></li>
+					<li><a href="index.php?controller=AdminWebservice&amp;token=9881c17aed3e9f12d9cd3f1f082da6eb">Webservice</a></li>
+					<li><a href="index.php?controller=AdminSelfUpgrade&amp;token=9561559492199b36feba5032ce97b36a">1-Click Upgrade</a></li>
+				</ul>
+				</li>
+				<li class="submenu_size maintab active" id="maintab18">
+				<a href="#" class="title">
+				<img src="../img/t/AdminAdmin.gif" alt="">Administration </a>
+				<ul class="submenu">
+					<li><a href="index.php?controller=AdminAdminPreferences&amp;token=67c66a3ae72bb1c2b4345ecd10dbd33d">Preferences</a></li>
+					<li><a href="index.php?controller=AdminQuickAccesses&amp;token=e2ea6e5aa32f8436c8adbb784f1b5bb1">Quick Access</a></li>
+					<li><a href="index.php?controller=AdminEmployees&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08">Employees</a></li>
+					<li><a href="index.php?controller=AdminProfiles&amp;token=213e2ea357ac9ca515126cd49fcf442a">Profiles</a></li>
+					<li><a href="index.php?controller=AdminAccess&amp;token=276fdb9a89302e2fcbfbcc8138b52e9c">Permissions</a></li>
+					<li><a href="index.php?controller=AdminTabs&amp;token=a6f1d648f7f93446e0d24a9204cf6942">Menus</a></li>
+					<li><a href="index.php?controller=AdminGamification&amp;token=d06f4022e1114c068ebca89d8480c351">Merchant Expertise</a></li>
+				</ul>
+				</li>
+				<li class="submenu_size maintab " id="maintab19">
+				<ul class="submenu">
+					<li><a href="index.php?controller=AdminStats&amp;token=630787798388728dedab46801099d4ad">Stats</a></li>
+					<li><a href="index.php?controller=AdminSearchEngines&amp;token=30388f2d00985a2535050037609ad54b">Search Engines</a></li>
+					<li><a href="index.php?controller=AdminReferrers&amp;token=26d6659c842f1234c8a1321ef52dbbaf">Referrers</a></li>
+				</ul>
+				</li>
+			</ul>
+		</div>
+		<div id="main">
+			<div id="content">
+				<br>
+				<script type="text/javascript">
+		$(document).ready(function() {
+			$('table.employee .filter').keypress(function(event){
+				formSubmit(event, 'submitFilterButtonemployee')
+			})
+		});
+	</script>
+				<script type="text/javascript">
+		$(function() {
+			if ($("table.employee .datepicker").length > 0)
+				$("table.employee .datepicker").datepicker({
+					prevText: '',
+					nextText: '',
+					dateFormat: 'yy-mm-dd'
+				});
+		});
+	</script>
+				<div class="toolbar-placeholder">
+					<div class="toolbarBox toolbarHead">
+						<ul class="cc_button">
+							<li>
+							<a id="desc-employee-new" class="toolbar_btn" href="index.php?controller=AdminEmployees&amp;addemployee&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08" title="Add new">
+							<span class="process-icon-new "></span>
+							<div>
+								Add new
+							</div>
+							</a>
+							</li>
+						</ul>
+						<script language="javascript" type="text/javascript">
+			//<![CDATA[
+				var submited = false
+				var modules_list_loaded = false;
+				$(function() {
+					//get reference on save link
+					btn_save = $('span[class~="process-icon-save"]').parent();
+					//get reference on form submit button
+					btn_submit = $('#employee_form_submit_btn');
+					if (btn_save.length > 0 && btn_submit.length > 0)
+					{
+						//get reference on save and stay link
+						btn_save_and_stay = $('span[class~="process-icon-save-and-stay"]').parent();
+						//get reference on current save link label
+						lbl_save = $('#desc-employee-save div');
+						//override save link label with submit button value
+						if (btn_submit.val().length > 0)
+							lbl_save.html(btn_submit.attr("value"));
+						if (btn_save_and_stay.length > 0)
+						{
+							//get reference on current save link label
+							lbl_save_and_stay = $('#desc-employee-save-and-stay div');
+							//override save and stay link label with submit button value
+							if (btn_submit.val().length > 0 && lbl_save_and_stay && !lbl_save_and_stay.hasClass('locked'))
+							{
+								lbl_save_and_stay.html(btn_submit.val() + " and stay ");
+							}
+						}
+						//hide standard submit button
+						btn_submit.hide();
+						//bind enter key press to validate form
+						$('#employee_form').keypress(function (e) {
+							if (e.which == 13 && e.target.localName != 'textarea')
+								$('#desc-employee-save').click();
+						});
+						//submit the form
+							btn_save.click(function() {
+								// Avoid double click
+								if (submited)
+									return false;
+								submited = true;
+								//add hidden input to emulate submit button click when posting the form -> field name posted
+								btn_submit.before('<input type="hidden" name="'+btn_submit.attr("name")+'" value="1" />');
+								$('#employee_form').submit();
+								return false;
+							});
+							if (btn_save_and_stay)
+							{
+								btn_save_and_stay.click(function() {
+									//add hidden input to emulate submit button click when posting the form -> field name posted
+									btn_submit.before('<input type="hidden" name="'+btn_submit.attr("name")+'AndStay" value="1" />');
+									$('#employee_form').submit();
+									return false;
+								});
+							}
+					}
+									});
+							//]]>
+			</script>
+						<div class="pageTitle">
+							<h3>
+							<span id="current_obj" style="font-weight: normal;">
+							<span class="breadcrumb item-0 ">Administration <img alt=">" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"> </span>
+							<span class="breadcrumb item-1 ">Employees </span>
+							</span>
+							</h3>
+						</div>
+					</div>
+				</div>
+				<div class="leadin">
+				</div>
+				<form method="post" action="index.php?controller=AdminEmployees&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08#employee" class="form">
+					<input id="submitFilteremployee" name="submitFilteremployee" value="0" type="hidden">
+					<table class="table_grid" name="list_table">
+					<tbody>
+					<tr>
+						<td style="vertical-align: bottom;">
+							<span style="float: left;">
+							Page <b>1</b> / 1 | Display
+							<select name="pagination" onchange="submit()">
+								<option value="20">20</option>
+								<option value="50" selected="selected">50</option>
+								<option value="100">100</option>
+								<option value="300">300</option>
+							</select>
+							 / 0 result(s) </span>
+							<span style="float: right;">
+							<input id="submitFilterButtonemployee" name="submitFilter" value="Filter" class="button" type="submit">
+							</span>
+							<span class="clear"></span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<table class="table employee" style="width: 100%; margin-bottom:10px;" cellpadding="0" cellspacing="0">
+							<colgroup><col width="10px">
+							<col width="25px">
+							<col>
+							<col width="130px">
+							<col width="180px">
+							<col width="90px">
+							<col width="30px">
+							<col width="52px">
+							</colgroup>
+							<thead>
+							<tr class="nodrag nodrop" style="height: 40px">
+								<th class="center">
+									<input name="checkme" class="noborder" onclick="checkDelBoxes(this.form, 'employeeBox[]', this.checked)" type="checkbox">
+								</th>
+								<th class="center">
+									<span class="title_box">
+									ID </span>
+									<br>
+									<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=id_employee&amp;employeeOrderway=desc&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08">
+									<img src="../img/admin/down.gif" border="0"></a>
+									<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=id_employee&amp;employeeOrderway=asc&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08">
+									<img src="../img/admin/up.gif" border="0"></a>
+								</th>
+								<th>
+									<span class="title_box">
+									Last Name </span>
+									<br>
+									<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=lastname&amp;employeeOrderway=desc&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08">
+									<img src="../img/admin/down.gif" border="0"></a>
+									<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=lastname&amp;employeeOrderway=asc&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08">
+									<img src="../img/admin/up_d.gif" border="0"></a>
+								</th>
+								<th>
+									<span class="title_box">
+									First Name </span>
+									<br>
+									<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=firstname&amp;employeeOrderway=desc&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08">
+									<img src="../img/admin/down.gif" border="0"></a>
+									<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=firstname&amp;employeeOrderway=asc&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08">
+									<img src="../img/admin/up.gif" border="0"></a>
+								</th>
+								<th>
+									<span class="title_box">
+									Email address </span>
+									<br>
+									<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=email&amp;employeeOrderway=desc&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08">
+									<img src="../img/admin/down.gif" border="0"></a>
+									<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=email&amp;employeeOrderway=asc&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08">
+									<img src="../img/admin/up.gif" border="0"></a>
+								</th>
+								<th>
+									<span class="title_box">
+									Profile </span>
+									<br>
+									<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=profile&amp;employeeOrderway=desc&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08">
+									<img src="../img/admin/down.gif" border="0"></a>
+									<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=profile&amp;employeeOrderway=asc&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08">
+									<img src="../img/admin/up.gif" border="0"></a>
+								</th>
+								<th class="center">
+									<span class="title_box">
+									Can log in </span>
+									<br>
+									<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=active&amp;employeeOrderway=desc&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08">
+									<img src="../img/admin/down.gif" border="0"></a>
+									<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=active&amp;employeeOrderway=asc&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08">
+									<img src="../img/admin/up.gif" border="0"></a>
+								</th>
+								<th class="center">
+									Actions<br>
+									&nbsp;
+								</th>
+							</tr>
+							<tr class="nodrag nodrop filter row_hover" style="height: 35px;">
+								<td class="center">
+									 --
+								</td>
+								<td class="center">
+									<input class="filter" name="employeeFilter_id_employee" value="" style="width:25px" type="text">
+								</td>
+								<td>
+									<input class="filter" name="employeeFilter_lastname" value="de" style="width:95%" type="text">
+								</td>
+								<td>
+									<input class="filter" name="employeeFilter_firstname" value="" style="width:130px" type="text">
+								</td>
+								<td>
+									<input class="filter" name="employeeFilter_email" value="" style="width:180px" type="text">
+								</td>
+								<td>
+									<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="employeeFilter_pl!name" style="width:90px">
+										<option value="">--</option>
+										<option value="SuperAdmin">SuperAdmin</option>
+										<option value="Administrator">Administrator</option>
+										<option value="Logistician" selected="selected">Logistician</option>
+										<option value="Translator">Translator</option>
+										<option value="Salesman">Salesman</option>
+									</select>
+								</td>
+								<td class="center">
+									<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="employeeFilter_active">
+										<option value="">--</option>
+										<option value="1" selected="selected">Yes</option>
+										<option value="0">No</option>
+									</select>
+								</td>
+								<td class="center">
+									--
+								</td>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td class="center" colspan="8">
+									No items found
+								</td>
+							</tr>
+							</tbody>
+							</table>
+							<p>
+								<input class="button" name="submitBulkdeleteemployee" value="Delete selected" onclick="return confirm('Delete selected items?');" type="submit">
+							</p>
+						</td>
+					</tr>
+					</tbody>
+					</table>
+					<input name="token" value="3ea43f6a9cacd87c68bc3aa234f53d08" type="hidden">
+				</form>
+				<div class="toolbar-placeholder">
+					<div class="toolbarBox toolbarHead">
+						<ul class="cc_button">
+							<li>
+							<a id="desc-employee-save" class="toolbar_btn" href="#" title="Save">
+							<span class="process-icon-save "></span>
+							<div>
+								Save
+							</div>
+							</a>
+							</li>
+						</ul>
+						<script language="javascript" type="text/javascript">
+			//<![CDATA[
+				var submited = false
+				var modules_list_loaded = false;
+				$(function() {
+					//get reference on save link
+					btn_save = $('span[class~="process-icon-save"]').parent();
+					//get reference on form submit button
+					btn_submit = $('#employee_form_submit_btn');
+					if (btn_save.length > 0 && btn_submit.length > 0)
+					{
+						//get reference on save and stay link
+						btn_save_and_stay = $('span[class~="process-icon-save-and-stay"]').parent();
+						//get reference on current save link label
+						lbl_save = $('#desc-employee-save div');
+						//override save link label with submit button value
+						if (btn_submit.val().length > 0)
+							lbl_save.html(btn_submit.attr("value"));
+						if (btn_save_and_stay.length > 0)
+						{
+							//get reference on current save link label
+							lbl_save_and_stay = $('#desc-employee-save-and-stay div');
+							//override save and stay link label with submit button value
+							if (btn_submit.val().length > 0 && lbl_save_and_stay && !lbl_save_and_stay.hasClass('locked'))
+							{
+								lbl_save_and_stay.html(btn_submit.val() + " and stay ");
+							}
+						}
+						//hide standard submit button
+						btn_submit.hide();
+						//bind enter key press to validate form
+						$('#employee_form').keypress(function (e) {
+							if (e.which == 13 && e.target.localName != 'textarea')
+								$('#desc-employee-save').click();
+						});
+						//submit the form
+							btn_save.click(function() {
+								// Avoid double click
+								if (submited)
+									return false;
+								submited = true;
+								//add hidden input to emulate submit button click when posting the form -> field name posted
+								btn_submit.before('<input type="hidden" name="'+btn_submit.attr("name")+'" value="1" />');
+								$('#employee_form').submit();
+								return false;
+							});
+							if (btn_save_and_stay)
+							{
+								btn_save_and_stay.click(function() {
+									//add hidden input to emulate submit button click when posting the form -> field name posted
+									btn_submit.before('<input type="hidden" name="'+btn_submit.attr("name")+'AndStay" value="1" />');
+									$('#employee_form').submit();
+									return false;
+								});
+							}
+					}
+									});
+							//]]>
+			</script>
+						<div class="pageTitle">
+							<h3>
+							<span id="current_obj" style="font-weight: normal;">
+							<span class="breadcrumb item-0 ">Administration <img alt=">" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"> </span>
+							<span class="breadcrumb item-1 ">Employees </span>
+							</span>
+							</h3>
+						</div>
+					</div>
+				</div>
+				<div class="leadin">
+				</div>
+				<script type="text/javascript">
+	id_language = Number(1);
+				</script>
+				<form action="index.php?controller=AdminEmployees&amp;token=3ea43f6a9cacd87c68bc3aa234f53d08" id="employee_form" method="post" enctype="multipart/form-data">
+					<fieldset>
+						<legend>
+						<img src="../img/t/AdminEmployees.gif">
+						Employee options </legend>
+						<div style="clear: both; padding-top:15px;" id="conf_id_PS_PASSWD_TIME_BACK">
+							<label class="conf_title">
+							Password regeneration</label>
+							<div class="margin-form">
+								<input size="5" name="PS_PASSWD_TIME_BACK" value="360" type="text">
+								&nbsp; minutes
+								<p class="preference_description">
+									Security: Minimum time to wait between two password changes.
+								</p>
+							</div>
+						</div>
+						<div class="clear">
+						</div>
+						<div style="clear: both; padding-top:15px;" id="conf_id_PS_BO_ALLOW_EMPLOYEE_FORM_LANG">
+							<label class="conf_title">
+							Memorize the language used in Admin panel forms</label>
+							<div class="margin-form">
+								<select name="PS_BO_ALLOW_EMPLOYEE_FORM_LANG" id="PS_BO_ALLOW_EMPLOYEE_FORM_LANG">
+									<option value="0" selected="selected">No</option>
+									<option value="1">Yes</option>
+								</select>
+								<p class="preference_description">
+									Allow employees to select a specific language for the Admin panel form.
+								</p>
+							</div>
+						</div>
+						<div class="clear">
+						</div>
+						<div class="margin-form">
+							<input style="display: none;" value="Save" name="submitOptionsemployee" class="button" id="employee_form_submit_btn" type="submit">
+						</div>
+					</fieldset>
+					<br>
+				</form>
+				<div style="clear:both;height:0;line-height:0">
+					&nbsp;
+				</div>
+			</div>
+			<div style="clear:both;height:0;line-height:0">
+				&nbsp;
+			</div>
+		</div>
+		<div id="footer">
+			<div class="footerLeft">
+				<a href="http://www.prestashop.com/" target="_blank">PrestaShop™ 1.5.4.1</a><br>
+				<span>Load time:0.222s</span>
+			</div>
+			<div class="footerRight">
+				 |&nbsp;<a href="http://www.prestashop.com/en/contact_us/" target="_blank" class="footer_link">Contact</a>
+				|&nbsp;<a href="http://forge.prestashop.com" target="_blank" class="footer_link">Bug Tracker</a>
+				|&nbsp;<a href="http://www.prestashop.com/forums/" target="_blank" class="footer_link">Forum</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="ajax_confirmation" style="display:none">
+</div>
+<div id="ajaxBox" style="display:none">
+</div>
+<div id="scrollTop">
+	<a style="display: none;" href="#top"></a>
+</div>
+<div id="fancybox-tmp">
+</div>
+<div id="fancybox-loading">
+	<div>
+	</div>
+</div>
+<div id="fancybox-overlay">
+</div>
+<div id="fancybox-wrap">
+	<div id="fancybox-outer">
+		<div class="fancybox-bg" id="fancybox-bg-n">
+		</div>
+		<div class="fancybox-bg" id="fancybox-bg-ne">
+		</div>
+		<div class="fancybox-bg" id="fancybox-bg-e">
+		</div>
+		<div class="fancybox-bg" id="fancybox-bg-se">
+		</div>
+		<div class="fancybox-bg" id="fancybox-bg-s">
+		</div>
+		<div class="fancybox-bg" id="fancybox-bg-sw">
+		</div>
+		<div class="fancybox-bg" id="fancybox-bg-w">
+		</div>
+		<div class="fancybox-bg" id="fancybox-bg-nw">
+		</div>
+		<div id="fancybox-content">
+		</div>
+		<a id="fancybox-close"></a>
+		<div id="fancybox-title">
+		</div>
+		<a href="javascript:;" id="fancybox-left"><span class="fancy-ico" id="fancybox-left-ico"></span></a><a href="javascript:;" id="fancybox-right"><span class="fancy-ico" id="fancybox-right-ico"></span></a>
+	</div>
+</div>
+</body>
+</html>

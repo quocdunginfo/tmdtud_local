@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Index";
+    var qRootAdminTemplatePath = @Url.Content("~/Content/admin/admin2109/");
+}
+
+<form action="/AdminLogin/Test_Login" id="login_form" method="post">
+	<div class="field">
+		<label for="email">Username:</label>
+		<input type="text" id="email" name="user_username" class="input email_field" tabindex="1" value="" />
+	</div>					
+	<div class="field">
+		<label for="passwd">Password:</label>
+		<input id="passwd" type="password" name="user_password" class="input password_field" tabindex="2" value=""/>
+	</div>					
+	<div class="field">
+		<input type="submit" name="submitLogin" value="Log in" tabindex="3" class="button fl margin-right-5" />					
+		<p class="fl no-margin hide ajax-loader">
+			<img src="../img/loader.gif" alt="" />
+		</p>					
+		<p class="fr no-margin">
+			<a href="#" class="show-forgot-password">Lost password?</a>
+		</p>
+		<div class="clear"></div>
+	</div>
+	<input type="hidden" name="redirect" id="redirect" value="index.php?controller=&token=3f592f8d7462bb09fe8b61c6083b89bc"/>
+</form>

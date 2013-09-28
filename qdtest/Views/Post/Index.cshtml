@@ -1,0 +1,30 @@
+﻿@model IEnumerable<qdtest.Models.PostModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@foreach (var item in Model)
+{
+    <div>
+        @item.id
+    </div>
+    <div>
+        @item.title
+    </div>
+    <div>
+        @item.content
+    </div>
+    <div>
+        @item.user.username
+    </div>
+    <div>
+        @foreach (var cat in item.categories)
+        {
+            <b>@cat.id
+                 -
+            @cat.name</b>
+        }
+    </div>
+    <br />
+}

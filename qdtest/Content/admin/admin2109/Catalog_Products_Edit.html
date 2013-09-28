@@ -1,0 +1,1258 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 lt-ie6 " lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie7" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]> <html lang="fr" class="no-js ie9" lang="en"> <![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+	<meta name="robots" content="NOFOLLOW, NOINDEX" />
+	<title>Products - PrestaShop&trade;</title>
+	<script type="text/javascript">
+		var help_class_name = 'AdminProducts';
+		var iso_user = 'en';
+		var country_iso_code = 'US';
+		var _PS_VERSION_ = '1.5.5.0';
+
+		var helpboxes = 1;
+		var roundMode = 2;
+						var youEditFieldFor = '';
+					
+		var autorefresh_notifications = '';
+		var new_order_msg = 'A new order has been placed on your shop.';
+		var order_number_msg = 'Order number:';
+		var total_msg = 'Total:';
+		var from_msg = 'From:';
+		var see_order_msg = 'View this order';
+		var new_customer_msg = 'A new customer registered on your shop.';
+		var customer_name_msg = 'Customer name:';
+		var see_customer_msg = 'View this customer';
+		var new_msg = 'A new message posted on your shop.';
+		var excerpt_msg = 'Excerpt:';
+		var see_msg = 'Read this message';
+		var token_admin_orders = '03b97c0470d2242e7ad0b01a281a087b';
+		var token_admin_customers = 'a63897f6b09f19ea042c44d7f543b6b6';
+		var token_admin_customer_threads = '2ca6e722bbb83b079663baeb78896005';
+		var currentIndex = 'index.php?controller=AdminProducts';
+		var choose_language_translate = "Choose language";
+	</script>
+
+			<link href="../modules/gamification/views/css/gamification.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/../js/jquery/plugins/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../css/admin.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/themes/default/css/admin.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/../js/jquery/plugins/cluetip/jquery.cluetip.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/../js/jquery/plugins/alerts/jquery.alerts.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/../js/jquery/plugins/chosen/jquery.chosen.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/../js/jquery/plugins/autocomplete/jquery.autocomplete.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/../js/jquery/plugins/thickbox/jquery.thickbox.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/../js/jquery/plugins/ajaxfileupload/jquery.ajaxfileupload.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/../js/jquery/ui/themes/base/jquery.ui.theme.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/../js/jquery/ui/themes/base/jquery.ui.core.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/../js/jquery/ui/themes/base/jquery.ui.accordion.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/../js/jquery/ui/themes/base/jquery.ui.slider.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../admin2109/../js/jquery/ui/themes/base/jquery.ui.datepicker.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../js/jquery/plugins/treeview-categories/jquery.treeview-categories.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../js/jquery/plugins/timepicker/jquery-ui-timepicker-addon.css" rel="stylesheet" type="text/css" media="all" />
+				<script type="text/javascript" src="../admin2109/../js/jquery/jquery-1.7.2.min.js"></script>
+			<script type="text/javascript" src="../modules/gamification/views/js/gamification.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/fancybox/jquery.fancybox.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/cluetip/jquery.cluetip.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/jquery.hoverIntent.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/jquery.scrollTo.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/alerts/jquery.alerts.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/chosen/jquery.chosen.js"></script>
+			<script type="text/javascript" src="../js/admin.js"></script>
+			<script type="text/javascript" src="../js/toggle.js"></script>
+			<script type="text/javascript" src="../js/tools.js"></script>
+			<script type="text/javascript" src="../js/ajax.js"></script>
+			<script type="text/javascript" src="../js/toolbar.js"></script>
+			<script type="text/javascript" src="../js/notifications.js"></script>
+			<script type="text/javascript" src="../js/helpAccess.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/autocomplete/jquery.autocomplete.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/jquery.tablednd.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/thickbox/jquery.thickbox.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/ajaxfileupload/jquery.ajaxfileupload.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/ui/jquery.ui.core.min.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/ui/jquery.ui.widget.min.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/ui/jquery.ui.accordion.min.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/ui/jquery.ui.mouse.min.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/ui/jquery.ui.slider.min.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/ui/jquery.ui.datepicker.min.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/ui/i18n/jquery.ui.datepicker-en.js"></script>
+			<script type="text/javascript" src="../js/productTabsManager.js"></script>
+			<script type="text/javascript" src="../js/admin-products.js"></script>
+			<script type="text/javascript" src="../js/attributesBack.js"></script>
+			<script type="text/javascript" src="../js/price.js"></script>
+			<script type="text/javascript" src="../js/tiny_mce/tiny_mce.js"></script>
+			<script type="text/javascript" src="../js/tinymce.inc.js"></script>
+			<script type="text/javascript" src="../js/fileuploader.js"></script>
+			<script type="text/javascript" src="../js/admin-dnd.js"></script>
+			<script type="text/javascript" src="../js/jquery/plugins/treeview-categories/jquery.treeview-categories.js"></script>
+			<script type="text/javascript" src="../js/jquery/plugins/treeview-categories/jquery.treeview-categories.async.js"></script>
+			<script type="text/javascript" src="../js/jquery/plugins/treeview-categories/jquery.treeview-categories.edit.js"></script>
+			<script type="text/javascript" src="../js/admin-categories-tree.js"></script>
+			<script type="text/javascript" src="../js/jquery/ui/jquery.ui.progressbar.min.js"></script>
+			<script type="text/javascript" src="../js/jquery/plugins/timepicker/jquery-ui-timepicker-addon.js"></script>
+			<script type="text/javascript" src="../js/form.js"></script>
+			<script type="text/javascript" src="../admin2109/../js/jquery/plugins/jquery.typewatch.js"></script>
+		<link rel="icon" type="image/vnd.microsoft.icon" href="/ps/img/favicon.ico" />
+	<link rel="shortcut icon" type="image/x-icon" href="/ps/img/favicon.ico" />
+	<script>
+				var admin_gamification_ajax_url = 'index.php?controller=AdminGamification&token=ed4504a18ef6ead39695897d952cd543';
+				var current_id_tab = 21;
+			</script>
+	<!--[if IE]>
+	<link type="text/css" rel="stylesheet" href="http://localhost/ps/css/admin-ie.css" />
+	<![endif]-->
+	<style type="text/css">
+		div#header_infos, div#header_infos a#header_shopname, div#header_infos a#header_logout, div#header_infos a#header_foaccess {color:#383838}
+	</style>
+</head>
+<body style="">
+<div id="ajax_running"><img src="../img/admin/ajax-loader-yellow.gif" alt="" /> Loading...</div>
+<div id="top_container" >
+<div id="container">
+
+	<div id="header">
+		<div id="header_infos">
+			<a id="header_shopname" href="index.php?controller=AdminHome&amp;token=a049b0978f5ae98944aaecf9e2ed39a7"><span>ps</span></a>
+			<div id="notifs_icon_wrapper">
+					<div id="orders_notif" class="notifs">
+							<span id="orders_notif_number_wrapper" class="number_wrapper">
+								<span id="orders_notif_value">0</span>
+							</span>
+						<div id="orders_notif_wrapper" class="notifs_wrapper">
+							<h3>Last orders</h3>
+							<p class="no_notifs">No new orders has been placed on your shop</p>
+							<ul id="list_orders_notif"></ul>
+							<p><a href="index.php?controller=AdminOrders&amp;token=03b97c0470d2242e7ad0b01a281a087b">Show all orders</a></p>
+						</div>
+					</div>
+					<div id="customers_notif" class="notifs notifs_alternate">
+							<span id="customers_notif_number_wrapper" class="number_wrapper">
+								<span id="customers_notif_value">0</span>
+							</span>
+						<div id="customers_notif_wrapper" class="notifs_wrapper">
+							<h3>Last customers</h3>
+							<p class="no_notifs">No new customers registered on your shop</p>
+							<ul id="list_customers_notif"></ul>
+							<p><a href="index.php?controller=AdminCustomers&amp;token=a63897f6b09f19ea042c44d7f543b6b6">Show all customers</a></p>
+						</div>
+					</div>
+					<div id="customer_messages_notif" class="notifs">
+							<span id="customer_messages_notif_number_wrapper" class="number_wrapper">
+								<span id="customer_messages_notif_value">0</span>
+							</span>
+						<div id="customer_messages_notif_wrapper" class="notifs_wrapper">
+							<h3>Last messages</h3>
+							<p class="no_notifs">No new messages posted on your shop</p>
+							<ul id="list_customer_messages_notif"></ul>
+							<p><a href="index.php?tab=AdminCustomerThreads&amp;token=2ca6e722bbb83b079663baeb78896005">Show all messages</a></p>
+						</div>
+					</div>
+			</div>
+			<div id="employee_box">
+				<div id="employee_infos">
+					<div class="employee_name">Welcome, <strong>Q&nbsp;Dung</strong></div>
+					<div class="clear"></div>
+					<ul id="employee_links">
+						<li><a href="index.php?controller=AdminEmployees&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c&id_employee=1&amp;updateemployee">My preferences</a></li>
+						<li class="separator">&nbsp;</li>
+						<li><a id="header_logout" href="index.php?logout">logout</a></li>
+						<li class="separator">&nbsp;</li>
+						<a href="http://localhost/ps/" id="header_foaccess" target="_blank" title="View my shop">View my shop</a>
+					</ul>
+				</div>
+			</div>
+			<div id="header_search">
+				<form method="post" action="index.php?controller=AdminSearch&amp;token=cc07a9f3c930480dcd5c9b686ae295da">
+					<input type="text" name="bo_query" id="bo_query" value="" />
+					<select name="bo_search_type" id="bo_search_type" class="chosen no-search">
+						<option value="0">everywhere</option>
+						<option value="1" >catalog</option>
+						<optgroup label="customers:">
+							<option value="2" >by name</option>
+							<option value="6" >by ip address</option>
+						</optgroup>
+						<option value="3" >orders</option>
+						<option value="4" >invoices</option>
+						<option value="5" >carts</option>
+						<option value="7" >modules</option>
+					</select>
+					<input type="submit" id="bo_search_submit" class="button" value="Search"/>
+				</form>
+			</div>
+			<div id="header_quick">
+				<select onchange="quickSelect(this);" id="quick_select" class="chosen no-search">
+					<option value="0">Quick Access</option>
+											<option value="index.php">&raquo; Home</option>
+											<option value="http://localhost/ps/_blank">&raquo; My Shop</option>
+											<option value="index.php?controller=AdminCategories&amp;addcategory&amp;token=9ef14dab525282a252161bbae087bd5b">&raquo; New category</option>
+											<option value="index.php?controller=AdminProducts&amp;addproduct&amp;token=c4ecb5500c32302d072130315b268033">&raquo; New product</option>
+											<option value="index.php?controller=AdminCartRules&amp;addcart_rule&amp;token=f6a0e29f52582cbe259d36183cf3e097">&raquo; New voucher</option>
+									</select>
+			</div>
+		</div>
+		<ul id="menu">
+					<li class="submenu_size maintab active" id="maintab9">
+						<a href="#" class="title">
+							<img src="../img/t/AdminCatalog.gif" alt="" />Catalog						</a>
+						<ul class="submenu">
+																								<li class="active"><a href="index.php?controller=AdminProducts&amp;token=c4ecb5500c32302d072130315b268033">Products</a></li>
+																																<li><a href="index.php?controller=AdminCategories&amp;token=9ef14dab525282a252161bbae087bd5b">Categories</a></li>
+																																<li><a href="index.php?controller=AdminTracking&amp;token=a1a8813502d0d70d56cd5638ea0ab277">Monitoring</a></li>
+																																<li><a href="index.php?controller=AdminAttributesGroups&amp;token=962ab9ca9cb47a246bfa932596b1c8ff">Attributes and Values</a></li>
+																																<li><a href="index.php?controller=AdminFeatures&amp;token=1576fdf770b9458ddb1be4211522c927">Features</a></li>
+																																<li><a href="index.php?controller=AdminManufacturers&amp;token=964bd0d9a4cef08503cdb5ed437faa22">Manufacturers</a></li>
+																																<li><a href="index.php?controller=AdminSuppliers&amp;token=38579ac48084cd5d59d7348720b8b737">Suppliers</a></li>
+																																<li><a href="index.php?controller=AdminScenes&amp;token=3707cc4f6a7c75db40e4f46189594aa9">Image Mapping</a></li>
+																																<li><a href="index.php?controller=AdminTags&amp;token=898310dbf5cca8ddb3301d2604873908">Tags</a></li>
+																																<li><a href="index.php?controller=AdminAttachments&amp;token=087a8f32e87b5e2c4c999f8ce5677953">Attachments</a></li>
+																					</ul>
+					</li>
+					<li class="submenu_size maintab " id="maintab10">
+						<a href="#" class="title">
+							<img src="../img/t/AdminParentOrders.gif" alt="" />Orders						</a>
+						<ul class="submenu">
+																								<li><a href="index.php?controller=AdminOrders&amp;token=03b97c0470d2242e7ad0b01a281a087b">Orders</a></li>
+																																<li><a href="index.php?controller=AdminInvoices&amp;token=9adc75ff9ddcf8972b47567f13338e35">Invoices</a></li>
+																																<li><a href="index.php?controller=AdminReturn&amp;token=d1ea899dc400d59e2e42dd7202d68fb4">Merchandise Returns</a></li>
+																																<li><a href="index.php?controller=AdminDeliverySlip&amp;token=8e1a0cb7e82854b5c992a659a6f1ac4a">Delivery Slips</a></li>
+																																<li><a href="index.php?controller=AdminSlip&amp;token=f7c9c3c582de293d73835a4a48402240">Credit Slips</a></li>
+																																<li><a href="index.php?controller=AdminStatuses&amp;token=bcbcde9789b0539fa910f73599c01bfd">Statuses</a></li>
+																																<li><a href="index.php?controller=AdminOrderMessage&amp;token=5c96440da44d74636408404ba88bc804">Order Messages</a></li>
+																					</ul>
+					</li>
+					<li class="submenu_size maintab " id="maintab11">
+						<a href="#" class="title">
+							<img src="../img/t/AdminParentCustomer.gif" alt="" />Customers						</a>
+						<ul class="submenu">
+																								<li><a href="index.php?controller=AdminCustomers&amp;token=a63897f6b09f19ea042c44d7f543b6b6">Customers</a></li>
+																																<li><a href="index.php?controller=AdminAddresses&amp;token=22b990b90f0084ce765afa8abb35357d">Addresses</a></li>
+																																<li><a href="index.php?controller=AdminGroups&amp;token=f7198b92f65159e9cb29c903b57a292d">Groups</a></li>
+																																<li><a href="index.php?controller=AdminCarts&amp;token=586814dd47729d0bd9b809ee3c9e576e">Shopping Carts</a></li>
+																																<li><a href="index.php?controller=AdminCustomerThreads&amp;token=2ca6e722bbb83b079663baeb78896005">Customer Service</a></li>
+																																<li><a href="index.php?controller=AdminContacts&amp;token=55d69c7e7bbec40fcf073e224e950489">Contacts</a></li>
+																																<li><a href="index.php?controller=AdminGenders&amp;token=8a2ba51dce0d03bb556e06b63d2fece6">Titles</a></li>
+																					</ul>
+					</li>
+					<li class="submenu_size maintab " id="maintab12">
+						<a href="#" class="title">
+							<img src="../img/t/AdminPriceRule.gif" alt="" />Price Rules						</a>
+						<ul class="submenu">
+																								<li><a href="index.php?controller=AdminCartRules&amp;token=f6a0e29f52582cbe259d36183cf3e097">Cart Rules</a></li>
+																																<li><a href="index.php?controller=AdminSpecificPriceRule&amp;token=7e1e080469c68950db777983034df528">Catalog Price Rules</a></li>
+																																<li><a href="index.php?controller=AdminMarketing&amp;token=4cf6e572d4d41b22bd2daaa6583ba45f">Marketing</a></li>
+																					</ul>
+					</li>
+					<li class="submenu_size maintab " id="maintab13">
+						<a href="#" class="title">
+							<img src="../img/t/AdminParentShipping.gif" alt="" />Shipping						</a>
+						<ul class="submenu">
+																								<li><a href="index.php?controller=AdminShipping&amp;token=161c0d3f6b4a9c9c183c4815b5add567">Shipping</a></li>
+																																<li><a href="index.php?controller=AdminCarriers&amp;token=8aa5d6c46f577e3a07c310c479d0d456">Carriers</a></li>
+																					</ul>
+					</li>
+					<li class="submenu_size maintab " id="maintab14">
+						<a href="#" class="title">
+							<img src="../img/t/AdminParentLocalization.gif" alt="" />Localization						</a>
+						<ul class="submenu">
+																								<li><a href="index.php?controller=AdminLocalization&amp;token=9270950b97a9f3463f65ad376f49b60f">Localization</a></li>
+																																<li><a href="index.php?controller=AdminLanguages&amp;token=59dca24731e175a975c4363251f35135">Languages</a></li>
+																																<li><a href="index.php?controller=AdminZones&amp;token=ab937f2e107666f7fb793da55d1fdc9d">Zones</a></li>
+																																<li><a href="index.php?controller=AdminCountries&amp;token=ea638640e467b049a7a4080007145f90">Countries</a></li>
+																																<li><a href="index.php?controller=AdminStates&amp;token=02879985f668a88172ebccbde5dfe1e3">States</a></li>
+																																<li><a href="index.php?controller=AdminCurrencies&amp;token=8560e036405f6079797e243cb95f35fd">Currencies</a></li>
+																																<li><a href="index.php?controller=AdminTaxes&amp;token=b5dcf911c94c040224e1caeff1c1e954">Taxes</a></li>
+																																<li><a href="index.php?controller=AdminTaxRulesGroup&amp;token=d13265b90d7110ef8ac667123eaa4eb3">Tax Rules</a></li>
+																																<li><a href="index.php?controller=AdminTranslations&amp;token=de24c0d6a8824183118e50ca479a7073">Translations</a></li>
+																					</ul>
+					</li>
+					<li class="submenu_size maintab " id="maintab15">
+						<a href="#" class="title">
+							<img src="../img/t/AdminParentModules.gif" alt="" />Modules						</a>
+						<ul class="submenu">
+																								<li><a href="index.php?controller=AdminModules&amp;token=9979b7fa2b0ec644bc06d7fd1e9c4d20">Modules</a></li>
+																																<li><a href="index.php?controller=AdminAddonsCatalog&amp;token=4e2eda1864cd5c037f95002338c56591">Modules &amp; Themes Catalog</a></li>
+																																<li><a href="index.php?controller=AdminModulesPositions&amp;token=c29feb66ca36083aafd447422b818e4b">Positions</a></li>
+																																<li><a href="index.php?controller=AdminPayment&amp;token=2a4c1ce2a24dc8b3fe82185126622e42">Payment</a></li>
+																					</ul>
+					</li>
+					<li class="submenu_size maintab " id="maintab16">
+						<a href="#" class="title">
+							<img src="../img/t/AdminParentPreferences.gif" alt="" />Preferences						</a>
+						<ul class="submenu">
+																								<li><a href="index.php?controller=AdminPreferences&amp;token=c893f05da9d476e55787cf2927b7b314">General</a></li>
+																																<li><a href="index.php?controller=AdminOrderPreferences&amp;token=8c9508816fd0814275d4118c067c8be4">Orders</a></li>
+																																<li><a href="index.php?controller=AdminPPreferences&amp;token=e89a7a6df2de924b7167b4a93d0ea651">Products</a></li>
+																																<li><a href="index.php?controller=AdminCustomerPreferences&amp;token=fa215a90129f4faf0812babfb4539573">Customers</a></li>
+																																<li><a href="index.php?controller=AdminThemes&amp;token=e11bd725b7ed317d7257524e778115b5">Themes</a></li>
+																																<li><a href="index.php?controller=AdminMeta&amp;token=668f98dda880af20741c0bc0676f2979">SEO &amp; URLs</a></li>
+																																<li><a href="index.php?controller=AdminCmsContent&amp;token=2f17510697ef098a6fbc27372234c9ef">CMS</a></li>
+																																<li><a href="index.php?controller=AdminImages&amp;token=1cae2cc37d366438f79e8d4e27d8065a">Images</a></li>
+																																<li><a href="index.php?controller=AdminStores&amp;token=14584b012154e1358dc0c07d13de40d0">Store Contacts</a></li>
+																																<li><a href="index.php?controller=AdminSearchConf&amp;token=1335b70da0a0a198eb6ad9a39deab313">Search</a></li>
+																																<li><a href="index.php?controller=AdminMaintenance&amp;token=db903acdc898a121f3dc92c94bbbae58">Maintenance</a></li>
+																																<li><a href="index.php?controller=AdminGeolocation&amp;token=89f5d26b050b0227a0f72791447d1e7f">Geolocation</a></li>
+																					</ul>
+					</li>
+					<li class="submenu_size maintab " id="maintab17">
+						<a href="#" class="title">
+							<img src="../img/t/AdminTools.gif" alt="" />Advanced Parameters						</a>
+						<ul class="submenu">
+																								<li><a href="index.php?controller=AdminInformation&amp;token=a2ace0aabe0fe7313ddc17d50277a095">Configuration Information</a></li>
+																																<li><a href="index.php?controller=AdminPerformance&amp;token=61f0e8a223841fdf959b988c7bbd8651">Performance</a></li>
+																																<li><a href="index.php?controller=AdminEmails&amp;token=aad9fa350a1502a26ae4c3b746af2728">E-mail</a></li>
+																																<li><a href="index.php?controller=AdminImport&amp;token=835b866e0e75cd5ca98c5dec14876640">CSV Import</a></li>
+																																<li><a href="index.php?controller=AdminBackup&amp;token=e9bb936b730d169f3b9ee36f8052096a">DB Backup</a></li>
+																																<li><a href="index.php?controller=AdminRequestSql&amp;token=11a3fd5c83cd97b83ee9696f75d2ade2">SQL Manager</a></li>
+																																<li><a href="index.php?controller=AdminLogs&amp;token=01b0b8f276084a7cadb7cf8a4cde1f61">Logs</a></li>
+																																<li><a href="index.php?controller=AdminWebservice&amp;token=01e4d48c5734d3c6a66cd0a8a9c256f1">Webservice</a></li>
+																					</ul>
+					</li>
+					<li class="submenu_size maintab " id="maintab18">
+						<a href="#" class="title">
+							<img src="../img/t/AdminAdmin.gif" alt="" />Administration						</a>
+						<ul class="submenu">
+																								<li><a href="index.php?controller=AdminAdminPreferences&amp;token=ad534619d25cc771e1a0decd46156593">Preferences</a></li>
+																																<li><a href="index.php?controller=AdminQuickAccesses&amp;token=694c5f1239bce23895f6a3dfd1e8e023">Quick Access</a></li>
+																																<li><a href="index.php?controller=AdminEmployees&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">Employees</a></li>
+																																<li><a href="index.php?controller=AdminProfiles&amp;token=8610cbbcfb96f69eb748050f114a335c">Profiles</a></li>
+																																<li><a href="index.php?controller=AdminAccess&amp;token=b966c26be9c5c618c6101d13d02b094b">Permissions</a></li>
+																																<li><a href="index.php?controller=AdminTabs&amp;token=c314176d39c1c7a4ede7be2c8b9a199d">Menus</a></li>
+																																<li><a href="index.php?controller=AdminGamification&amp;token=ed4504a18ef6ead39695897d952cd543">Merchant Expertise</a></li>
+																					</ul>
+					</li>
+					<li class="submenu_size maintab " id="maintab19">
+						<a href="#" class="title">
+							<img src="../img/t/AdminParentStats.gif" alt="" />Stats						</a>
+						<ul class="submenu">
+																								<li><a href="index.php?controller=AdminStats&amp;token=f039fe6f78d94d87076fa6f2368225a4">Stats</a></li>
+																																<li><a href="index.php?controller=AdminSearchEngines&amp;token=27302fc4612fe01a038f986386468956">Search Engines</a></li>
+																																<li><a href="index.php?controller=AdminReferrers&amp;token=abf62b8ed049a103d8255f3ddaa18420">Referrers</a></li>
+																					</ul>
+					</li>
+		</ul>
+	</div>	
+	<div id="main">
+		<div id="content">
+
+
+	
+	
+<div class="toolbar-placeholder">
+	<div class="toolbarBox toolbarHead">
+		
+			<ul class="cc_button">
+									<li>
+						<a id="desc-product-save" class="toolbar_btn" href="#" title="Save" >
+							<span class="process-icon-save " ></span>
+							<div >Save</div>
+						</a>
+											</li>
+									<li>
+						<a id="desc-product-back" class="toolbar_btn" href="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033" title="Back to list" >
+							<span class="process-icon-back " ></span>
+							<div >Back to list</div>
+						</a>
+											</li>
+									<li>
+						<a id="desc-product-save-and-stay" class="toolbar_btn" href="#" title="Save and stay" >
+							<span class="process-icon-save-and-stay " ></span>
+							<div >Save and stay</div>
+						</a>
+											</li>
+									<li>
+						<a id="desc-product-duplicate" class="toolbar_btn"  title="Duplicate" onclick="if (confirm('Also copy images ?')) document.location = 'index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;duplicateproduct'; else document.location = 'index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;duplicateproduct&amp;noimage=1';">
+							<span class="process-icon-duplicate " ></span>
+							<div >Duplicate</div>
+						</a>
+											</li>
+									<li>
+						<a id="desc-product-preview" class="toolbar_btn" href="http://localhost/ps/index.php?id_product=1&controller=product" title="Preview" target="_blank">
+							<span class="process-icon-preview previewUrl" ></span>
+							<div >Preview</div>
+						</a>
+											</li>
+									<li>
+						<a id="desc-product-stats" class="toolbar_btn" href="index.php?controller=AdminStats&token=f039fe6f78d94d87076fa6f2368225a4&amp;module=statsproduct&amp;id_product=1" title="Product sales" >
+							<span class="process-icon-stats " ></span>
+							<div >Product sales</div>
+						</a>
+											</li>
+									<li>
+						<a id="desc-product-newCombination" class="toolbar_btn"  title="New combination" >
+							<span class="process-icon-newCombination toolbar-new" ></span>
+							<div >New combination</div>
+						</a>
+											</li>
+									<li>
+						<a id="desc-product-delete" class="toolbar_btn" href="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;deleteproduct" title="Delete this product." onclick="if (confirm('Delete product?')){return true;}else{event.preventDefault();}">
+							<span class="process-icon-delete " ></span>
+							<div >Delete this product.</div>
+						</a>
+											</li>
+							</ul>
+
+			<script language="javascript" type="text/javascript">
+			//<![CDATA[
+				var submited = false
+				var modules_list_loaded = false;
+				$(function() {
+					//get reference on save link
+					btn_save = $('span[class~="process-icon-save"]').parent();
+
+					//get reference on form submit button
+					btn_submit = $('#product_form_submit_btn');
+
+					if (btn_save.length > 0 && btn_submit.length > 0)
+					{
+						//get reference on save and stay link
+						btn_save_and_stay = $('span[class~="process-icon-save-and-stay"]').parent();
+
+						//get reference on current save link label
+						lbl_save = $('#desc-product-save div');
+
+						//override save link label with submit button value
+						if (btn_submit.val().length > 0)
+							lbl_save.html(btn_submit.attr("value"));
+
+						if (btn_save_and_stay.length > 0)
+						{
+
+							//get reference on current save link label
+							lbl_save_and_stay = $('#desc-product-save-and-stay div');
+
+							//override save and stay link label with submit button value
+							if (btn_submit.val().length > 0 && lbl_save_and_stay && !lbl_save_and_stay.hasClass('locked'))
+							{
+								lbl_save_and_stay.html(btn_submit.val() + " and stay ");
+							}
+
+						}
+
+						//hide standard submit button
+						btn_submit.hide();
+						//bind enter key press to validate form
+						$('#product_form').keypress(function (e) {
+							if (e.which == 13 && e.target.localName != 'textarea')
+								$('#desc-product-save').click();
+						});
+						//submit the form
+						
+							btn_save.click(function() {
+								// Avoid double click
+								if (submited)
+									return false;
+								submited = true;
+								
+								//add hidden input to emulate submit button click when posting the form -> field name posted
+								btn_submit.before('<input type="hidden" name="'+btn_submit.attr("name")+'" value="1" />');
+
+								$('#product_form').submit();
+								return false;
+							});
+
+							if (btn_save_and_stay)
+							{
+								btn_save_and_stay.click(function() {
+									//add hidden input to emulate submit button click when posting the form -> field name posted
+									btn_submit.before('<input type="hidden" name="'+btn_submit.attr("name")+'AndStay" value="1" />');
+
+									$('#product_form').submit();
+									return false;
+								});
+							}
+						
+					}
+									});
+							//]]>
+			</script>
+		
+		<div class="pageTitle">
+			<h3>
+				<span id="current_obj" style="font-weight: normal;">
+																		
+							<span class="breadcrumb item-0 ">Catalog
+																	<img alt="&gt;" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png" />
+															</span>
+													
+							<span class="breadcrumb item-1 ">Products
+																	<img alt="&gt;" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png" />
+															</span>
+													
+							<span class="breadcrumb item-2 ">Edit (iPod Nano)
+															</span>
+															</span>
+				
+			</h3>
+		</div>
+	</div>
+</div>
+
+	<div class="leadin"></div>
+
+
+	<div>
+		<div class="productTabs" style="display:none;">
+			<ul class="tab">
+			
+							<li class="tab-row">
+					<a class="tab-page selected" id="link-Informations" href="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;action=Informations&amp;updateproduct">Information</a>
+				</li>
+							<li class="tab-row">
+					<a class="tab-page " id="link-Prices" href="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;action=Prices&amp;updateproduct">Prices</a>
+				</li>
+							<li class="tab-row">
+					<a class="tab-page " id="link-Seo" href="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;action=Seo&amp;updateproduct">SEO</a>
+				</li>
+							<li class="tab-row">
+					<a class="tab-page " id="link-Associations" href="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;action=Associations&amp;updateproduct">Associations</a>
+				</li>
+							<li class="tab-row">
+					<a class="tab-page " id="link-Shipping" href="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;action=Shipping&amp;updateproduct">Shipping</a>
+				</li>
+							<li class="tab-row">
+					<a class="tab-page " id="link-Combinations" href="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;action=Combinations&amp;updateproduct">Combinations</a>
+				</li>
+							<li class="tab-row">
+					<a class="tab-page " id="link-Quantities" href="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;action=Quantities&amp;updateproduct">Quantities</a>
+				</li>
+							<li class="tab-row">
+					<a class="tab-page " id="link-Pack" href="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;action=Pack&amp;updateproduct">Pack</a>
+				</li>
+							<li class="tab-row">
+					<a class="tab-page " id="link-VirtualProduct" href="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;action=VirtualProduct&amp;updateproduct">Virtual Product</a>
+				</li>
+							<li class="tab-row">
+					<a class="tab-page " id="link-Images" href="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;action=Images&amp;updateproduct">Images</a>
+				</li>
+							<li class="tab-row">
+					<a class="tab-page " id="link-Features" href="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;action=Features&amp;updateproduct">Features</a>
+				</li>
+							<li class="tab-row">
+					<a class="tab-page " id="link-Customization" href="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;action=Customization&amp;updateproduct">Customization</a>
+				</li>
+							<li class="tab-row">
+					<a class="tab-page " id="link-Attachments" href="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;action=Attachments&amp;updateproduct">Attachments</a>
+				</li>
+							<li class="tab-row">
+					<a class="tab-page " id="link-Suppliers" href="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1&amp;action=Suppliers&amp;updateproduct">Suppliers</a>
+				</li>
+						</ul>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var token = 'c4ecb5500c32302d072130315b268033';
+		var id_product = 1;
+		var id_lang_default = 1;
+		var product_type_pack = 1;
+		var product_type_virtual = 2;
+		var product_type_simple = 0;
+
+		var has_combinations = 16;
+
+		var toload = new Array();
+		var empty_pack_msg = 'This pack is empty. You will need to add at least one product to the pack before you can save.';
+		var empty_name_msg = 'The product name is empty. You will at least need to enter a name for the default language before you can save the product.';
+		var empty_link_rewrite_msg = 'The friendly URL is empty. You will at least need to enter a friendly URL for the default language before you can save the product.';
+		var reload_tab_title = 'Confirmation';
+		var reload_tab_description = 'Some tabs was not loaded correctly. Would you like to reload them?';
+
+		$('#product-tab-content-wait').show();
+		var post_data = [];
+		var save_error = false;
+
+		var product_type = 0;
+		
+					var display_multishop_checkboxes = false;
+		
+		$(document).ready(function()
+		{
+			$('#product-tab-content-wait').show();
+			//product_type = $("input[name=type_product]:checked").val();
+			if (product_type == product_type_pack)
+			{
+				$('li.tab-row a[id*="VirtualProduct"]').hide();
+			}
+			else if (product_type == product_type_virtual)
+			{
+				$('li.tab-row a[id*="Pack"]').hide();
+				$('li.tab-row a[id*="Shipping"]').hide();
+			}
+			else
+			{
+				$('li.tab-row a[id*="Pack"]').hide();
+				$('li.tab-row a[id*="VirtualProduct"]').hide();
+			}
+
+			$('#desc-product-newCombination').hide();
+
+			
+			$(".tab-page").click(function(e){
+				e.preventDefault();
+
+				// currentId is the current product tab id
+				currentId = $(".productTabs a.selected").attr('id').substr(5);
+				// id is the wanted producttab id
+				id = $(this).attr('id').substr(5);
+
+				// Update submit button value
+				var split_position = id.indexOf('-') + 1;
+				var btn_name = id.substr(split_position);
+
+				$('#key_tab').val(btn_name);
+
+				if ($(this).attr("id") != $(".productTabs a.selected").attr('id'))
+				{
+					$(".tab-page").removeClass('selected');
+					$("#product-tab-content-"+currentId).hide();
+				}
+
+				// if the tab has not already been loaded, load it now
+				tabs_manager.display(id, true);
+
+				tabs_manager.onLoad(id, function(){
+					$("#product-tab-content-"+id).show(0, function(){
+						$(this).trigger('displayed');
+					});
+					$("#link-"+id).addClass('selected');
+				});
+
+				var languages = new Array();
+				if (btn_name == "Combinations")
+				{
+					$('#desc-product-new').hide();
+					$('#desc-product-newCombination').show();
+					populate_attrs();
+				}
+				else if (btn_name == "Attachments")
+				{
+					handleSaveButtons();
+				}
+				else
+				{
+					$('#desc-product-newCombination').hide();
+					// if pack is enabled, save button are visible only if pack is valid
+					handleSaveButtons();
+				}
+			});
+
+			$(".productTabs a.selected").click();
+
+			// disable save if Associations tab is not loaded
+			if ($('#product-tab-content-Associations').hasClass('not-loaded'))
+				disableSave();
+
+			tabs_manager.onLoad('Associations', function(){
+				handleSaveButtons();
+			});
+
+			$('.confirm_leave').live('click', function(){
+				// Double quotes are necessary when the translated string has single quotes
+				return confirm("You will lose all unsaved modifications. Are you sure that you\'d like to proceed?");
+			});
+
+		});
+
+		var tabs_preloaded = new Array();
+
+		// Listen to the load event that is fired each time an ajax call to load a tab has completed
+		$(window).bind("load", function() {
+			
+			var tabs_to_preload = new Array();
+							
+									if ($("#product-tab-content-"+'Informations').hasClass('not-loaded'))
+						tabs_to_preload.push('Informations');
+											
+									if ($("#product-tab-content-"+'Prices').hasClass('not-loaded'))
+						tabs_to_preload.push('Prices');
+											
+									if ($("#product-tab-content-"+'Seo').hasClass('not-loaded'))
+						tabs_to_preload.push('Seo');
+											
+									if ($("#product-tab-content-"+'Associations').hasClass('not-loaded'))
+						tabs_to_preload.push('Associations');
+											
+									if ($("#product-tab-content-"+'Shipping').hasClass('not-loaded'))
+						tabs_to_preload.push('Shipping');
+											
+									if ($("#product-tab-content-"+'Combinations').hasClass('not-loaded'))
+						tabs_to_preload.push('Combinations');
+											
+									if ($("#product-tab-content-"+'Quantities').hasClass('not-loaded'))
+						tabs_to_preload.push('Quantities');
+											
+									if ($("#product-tab-content-"+'Pack').hasClass('not-loaded'))
+						tabs_to_preload.push('Pack');
+											
+									if ($("#product-tab-content-"+'VirtualProduct').hasClass('not-loaded'))
+						tabs_to_preload.push('VirtualProduct');
+											
+									if ($("#product-tab-content-"+'Images').hasClass('not-loaded'))
+						tabs_to_preload.push('Images');
+											
+									if ($("#product-tab-content-"+'Features').hasClass('not-loaded'))
+						tabs_to_preload.push('Features');
+											
+									if ($("#product-tab-content-"+'Customization').hasClass('not-loaded'))
+						tabs_to_preload.push('Customization');
+											
+									if ($("#product-tab-content-"+'Attachments').hasClass('not-loaded'))
+						tabs_to_preload.push('Attachments');
+											
+									if ($("#product-tab-content-"+'Suppliers').hasClass('not-loaded'))
+						tabs_to_preload.push('Suppliers');
+											
+									if ($("#product-tab-content-"+'Warehouses').hasClass('not-loaded'))
+						tabs_to_preload.push('Warehouses');
+							
+			// Recursively load tabs starting with the first element of stack
+			tabs_manager.displayBulk(tabs_to_preload);
+			$('.productTabs').show();
+			$('#product_form').show();
+			$('#product-tab-content-wait').hide();
+		});
+	</script>
+	
+	
+	
+	<script type="text/javascript">
+		// <![CDATA[
+			ThickboxI18nImage = "Image";
+			ThickboxI18nOf = "of";
+			ThickboxI18nClose = "Close";
+			ThickboxI18nOrEscKey = "(or &quot;Esc&quot;)";
+			ThickboxI18nNext = "Next &gt;";
+			ThickboxI18nPrev = "&lt; Previous";
+			tb_pathToImage = "../img/loadingAnimation.gif";
+		//]]>
+	</script>
+
+	<div id="product-tab-content-wait" style="display:none"><div id="loading">Loading...</div></div>
+
+	<form id="product_form" action="index.php?controller=AdminProducts&token=c4ecb5500c32302d072130315b268033&amp;id_product=1" method="post" enctype="multipart/form-data" name="product" style="display:none;">
+		<input type="hidden" name="id_product" value="1" />
+		<input type="hidden" id="is_virtual" name="is_virtual" value="0" />
+		<div class="tab-pane" id="tabPane1">
+				
+							<div id="product-tab-content-Informations" class=" product-tab-content" >
+											<input type="hidden" name="submitted_tabs[]" value="Informations" />
+<div id="step1">
+	<h4 class="tab">1. Info.</h4>
+	<h4>Product global information</h4>
+	<script type="text/javascript">
+					var PS_ALLOW_ACCENTED_CHARS_URL = 0;
+				var combination_images = new Array();combination_images[19] = new Array();combination_images[19][0] = 15;combination_images[18] = new Array();combination_images[18][0] = 15;combination_images[13] = new Array();combination_images[13][0] = 16;combination_images[12] = new Array();combination_images[12][0] = 16;combination_images[25] = new Array();combination_images[25][0] = 17;combination_images[24] = new Array();combination_images[24][0] = 17;combination_images[20] = new Array();combination_images[20][0] = 18;combination_images[21] = new Array();combination_images[21][0] = 18;combination_images[22] = new Array();combination_images[22][0] = 19;combination_images[23] = new Array();combination_images[23][0] = 19;combination_images[26] = new Array();combination_images[26][0] = 20;combination_images[27] = new Array();combination_images[27][0] = 20;combination_images[16] = new Array();combination_images[16][0] = 21;combination_images[17] = new Array();combination_images[17][0] = 21;combination_images[15] = new Array();combination_images[15][0] = 22;combination_images[14] = new Array();combination_images[14][0] = 22;
+			</script>
+
+	
+	
+
+
+	<div class="separation"></div>
+	<div id="warn_virtual_combinations" class="warn" style="display:none">You cannot use combinations with a virtual product.</div>
+	<div>
+		<label class="text"> Type:</label>
+		<input type="radio" name="type_product" id="simple_product" value="0" checked="checked" />
+		<label class="radioCheck" for="simple_product">Product</label>
+		<input type="radio" name="type_product"  id="pack_product" value="1"  />
+		<label class="radioCheck" for="pack_product">Pack</label>
+		<input type="radio" name="type_product" id="virtual_product"  value="2"  />
+		<label class="radioCheck" for="virtual_product">Virtual Product (services, booking or downloadable products)</label>
+	</div>
+
+	<div class="separation"></div>
+	<br />
+	<table cellpadding="5" style="width: 50%; float: left; margin-right: 20px; border-right: 1px solid #CCCCCC;">
+	
+		<tr>
+			<td class="col-left">
+				
+
+				<label>Name:</label>
+			</td>
+			<td style="padding-bottom:5px;" class="translatable">
+							<div class="lang_1" style=" float: left;">
+						<input class=" updateCurrentText" size="43" type="text" 						id="name_1" name="name_1"
+						value="iPod Nano"/><sup> *</sup>
+					<span class="hint" name="help_box">Invalid characters: <>;=#{}<span class="hint-pointer">&nbsp;</span>
+					</span>
+				</div>
+						</td>
+		</tr>
+		<tr>
+			<td class="col-left"><label> Reference:</label></td>
+			<td style="padding-bottom:5px;">
+				<input size="55" type="text" name="reference" value="demo_1" style="width: 130px; margin-right: 44px;" />
+				<span class="hint" name="help_box">Special characters allowed:.-_#\<span class="hint-pointer">&nbsp;</span></span>
+			</td>
+		</tr>
+		<tr>
+			<td class="col-left"><label> EAN13 or JAN:</label></td>
+			<td style="padding-bottom:5px;">
+				<input size="55" maxlength="13" type="text" name="ean13" value="0" style="width: 130px; margin-right: 5px;" /> <span class="small">(Europe, Japan)</span>
+			</td>
+		</tr>
+		<tr>
+			<td class="col-left"><label> UPC:</label></td>
+			<td style="padding-bottom:5px;">
+				<input size="55" maxlength="12" type="text" name="upc" value="" style="width: 130px; margin-right: 5px;" /> <span class="small">(US, Canada)</span>
+			</td>
+		</tr>
+	</table>
+	
+	<table cellpadding="5" style="width: 40%; float: left; margin-left: 10px;">
+	<tr>
+		<td class="col-left">
+			
+
+			<label class="text">Status:</label>
+		</td>
+		<td style="padding-bottom:5px;">
+			<ul class="listForm">
+				<li>
+					<input onclick="toggleDraftWarning(false);showOptions(true);showRedirectProductOptions(false);" type="radio" name="active" id="active_on" value="1" checked="checked"  />
+					<label for="active_on" class="radioCheck">Enabled</label>
+				</li>
+				<li>
+					<input onclick="toggleDraftWarning(true);showOptions(false);showRedirectProductOptions(true);"  type="radio" name="active" id="active_off" value="0"  />
+					<label for="active_off" class="radioCheck">Disabled</label>
+				</li>
+			</ul>
+		</td>
+	</tr>
+	<tr class="redirect_product_options" style="display:none">
+		<td class="col-left">
+			
+
+			<label class="text">Redirect:</label>
+		</td>
+		<td style="padding-bottom:5px;">
+			<select name="redirect_type" id="redirect_type">
+				<option value="404" >No redirect (404)</option>
+				<option value="301" >Redirect permanently (301)</option>
+				<option value="302" >Redirect temporarily (302)</option>
+			</select>
+			<span class="hint" name="help_box">
+				404 : Not Found = Product does not exist and no redirect<br/>
+				301 : Moved Permanently = Product Moved Permanently<br/>
+				302 : Moved Temporarily = Product moved temporarily
+			</span>
+		</td>
+	</tr>
+	<tr class="redirect_product_options redirect_product_options_product_choise" style="display:none">
+		<td class="col-left">
+			
+
+			<label class="text">Related product:</label>
+		</td>
+		<td style="padding-bottom:5px;">
+			<input type="hidden" value="" name="id_product_redirected" />
+			<input value="" id="related_product_autocomplete_input" autocomplete="off" class="ac_input" />
+			<p>
+				<script>
+					var no_related_product = 'No related product';
+					var id_product_redirected = 0;
+					var product_name_redirected = '';
+				</script>
+				<span id="related_product_name">No related product</span>
+				<span id="related_product_remove" style="display:none">
+					<a hre="#" onclick="removeRelatedProduct(); return false" id="related_product_remove_link">
+						<img src="../img/admin/delete.gif" class="middle" alt="" />
+					</a>
+				</span>
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td class="col-left">
+			
+
+			<label>Visibility:</label>
+		</td>
+		<td style="padding-bottom:5px;">
+			<select name="visibility" id="visibility">
+				<option value="both" selected="selected" >Everywhere</option>
+				<option value="catalog"  >Catalog only</option>
+				<option value="search"  >Search only</option>
+				<option value="none" >Nowhere</option>
+			</select>
+		</td>
+	</tr>
+	<tr id="product_options"  >
+		<td class="col-left">
+			
+			<label>Options:</label>
+		</td>
+		<td style="padding-bottom:5px;">
+			<ul class="listForm">
+				<li>
+					<input  type="checkbox" name="available_for_order" id="available_for_order" value="1" checked="checked"  />
+					<label for="available_for_order" class="t">Available for order</label>
+				</li>
+			<li>
+				<input type="checkbox" name="show_price" id="show_price" value="1" checked="checked" disabled="disabled"/>
+				<label for="show_price" class="t">show price</label>
+			</li>
+			<li>
+				<input type="checkbox" name="online_only" id="online_only" value="1"  />
+				<label for="online_only" class="t">Online only (not sold in store)</label>
+			</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td class="col-left">
+			
+
+			<label>Condition:</label>
+		</td>
+		<td style="padding-bottom:5px;">
+			<select name="condition" id="condition">
+				<option value="new" selected="selected" >New</option>
+				<option value="used"  >Used</option>
+				<option value="refurbished" >Refurbished</option>
+			</select>
+		</td>
+	</tr>
+</table>
+
+<table cellpadding="5" cellspacing="0" border="0" style="width: 100%;"><tr><td><div class="separation"></div></td></tr></table>
+		<table cellspacing="0" cellpadding="5" border="0">
+			<tr>
+				<td class="col-left">
+					
+
+					<label>Short description:<br /></label>
+					<p class="product_description">(Appears in the product list(s), and on the top of the product page.)</p>
+				</td>
+				<td style="padding-bottom:5px;">
+						
+<div class="translatable">
+<div class="lang_1" style="float: left;">
+	<textarea cols="100" rows="10" id="description_short_1" 
+		name="description_short_1" 
+		class="autoload_rte" >&lt;p&gt;New design. New features. Now in 8GB and 16GB. iPod nano rocks like never before.&lt;/p&gt;</textarea>
+	<span class="counter" max="400"></span>
+	<span class="hint"><span class="hint-pointer">&nbsp;</span></span>
+</div>
+</div>
+<script type="text/javascript">
+	var iso = 'en';
+	var pathCSS = '/ps/themes/default/css/';
+	var ad = '/ps/admin2109';
+</script>
+
+					<p class="clear"></p>
+				</td>
+			</tr>
+			<tr>
+				<td class="col-left">
+					
+
+					<label>Description:<br /></label>
+					<p class="product_description">(Appears in the body of the product page)</p>
+				</td>
+				<td style="padding-bottom:5px;">
+						
+<div class="translatable">
+<div class="lang_1" style="float: left;">
+	<textarea cols="100" rows="10" id="description_1" 
+		name="description_1" 
+		class="autoload_rte" >&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;font-size: small;&quot;&gt;Curved ahead of the curve.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;For those about to rock, we give you nine amazing colors. But that&#039;s only part of the story. Feel the curved, all-aluminum and glass design and you won&#039;t want to put iPod nano down.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;font-size: small;&quot;&gt;Great looks. And brains, too.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The new Genius feature turns iPod nano into your own highly intelligent, personal DJ. It creates playlists by finding songs in your library that go great together.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;span style=&quot;font-size: small;&quot;&gt;Made to move with your moves.&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The accelerometer comes to iPod nano. Give it a shake to shuffle your music. Turn it sideways to view Cover Flow. And play games designed with your moves in mind.&lt;/p&gt;</textarea>
+	<span class="counter" max="none"></span>
+	<span class="hint"><span class="hint-pointer">&nbsp;</span></span>
+</div>
+</div>
+<script type="text/javascript">
+	var iso = 'en';
+	var pathCSS = '/ps/themes/default/css/';
+	var ad = '/ps/admin2109';
+</script>
+
+					<p class="clear"></p>
+				</td>
+			</tr>
+					<tr>
+				<td class="col-left"><label></label></td>
+				<td style="padding-bottom:5px;">
+					<div style="display:block;width:620px;" class="hint clear">
+						Do you want an image associated with the product in your description?
+						<span class="addImageDescription" style="cursor:pointer">Click here</span>.
+					</div>
+					<p class="clear"></p>
+				</td>
+			</tr>
+			</table>
+				<table id="createImageDescription" style="display:none;width:100%">
+					<tr>
+						<td colspan="2" height="10"></td>
+					</tr>
+					<tr>
+						<td class="col-left"><label>Select your image:</label></td>
+						<td style="padding-bottom:5px;">
+							<ul class="smallImage">
+																<li>
+										<input type="radio" name="smallImage" id="smallImage_0" value="15" checked="checked" >
+										<label for="smallImage_0" class="t">
+											<img src="http://localhost/ps/img/p/1/5/15-small_default.jpg" alt="" />
+										</label>
+									</li>
+																<li>
+										<input type="radio" name="smallImage" id="smallImage_1" value="16"  >
+										<label for="smallImage_1" class="t">
+											<img src="http://localhost/ps/img/p/1/6/16-small_default.jpg" alt="" />
+										</label>
+									</li>
+																<li>
+										<input type="radio" name="smallImage" id="smallImage_2" value="17"  >
+										<label for="smallImage_2" class="t">
+											<img src="http://localhost/ps/img/p/1/7/17-small_default.jpg" alt="" />
+										</label>
+									</li>
+																<li>
+										<input type="radio" name="smallImage" id="smallImage_3" value="18"  >
+										<label for="smallImage_3" class="t">
+											<img src="http://localhost/ps/img/p/1/8/18-small_default.jpg" alt="" />
+										</label>
+									</li>
+																<li>
+										<input type="radio" name="smallImage" id="smallImage_4" value="19"  >
+										<label for="smallImage_4" class="t">
+											<img src="http://localhost/ps/img/p/1/9/19-small_default.jpg" alt="" />
+										</label>
+									</li>
+																<li>
+										<input type="radio" name="smallImage" id="smallImage_5" value="20"  >
+										<label for="smallImage_5" class="t">
+											<img src="http://localhost/ps/img/p/2/0/20-small_default.jpg" alt="" />
+										</label>
+									</li>
+																<li>
+										<input type="radio" name="smallImage" id="smallImage_6" value="21"  >
+										<label for="smallImage_6" class="t">
+											<img src="http://localhost/ps/img/p/2/1/21-small_default.jpg" alt="" />
+										</label>
+									</li>
+																<li>
+										<input type="radio" name="smallImage" id="smallImage_7" value="22"  >
+										<label for="smallImage_7" class="t">
+											<img src="http://localhost/ps/img/p/2/2/22-small_default.jpg" alt="" />
+										</label>
+									</li>
+														</ul>
+							<p class="clear"></p>
+						</td>
+					</tr>
+					<tr>
+						<td class="col-left"><label>Position:</label></td>
+						<td style="padding-bottom:5px;">
+							<ul class="listForm">
+								<li><input type="radio" name="leftRight" id="leftRight_1" value="left" checked>
+									<label for="leftRight_1" class="t">left</label>
+								</li>
+								<li>
+									<input type="radio" name="leftRight" id="leftRight_2" value="right">
+									<label for="leftRight_2" class="t">right</label>
+								</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<td class="col-left"><label>Select the type of picture:</label></td>
+						<td style="padding-bottom:5px;">
+							<ul class="listForm">
+															<li><input type="radio" name="imageTypes" id="imageTypes_0" value="home_default" checked="checked">
+									<label for="imageTypes_0" class="t">home_default <span>(124px by 124px)</span></label>
+								</li>
+															<li><input type="radio" name="imageTypes" id="imageTypes_1" value="large_default" >
+									<label for="imageTypes_1" class="t">large_default <span>(264px by 264px)</span></label>
+								</li>
+															<li><input type="radio" name="imageTypes" id="imageTypes_2" value="medium_default" >
+									<label for="imageTypes_2" class="t">medium_default <span>(58px by 58px)</span></label>
+								</li>
+															<li><input type="radio" name="imageTypes" id="imageTypes_3" value="small_default" >
+									<label for="imageTypes_3" class="t">small_default <span>(45px by 45px)</span></label>
+								</li>
+															<li><input type="radio" name="imageTypes" id="imageTypes_4" value="thickbox_default" >
+									<label for="imageTypes_4" class="t">thickbox_default <span>(600px by 600px)</span></label>
+								</li>
+														</ul>
+							<p class="clear"></p>
+						</td>
+					</tr>
+					<tr>
+						<td class="col-left"><label>Image tag to insert:</label></td>
+						<td style="padding-bottom:5px;">
+							<input type="text" id="resultImage" name="resultImage" />
+							<p class="preference_description">The tag to copy/paste into the description.</p>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div class="separation"></div>
+						</td>
+					</tr>
+				</table>
+				<table>
+		<tr>
+			<td class="col-left"><label>Tags:</label></td>
+			<td style="padding-bottom:5px;" class="translatable">
+									<div class="lang_1" style="float: left;">
+						<input size="55" type="text" id="tags_1" name="tags_1"
+							value="apple, ipod, nano" />
+						<span class="hint" name="help_box">Forbidden characters: !&lt;;&gt;;?=+#&quot;&deg;{}_$%<span class="hint-pointer">&nbsp;</span></span>
+					</div>
+								<p class="preference_description clear">Tags separated by commas (e.g. dvd, dvd player, hifi)</p>
+			</td>
+		</tr>
+		</table>
+	</table>
+	<br />
+</div>
+
+									</div>
+							<div id="product-tab-content-Prices" class="not-loaded product-tab-content" style="display:none">
+									</div>
+							<div id="product-tab-content-Seo" class="not-loaded product-tab-content" style="display:none">
+									</div>
+							<div id="product-tab-content-Associations" class="not-loaded product-tab-content" style="display:none">
+									</div>
+							<div id="product-tab-content-Shipping" class="not-loaded product-tab-content" style="display:none">
+									</div>
+							<div id="product-tab-content-Combinations" class="not-loaded product-tab-content" style="display:none">
+									</div>
+							<div id="product-tab-content-Quantities" class="not-loaded product-tab-content" style="display:none">
+									</div>
+							<div id="product-tab-content-Pack" class="not-loaded product-tab-content" style="display:none">
+									</div>
+							<div id="product-tab-content-VirtualProduct" class="not-loaded product-tab-content" style="display:none">
+									</div>
+							<div id="product-tab-content-Images" class="not-loaded product-tab-content" style="display:none">
+									</div>
+							<div id="product-tab-content-Features" class="not-loaded product-tab-content" style="display:none">
+									</div>
+							<div id="product-tab-content-Customization" class="not-loaded product-tab-content" style="display:none">
+									</div>
+							<div id="product-tab-content-Attachments" class="not-loaded product-tab-content" style="display:none">
+									</div>
+							<div id="product-tab-content-Suppliers" class="not-loaded product-tab-content" style="display:none">
+									</div>
+					</div>
+		<input type="hidden" name="id_product_attribute" id="id_product_attribute" value="0" />
+		<input type="hidden" name="key_tab" id="key_tab" value="Informations" />
+		<input id="product_form_submit_btn"  type="submit" value="Save" name="submitAddproduct" class="button" />
+	</form>
+	
+	<br/>
+
+
+
+	<script type="text/javascript">
+
+	var iso = 'en';
+	var pathCSS = '/ps/themes/default/css/';
+	var ad = '/ps/admin2109';
+
+	$(document).ready(function(){
+		
+	// Execute when tab Informations has finished loading
+	tabs_manager.onLoad('Informations', function(){
+		tinySetup({
+			editor_selector :"autoload_rte",
+			setup : function(ed) {
+				ed.onInit.add(function(ed)
+				{
+					if (typeof ProductMultishop.load_tinymce[ed.id] != 'undefined')
+					{
+						if (typeof ProductMultishop.load_tinymce[ed.id])
+							ed.hide();
+						else
+							ed.show();
+					}
+				});
+
+				ed.onKeyUp.add(function(ed, e) {
+					tinyMCE.triggerSave();
+					textarea = $('#'+ed.id);
+					max = textarea.parent('div').find('span.counter').attr('max');
+					if (max != 'none')
+					{
+						textarea_value = textarea.val();
+						count = stripHTML(textarea_value).length;
+						rest = max - count;
+						if (rest < 0)
+							textarea.parent('div').find('span.counter').html('<span style="color:red;">Maximum '+max+' characters : '+rest+'</span>');
+						else
+							textarea.parent('div').find('span.counter').html(' ');
+					}
+				});
+			}
+		});
+	});
+
+	});
+	</script>
+	<script type="text/javascript">
+		var module_dir = '/ps/modules/';
+		var id_language = 1;
+		var languages = new Array();
+		var vat_number = 1;
+		// Multilang field setup must happen before document is ready so that calls to displayFlags() to avoid
+		// precedence conflicts with other document.ready() blocks
+					languages[0] = {
+				id_lang: 1,
+				iso_code: 'en',
+				name: 'English (United States)',
+				is_default: '1'
+			};
+				// we need allowEmployeeFormLang var in ajax request
+		allowEmployeeFormLang = 0;
+		displayFlags(languages, id_language, allowEmployeeFormLang);
+
+		$(document).ready(function() {
+			
+			if ($(".datepicker").length > 0)
+				$(".datepicker").datepicker({
+					prevText: '',
+					nextText: '',
+					dateFormat: 'yy-mm-dd'
+				});
+
+		});
+	
+	</script>
+
+
+			<div style="clear:both;height:0;line-height:0">&nbsp;</div>
+		</div>
+		<div style="clear:both;height:0;line-height:0">&nbsp;</div>
+	</div>
+
+			<div id="footer">
+				<div class="footerLeft">
+					<a href="http://www.prestashop.com/" target="_blank">PrestaShop&trade; 1.5.5.0</a><br />
+					<span>Load time:1.314s</span>
+				</div>
+				<div class="footerRight">
+										|&nbsp;<a href="http://www.prestashop.com/en/contact-us?utm_source=backoffice_footer" target="_blank" class="footer_link">Contact</a>
+					|&nbsp;<a href="http://forge.prestashop.com/?utm_source=backoffice_footer" target="_blank" class="footer_link">Bug Tracker</a>
+					|&nbsp;<a href="http://www.prestashop.com/forums/?utm_source=backoffice_footer" target="_blank" class="footer_link">Forum</a>
+					|&nbsp;<a href="http://addons.prestashop.com/?utm_source=backoffice_footer" target="_blank" class="footer_link">Addons</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="ajax_confirmation" style="display:none"></div>
+	<div id="ajaxBox" style="display:none"></div>
+	<div id="scrollTop"><a href="#top"></a></div>
+</body>
+</html>

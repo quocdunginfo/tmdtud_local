@@ -1,0 +1,7 @@
+-Run prestashop on localhost
+-Account: quocdunginfo@gmail.com - pass: 12345678
+-Choose page to copy template
+-Viewsource -> Copy het HTML
+-Replace all text "/ps/admin2109/"->""
+-Save in admin2109 folder as HTML file
+-Done

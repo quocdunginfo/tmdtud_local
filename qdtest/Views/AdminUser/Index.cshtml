@@ -1,0 +1,410 @@
+﻿@{
+    ViewBag.Title = "Index";
+    var User = (qdtest.Models.UserModel)ViewBag.User;
+}
+
+<div id="main">
+	<div id="content">
+		<div class="toolbar-placeholder">
+			<div class="toolbarBox toolbarHead">
+				<ul class="cc_button">
+					<li>
+					<a id="desc-employee-save" class="toolbar_btn" href="#" title="Save">
+					<span class="process-icon-save "></span>
+					<div>
+						Save
+					</div>
+					</a>
+					</li>
+					<li>
+					<a id="desc-employee-back" class="toolbar_btn" href="index.php?controller=AdminEmployees&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c" title="Back to list">
+					<span class="process-icon-back "></span>
+					<div>
+						Back to list
+					</div>
+					</a>
+					</li>
+				</ul>
+				<script language="javascript" type="text/javascript">
+			//<![CDATA[
+				var submited = false
+				var modules_list_loaded = false;
+				$(function() {
+					//get reference on save link
+					btn_save = $('span[class~="process-icon-save"]').parent();
+					//get reference on form submit button
+					btn_submit = $('#employee_form_submit_btn');
+					if (btn_save.length > 0 && btn_submit.length > 0)
+					{
+						//get reference on save and stay link
+						btn_save_and_stay = $('span[class~="process-icon-save-and-stay"]').parent();
+						//get reference on current save link label
+						lbl_save = $('#desc-employee-save div');
+						//override save link label with submit button value
+						if (btn_submit.val().length > 0)
+							lbl_save.html(btn_submit.attr("value"));
+						if (btn_save_and_stay.length > 0)
+						{
+							//get reference on current save link label
+							lbl_save_and_stay = $('#desc-employee-save-and-stay div');
+							//override save and stay link label with submit button value
+							if (btn_submit.val().length > 0 && lbl_save_and_stay && !lbl_save_and_stay.hasClass('locked'))
+							{
+								lbl_save_and_stay.html(btn_submit.val() + " and stay ");
+							}
+						}
+						//hide standard submit button
+						btn_submit.hide();
+						//bind enter key press to validate form
+						$('#employee_form').keypress(function (e) {
+							if (e.which == 13 && e.target.localName != 'textarea')
+								$('#desc-employee-save').click();
+						});
+						//submit the form
+							btn_save.click(function() {
+								// Avoid double click
+								if (submited)
+									return false;
+								submited = true;
+								//add hidden input to emulate submit button click when posting the form -> field name posted
+								btn_submit.before('<input type="hidden" name="'+btn_submit.attr("name")+'" value="1" />');
+								$('#employee_form').submit();
+								return false;
+							});
+							if (btn_save_and_stay)
+							{
+								btn_save_and_stay.click(function() {
+									//add hidden input to emulate submit button click when posting the form -> field name posted
+									btn_submit.before('<input type="hidden" name="'+btn_submit.attr("name")+'AndStay" value="1" />');
+									$('#employee_form').submit();
+									return false;
+								});
+							}
+					}
+									});
+							//]]>
+			</script>
+				<div class="pageTitle">
+					<h3>
+					<span id="current_obj" style="font-weight: normal;">
+					<span class="breadcrumb item-0 ">Administration <img alt="&gt;" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"/>
+					</span>
+					<span class="breadcrumb item-1 ">Employees <img alt="&gt;" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"/>
+					</span>
+					<span class="breadcrumb item-2 ">Edit </span>
+					</span>
+					</h3>
+				</div>
+			</div>
+		</div>
+		<div class="leadin">
+		</div>
+		<form id="employee_form" class="defaultForm AdminEmployees" action="http://google.com" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="id_employee" id="id_employee" value="@User.id"/>
+			<fieldset id="fieldset_0">
+				<legend>
+				<img src="../img/admin/nav-user.gif" alt="Employees"/> Employees </legend>
+				<label>First Name: </label>
+				<div class="margin-form">
+					<input type="text" name="firstname" id="firstname" value="@User.username" class="" size="33"/>
+					<sup>*</sup>
+				</div>
+				<div class="clear">
+				</div>
+				<label>Last Name: </label>
+				<div class="margin-form">
+					<input type="text" name="lastname" id="lastname" value="Dung" class="" size="33"/>
+					<sup>*</sup>
+				</div>
+				<div class="clear">
+				</div>
+				<label>Password: </label>
+				<div class="margin-form">
+					<input type="password" name="passwd" size="33" class="" value="@User.password"/>
+					<sup>*</sup>
+					<p class="preference_description">
+						 Leave this field blank if you do not want to change your password.
+					</p>
+				</div>
+				<div class="clear">
+				</div>
+				<label>Email address: </label>
+				<div class="margin-form">
+					<input type="text" name="email" id="email" value="quocdunginfo@gmail.com" class="" size="33"/>
+					<sup>*</sup>
+				</div>
+				<div class="clear">
+				</div>
+                <!--
+				<label>Admin panel color: </label>
+				<div class="margin-form">
+					<input type="color" size="20" data-hex="true" class="color mColorPickerInput" name="bo_color" value=""/>
+					<p class="preference_description">
+						 Admin panel background will be displayed in this color (HTML colors only). "lightblue", "#CC6600")
+					</p>
+				</div>
+                
+				<div class="clear">
+				</div>
+				<label>Default page: </label>
+				<div class="margin-form">
+					<select name="default_tab" id="default_tab">
+						<optgroup label="Home"></optgroup>
+						<option value="1">&nbsp;&nbsp;Home</option>
+						<optgroup label="Catalog"></optgroup>
+						<option value="21">&nbsp;&nbsp;Products</option>
+						<option value="22">&nbsp;&nbsp;Categories</option>
+						<option value="23">&nbsp;&nbsp;Monitoring</option>
+						<option value="24">&nbsp;&nbsp;Attributes and Values</option>
+						<option value="25">&nbsp;&nbsp;Features</option>
+						<option value="26">&nbsp;&nbsp;Manufacturers</option>
+						<option value="27">&nbsp;&nbsp;Suppliers</option>
+						<option value="28">&nbsp;&nbsp;Image Mapping</option>
+						<option value="29">&nbsp;&nbsp;Tags</option>
+						<option value="30">&nbsp;&nbsp;Attachments</option>
+						<optgroup label="Orders"></optgroup>
+						<option value="31">&nbsp;&nbsp;Orders</option>
+						<option value="32">&nbsp;&nbsp;Invoices</option>
+						<option value="33">&nbsp;&nbsp;Merchandise Returns</option>
+						<option value="34">&nbsp;&nbsp;Delivery Slips</option>
+						<option value="35">&nbsp;&nbsp;Credit Slips</option>
+						<option value="36">&nbsp;&nbsp;Statuses</option>
+						<option value="37">&nbsp;&nbsp;Order Messages</option>
+						<optgroup label="Customers"></optgroup>
+						<option value="38">&nbsp;&nbsp;Customers</option>
+						<option value="39">&nbsp;&nbsp;Addresses</option>
+						<option value="40">&nbsp;&nbsp;Groups</option>
+						<option value="41">&nbsp;&nbsp;Shopping Carts</option>
+						<option value="42">&nbsp;&nbsp;Customer Service</option>
+						<option value="43">&nbsp;&nbsp;Contacts</option>
+						<option value="44">&nbsp;&nbsp;Titles</option>
+						<option value="45">&nbsp;&nbsp;Outstanding</option>
+						<optgroup label="Price Rules"></optgroup>
+						<option value="46">&nbsp;&nbsp;Cart Rules</option>
+						<option value="47">&nbsp;&nbsp;Catalog Price Rules</option>
+						<option value="48">&nbsp;&nbsp;Marketing</option>
+						<optgroup label="Shipping"></optgroup>
+						<option value="49">&nbsp;&nbsp;Shipping</option>
+						<option value="50">&nbsp;&nbsp;Carriers</option>
+						<option value="">&nbsp;&nbsp;</option>
+						<optgroup label="Localization"></optgroup>
+						<option value="52">&nbsp;&nbsp;Localization</option>
+						<option value="53">&nbsp;&nbsp;Languages</option>
+						<option value="54">&nbsp;&nbsp;Zones</option>
+						<option value="55">&nbsp;&nbsp;Countries</option>
+						<option value="56">&nbsp;&nbsp;States</option>
+						<option value="57">&nbsp;&nbsp;Currencies</option>
+						<option value="58">&nbsp;&nbsp;Taxes</option>
+						<option value="59">&nbsp;&nbsp;Tax Rules</option>
+						<option value="60">&nbsp;&nbsp;Translations</option>
+						<optgroup label="Modules"></optgroup>
+						<option value="61">&nbsp;&nbsp;Modules</option>
+						<option value="62">&nbsp;&nbsp;Modules &amp; Themes Catalog</option>
+						<option value="63">&nbsp;&nbsp;Positions</option>
+						<option value="64">&nbsp;&nbsp;Payment</option>
+						<optgroup label="Preferences"></optgroup>
+						<option value="65">&nbsp;&nbsp;General</option>
+						<option value="66">&nbsp;&nbsp;Orders</option>
+						<option value="67">&nbsp;&nbsp;Products</option>
+						<option value="68">&nbsp;&nbsp;Customers</option>
+						<option value="69">&nbsp;&nbsp;Themes</option>
+						<option value="70">&nbsp;&nbsp;SEO &amp; URLs</option>
+						<option value="71">&nbsp;&nbsp;CMS</option>
+						<option value="72">&nbsp;&nbsp;Images</option>
+						<option value="73">&nbsp;&nbsp;Store Contacts</option>
+						<option value="74">&nbsp;&nbsp;Search</option>
+						<option value="75">&nbsp;&nbsp;Maintenance</option>
+						<option value="76">&nbsp;&nbsp;Geolocation</option>
+						<optgroup label="Advanced Parameters"></optgroup>
+						<option value="77">&nbsp;&nbsp;Configuration Information</option>
+						<option value="78">&nbsp;&nbsp;Performance</option>
+						<option value="79">&nbsp;&nbsp;E-mail</option>
+						<option value="80">&nbsp;&nbsp;Multistore</option>
+						<option value="81">&nbsp;&nbsp;CSV Import</option>
+						<option value="82">&nbsp;&nbsp;DB Backup</option>
+						<option value="83">&nbsp;&nbsp;SQL Manager</option>
+						<option value="84">&nbsp;&nbsp;Logs</option>
+						<option value="85">&nbsp;&nbsp;Webservice</option>
+						<optgroup label="Administration"></optgroup>
+						<option value="86">&nbsp;&nbsp;Preferences</option>
+						<option value="87">&nbsp;&nbsp;Quick Access</option>
+						<option value="88">&nbsp;&nbsp;Employees</option>
+						<option value="89">&nbsp;&nbsp;Profiles</option>
+						<option value="90">&nbsp;&nbsp;Permissions</option>
+						<option value="91">&nbsp;&nbsp;Menus</option>
+						<option value="102">&nbsp;&nbsp;Merchant Expertise</option>
+						<optgroup label="Stats"></optgroup>
+						<option value="92">&nbsp;&nbsp;Stats</option>
+						<option value="93">&nbsp;&nbsp;Search Engines</option>
+						<option value="94">&nbsp;&nbsp;Referrers</option>
+						<optgroup label="Stock"></optgroup>
+						<option value="95">&nbsp;&nbsp;Warehouses</option>
+						<option value="96">&nbsp;&nbsp;Stock Management</option>
+						<option value="97">&nbsp;&nbsp;Stock Movement</option>
+						<option value="98">&nbsp;&nbsp;Instant Stock Status</option>
+						<option value="99">&nbsp;&nbsp;Stock Coverage</option>
+						<option value="100">&nbsp;&nbsp;Supply orders</option>
+						<option value="101">&nbsp;&nbsp;Configuration</option>
+					</select>
+					<p class="preference_description">
+						 This page will be displayed just after login
+					</p>
+				</div>
+				<div class="clear">
+				</div>
+				<label>Back Office width: </label>
+				<div class="margin-form">
+					<input type="text" name="bo_width" id="bo_width" value="0" class="" size="10"/>
+					<p class="preference_description">
+						 Back Office width, in pixels. The value &quot;0&quot; means that the Back Office width will be flexible.
+					</p>
+				</div>
+				<div class="clear">
+				</div>
+				<label>Language: </label>
+				<div class="margin-form">
+					<select name="id_lang" class="" id="id_lang">
+						<option value="1" selected="selected">English (United States)</option>
+					</select>
+					<sup>*</sup>
+				</div>
+				<div class="clear">
+				</div>
+				<label>Theme: </label>
+				<div class="margin-form">
+					<select name="bo_theme" id="bo_theme">
+						<option value="default" selected="selected">default</option>
+					</select>
+					<p class="preference_description">
+						 Back Office theme
+					</p>
+				</div>
+				<div class="clear">
+				</div>
+				<label>Show screencast at login: </label>
+				<div class="margin-form">
+					<input type="radio" name="bo_show_screencast" id="bo_show_screencast_on" value="1" checked="checked"/>
+					<label class="t" for="bo_show_screencast_on">
+					<img src="../img/admin/enabled.gif" alt="Enabled" title="Enabled"/>
+					</label>
+					<input type="radio" name="bo_show_screencast" id="bo_show_screencast_off" value="0"/>
+					<label class="t" for="bo_show_screencast_off">
+					<img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled"/>
+					</label>
+					<p class="preference_description">
+						 Display the welcome video in the Admin panel dashboard at log in.
+					</p>
+				</div>
+				<div class="clear">
+				</div>
+                -->
+				<label>Status: </label>
+				<div class="margin-form">
+					<input type="radio" name="active" id="active_on" value="1" checked="checked"/>
+					<label class="t" for="active_on">
+					<img src="../img/admin/enabled.gif" alt="Enabled" title="Enabled"/>
+					</label>
+					<input type="radio" name="active" id="active_off" value="0"/>
+					<label class="t" for="active_off">
+					<img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled"/>
+					</label>
+					<p class="preference_description">
+						 Allow or disallow this employee to log into the Admin panel.
+					</p>
+				</div>
+				<div class="clear">
+				</div>
+                
+				<label>Profile Permission: </label>
+				<div class="margin-form">
+					<select name="id_profile" class="" id="id_profile">
+						<option value="">-- Choose --</option>
+						<option value="1" selected="selected">SuperAdmin</option>
+						<option value="2">Administrator</option>
+						<option value="3">Logistician</option>
+						<option value="4">Translator</option>
+						<option value="5">Salesman</option>
+					</select>
+					<sup>*</sup>
+				</div>
+				<div class="clear">
+				</div>
+				<div class="margin-form">
+					<input type="submit" id="employee_form_submit_btn" value="Save" name="submitAddemployee" class="button"/>
+				</div>
+				<div class="small">
+					<sup>*</sup> Required field
+				</div>
+			</fieldset>
+		</form>
+		<script type="text/javascript">
+		    var module_dir = '/ps/modules/';
+		    var id_language = 1;
+		    var languages = new Array();
+		    var vat_number = 1;
+		    // Multilang field setup must happen before document is ready so that calls to displayFlags() to avoid
+		    // precedence conflicts with other document.ready() blocks
+		    languages[0] = {
+		        id_lang: 1,
+		        iso_code: 'en',
+		        name: 'English (United States)',
+		        is_default: '1'
+		    };
+		    // we need allowEmployeeFormLang var in ajax request
+		    allowEmployeeFormLang = 0;
+		    displayFlags(languages, id_language, allowEmployeeFormLang);
+		    $(document).ready(function () {
+		        if ($(".datepicker").length > 0)
+		            $(".datepicker").datepicker({
+		                prevText: '',
+		                nextText: '',
+		                dateFormat: 'yy-mm-dd'
+		            });
+		    });
+		    $(document).ready(function () {
+		        $('select[name=id_profile]').change(function () {
+		            ifSuperAdmin($(this));
+		            $.ajax({
+		                url: "index.php?controller=AdminEmployees&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c",
+		                cache: false,
+		                data: {
+		                    ajax: '1',
+		                    action: 'getTabByIdProfile',
+		                    id_profile: $(this).val()
+		                },
+		                dataType: 'json',
+		                success: function (resp, textStatus, jqXHR) {
+		                    if (resp != false) {
+		                        $('select[name=default_tab]').html('');
+		                        $.each(resp, function (key, r) {
+		                            if (r.id_parent == 0) {
+		                                $('select[name=default_tab]').append('<optgroup label="' + r.name + '"></optgroup>');
+		                                $.each(r.children, function (k, value) {
+		                                    $('select[name=default_tab]').append('<option value="' + r.id_tab + '">' + value.name + '</option>')
+		                                });
+		                            }
+		                        });
+		                    }
+		                }
+		            });
+		        });
+		        ifSuperAdmin($('select[name=id_profile]'));
+		    });
+		    function ifSuperAdmin(el) {
+		        var val = $(el).val();
+		        if (!val || val == 1) {
+		            $('.assoShop input[type=checkbox]').attr('disabled', true);
+		            $('.assoShop input[type=checkbox]').attr('checked', true);
+		        }
+		        else
+		            $('.assoShop input[type=checkbox]').attr('disabled', false);
+		    }
+	</script>
+		<div style="clear:both;height:0;line-height:0">
+			&nbsp;
+		</div>
+	</div>
+	<div style="clear:both;height:0;line-height:0">
+		&nbsp;
+	</div>
+</div>
