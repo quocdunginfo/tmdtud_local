@@ -11,8 +11,8 @@ namespace qdtest.Controllers
 {
     public class AdminLoginController : Controller
     {
-        private BlogDBContext _db = new BlogDBContext();
-        private UserModel _user = new UserModel();
+        private BanGiayDBContext _db = new BanGiayDBContext();
+        private NhanVien _user = new NhanVien();
         //
         // GET: /AdminLogin/
         public ActionResult Index()
@@ -20,7 +20,7 @@ namespace qdtest.Controllers
             HttpCookie _tmp = Request.Cookies.Get("admin");
             if (_tmp == null) return View();
             //Nếu đã đang nhập rồi thì return home
-            UserModelController uc = new UserModelController();
+            NhanVienController uc = new NhanVienController();
             if (uc.get_by_id_password(_tmp["user_id"],_tmp["user_password"])!=null)
             {
                 return RedirectToAction("Index","AdminHome");
@@ -33,21 +33,19 @@ namespace qdtest.Controllers
         public ActionResult Test_Login()
         {
             //get data from client
-            UserModelController uc = new UserModelController();
+            NhanVienController uc = new NhanVienController();
             String username = Request["user_username"];
             String password = Request["user_password"];
             //validate
-            //UserModelController c = new UserModelController();
+            //NhanVienController c = new NhanVienController();
             if (uc.login(username,password))
             {
                 Debug.WriteLine("Đăng nhập thành công");
-                UserModel u = (from user in _db.Users
-                     where user.username == username
-                     select user).FirstOrDefault();
+                NhanVien u = uc.get_by_username(username);
                 //set Cookies
                 HttpCookie _tmp = new HttpCookie("admin");
                 _tmp["user_id"] = u.id.ToString();
-                _tmp["user_password"] = u.password.ToString();
+                _tmp["user_password"] = u.matkhau.ToString();
                 _tmp.Expires = DateTime.Now.AddDays(1);
                 Response.Cookies.Add(_tmp);
 
@@ -59,7 +57,7 @@ namespace qdtest.Controllers
         }
         public ActionResult Logout()
         {
-            //re new cookies
+            //renew cookies for admin
             HttpCookie _tmp = new HttpCookie("admin");
             _tmp.Expires = DateTime.Now.AddDays(-1);
             Response.Cookies.Add(_tmp);

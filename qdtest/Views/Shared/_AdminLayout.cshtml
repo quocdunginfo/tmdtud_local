@@ -57,10 +57,10 @@
 <script type="text/javascript" src="@qRootAdminTemplatePath../js/admin.js"></script>
 <script type="text/javascript" src="@qRootAdminTemplatePath../js/toggle.js"></script>
 <script type="text/javascript" src="@qRootAdminTemplatePath../js/tools.js"></script>
-<script type="text/javascript" src="@qRootAdminTemplatePath../js/ajax.js"></script>
+<!-- <script type="text/javascript" src="@qRootAdminTemplatePath../js/ajax.js"></script> -->
 <script type="text/javascript" src="@qRootAdminTemplatePath../js/toolbar.js"></script>
-<script type="text/javascript" src="@qRootAdminTemplatePath../js/notifications.js"></script>
-<script type="text/javascript" src="@qRootAdminTemplatePath../js/helpAccess.js"></script>
+<!-- <script type="text/javascript" src="@qRootAdminTemplatePath../js/notifications.js"></script> -->
+<!-- <script type="text/javascript" src="@qRootAdminTemplatePath../js/helpAccess.js"></script> -->
 <script type="text/javascript" src="@qRootAdminTemplatePath../admin2109/../js/jquery/plugins/jquery.flot.js"></script>
 <link rel="icon" type="image/vnd.microsoft.icon" href="/ps/img/favicon.ico"/>
 <link rel="shortcut icon" type="image/x-icon" href="/ps/img/favicon.ico"/>
@@ -144,7 +144,7 @@
 						<ul id="employee_links">
 							<li><a href="index.php?controller=AdminEmployees&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c&id_employee=1&amp;updateemployee">My preferences</a></li>
 							<li class="separator">&nbsp;</li>
-							<li><a id="header_logout" href="index.php?logout">logout</a></li>
+							<li><a id="header_logout" href="@Url.Action("Logout","AdminLogin")">logout</a></li>
 							<li class="separator">&nbsp;</li>
 							<a href="http://localhost/ps/" id="header_foaccess" target="_blank" title="View my shop">View my shop</a>
 						</ul>
@@ -300,13 +300,8 @@
 				<a href="#" class="title">
 				<img src="../img/t/AdminAdmin.gif" alt=""/>Administration </a>
 				<ul class="submenu">
-					<li><a href="index.php?controller=AdminAdminPreferences&amp;token=ad534619d25cc771e1a0decd46156593">Preferences</a></li>
-					<li><a href="index.php?controller=AdminQuickAccesses&amp;token=694c5f1239bce23895f6a3dfd1e8e023">Quick Access</a></li>
-					<li class="@if(ActiveTab.Contains("Employees")) {<text>active</text>}" ><a href="index.php?controller=AdminEmployees&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">Employees</a></li>
-					<li><a href="index.php?controller=AdminProfiles&amp;token=8610cbbcfb96f69eb748050f114a335c">Profiles</a></li>
-					<li><a href="index.php?controller=AdminAccess&amp;token=b966c26be9c5c618c6101d13d02b094b">Permissions</a></li>
-					<li><a href="index.php?controller=AdminTabs&amp;token=c314176d39c1c7a4ede7be2c8b9a199d">Menus</a></li>
-					<li><a href="index.php?controller=AdminGamification&amp;token=ed4504a18ef6ead39695897d952cd543">Merchant Expertise</a></li>
+					<li class="@if(ActiveTab.Contains("Setting")) {<text>active</text>}"><a href="@Url.Action("Index","AdminSetting")">Setting</a></li>
+					<li class="@if(ActiveTab.Contains("Employees")) {<text>active</text>}" ><a href="@Url.Action("Index","AdminUsers")">Users</a></li>
 				</ul>
 				</li>
 				<li class="submenu_size maintab " id="maintab19">

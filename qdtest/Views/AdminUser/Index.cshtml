@@ -1,8 +1,7 @@
 ﻿@{
     ViewBag.Title = "Index";
-    var User = (qdtest.Models.UserModel)ViewBag.User;
+    var NhanVien = (qdtest.Models.NhanVien)ViewBag.NhanVien;
 }
-
 <div id="main">
 	<div id="content">
 		<div class="toolbar-placeholder">
@@ -17,80 +16,74 @@
 					</a>
 					</li>
 					<li>
-					<a id="desc-employee-back" class="toolbar_btn" href="index.php?controller=AdminEmployees&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c" title="Back to list">
+					<a id="desc-employee-back" class="toolbar_btn" href="index.php?controller=AdminEmployees&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c" title="Back to list">
 					<span class="process-icon-back "></span>
 					<div>
-						Back to list
+						 Back to list
 					</div>
 					</a>
 					</li>
 				</ul>
 				<script language="javascript" type="text/javascript">
-			//<![CDATA[
-				var submited = false
-				var modules_list_loaded = false;
-				$(function() {
-					//get reference on save link
-					btn_save = $('span[class~="process-icon-save"]').parent();
-					//get reference on form submit button
-					btn_submit = $('#employee_form_submit_btn');
-					if (btn_save.length > 0 && btn_submit.length > 0)
-					{
-						//get reference on save and stay link
-						btn_save_and_stay = $('span[class~="process-icon-save-and-stay"]').parent();
-						//get reference on current save link label
-						lbl_save = $('#desc-employee-save div');
-						//override save link label with submit button value
-						if (btn_submit.val().length > 0)
-							lbl_save.html(btn_submit.attr("value"));
-						if (btn_save_and_stay.length > 0)
-						{
-							//get reference on current save link label
-							lbl_save_and_stay = $('#desc-employee-save-and-stay div');
-							//override save and stay link label with submit button value
-							if (btn_submit.val().length > 0 && lbl_save_and_stay && !lbl_save_and_stay.hasClass('locked'))
-							{
-								lbl_save_and_stay.html(btn_submit.val() + " and stay ");
-							}
-						}
-						//hide standard submit button
-						btn_submit.hide();
-						//bind enter key press to validate form
-						$('#employee_form').keypress(function (e) {
-							if (e.which == 13 && e.target.localName != 'textarea')
-								$('#desc-employee-save').click();
-						});
-						//submit the form
-							btn_save.click(function() {
-								// Avoid double click
-								if (submited)
-									return false;
-								submited = true;
-								//add hidden input to emulate submit button click when posting the form -> field name posted
-								btn_submit.before('<input type="hidden" name="'+btn_submit.attr("name")+'" value="1" />');
-								$('#employee_form').submit();
-								return false;
-							});
-							if (btn_save_and_stay)
-							{
-								btn_save_and_stay.click(function() {
-									//add hidden input to emulate submit button click when posting the form -> field name posted
-									btn_submit.before('<input type="hidden" name="'+btn_submit.attr("name")+'AndStay" value="1" />');
-									$('#employee_form').submit();
-									return false;
-								});
-							}
-					}
-									});
-							//]]>
+				    //<![CDATA[
+				    var submited = false
+				    var modules_list_loaded = false;
+				    $(function () {
+				        //get reference on save link
+				        btn_save = $('span[class~="process-icon-save"]').parent();
+				        //get reference on form submit button
+				        btn_submit = $('#employee_form_submit_btn');
+				        if (btn_save.length > 0 && btn_submit.length > 0) {
+				            //get reference on save and stay link
+				            btn_save_and_stay = $('span[class~="process-icon-save-and-stay"]').parent();
+				            //get reference on current save link label
+				            lbl_save = $('#desc-employee-save div');
+				            //override save link label with submit button value
+				            if (btn_submit.val().length > 0)
+				                lbl_save.html(btn_submit.attr("value"));
+				            if (btn_save_and_stay.length > 0) {
+				                //get reference on current save link label
+				                lbl_save_and_stay = $('#desc-employee-save-and-stay div');
+				                //override save and stay link label with submit button value
+				                if (btn_submit.val().length > 0 && lbl_save_and_stay && !lbl_save_and_stay.hasClass('locked')) {
+				                    lbl_save_and_stay.html(btn_submit.val() + " and stay ");
+				                }
+				            }
+				            //hide standard submit button
+				            btn_submit.hide();
+				            //bind enter key press to validate form
+				            $('#employee_form').keypress(function (e) {
+				                if (e.which == 13 && e.target.localName != 'textarea')
+				                    $('#desc-employee-save').click();
+				            });
+				            //submit the form
+				            btn_save.click(function () {
+				                // Avoid double click
+				                if (submited)
+				                    return false;
+				                submited = true;
+				                //add hidden input to emulate submit button click when posting the form -> field name posted
+				                btn_submit.before('<input type="hidden" name="' + btn_submit.attr("name") + '" value="1" />');
+				                $('#employee_form').submit();
+				                return false;
+				            });
+				            if (btn_save_and_stay) {
+				                btn_save_and_stay.click(function () {
+				                    //add hidden input to emulate submit button click when posting the form -> field name posted
+				                    btn_submit.before('<input type="hidden" name="' + btn_submit.attr("name") + 'AndStay" value="1" />');
+				                    $('#employee_form').submit();
+				                    return false;
+				                });
+				            }
+				        }
+				    });
+				    //]]>
 			</script>
 				<div class="pageTitle">
 					<h3>
 					<span id="current_obj" style="font-weight: normal;">
-					<span class="breadcrumb item-0 ">Administration <img alt="&gt;" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"/>
-					</span>
-					<span class="breadcrumb item-1 ">Employees <img alt="&gt;" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"/>
-					</span>
+					<span class="breadcrumb item-0 ">Administration <img alt=">" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"> </span>
+					<span class="breadcrumb item-1 ">Users <img alt=">" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"> </span>
 					<span class="breadcrumb item-2 ">Edit </span>
 					</span>
 					</h3>
@@ -99,241 +92,79 @@
 		</div>
 		<div class="leadin">
 		</div>
-		<form id="employee_form" class="defaultForm AdminEmployees" action="http://google.com" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="id_employee" id="id_employee" value="@User.id"/>
+		<form id="employee_form" class="defaultForm AdminEmployees" action="index.php?controller=AdminEmployees&amp;submitAddemployee=1&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c" method="post" enctype="multipart/form-data">
+			<input name="nhanvien_id" id="id_employee" value="@NhanVien.id" type="hidden">
 			<fieldset id="fieldset_0">
 				<legend>
-				<img src="../img/admin/nav-user.gif" alt="Employees"/> Employees </legend>
-				<label>First Name: </label>
+				<img src="../img/admin/nav-user.gif" alt="Employees"> User </legend>
+				<label>Tên đăng nhập:</label>
 				<div class="margin-form">
-					<input type="text" name="firstname" id="firstname" value="@User.username" class="" size="33"/>
+					<input name="nhanvien_tendangnhap" id="firstname" value="@NhanVien.tendangnhap" class="" size="33" type="text">
 					<sup>*</sup>
 				</div>
 				<div class="clear">
 				</div>
-				<label>Last Name: </label>
+				<label>Tên đầy đủ:</label>
 				<div class="margin-form">
-					<input type="text" name="lastname" id="lastname" value="Dung" class="" size="33"/>
+					<input name="nhanvien_tendaydu" Value="@NhanVien.tendaydu" class="" size="33" type="text">
 					<sup>*</sup>
 				</div>
 				<div class="clear">
 				</div>
-				<label>Password: </label>
+				<label>Mật khẩu: </label>
 				<div class="margin-form">
-					<input type="password" name="passwd" size="33" class="" value="@User.password"/>
-					<sup>*</sup>
-					<p class="preference_description">
-						 Leave this field blank if you do not want to change your password.
-					</p>
-				</div>
-				<div class="clear">
-				</div>
-				<label>Email address: </label>
-				<div class="margin-form">
-					<input type="text" name="email" id="email" value="quocdunginfo@gmail.com" class="" size="33"/>
+					<input name="nhanvien_matkhau" size="33" class="" value="@NhanVien.matkhau" type="password">
 					<sup>*</sup>
 				</div>
 				<div class="clear">
 				</div>
-                <!--
-				<label>Admin panel color: </label>
+                <label>Xác nhận mật khẩu: </label>
 				<div class="margin-form">
-					<input type="color" size="20" data-hex="true" class="color mColorPickerInput" name="bo_color" value=""/>
-					<p class="preference_description">
-						 Admin panel background will be displayed in this color (HTML colors only). "lightblue", "#CC6600")
-					</p>
-				</div>
-                
-				<div class="clear">
-				</div>
-				<label>Default page: </label>
-				<div class="margin-form">
-					<select name="default_tab" id="default_tab">
-						<optgroup label="Home"></optgroup>
-						<option value="1">&nbsp;&nbsp;Home</option>
-						<optgroup label="Catalog"></optgroup>
-						<option value="21">&nbsp;&nbsp;Products</option>
-						<option value="22">&nbsp;&nbsp;Categories</option>
-						<option value="23">&nbsp;&nbsp;Monitoring</option>
-						<option value="24">&nbsp;&nbsp;Attributes and Values</option>
-						<option value="25">&nbsp;&nbsp;Features</option>
-						<option value="26">&nbsp;&nbsp;Manufacturers</option>
-						<option value="27">&nbsp;&nbsp;Suppliers</option>
-						<option value="28">&nbsp;&nbsp;Image Mapping</option>
-						<option value="29">&nbsp;&nbsp;Tags</option>
-						<option value="30">&nbsp;&nbsp;Attachments</option>
-						<optgroup label="Orders"></optgroup>
-						<option value="31">&nbsp;&nbsp;Orders</option>
-						<option value="32">&nbsp;&nbsp;Invoices</option>
-						<option value="33">&nbsp;&nbsp;Merchandise Returns</option>
-						<option value="34">&nbsp;&nbsp;Delivery Slips</option>
-						<option value="35">&nbsp;&nbsp;Credit Slips</option>
-						<option value="36">&nbsp;&nbsp;Statuses</option>
-						<option value="37">&nbsp;&nbsp;Order Messages</option>
-						<optgroup label="Customers"></optgroup>
-						<option value="38">&nbsp;&nbsp;Customers</option>
-						<option value="39">&nbsp;&nbsp;Addresses</option>
-						<option value="40">&nbsp;&nbsp;Groups</option>
-						<option value="41">&nbsp;&nbsp;Shopping Carts</option>
-						<option value="42">&nbsp;&nbsp;Customer Service</option>
-						<option value="43">&nbsp;&nbsp;Contacts</option>
-						<option value="44">&nbsp;&nbsp;Titles</option>
-						<option value="45">&nbsp;&nbsp;Outstanding</option>
-						<optgroup label="Price Rules"></optgroup>
-						<option value="46">&nbsp;&nbsp;Cart Rules</option>
-						<option value="47">&nbsp;&nbsp;Catalog Price Rules</option>
-						<option value="48">&nbsp;&nbsp;Marketing</option>
-						<optgroup label="Shipping"></optgroup>
-						<option value="49">&nbsp;&nbsp;Shipping</option>
-						<option value="50">&nbsp;&nbsp;Carriers</option>
-						<option value="">&nbsp;&nbsp;</option>
-						<optgroup label="Localization"></optgroup>
-						<option value="52">&nbsp;&nbsp;Localization</option>
-						<option value="53">&nbsp;&nbsp;Languages</option>
-						<option value="54">&nbsp;&nbsp;Zones</option>
-						<option value="55">&nbsp;&nbsp;Countries</option>
-						<option value="56">&nbsp;&nbsp;States</option>
-						<option value="57">&nbsp;&nbsp;Currencies</option>
-						<option value="58">&nbsp;&nbsp;Taxes</option>
-						<option value="59">&nbsp;&nbsp;Tax Rules</option>
-						<option value="60">&nbsp;&nbsp;Translations</option>
-						<optgroup label="Modules"></optgroup>
-						<option value="61">&nbsp;&nbsp;Modules</option>
-						<option value="62">&nbsp;&nbsp;Modules &amp; Themes Catalog</option>
-						<option value="63">&nbsp;&nbsp;Positions</option>
-						<option value="64">&nbsp;&nbsp;Payment</option>
-						<optgroup label="Preferences"></optgroup>
-						<option value="65">&nbsp;&nbsp;General</option>
-						<option value="66">&nbsp;&nbsp;Orders</option>
-						<option value="67">&nbsp;&nbsp;Products</option>
-						<option value="68">&nbsp;&nbsp;Customers</option>
-						<option value="69">&nbsp;&nbsp;Themes</option>
-						<option value="70">&nbsp;&nbsp;SEO &amp; URLs</option>
-						<option value="71">&nbsp;&nbsp;CMS</option>
-						<option value="72">&nbsp;&nbsp;Images</option>
-						<option value="73">&nbsp;&nbsp;Store Contacts</option>
-						<option value="74">&nbsp;&nbsp;Search</option>
-						<option value="75">&nbsp;&nbsp;Maintenance</option>
-						<option value="76">&nbsp;&nbsp;Geolocation</option>
-						<optgroup label="Advanced Parameters"></optgroup>
-						<option value="77">&nbsp;&nbsp;Configuration Information</option>
-						<option value="78">&nbsp;&nbsp;Performance</option>
-						<option value="79">&nbsp;&nbsp;E-mail</option>
-						<option value="80">&nbsp;&nbsp;Multistore</option>
-						<option value="81">&nbsp;&nbsp;CSV Import</option>
-						<option value="82">&nbsp;&nbsp;DB Backup</option>
-						<option value="83">&nbsp;&nbsp;SQL Manager</option>
-						<option value="84">&nbsp;&nbsp;Logs</option>
-						<option value="85">&nbsp;&nbsp;Webservice</option>
-						<optgroup label="Administration"></optgroup>
-						<option value="86">&nbsp;&nbsp;Preferences</option>
-						<option value="87">&nbsp;&nbsp;Quick Access</option>
-						<option value="88">&nbsp;&nbsp;Employees</option>
-						<option value="89">&nbsp;&nbsp;Profiles</option>
-						<option value="90">&nbsp;&nbsp;Permissions</option>
-						<option value="91">&nbsp;&nbsp;Menus</option>
-						<option value="102">&nbsp;&nbsp;Merchant Expertise</option>
-						<optgroup label="Stats"></optgroup>
-						<option value="92">&nbsp;&nbsp;Stats</option>
-						<option value="93">&nbsp;&nbsp;Search Engines</option>
-						<option value="94">&nbsp;&nbsp;Referrers</option>
-						<optgroup label="Stock"></optgroup>
-						<option value="95">&nbsp;&nbsp;Warehouses</option>
-						<option value="96">&nbsp;&nbsp;Stock Management</option>
-						<option value="97">&nbsp;&nbsp;Stock Movement</option>
-						<option value="98">&nbsp;&nbsp;Instant Stock Status</option>
-						<option value="99">&nbsp;&nbsp;Stock Coverage</option>
-						<option value="100">&nbsp;&nbsp;Supply orders</option>
-						<option value="101">&nbsp;&nbsp;Configuration</option>
-					</select>
-					<p class="preference_description">
-						 This page will be displayed just after login
-					</p>
-				</div>
-				<div class="clear">
-				</div>
-				<label>Back Office width: </label>
-				<div class="margin-form">
-					<input type="text" name="bo_width" id="bo_width" value="0" class="" size="10"/>
-					<p class="preference_description">
-						 Back Office width, in pixels. The value &quot;0&quot; means that the Back Office width will be flexible.
-					</p>
-				</div>
-				<div class="clear">
-				</div>
-				<label>Language: </label>
-				<div class="margin-form">
-					<select name="id_lang" class="" id="id_lang">
-						<option value="1" selected="selected">English (United States)</option>
-					</select>
+					<input name="nhanvien_matkhau2" size="33" class="" value="@NhanVien.matkhau" type="password">
 					<sup>*</sup>
 				</div>
 				<div class="clear">
 				</div>
-				<label>Theme: </label>
+				<label>Email: </label>
 				<div class="margin-form">
-					<select name="bo_theme" id="bo_theme">
-						<option value="default" selected="selected">default</option>
-					</select>
-					<p class="preference_description">
-						 Back Office theme
-					</p>
+					<input name="nhanvien_email" id="email" value="quocdunginfo@gmail.com" class="" size="33" type="text">
+					<sup>*</sup>
 				</div>
 				<div class="clear">
 				</div>
-				<label>Show screencast at login: </label>
+				<label>Active: </label>
 				<div class="margin-form">
-					<input type="radio" name="bo_show_screencast" id="bo_show_screencast_on" value="1" checked="checked"/>
-					<label class="t" for="bo_show_screencast_on">
-					<img src="../img/admin/enabled.gif" alt="Enabled" title="Enabled"/>
-					</label>
-					<input type="radio" name="bo_show_screencast" id="bo_show_screencast_off" value="0"/>
-					<label class="t" for="bo_show_screencast_off">
-					<img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled"/>
-					</label>
-					<p class="preference_description">
-						 Display the welcome video in the Admin panel dashboard at log in.
-					</p>
-				</div>
-				<div class="clear">
-				</div>
-                -->
-				<label>Status: </label>
-				<div class="margin-form">
-					<input type="radio" name="active" id="active_on" value="1" checked="checked"/>
+					<input name="nhanvien_active" id="active_on" value="1" checked="checked" type="radio">
 					<label class="t" for="active_on">
-					<img src="../img/admin/enabled.gif" alt="Enabled" title="Enabled"/>
+					<img src="../img/admin/enabled.gif" alt="Enabled" title="Enabled">
 					</label>
-					<input type="radio" name="active" id="active_off" value="0"/>
+					<input name="nhanvien_active" id="active_off" value="0" type="radio">
 					<label class="t" for="active_off">
-					<img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled"/>
+					<img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled">
 					</label>
 					<p class="preference_description">
-						 Allow or disallow this employee to log into the Admin panel.
+						 Cho phép người dùng đăng nhập vào hệ thống
 					</p>
 				</div>
 				<div class="clear">
 				</div>
-                
-				<label>Profile Permission: </label>
+				<label>Nhóm người dùng:</label>
 				<div class="margin-form">
-					<select name="id_profile" class="" id="id_profile">
+					<select name="nhanvien_group_id" class="" id="id_profile">
 						<option value="">-- Choose --</option>
-						<option value="1" selected="selected">SuperAdmin</option>
-						<option value="2">Administrator</option>
-						<option value="3">Logistician</option>
-						<option value="4">Translator</option>
-						<option value="5">Salesman</option>
+						<option value="0" selected="selected">Admin</option>
+						<option value="1">Normal user</option>
+						<option value="2">Guest</option>
 					</select>
 					<sup>*</sup>
 				</div>
 				<div class="clear">
 				</div>
 				<div class="margin-form">
-					<input type="submit" id="employee_form_submit_btn" value="Save" name="submitAddemployee" class="button"/>
+					<input style="display: none;" id="employee_form_submit_btn" value="Save" name="submitAddemployee" class="button" type="submit">
 				</div>
 				<div class="small">
-					<sup>*</sup> Required field
+					<sup>*</sup> Trường bắt buộc
 				</div>
 			</fieldset>
 		</form>
@@ -401,10 +232,10 @@
 		    }
 	</script>
 		<div style="clear:both;height:0;line-height:0">
-			&nbsp;
+			 &nbsp;
 		</div>
 	</div>
 	<div style="clear:both;height:0;line-height:0">
-		&nbsp;
+		 &nbsp;
 	</div>
 </div>

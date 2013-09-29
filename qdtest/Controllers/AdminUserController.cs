@@ -20,23 +20,33 @@ namespace qdtest.Controllers
                 return _fail_permission("user_view");
             }
 
-            UserModel u = (from user in this._db.Users
-                           where user.id == id
-                           select user).FirstOrDefault();
+            NhanVien u = new NhanVienController().get_by_id(id);
 
             if (u == null)
             {
                 //user khong ton tai
                 return RedirectToAction("Index", "AdminUsers");
             }
-            ViewBag.User = u;
+            ViewBag.NhanVien = u;
             return View();
+        }
+        public ActionResult Add()
+        {
+            if (!this._permission.Contains("user_add"))
+            {
+                return _fail_permission("user_add");
+            }
+            NhanVien nv = new NhanVien();
+
+            ViewBag.NhanVien = nv;
+            return View("Index");
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
             ViewBag.Title += " - User View";
         }
+
 
     }
 }

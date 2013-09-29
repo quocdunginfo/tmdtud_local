@@ -20,11 +20,11 @@ namespace qdtest.Controllers
             }
             //this.define_active_tab();
             List<String> ActiveTab = new List<String>();
-            ActiveTab.Add("Employees");
-            ActiveTab.Add("Administration");
+            ActiveTab.Add("NhanVien");
+            ActiveTab.Add("QuanTriHeThong");
             ViewBag.ActiveTab = ActiveTab;
 
-            ViewBag.UserModels = this._db.Users.ToList();
+            ViewBag.User_List = this._db.ds_nhanvien.ToList();
             //return View(this._db.Users.ToList());
             //this._build_common_data();
             return View();

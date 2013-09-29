@@ -1,5 +1,5 @@
 ﻿@{
-    
+    var User_List = (List<qdtest.Models.NhanVien>)ViewBag.User_List;
 }
 <div id="main">
 	<div id="content">
@@ -24,7 +24,7 @@
 			<div class="toolbarBox toolbarHead">
 				<ul class="cc_button">
 					<li>
-					<a id="desc-employee-new" class="toolbar_btn" href="index.php?controller=AdminEmployees&amp;addemployee&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c" title="Add new">
+					<a id="desc-employee-new" class="toolbar_btn" href="@Url.Action("Add","AdminUsers")" title="Add new">
 					<span class="process-icon-new "></span>
 					<div>
 						Add new
@@ -92,7 +92,7 @@
 					<span id="current_obj" style="font-weight: normal;">
 					<span class="breadcrumb item-0 ">Administration <img alt="&gt;" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"/>
 					</span>
-					<span class="breadcrumb item-1 ">Employees </span>
+					<span class="breadcrumb item-1 ">Users </span>
 					</span>
 					</h3>
 				</div>
@@ -100,7 +100,7 @@
 		</div>
 		<div class="leadin">
 		</div>
-		<form method="post" action="index.php?controller=AdminEmployees&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c#employee" class="form">
+		<form method="post" action="@Url.Action("Submit", "AdminUsers")" class="form">
 			<input type="hidden" id="submitFilteremployee" name="submitFilteremployee" value="0"/>
 			<table class="table_grid" name="list_table">
 			<tr>
@@ -234,37 +234,37 @@
 					</tr>
 					</thead>
 					<tbody>
-                    @foreach(var item in ViewBag.UserModels)
+                    @foreach(var item in User_List)
                     {
 					<tr class=" row_hover">
 						<td class="center">
 						</td>
-						<td class="pointer center" onclick="document.location = 'index.php?controller=AdminEmployees&id_employee=1&updateemployee&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c'">
+						<td class="pointer center" onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
 							 @item.id
 						</td>
-						<td class="pointer " onclick="document.location = 'index.php?controller=AdminEmployees&id_employee=1&updateemployee&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c'">
-							 @item.username
+						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
+							 @item.tendangnhap
 						</td>
-						<td class="pointer " onclick="document.location = 'index.php?controller=AdminEmployees&id_employee=1&updateemployee&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c'">
-							 @ViewBag.Employees
+						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
+							 @item.tendaydu
 						</td>
-						<td class="pointer " onclick="document.location = 'index.php?controller=AdminEmployees&id_employee=1&updateemployee&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c'">
+						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
 							 
 						</td>
-						<td class="pointer " onclick="document.location = 'index.php?controller=AdminEmployees&id_employee=1&updateemployee&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c'">
+						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
 							 @item.group_id
 						</td>
-						<td class="pointer center" onclick="document.location = 'index.php?controller=AdminEmployees&id_employee=1&updateemployee&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c'">
-							<a href="index.php?controller=AdminEmployees&amp;id_employee=1&amp;statusemployee&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c" title="Enabled">
+						<td class="pointer center" onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
+							<a href="@Url.Action("Edit", "AdminUsers", new { id = item.id })" title="Enabled">
 							<img src="../img/admin/enabled.gif" alt="Enabled"/>
 							</a>
 						</td>
 						<td class="center" style="white-space: nowrap;">
-							<a href="index.php?controller=AdminEmployees&id_employee=1&updateemployee&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c" class="edit" title="Edit">
+							<a href="@Url.Action("Edit", "AdminUsers", new { id = item.id })" class="edit" title="Edit">
 							<img src="../img/admin/edit.gif" alt="Edit"/>
 							</a>
                             &nbsp;&nbsp;
-                            <a href="index.php?controller=AdminEmployees&id_employee=1&updateemployee&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c" class="edit" title="Edit">
+                            <a href="@Url.Action("Edit", "AdminUsers", new { id = item.id })" class="edit" title="Delete">
 							<img src="../img/admin/delete.gif" alt="Delete"/>
 							</a>
 						</td>
@@ -280,128 +280,13 @@
 			</table>
 			<input type="hidden" name="token" value="0eb4238fbc37dd9ef96cdfa5f4b6b90c"/>
 		</form>
-		<div class="toolbar-placeholder">
-			<div class="toolbarBox toolbarHead">
-				<ul class="cc_button">
-					<li>
-					<a id="desc-employee-save" class="toolbar_btn" href="#" title="Save">
-					<span class="process-icon-save "></span>
-					<div>
-						Save
-					</div>
-					</a>
-					</li>
-				</ul>
-				<script language="javascript" type="text/javascript">
-				    //<![CDATA[
-				    var submited = false
-				    var modules_list_loaded = false;
-				    $(function () {
-				        //get reference on save link
-				        btn_save = $('span[class~="process-icon-save"]').parent();
-				        //get reference on form submit button
-				        btn_submit = $('#employee_form_submit_btn');
-				        if (btn_save.length > 0 && btn_submit.length > 0) {
-				            //get reference on save and stay link
-				            btn_save_and_stay = $('span[class~="process-icon-save-and-stay"]').parent();
-				            //get reference on current save link label
-				            lbl_save = $('#desc-employee-save div');
-				            //override save link label with submit button value
-				            if (btn_submit.val().length > 0)
-				                lbl_save.html(btn_submit.attr("value"));
-				            if (btn_save_and_stay.length > 0) {
-				                //get reference on current save link label
-				                lbl_save_and_stay = $('#desc-employee-save-and-stay div');
-				                //override save and stay link label with submit button value
-				                if (btn_submit.val().length > 0 && lbl_save_and_stay && !lbl_save_and_stay.hasClass('locked')) {
-				                    lbl_save_and_stay.html(btn_submit.val() + " and stay ");
-				                }
-				            }
-				            //hide standard submit button
-				            btn_submit.hide();
-				            //bind enter key press to validate form
-				            $('#employee_form').keypress(function (e) {
-				                if (e.which == 13 && e.target.localName != 'textarea')
-				                    $('#desc-employee-save').click();
-				            });
-				            //submit the form
-				            btn_save.click(function () {
-				                // Avoid double click
-				                if (submited)
-				                    return false;
-				                submited = true;
-				                //add hidden input to emulate submit button click when posting the form -> field name posted
-				                btn_submit.before('<input type="hidden" name="' + btn_submit.attr("name") + '" value="1" />');
-				                $('#employee_form').submit();
-				                return false;
-				            });
-				            if (btn_save_and_stay) {
-				                btn_save_and_stay.click(function () {
-				                    //add hidden input to emulate submit button click when posting the form -> field name posted
-				                    btn_submit.before('<input type="hidden" name="' + btn_submit.attr("name") + 'AndStay" value="1" />');
-				                    $('#employee_form').submit();
-				                    return false;
-				                });
-				            }
-				        }
-				    });
-				    //]]>
-			</script>
-				<div class="pageTitle">
-					<h3>
-					<span id="current_obj" style="font-weight: normal;">
-					<span class="breadcrumb item-0 ">Administration <img alt="&gt;" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"/>
-					</span>
-					<span class="breadcrumb item-1 ">Employees </span>
-					</span>
-					</h3>
-				</div>
-			</div>
-		</div>
+		
 		<div class="leadin">
 		</div>
 		<script type="text/javascript">
 		    id_language = Number(1);
 		</script>
-		<form action="index.php?controller=AdminEmployees&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c" id="employee_form" method="post" enctype="multipart/form-data">
-			<fieldset>
-				<legend>
-				<img src="../img/t/AdminEmployees.gif"/>
-				Employee options </legend>
-				<div style="clear: both; padding-top:15px;" id="conf_id_PS_PASSWD_TIME_BACK">
-					<label class="conf_title">
-					Password regeneration</label>
-					<div class="margin-form">
-						<input type="text" size="5" name="PS_PASSWD_TIME_BACK" value="360"/>
-						&nbsp; minutes
-						<p class="preference_description">
-							Security: Minimum time to wait between two password changes.
-						</p>
-					</div>
-				</div>
-				<div class="clear">
-				</div>
-				<div style="clear: both; padding-top:15px;" id="conf_id_PS_BO_ALLOW_EMPLOYEE_FORM_LANG">
-					<label class="conf_title">
-					Memorize the language used in Admin panel forms</label>
-					<div class="margin-form">
-						<select name="PS_BO_ALLOW_EMPLOYEE_FORM_LANG" id="PS_BO_ALLOW_EMPLOYEE_FORM_LANG">
-							<option value="0" selected="selected">No</option>
-							<option value="1">Yes</option>
-						</select>
-						<p class="preference_description">
-							Allow employees to select a specific language for the Admin panel form.
-						</p>
-					</div>
-				</div>
-				<div class="clear">
-				</div>
-				<div class="margin-form">
-					<input type="submit" value="Save" name="submitOptionsemployee" class="button" id="employee_form_submit_btn"/>
-				</div>
-			</fieldset>
-			<br/>
-		</form>
+		
 		<div style="clear:both;height:0;line-height:0">
 			&nbsp;
 		</div>

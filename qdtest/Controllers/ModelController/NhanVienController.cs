@@ -8,26 +8,28 @@ using qdtest._Library;
 
 namespace qdtest.Controllers.ModelController
 {
-    public class UserModelController
+    public class NhanVienController
     {
-        private BlogDBContext db = new BlogDBContext();
+        private BanGiayDBContext _db = new BanGiayDBContext();
         public Boolean login(String username,String password)
         {
-            var result = (from user in db.Users
-                          where user.username == username
-                          select new { user.password }).FirstOrDefault();
+            if (username == null || password == null) return false;
+            var result = (from user in _db.ds_nhanvien
+                          where user.tendangnhap == username
+                          select new { user.matkhau }).FirstOrDefault();
             if (result == null) return false;
-            if (result.password.Equals(password)) return true;
+            if (result.matkhau.Equals(password)) return true;
             return false;
         }
-        public UserModel get_by_username(String username)
+        public NhanVien get_by_username(String username)
         {
-            UserModel re = db.Users.FirstOrDefault(x => x.username==username);
+            if(username==null) return null;
+            NhanVien re = _db.ds_nhanvien.FirstOrDefault(x => x.tendangnhap == username);
             return re;
         }
-        public UserModel get_by_id(int id)
+        public NhanVien get_by_id(int id)
         {
-            UserModel re = db.Users.FirstOrDefault(x => x.id == id);
+            NhanVien re = _db.ds_nhanvien.FirstOrDefault(x => x.id == id);
             return re;
         }
         public Boolean change_password(int uid, String old_pass, String new_pass)
@@ -35,20 +37,20 @@ namespace qdtest.Controllers.ModelController
             //String old_pass_sha1 = 
             return true;
         }
-        public UserModel get_by_id_password(String uid, String password)
+        public NhanVien get_by_id_password(String uid, String password)
         {
             if (uid == null || password == null) return null;
             int user_id = Int32.Parse(uid);
-            UserModel re = new UserModel();
-            re = (from user in db.Users
+            NhanVien re = new NhanVien();
+            re = (from user in _db.ds_nhanvien
                   where user.id == user_id
-                  && user.password == password
+                  && user.matkhau == password
                   select user).FirstOrDefault();
             return re;
         }
         public Boolean is_exist(int id)
         {
-            UserModel u = (from user in db.Users
+            NhanVien u = (from user in _db.ds_nhanvien
                   where user.id == id
                   select user).FirstOrDefault();
             return u==null?false:true;

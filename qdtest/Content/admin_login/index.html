@@ -1,7 +1,3 @@
-﻿@{
-    ViewBag.Title = "Admin Login Form";
-    var qRootAdminTemplatePath = @Url.Content("~/Content/admin_login/");
-}
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -10,21 +6,20 @@
 <html lang="en"><!--<![endif]--><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <base href="@qRootAdminTemplatePath" />
-  <title>@ViewBag.Title</title>
+  <title>Admin Login Form</title>
   <link rel="stylesheet" href="css/style.css">
   <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 <body>
-  <form method="post" action="@Url.Action("Test_Login", "AdminLogin")" class="login">
+  <form method="post" action="index.html" class="login">
     <p>
       <label for="login">Username:</label>
-      <input name="user_username" id="login" value="guest" type="text">
+      <input name="login" id="login" value="guest" type="text">
     </p>
 
     <p>
       <label for="password">Password:</label>
-      <input name="user_password" id="password" value="guest" type="password">
+      <input name="password" id="password" value="guest" type="password">
     </p>
 
     <p class="login-submit">
@@ -33,6 +28,8 @@
 
     <p class="forgot-password"><a href="index.html">Forgot your password?</a></p>
   </form>
-</body>
 
-</html>
+  
+
+
+</body></html>

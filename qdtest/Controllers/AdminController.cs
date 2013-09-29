@@ -11,13 +11,13 @@ namespace qdtest.Controllers
 {
     public class AdminController : Controller
     {
-        protected UserModel _user = null;
+        protected NhanVien _user = null;
         public List<String> _permission = null;
-        public BlogDBContext _db = null;
+        public BanGiayDBContext _db = null;
         public AdminController()
         {
             //vi du về sự thay đổi
-            this._db = new BlogDBContext();
+            this._db = new BanGiayDBContext();
             this._permission = new List<String>();
         }
         public ActionResult Index2()
@@ -36,7 +36,7 @@ namespace qdtest.Controllers
             HttpCookie _tmp = Request.Cookies.Get("admin");
             if (_tmp != null)
             {
-                UserModelController uc = new UserModelController();
+                NhanVienController uc = new NhanVienController();
                 Debug.WriteLine("Phát hiện user_id=" + _tmp["user_id"]);
                 this._user = uc.get_by_id_password(_tmp["user_id"],_tmp["user_password"]);
                 //Gán permission
