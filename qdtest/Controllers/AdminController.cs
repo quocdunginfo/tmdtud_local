@@ -85,6 +85,23 @@ namespace qdtest.Controllers
             }
             ViewBag.ActiveTab = new List<String>(tabs_name);
         }
+        /*
+        [NonAction]
+        protected void _set_timkiem_cookies(String vung_timkiem)
+        {
+            //Clear other search cookies
+            String[] list = new String[] { "timkiem_nhanvien", "timkiem_sanpham","timkiem_nhomsanpham", "timkiem_hangsx" };
+            //Xóa các cookies tìm kiếm khác ngoại trừ item ra
+            foreach (String item in list)
+            {
+                if (item.Equals(vung_timkiem)) continue;
+                HttpCookie _tmp = new HttpCookie(item);
+                _tmp.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(_tmp);
+            }
+
+        }
+         * */
         [NonAction]
         private void _reset_permission(int group_id)
         {

@@ -1,5 +1,6 @@
 ﻿@{
     var User_List = (List<qdtest.Models.NhanVien>)ViewBag.User_List;
+    var User_Search = (HttpCookie)ViewBag.User_Search;
 }
 <div id="main">
 	<div id="content">
@@ -115,8 +116,8 @@
 					</select>
 					 / 1 result(s) </span>
 					<span style="float: right;">
-					<input type="submit" id="submitFilterButtonemployee" name="submitFilter" value="Filter" class="button"/>
-					<input type="submit" name="submitResetemployee" value="Reset" class="button"/>
+					<input type="submit" id="submitFilterButtonemployee" name="submit_search" value="search" class="button"/>
+					<input type="submit" name="submit_reset" value="reset" class="button"/>
 					</span>
 					<span class="clear"></span>
 				</td>
@@ -200,29 +201,29 @@
 							 --
 						</td>
 						<td class="center">
-							<input type="text" class="filter" name="employeeFilter_id_employee" value="" style="width:25px"/>
+							<input type="text" class="filter" name="nhanvien_id" value="@User_Search["id"]" style="width:25px"/>
 						</td>
 						<td>
-							<input type="text" class="filter" name="employeeFilter_lastname" value="" style="width:95%"/>
+							<input type="text" class="filter" name="nhanvien_tendangnhap" value="@User_Search["tendangnhap"]" style="width:95%"/>
 						</td>
 						<td>
-							<input type="text" class="filter" name="employeeFilter_firstname" value="" style="width:130px"/>
+							<input type="text" class="filter" name="nhanvien_tendaydu" value="@User_Search["tendaydu"]" style="width:130px"/>
 						</td>
 						<td>
-							<input type="text" class="filter" name="employeeFilter_email" value="" style="width:180px"/>
+							<input type="text" class="filter" name="nhanvien_email" value="@User_Search["email"]" style="width:180px"/>
 						</td>
 						<td>
-							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="employeeFilter_pl!name" style="width:90px">
-								<option value="" selected="selected">--</option>
-								<option value="0">Admin</option>
-								<option value="1">Normal User</option>
+							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="nhanvien_group_id" style="width:90px">
+								<option value="" @if(User_Search["id"].Equals("")) {<text>selected="selected"</text> }>--</option>
+								<option value="0" @if(User_Search["group_id"].Equals("0")) {<text>selected="selected"</text> } >Admin</option>
+								<option value="1" @if(User_Search["group_id"].Equals("1")) {<text>selected="selected"</text> }>Normal User</option>
 							</select>
 						</td>
 						<td class="center">
-							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="employeeFilter_active">
-								<option value="">--</option>
-								<option value="1">Yes</option>
-								<option value="0">No</option>
+							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="nhanvien_active">
+								<option value="" @if(User_Search["active"].Equals("")) {<text>selected="selected"</text> }>--</option>
+								<option value="1" @if(User_Search["active"].Equals("1")) {<text>selected="selected"</text> }>Yes</option>
+								<option value="0" @if(User_Search["active"].Equals("0")) {<text>selected="selected"</text> }>No</option>
 							</select>
 						</td>
 						<td class="center">
@@ -246,7 +247,7 @@
 							 @item.tendaydu
 						</td>
 						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
-							 
+							 @item.email
 						</td>
 						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
 							 @item.group_id

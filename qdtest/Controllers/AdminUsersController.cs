@@ -1,4 +1,5 @@
-﻿using qdtest.Controllers.ModelController;
+﻿using qdtest._Library;
+using qdtest.Controllers.ModelController;
 using qdtest.Models;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,23 @@ namespace qdtest.Controllers
 {
     public class AdminUsersController : AdminController
     {
+        private HttpCookie timkiem_nhanvien;
+        public AdminUsersController()
+        {
+            this.khoitao_cookie();
+        }
+        [NonAction]
+        private void khoitao_cookie()
+        {
+            timkiem_nhanvien = new HttpCookie("timkiem_nhanvien");
+            timkiem_nhanvien.Expires = DateTime.Now.AddDays(1);
+            this.timkiem_nhanvien["id"] = "";
+            this.timkiem_nhanvien["tendangnhap"] = "";
+            this.timkiem_nhanvien["tendaydu"] = "";
+            this.timkiem_nhanvien["group_id"] = "";
+            this.timkiem_nhanvien["active"] = "";
+            this.timkiem_nhanvien["email"] = "";
+        }
         //
         // GET: /AdminUsers/
         public ActionResult Index()
@@ -23,7 +41,16 @@ namespace qdtest.Controllers
             //this.define_active_tab();
             this._set_activetab(new String[] {"NhanVien","QuanTriHeThong"});
 
-            ViewBag.User_List = this._db.ds_nhanvien.ToList();
+            //Chọn danh sách nhân viên để hiển thị theo cookies tìm kiếm
+            ViewBag.User_List = new NhanVienController().timkiem(
+                timkiem_nhanvien["id"],
+                timkiem_nhanvien["tendangnhap"],
+                timkiem_nhanvien["tendaydu"],
+                timkiem_nhanvien["email"],
+                timkiem_nhanvien["active"],
+                timkiem_nhanvien["group_id"]);
+            //set search cookies
+            ViewBag.User_Search = this.timkiem_nhanvien;
             //return View(this._db.Users.ToList());
             //this._build_common_data();
             ViewBag.Title += " - Management";
@@ -55,10 +82,46 @@ namespace qdtest.Controllers
             new NhanVienController().delete(id);
             return RedirectToAction("Index","AdminUsers");
         }
+        [HttpPost]
+        public ActionResult Submit()
+        {
+            //get search value
+            if (Request["submit_reset"] == "reset")
+            {
+                //reset button click
+                this.khoitao_cookie();
+            }
+            else
+            {
+                //search button click
+                this.timkiem_nhanvien["id"] = Request["nhanvien_id"] == null ? "" : Request["nhanvien_id"];
+                this.timkiem_nhanvien["tendangnhap"] = Request["nhanvien_tendangnhap"] == null ? "" : Request["nhanvien_tendangnhap"];
+                this.timkiem_nhanvien["tendaydu"] = Request["nhanvien_tendaydu"] == null ? "" : Request["nhanvien_tendaydu"];
+                this.timkiem_nhanvien["email"] = Request["nhanvien_email"] == null ? "" : Request["nhanvien_email"];
+                this.timkiem_nhanvien["group_id"] = Request["nhanvien_group_id"] == null ? "" : Request["nhanvien_group_id"];
+                this.timkiem_nhanvien["active"] = Request["nhanvien_active"] == null ? "" : Request["nhanvien_active"];
+            }
+            //Save respone cookies
+            Response.Cookies.Add(CookieLibrary.Base64Encode(this.timkiem_nhanvien));
+            //redirect
+            return RedirectToAction("Index","AdminUsers");
+        }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
             ViewBag.Title += " - Users";
+
+            //build timkiem_nhanvien
+            if (Request.Cookies.Get("timkiem_nhanvien") == null)
+            {
+                //chưa set cookies trước => tiến hành set cookies
+                this.khoitao_cookie();
+                Response.Cookies.Add(CookieLibrary.Base64Encode(this.timkiem_nhanvien));
+            }
+            else
+            {
+                this.timkiem_nhanvien = CookieLibrary.Base64Decode(Request.Cookies.Get("timkiem_nhanvien"));
+            }
         }
 
     }

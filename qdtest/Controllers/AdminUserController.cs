@@ -102,6 +102,7 @@ namespace qdtest.Controllers
                 //hash password before add
                 nv.matkhau = TextLibrary.GetSHA1HashData(Request["nhanvien_matkhau"]);
                 //call add
+                Debug.WriteLine("Add Nhan vien");
                 int maxid = nvc.add(nv);
                 //re assign id
                 nv.id = maxid;

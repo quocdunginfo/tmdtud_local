@@ -95,5 +95,50 @@ namespace qdtest.Controllers.ModelController
             this._db.SaveChanges();
             return true;
         }
+        public List<NhanVien> timkiem(String id="", String tendangnhap="", String tendaydu="", String email="", String active="", String group_id="")
+        {
+            List<NhanVien> nhanvien_list = new List<NhanVien>();
+            if (!id.Equals(""))
+            {
+                //find by id
+                int id_i = TextLibrary.ToInt(id);
+                nhanvien_list = this._db.ds_nhanvien.Where(x => x.id == id_i).ToList();
+                if (nhanvien_list == null)
+                {
+                    nhanvien_list = new List<NhanVien>();
+                }
+                return nhanvien_list;
+            }
+            //find by LIKE elament
+            nhanvien_list = this._db.ds_nhanvien.Where(x => x.tendangnhap.Contains(tendangnhap)
+                && x.tendaydu.Contains(tendaydu)
+                && x.email.Contains(email)).ToList();
+            if (nhanvien_list == null)
+            {
+                nhanvien_list = new List<NhanVien>();
+            }
+            //Filter again by by active
+            if (!active.Equals(""))
+            {
+                Boolean active_b = active.Equals("1") ? true : false;
+                nhanvien_list = nhanvien_list.Where(x => x.active==active_b).ToList();
+            }
+            if (nhanvien_list == null)
+            {
+                nhanvien_list = new List<NhanVien>();
+            }
+            //Filter again by by group_id
+            if (!group_id.Equals(""))
+            {
+                int group_id_i = TextLibrary.ToInt(group_id);
+                nhanvien_list = nhanvien_list.Where(x => x.group_id == group_id_i).ToList();
+            }
+            if (nhanvien_list == null)
+            {
+                nhanvien_list = new List<NhanVien>();
+            }
+            //FINAL return
+            return nhanvien_list;
+        }
     }
 }
