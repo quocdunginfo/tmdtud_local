@@ -214,11 +214,8 @@
 						<td>
 							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="employeeFilter_pl!name" style="width:90px">
 								<option value="" selected="selected">--</option>
-								<option value="SuperAdmin">SuperAdmin</option>
-								<option value="Administrator">Administrator</option>
-								<option value="Logistician">Logistician</option>
-								<option value="Translator">Translator</option>
-								<option value="Salesman">Salesman</option>
+								<option value="0">Admin</option>
+								<option value="1">Normal User</option>
 							</select>
 						</td>
 						<td class="center">
@@ -264,7 +261,7 @@
 							<img src="../img/admin/edit.gif" alt="Edit"/>
 							</a>
                             &nbsp;&nbsp;
-                            <a href="@Url.Action("Edit", "AdminUsers", new { id = item.id })" class="edit" title="Delete">
+                            <a href="@Url.Action("Delete", "AdminUsers", new { id = item.id })" class="edit" title="Delete">
 							<img src="../img/admin/delete.gif" alt="Delete"/>
 							</a>
 						</td>

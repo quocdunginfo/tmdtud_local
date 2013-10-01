@@ -14,6 +14,7 @@ namespace qdtest.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = TempData["admin_fail_message"];
+            ViewBag.Title += " - Fail Permission";
             return View();
         }
 

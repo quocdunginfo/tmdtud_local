@@ -148,6 +148,9 @@ namespace qdtest.Models
     {
         public NhanVien()
         {
+            this.id = 0;
+            this.active = true;
+            this.group_id = 0;
             this.ds_sanpham = new List<SanPham>();
             this.ds_dathang = new List<DatHang>();
         }

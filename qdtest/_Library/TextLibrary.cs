@@ -12,7 +12,17 @@ namespace qdtest._Library
     {
         public static string GetSHA1HashData(string data)
         {
-            return FormsAuthentication.HashPasswordForStoringInConfigFile("whatthefuck", "SHA1");
+            //chu HOA
+            return FormsAuthentication.HashPasswordForStoringInConfigFile(data, "SHA1");
+        }
+        public static int ToInt(String input)
+        {
+            int re=0;
+            if (Int32.TryParse(input, out re))
+            {
+                return re;
+            }
+            return 0;
         }
     }
 }

@@ -282,6 +282,7 @@
 					<li><a href="index.php?controller=AdminGeolocation&amp;token=89f5d26b050b0227a0f72791447d1e7f">Geolocation</a></li>
 				</ul>
 				</li>
+                <!--
 				<li class="submenu_size maintab " id="maintab17">
 				<a href="#" class="title">
 				<img src="../img/t/AdminTools.gif" alt=""/>Advanced Parameters </a>
@@ -296,12 +297,13 @@
 					<li><a href="index.php?controller=AdminWebservice&amp;token=01e4d48c5734d3c6a66cd0a8a9c256f1">Webservice</a></li>
 				</ul>
 				</li>
-				<li class="submenu_size maintab @if(ActiveTab.Contains("Administration")) {<text>active</text>}" id="maintab18">
+                -->
+				<li class="submenu_size maintab @if(ActiveTab.Contains("QuanTriHeThong")) {<text>active</text>}" id="maintab18">
 				<a href="#" class="title">
-				<img src="../img/t/AdminAdmin.gif" alt=""/>Administration </a>
+				<img src="../img/t/AdminAdmin.gif" alt=""/>Quản trị hệ thống </a>
 				<ul class="submenu">
-					<li class="@if(ActiveTab.Contains("Setting")) {<text>active</text>}"><a href="@Url.Action("Index","AdminSetting")">Setting</a></li>
-					<li class="@if(ActiveTab.Contains("Employees")) {<text>active</text>}" ><a href="@Url.Action("Index","AdminUsers")">Users</a></li>
+					<li class="@if(ActiveTab.Contains("CaiDat")) {<text>active</text>}"><a href="@Url.Action("Index","AdminSetting")">Cài đặt</a></li>
+					<li class="@if(ActiveTab.Contains("NhanVien")) {<text>active</text>}" ><a href="@Url.Action("Index","AdminUsers")">Nhân viên</a></li>
 				</ul>
 				</li>
 				<li class="submenu_size maintab " id="maintab19">

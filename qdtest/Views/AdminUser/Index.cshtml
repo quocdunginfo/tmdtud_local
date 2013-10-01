@@ -1,5 +1,6 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    //ViewBag.Title = "Index";
+    //ViewBag.ActiveTab
     var NhanVien = (qdtest.Models.NhanVien)ViewBag.NhanVien;
 }
 <div id="main">
@@ -92,7 +93,7 @@
 		</div>
 		<div class="leadin">
 		</div>
-		<form id="employee_form" class="defaultForm AdminEmployees" action="index.php?controller=AdminEmployees&amp;submitAddemployee=1&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c" method="post" enctype="multipart/form-data">
+		<form id="employee_form" class="defaultForm AdminEmployees" action="@Url.Action("Submit","AdminUser")" method="post" enctype="multipart/form-data">
 			<input name="nhanvien_id" id="id_employee" value="@NhanVien.id" type="hidden">
 			<fieldset id="fieldset_0">
 				<legend>
@@ -127,18 +128,18 @@
 				</div>
 				<label>Email: </label>
 				<div class="margin-form">
-					<input name="nhanvien_email" id="email" value="quocdunginfo@gmail.com" class="" size="33" type="text">
+					<input name="nhanvien_email" id="email" value="@NhanVien.email" class="" size="33" type="text">
 					<sup>*</sup>
 				</div>
 				<div class="clear">
 				</div>
 				<label>Active: </label>
 				<div class="margin-form">
-					<input name="nhanvien_active" id="active_on" value="1" checked="checked" type="radio">
+					<input name="nhanvien_active" id="active_on" value="1" @if(@NhanVien.active==true) {<text>checked="checked"</text>} type="radio">
 					<label class="t" for="active_on">
 					<img src="../img/admin/enabled.gif" alt="Enabled" title="Enabled">
 					</label>
-					<input name="nhanvien_active" id="active_off" value="0" type="radio">
+					<input name="nhanvien_active" id="active_off" value="0" @if(@NhanVien.active==false) {<text>checked="checked"</text>} type="radio">
 					<label class="t" for="active_off">
 					<img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled">
 					</label>
@@ -152,9 +153,9 @@
 				<div class="margin-form">
 					<select name="nhanvien_group_id" class="" id="id_profile">
 						<option value="">-- Choose --</option>
-						<option value="0" selected="selected">Admin</option>
-						<option value="1">Normal user</option>
-						<option value="2">Guest</option>
+						<option value="0" @if(NhanVien.group_id==0) {<text>selected="selected"</text>}>Admin</option>
+						<option value="1" @if(NhanVien.group_id==1) {<text>selected="selected"</text>}>Normal user</option>
+						<option value="2" @if(NhanVien.group_id==2) {<text>selected="selected"</text>}>Guest</option>
 					</select>
 					<sup>*</sup>
 				</div>

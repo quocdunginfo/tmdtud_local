@@ -1,4 +1,5 @@
-﻿using qdtest.Controllers.ModelController;
+﻿using qdtest._Library;
+using qdtest.Controllers.ModelController;
 using qdtest.Models;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace qdtest.Controllers
             if (_tmp == null) return View();
             //Nếu đã đang nhập rồi thì return home
             NhanVienController uc = new NhanVienController();
-            if (uc.get_by_id_password(_tmp["user_id"],_tmp["user_password"])!=null)
+            if (uc.get_by_id_hash_password(TextLibrary.ToInt(_tmp["user_id"]),_tmp["user_password"])!=null)
             {
                 return RedirectToAction("Index","AdminHome");
             }
@@ -45,7 +46,7 @@ namespace qdtest.Controllers
                 //set Cookies
                 HttpCookie _tmp = new HttpCookie("admin");
                 _tmp["user_id"] = u.id.ToString();
-                _tmp["user_password"] = u.matkhau.ToString();
+                _tmp["user_password"] = u.matkhau;
                 _tmp.Expires = DateTime.Now.AddDays(1);
                 Response.Cookies.Add(_tmp);
 
