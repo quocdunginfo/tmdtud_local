@@ -103,10 +103,12 @@
     <Compile Include="Controllers\AdminFailController.cs" />
     <Compile Include="Controllers\AdminHomeController.cs" />
     <Compile Include="Controllers\AdminLoginController.cs" />
+    <Compile Include="Controllers\AdminNhomSanPhamController.cs" />
     <Compile Include="Controllers\AdminUserController.cs" />
     <Compile Include="Controllers\AdminUsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModelController\NhanVienController.cs" />
+    <Compile Include="Controllers\ModelController\NhomSanPhamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -3264,6 +3266,9 @@
     <Content Include="Views\Admin\fu.cshtml" />
     <Content Include="Views\AdminUsers\Delete.cshtml" />
     <Content Include="Views\AdminFail\_ViewStart.cshtml" />
+    <Content Include="Views\AdminNhomSanPham\Index.cshtml" />
+    <Content Include="Views\AdminNhomSanPham\Submit.cshtml" />
+    <Content Include="Views\AdminNhomSanPham\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
