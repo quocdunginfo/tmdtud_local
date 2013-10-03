@@ -30,6 +30,7 @@ namespace qdtest.Controllers.ModelController
             //return ma moi nhat
             return this._db.ds_nhomsanpham.Max(x => x.id);
         }
+        
         public Boolean delete(int id)
         {
             //Xóa object có dính khóa ngoại trước
@@ -54,27 +55,78 @@ namespace qdtest.Controllers.ModelController
             this._db.SaveChanges();
             return true;
         }
-        public List<NhomSanPham> timkiem(String id = "", String ten = "")
+        private List<NhomSanPham2> _tmp_for_get_tree=new List<NhomSanPham2>();
+        private List<NhomSanPham2> _get_tree(NhomSanPham root, int level)
         {
-            List<NhomSanPham> list = new List<NhomSanPham>();
+            List<NhomSanPham> list;
+            //lấy các child
+            if (root == null)
+            {
+                list = this._db.ds_nhomsanpham.Where(x => x.nhomcha == null).ToList();
+            }
+            else
+            {
+                 list = root.ds_nhomcon;
+            }
+            
+            if (list == null) return new List<NhomSanPham2>();
+            foreach (NhomSanPham item in list)
+            {
+                //add child đang xét vô cùng với level
+                NhomSanPham2 tmp = new NhomSanPham2();
+                tmp.Load_From(item);//load id, ten, ...
+                tmp.level = level;
+                this._tmp_for_get_tree.Add(tmp);
+                //call recursive for this child
+                this._get_tree(item, level+1);
+            }
+            //finish
+            return this._tmp_for_get_tree;
+        }
+        public List<NhomSanPham2> get_tree(NhomSanPham root=null, int level=0)
+        {
+            this._tmp_for_get_tree = new List<NhomSanPham2>();
+            List<NhomSanPham2> tmp = this._get_tree(root,0);
+            this._tmp_for_get_tree = new List<NhomSanPham2>();
+            return tmp;
+        }
+        public List<NhomSanPham2> timkiem(String id="", String ten="", String mota="", String active="")
+        {
+            List<NhomSanPham2> list = this.get_tree(null, 0);
             if (!id.Equals(""))
             {
                 //find by id
                 int id_i = TextLibrary.ToInt(id);
-                list = this._db.ds_nhomsanpham.Where(x => x.id == id_i).ToList();
+                list = list.Where(x => x.id == id_i).ToList();
                 if (list == null)
                 {
-                    list = new List<NhomSanPham>();
+                    list = new List<NhomSanPham2>();
                 }
                 return list;
             }
-            //find by LIKE elament
-            list = this._db.ds_nhomsanpham.Where(x => x.ten.Contains(ten)).ToList();
             if (list == null)
             {
-                list = new List<NhomSanPham>();
+                list = new List<NhomSanPham2>();
             }
-
+            //find by LIKE element
+            list = list.Where(x => x.ten.Contains(ten)
+                && x.mota.Contains(mota)).ToList();
+            if (list == null)
+            {
+                list = new List<NhomSanPham2>();
+            }
+            
+            //Filter again by by active
+            if (!active.Equals(""))
+            {
+                Boolean active_b = TextLibrary.ToBoolean(active);
+                list = list.Where(x => x.active == active_b).ToList();
+            }
+            if (list == null)
+            {
+                list = new List<NhomSanPham2>();
+            }
+            //FINAL return
             return list;
         }
     }

@@ -120,7 +120,12 @@
     <Compile Include="Migrations\201309291114551_NhanVien_Them_ThuocTinh_group_id.Designer.cs">
       <DependentUpon>201309291114551_NhanVien_Them_ThuocTinh_group_id.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310031534039_cap_nhat_tpic_phanhoi.cs" />
+    <Compile Include="Migrations\201310031534039_cap_nhat_tpic_phanhoi.Designer.cs">
+      <DependentUpon>201310031534039_cap_nhat_tpic_phanhoi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Models.cs" />
     <Compile Include="Models\TableModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_Library\CookieLibrary.cs" />
@@ -3269,6 +3274,7 @@
     <Content Include="Views\AdminNhomSanPham\Index.cshtml" />
     <Content Include="Views\AdminNhomSanPham\Submit.cshtml" />
     <Content Include="Views\AdminNhomSanPham\Add.cshtml" />
+    <Content Include="Views\AdminNhomSanPham\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3452,6 +3458,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201309291114551_NhanVien_Them_ThuocTinh_group_id.resx">
       <DependentUpon>201309291114551_NhanVien_Them_ThuocTinh_group_id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310031534039_cap_nhat_tpic_phanhoi.resx">
+      <DependentUpon>201310031534039_cap_nhat_tpic_phanhoi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

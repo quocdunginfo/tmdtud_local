@@ -38,8 +38,6 @@ namespace qdtest.Controllers
             {
                 return this._fail_permission("user_view");
             }
-            //this.define_active_tab();
-            this._set_activetab(new String[] {"NhanVien","QuanTriHeThong"});
 
             //Chọn danh sách nhân viên để hiển thị theo cookies tìm kiếm
             ViewBag.User_List = new NhanVienController().timkiem(
@@ -86,7 +84,7 @@ namespace qdtest.Controllers
         public ActionResult Submit()
         {
             //get search value
-            if (Request["submit_reset"] == "reset")
+            if (!TextLibrary.ToString(Request["submit_reset"]).Equals(""))
             {
                 //reset button click
                 this.khoitao_cookie();
@@ -122,6 +120,8 @@ namespace qdtest.Controllers
             {
                 this.timkiem_nhanvien = CookieLibrary.Base64Decode(Request.Cookies.Get("timkiem_nhanvien"));
             }
+            //set active tab
+            this._set_activetab(new String[] { "NhanVien", "QuanTriHeThong" });
         }
 
     }

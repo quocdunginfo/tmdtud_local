@@ -180,20 +180,13 @@
 				</div>
 			</div>
 			<ul id="menu">
-				<li class="submenu_size maintab " id="maintab9">
+				<li class="submenu_size maintab @if(ActiveTab.Contains("Catalog")) {<text>active</text>}" id="maintab9">
 				<a href="#" class="title">
 				<img src="../img/t/AdminCatalog.gif" alt=""/>Catalog </a>
 				<ul class="submenu">
-					<li><a href="index.php?controller=AdminProducts&amp;token=c4ecb5500c32302d072130315b268033">Products</a></li>
-					<li><a href="index.php?controller=AdminCategories&amp;token=9ef14dab525282a252161bbae087bd5b">Categories</a></li>
-					<li><a href="index.php?controller=AdminTracking&amp;token=a1a8813502d0d70d56cd5638ea0ab277">Monitoring</a></li>
-					<li><a href="index.php?controller=AdminAttributesGroups&amp;token=962ab9ca9cb47a246bfa932596b1c8ff">Attributes and Values</a></li>
-					<li><a href="index.php?controller=AdminFeatures&amp;token=1576fdf770b9458ddb1be4211522c927">Features</a></li>
+					<li ><a href="index.php?controller=AdminProducts&amp;token=c4ecb5500c32302d072130315b268033">Sản phẩm</a></li>
+					<li class="@if(ActiveTab.Contains("NhomSanPham")) {<text>active</text>}"><a href="@Url.Action("Index","AdminNhomSanPham")">Nhóm sản phẩm</a></li>
 					<li><a href="index.php?controller=AdminManufacturers&amp;token=964bd0d9a4cef08503cdb5ed437faa22">Manufacturers</a></li>
-					<li><a href="index.php?controller=AdminSuppliers&amp;token=38579ac48084cd5d59d7348720b8b737">Suppliers</a></li>
-					<li><a href="index.php?controller=AdminScenes&amp;token=3707cc4f6a7c75db40e4f46189594aa9">Image Mapping</a></li>
-					<li><a href="index.php?controller=AdminTags&amp;token=898310dbf5cca8ddb3301d2604873908">Tags</a></li>
-					<li><a href="index.php?controller=AdminAttachments&amp;token=087a8f32e87b5e2c4c999f8ce5677953">Attachments</a></li>
 				</ul>
 				</li>
 				<li class="submenu_size maintab " id="maintab10">

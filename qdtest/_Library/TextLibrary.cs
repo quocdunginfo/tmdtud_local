@@ -24,5 +24,14 @@ namespace qdtest._Library
             }
             return 0;
         }
+        public static String ToString(String input)
+        {
+            return input == null ? "" : input;
+        }
+        public static Boolean ToBoolean(String input)
+        {
+            if (input == null) return false;
+            return input.Equals("1") ? true : false;
+        }
     }
 }

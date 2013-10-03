@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    var NhomSanPham_List = (List<qdtest.Models.NhomSanPham>)ViewBag.NhomSanPham_List;
+    var NhomSanPham2_List = (List<qdtest.Models.NhomSanPham2>)ViewBag.NhomSanPham2_List;
+    var timkiem_nhomsanpham = (HttpCookie)ViewBag.timkiem_nhomsanpham;
 }
 
 <div id="main">
@@ -146,7 +147,7 @@
 					 / n kết quả </span>
 					<span style="float: right;">
 					<input id="submitFilterButtoncategory" name="submitFilter" value="Tìm kiếm" class="button" type="submit">
-					<input name="submitResetcategory" value="Reset" class="button" type="submit">
+					<input name="submit_reset" value="reset" class="button" type="submit">
 					</span>
 					<span class="clear"></span>
 				</td>
@@ -176,7 +177,7 @@
 						</th>
 						<th>
 							<span class="title_box">
-							Name </span>
+							Tên </span>
 							<br>
 							<a href="index.php?controller=AdminCategories&amp;categoryOrderby=name&amp;categoryOrderway=desc&amp;token=9ef14dab525282a252161bbae087bd5b">
 							<img src="../img/admin/down.gif" border="0"></a>
@@ -185,13 +186,13 @@
 						</th>
 						<th>
 							<span class="title_box">
-							Description </span>
+							Mô tả </span>
 							<br>
 							&nbsp;
 						</th>
 						<th class="center">
 							<span class="title_box">
-							Displayed </span>
+							Active </span>
 							<br>
 							&nbsp;
 						</th>
@@ -205,19 +206,19 @@
 							    --
 						</td>
 						<td class="center">
-							<input class="filter" name="categoryFilter_id_category" value="" style="width:20px" type="text">
+							<input class="filter" name="id" value="@timkiem_nhomsanpham["id"]" style="width:20px" type="text">
 						</td>
 						<td>
-							<input class="filter" name="categoryFilter_name" value="" style="width:95%" type="text">
+							<input class="filter" name="ten" value="@timkiem_nhomsanpham["ten"]" style="width:95%" type="text">
 						</td>
 						<td>
-							<input class="filter" name="categoryFilter_description" value="" style="width:500px" type="text">
+							<input class="filter" name="mota" value="@timkiem_nhomsanpham["mota"]" style="width:500px" type="text">
 						</td>
 						<td class="center">
-							<select onchange="$('#submitFilterButtoncategory').focus();$('#submitFilterButtoncategory').click();" name="categoryFilter_active">
-								<option value="">--</option>
-								<option value="1">Yes</option>
-								<option value="0">No</option>
+							<select onchange="$('#submitFilterButtoncategory').focus();$('#submitFilterButtoncategory').click();" name="active">
+								<option value="" @if(timkiem_nhomsanpham["active"].Equals("")) {<text>selected="selected"</text>}>--</option>
+								<option value="1" @if(timkiem_nhomsanpham["active"].Equals("1")) {<text>selected="selected"</text>} >Có</option>
+								<option value="0" @if(timkiem_nhomsanpham["active"].Equals("0")) {<text>selected="selected"</text>}>Không</option>
 							</select>
 						</td>
 						<td class="center">
@@ -228,10 +229,10 @@
 					<tbody>
                         <tr id="" class=" row_hover">
 						    <td class="center">
-							    <input name="categoryBox[]" value="1" class="noborder" type="radio" checked="checked" onclick="qd_send_id(this)">
+							    <input name="categoryBox[]" value="0" class="noborder" type="radio" checked="checked" onclick="qd_send_id(this)">
 						    </td>
 						    <td class="pointer center"">
-							     1
+							     0
 						    </td>
 						    <td class="pointer ">
 							     Nhóm gốc.
@@ -248,7 +249,7 @@
 							    
 						    </td>
 					    </tr>
-                        @foreach(var item in NhomSanPham_List) {
+                        @foreach(var item in NhomSanPham2_List) {
                             <tr id="" class=" row_hover">
 						        <td class="center">
 							        <input name="categoryBox[]" value="@item.id" class="noborder" type="radio" onchange="qd_send_id(this)">
@@ -257,21 +258,33 @@
 							         @item.id
 						        </td>
 						        <td class="pointer " onclick="document.location = '@Url.Action("Edit","AdminNhomSanPham", new {id=item.id})'">
-							         @item.ten
+							        @for (int i = 0; i < item.level; i++) { <text>--</text>}
+                                    @item.ten
 						        </td>
 						        <td class="pointer " onclick="document.location = '@Url.Action("Edit","AdminNhomSanPham", new {id=item.id})'">
-							         [Not defined yet]
+							         @item.mota
 						        </td>
 						        <td class="pointer center" onclick="document.location = '@Url.Action("Edit","AdminNhomSanPham", new {id=item.id})'">
 							        <a href="@Url.Action("Edit","AdminNhomSanPham", new {id=item.id})" title="Enabled">
-							        <img src="../img/admin/enabled.gif" alt="Enabled">
+    							        @if(item.active==true)
+                                        {
+                                            <text>
+                                                <img src="../img/admin/enabled.gif" alt="Enabled">
+                                            </text>
+                                        }
+                                        else
+                                        {
+                                            <text>
+                                                <img src="../img/admin/disabled.gif" alt="Disabled">
+                                            </text>
+                                        }
 							        </a>
 						        </td>
 						        <td class="center" style="white-space: nowrap;">
-							        <a href="@Url.Action("Edit","AdminNhomSanPham", new {id=item.id})" class="edit" title="Edit">
+							        <a href="@Url.Action("Edit", "AdminNhomSanPham", new { id = item.id })" class="edit" title="Edit">
 							        <img src="../img/admin/edit.gif" alt="Edit">
 							        </a>
-							        <a href="@Url.Action("Delete","AdminNhomSanPham", new { id= item.id})" class="delete" title="Delete">
+							        <a href="@Url.Action("Delete", "AdminNhomSanPham", new { id = item.id })" class="delete" title="Delete">
 							        <img src="../img/admin/delete.gif" alt="Delete">
 							        </a>
 						        </td>
@@ -296,7 +309,7 @@
 	                    $("#cat_parent_id").val(sender.value);
 	                }
 	            </script>
-                <input id="cat_parent_id" name="cat_parent_id" type="hidden" value="1" />
+                <input id="cat_parent_id" name="cat_parent_id" type="hidden" value="0" /> <!-- Mặc định p_id =0 = NULL-->
                 <label>Tên: </label>
 	            <div class="margin-form">
 		            <input name="cat_name" id="lastname" value="" class="" size="33" type="text">
@@ -310,22 +323,18 @@
 	            </div>
 	            <div class="clear">
 	            </div>
-	
-	            <div class="clear">
-	            </div>
-
 	            <label>Active: </label>
 	            <div class="margin-form">
-		            <input name="active" id="active_on" value="1" checked="checked" type="radio">
+		            <input name="cat_active" id="active_on" value="1" checked="checked" type="radio">
 		            <label class="t" for="active_on">
 		            <img src="../img/admin/enabled.gif" alt="Enabled" title="Enabled">
 		            </label>
-		            <input name="active" id="active_off" value="0" type="radio">
+		            <input name="cat_active" id="active_off" value="0" type="radio">
 		            <label class="t" for="active_off">
 		            <img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled">
 		            </label>
 		            <p class="preference_description">
-			                Hiển thị hoặc không hiển thị Category này.
+			                Hiển thị hoặc không hiển thị Nhóm sản phẩm này.
 		            </p>
 	            </div>
 	            <div class="clear">

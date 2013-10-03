@@ -36,6 +36,33 @@ namespace qdtest.Models
         public virtual NhomSanPham nhomsanpham { get; set; }
         public virtual NhanVien nguoidung { get; set; }
     }
+    public class Topic
+    {
+        public Topic()
+        {
+            this.ds_phanhoi = new List<PhanHoi>();
+        }
+        [Key]
+        public int id { get; set; }
+        public String ten { get; set; }
+        public String noidung { get; set; }
+        public DateTime ngay { get; set; }
+        //external
+        public virtual KhachHang nguoitao { get; set; }
+        public virtual List<PhanHoi> ds_phanhoi { get; set; }
+    }
+    public class PhanHoi
+    {
+        [Key]
+        public int id { get; set; }
+        public String ten { get; set; }
+        public String noidung { get; set; }
+        public DateTime ngay {get; set; }
+        //external
+        public virtual NhanVien nhanvien { get; set; }//Nhân viên gửi
+        public virtual KhachHang khachhang { get; set; }//Khách Hàng gửi
+        public virtual Topic topic { get; set; }//thuộc Topic nào
+    }
     public class SanPham_Tag
     {
         [Key]
@@ -92,6 +119,8 @@ namespace qdtest.Models
         [Key]
         public int id { get; set; }
         public String ten { get; set; }
+        public String mota { get; set; }
+        public Boolean active { get; set; }
         //external
         public virtual NhomSanPham nhomcha { get; set; }
         public virtual List<NhomSanPham> ds_nhomcon { get; set; }
