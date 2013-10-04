@@ -38,6 +38,7 @@ namespace qdtest.Controllers
                 this.timkiem_nhomsanpham["ten"],
                 this.timkiem_nhomsanpham["mota"],
                 this.timkiem_nhomsanpham["active"]);
+            ViewBag.NhomSanPham2_List_All = ctr.timkiem("","","","");
             ViewBag.Title += " - View";
             ViewBag.timkiem_nhomsanpham = this.timkiem_nhomsanpham;
             return View();
@@ -99,6 +100,7 @@ namespace qdtest.Controllers
             }
             ViewBag.nhom_san_pham = ctr.get_by_id(id);
             ViewBag.Title += " - Edit";
+            ViewBag.NhomSanPham2_List_All = ctr.timkiem("","","","");
             return View();
         }
         [HttpPost]

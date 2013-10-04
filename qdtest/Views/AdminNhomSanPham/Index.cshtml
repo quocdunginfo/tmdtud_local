@@ -1,7 +1,9 @@
 ﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     var NhomSanPham2_List = (List<qdtest.Models.NhomSanPham2>)ViewBag.NhomSanPham2_List;
+    var NhomSanPham2_List_All = (List<qdtest.Models.NhomSanPham2>)ViewBag.NhomSanPham2_List_All;
     var timkiem_nhomsanpham = (HttpCookie)ViewBag.timkiem_nhomsanpham;
+    
 }
 
 <div id="main">
@@ -203,7 +205,7 @@
 					</tr>
 					<tr class="nodrag nodrop filter row_hover" style="height: 35px;">
                         <td class="center">
-							    --
+							    
 						</td>
 						<td class="center">
 							<input class="filter" name="id" value="@timkiem_nhomsanpham["id"]" style="width:20px" type="text">
@@ -222,14 +224,14 @@
 							</select>
 						</td>
 						<td class="center">
-							    --
+							   --
 						</td>
 					</tr>
 					</thead>
 					<tbody>
                         <tr id="" class=" row_hover">
 						    <td class="center">
-							    <input name="categoryBox[]" value="0" class="noborder" type="radio" checked="checked" onclick="qd_send_id(this)">
+							    <!-- <input name="categoryBox[]" value="0" class="noborder" type="radio" checked="checked" onclick="qd_send_id(this)"> -->
 						    </td>
 						    <td class="pointer center"">
 							     0
@@ -252,7 +254,7 @@
                         @foreach(var item in NhomSanPham2_List) {
                             <tr id="" class=" row_hover">
 						        <td class="center">
-							        <input name="categoryBox[]" value="@item.id" class="noborder" type="radio" onchange="qd_send_id(this)">
+							        <!-- <input name="categoryBox[]" value="@item.id" class="noborder" type="radio" onchange="qd_send_id(this)"> -->
 						        </td>
 						        <td class="pointer center" onclick="document.location = '@Url.Action("Edit","AdminNhomSanPham", new {id=item.id})'">
 							         @item.id
@@ -303,13 +305,31 @@
         <form name="add_new_cat" action="@Url.Action("Add","AdminNhomSanPham")" method="post">
             <fieldset id="fieldset_0">
 	            <legend> <img src="../img/admin/nav-user.gif" alt="Employees"> Chọn nhóm sản phẩm cha ở trên để thêm nhanh nhóm sản phẩm mới </legend>
-	            <script>
-                    <!-- Khi chọn category ở trên thì sẽ pass value xuống input cat_parent_id dưới này -->
+	            <!--
+                <script>
+                    Khi chọn category ở trên thì sẽ pass value xuống input cat_parent_id dưới này
 	                function qd_send_id(sender) {
 	                    $("#cat_parent_id").val(sender.value);
 	                }
 	            </script>
-                <input id="cat_parent_id" name="cat_parent_id" type="hidden" value="0" /> <!-- Mặc định p_id =0 = NULL-->
+                -->
+                <label>Nhóm cha:</label>
+                <div class="margin-form">
+                    <select name="cat_parent_id" style="width:400px">
+					    <option value="0" >Nhóm gốc</option>
+					    @foreach(var cat in NhomSanPham2_List_All) {
+                            String pre_fix = "";
+                            for (int i = 0; i < cat.level; i++)
+                            {
+                                pre_fix += "--";
+                            }
+                            <option value="@cat.id">@pre_fix @cat.ten</option>
+                        }
+				    </select>
+                </div>
+                <div class="clear">
+	            </div>
+                <!-- <input id="cat_parent_id" name="cat_parent_id" type="hidden" value="0" /> --> <!-- Mặc định p_id =0 = NULL-->
                 <label>Tên: </label>
 	            <div class="margin-form">
 		            <input name="cat_name" id="lastname" value="" class="" size="33" type="text">

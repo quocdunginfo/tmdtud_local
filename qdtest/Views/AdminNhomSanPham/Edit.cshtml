@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     var nhom_san_pham = (qdtest.Models.NhomSanPham)ViewBag.nhom_san_pham;
+    var NhomSanPham2_List_All = (List<qdtest.Models.NhomSanPham2>)ViewBag.NhomSanPham2_List_All;
 }
 
 <div id="main">
@@ -134,6 +135,22 @@
             <fieldset id="fieldset_0">
 	            <legend> <img src="../img/admin/nav-user.gif" alt="Employees"> Thông tin nhóm sản phẩm</legend>
                 <input name="cat_id" type="hidden" value="@nhom_san_pham.id" type="text">
+                <label>Nhóm cha:</label>
+                <div class="margin-form">
+                    <select name="cat_parent_id" style="width:400px">
+					    <option value="0" @if(nhom_san_pham.nhomcha == null) {<text>selected="selected"</text>}>Nhóm gốc</option>
+					    @foreach (var cat in NhomSanPham2_List_All)
+                         {
+                             String pre_fix = "";
+                             for (int i = 0; i < cat.level; i++)
+                             {
+                                 pre_fix += "--";
+                             }
+                        <option value="@cat.id" @if (nhom_san_pham.nhomcha == null && nhom_san_pham.nhomcha.id == nhom_san_pham.id)
+                                {<text>selected="selected"</text>} >@pre_fix @cat.ten</option>
+                        }
+				    </select>
+                </div>
                 <label>Tên: </label>
 	            <div class="margin-form">
 		            <input name="cat_name" id="lastname" value="@nhom_san_pham.ten" class="" size="33" type="text">
