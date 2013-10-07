@@ -123,6 +123,11 @@ namespace qdtest.Controllers
                 this._permission.Add("user_edit");
                 this._permission.Add("user_delete");
                 this._permission.Add("user_add");
+
+                this._permission.Add("khachhang_view");
+                this._permission.Add("khachhang_edit");
+                this._permission.Add("khachhang_delete");
+                this._permission.Add("khachhang_add");
             }
             if (group_id == 1)
             {

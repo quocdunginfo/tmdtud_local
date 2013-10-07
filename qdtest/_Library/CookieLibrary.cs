@@ -10,23 +10,33 @@ namespace qdtest._Library
     {
         public static HttpCookie Base64Encode(HttpCookie input)
         {
+            HttpCookie tmp = new HttpCookie(input.Name);
+            tmp.Expires = input.Expires;
             foreach (String key in input.Values.AllKeys)
             {
-                byte[] bytes = System.Text.Encoding.UTF8.GetBytes(input[key]);
+                //copy value
+                tmp[key] = input[key];
+                //process
+                byte[] bytes = System.Text.Encoding.UTF8.GetBytes(tmp[key]);
                 string encoded = System.Convert.ToBase64String(bytes);
-                input[key] = encoded;
+                tmp[key] = encoded;
             }
-            return input;
+            return tmp;
         }
         public static HttpCookie Base64Decode(HttpCookie input)
         {
+            HttpCookie tmp = new HttpCookie(input.Name);
+            tmp.Expires = input.Expires;
             foreach (String key in input.Values.AllKeys)
             {
-                byte[] bytes = System.Convert.FromBase64String(input[key]);
+                //copy value
+                tmp[key] = input[key];
+                //process
+                byte[] bytes = System.Convert.FromBase64String(tmp[key]);
                 string decoded = System.Text.Encoding.UTF8.GetString(bytes);
-                input[key] = decoded;
+                tmp[key] = decoded;
             }
-            return input;
+            return tmp;
         }
     }
 }

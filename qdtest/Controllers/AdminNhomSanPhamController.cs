@@ -79,11 +79,15 @@ namespace qdtest.Controllers
             String cat_name = TextLibrary.ToString(Request["cat_name"]);
             Boolean cat_active = TextLibrary.ToBoolean(Request["cat_active"]);
             String cat_description =  TextLibrary.ToString(Request["cat_description"]);
+            int cat_p_id = TextLibrary.ToInt(Request["cat_parent_id"]);
             //get curent cat object and pass update info
             NhomSanPham obj = ctr.get_by_id(id);
             obj.ten = cat_name;
             obj.mota = cat_description;
             obj.active = cat_active;
+            //get parent cat info
+            NhomSanPham p_nhom = ctr.get_by_id(cat_p_id);
+            ctr.set_parent(obj, p_nhom);
             //call update
             ctr._db.SaveChanges();
             Debug.WriteLine("Cập nhật thành công Nhóm Sản phẩm");

@@ -30,7 +30,29 @@ namespace qdtest.Controllers.ModelController
             //return ma moi nhat
             return this._db.ds_nhomsanpham.Max(x => x.id);
         }
-        
+        public Boolean set_parent(NhomSanPham obj, NhomSanPham parent)
+        {
+            if (parent!=null && this.is_exist(parent.id))
+            {
+                if (obj.id == parent.id)
+                {
+                    return false;
+                }
+                obj.nhomcha = parent;
+            }
+            else
+            {
+                if (obj.nhomcha == null)
+                {
+                    //nothing
+                }
+                else
+                {
+                    obj.nhomcha.ds_nhomcon.Remove(obj);
+                }
+            }
+            return true;
+        }
         public Boolean delete(int id)
         {
             //Xóa object có dính khóa ngoại trước
@@ -109,8 +131,8 @@ namespace qdtest.Controllers.ModelController
                 list = new List<NhomSanPham2>();
             }
             //find by LIKE element
-            list = list.Where(x => x.ten.Contains(ten)
-                && x.mota.Contains(mota)).ToList();
+            list = list.Where(x => x.ten.ToUpper().Contains(ten.ToUpper())
+                && x.mota.ToUpper().Contains(mota.ToUpper())).ToList();
             if (list == null)
             {
                 list = new List<NhomSanPham2>();

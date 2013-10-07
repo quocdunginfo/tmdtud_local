@@ -20,6 +20,9 @@ namespace qdtest.Models
             this.ds_sanpham_tag = new List<SanPham_Tag>();
             this.ds_dathang = new List<DatHang>();
             this.ds_hinhanh = new List<HinhAnh>();
+            this.masp = "";
+            this.ten = "";
+            this.mota = "";
         }
         [Key]
         public int id { get; set; }
@@ -41,6 +44,9 @@ namespace qdtest.Models
         public Topic()
         {
             this.ds_phanhoi = new List<PhanHoi>();
+            this.ten = "";
+            this.noidung = "";
+            this.ngay = DateTime.Now;
         }
         [Key]
         public int id { get; set; }
@@ -53,6 +59,12 @@ namespace qdtest.Models
     }
     public class PhanHoi
     {
+        public PhanHoi()
+        {
+            this.ten = "";
+            this.noidung = "";
+            this.ngay = DateTime.Now;
+        }
         [Key]
         public int id { get; set; }
         public String ten { get; set; }
@@ -78,6 +90,7 @@ namespace qdtest.Models
         public KichThuoc()
         {
             this.ds_sanpham_tag = new List<SanPham_Tag>();
+            this.giatri = "";
         }
         [Key]
         public int id { get; set; }
@@ -90,6 +103,7 @@ namespace qdtest.Models
         public MauSac()
         {
             this.ds_sanpham_tag = new List<SanPham_Tag>();
+            this.giatri = "";
         }
         [Key]
         public int id { get; set; }
@@ -102,6 +116,7 @@ namespace qdtest.Models
         public HangSX()
         {
             this.ds_sanpham = new List<SanPham>();
+            this.ten = "";
         }
         [Key]
         public int id { get; set; }
@@ -115,6 +130,8 @@ namespace qdtest.Models
         {
             this.ds_sanpham = new List<SanPham>();
             this.ds_nhomcon = new List<NhomSanPham>();
+            this.ten = "";
+            this.mota = "";
         }
         [Key]
         public int id { get; set; }
@@ -131,6 +148,10 @@ namespace qdtest.Models
         public DatHang()
         {
             this.ds_chitiet_dathang = new List<ChiTiet_DatHang>();
+            this.ngay = DateTime.Now;
+            this.diachi_nguoinhan = "";
+            this.ten_nguoinhan = "";
+            this.sdt_nguoinhan = "";
         }
         [Key]
         public int id { get; set; }
@@ -160,6 +181,12 @@ namespace qdtest.Models
         public KhachHang()
         {
             this.ds_dathang = new List<DatHang>();
+            this.tendangnhap = "";
+            this.tendaydu = "";
+            this.matkhau = "";
+            this.diachi = "";
+            this.email = "";
+            this.sdt = "";
         }
         [Key]
         public int id { get; set; }
@@ -182,6 +209,10 @@ namespace qdtest.Models
             this.group_id = 0;
             this.ds_sanpham = new List<SanPham>();
             this.ds_dathang = new List<DatHang>();
+            this.tendangnhap = "";
+            this.tendaydu = "";
+            this.email = "";
+            this.matkhau = "";
         }
         [Key]
         public int id { get; set; }

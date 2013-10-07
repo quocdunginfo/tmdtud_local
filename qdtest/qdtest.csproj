@@ -102,11 +102,13 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminFailController.cs" />
     <Compile Include="Controllers\AdminHomeController.cs" />
+    <Compile Include="Controllers\AdminKhachHangsController.cs" />
     <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\AdminNhomSanPhamController.cs" />
     <Compile Include="Controllers\AdminUserController.cs" />
     <Compile Include="Controllers\AdminUsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ModelController\KhachHangController.cs" />
     <Compile Include="Controllers\ModelController\NhanVienController.cs" />
     <Compile Include="Controllers\ModelController\NhomSanPhamController.cs" />
     <Compile Include="Global.asax.cs">
@@ -129,6 +131,7 @@
     <Compile Include="Models\TableModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_Library\CookieLibrary.cs" />
+    <Compile Include="_Library\Dynamic.cs" />
     <Compile Include="_Library\TextLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -3275,6 +3278,11 @@
     <Content Include="Views\AdminNhomSanPham\Submit.cshtml" />
     <Content Include="Views\AdminNhomSanPham\Add.cshtml" />
     <Content Include="Views\AdminNhomSanPham\Edit.cshtml" />
+    <Content Include="Views\AdminKhachHangs\Index.cshtml">
+      <SubType>
+      </SubType>
+    </Content>
+    <Content Include="Views\AdminKhachHangs\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

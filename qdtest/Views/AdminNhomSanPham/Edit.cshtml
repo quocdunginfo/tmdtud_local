@@ -118,7 +118,7 @@
 					<h3>
 					<span id="current_obj" style="font-weight: normal;">
 					<span class="breadcrumb item-0 ">Catalog <img alt=">" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"> </span>
-					<span class="breadcrumb item-1 ">Categories </span>
+					<span class="breadcrumb item-1 ">Nhóm sản phẩm </span>
 					</span>
 					</h3>
 				</div>
@@ -146,7 +146,7 @@
                              {
                                  pre_fix += "--";
                              }
-                        <option value="@cat.id" @if (nhom_san_pham.nhomcha == null && nhom_san_pham.nhomcha.id == nhom_san_pham.id)
+                        <option value="@cat.id" @if (nhom_san_pham.nhomcha != null && nhom_san_pham.nhomcha.id == cat.id)
                                 {<text>selected="selected"</text>} >@pre_fix @cat.ten</option>
                         }
 				    </select>
