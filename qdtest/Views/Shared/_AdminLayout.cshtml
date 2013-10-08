@@ -1,6 +1,7 @@
 ﻿@{
     var qRootAdminTemplatePath = @Url.Content("~/Content/admin/admin2109/");
     var ActiveTab = (List<String>)ViewBag.ActiveTab;
+    var Current_User = (qdtest.Models.NhanVien)ViewBag.Current_User;
 }
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 lt-ie6 " lang="en"> <![endif]-->
@@ -137,7 +138,9 @@
 				<div id="employee_box">
 					<div id="employee_infos">
 						<div class="employee_name">
-							Welcome, <strong>Q&nbsp;Dung</strong>
+							<a href="@Url.Action("Index","AdminUser", new {id=Current_User.id})">
+                            Xin chào, <strong>@Current_User.tendaydu</strong>
+                            </a>
 						</div>
 						<div class="clear">
 						</div>
@@ -202,17 +205,12 @@
 					<li><a href="index.php?controller=AdminOrderMessage&amp;token=5c96440da44d74636408404ba88bc804">Order Messages</a></li>
 				</ul>
 				</li>
-				<li class="submenu_size maintab " id="maintab11">
-				<a href="#" class="title">
-				<img src="../img/t/AdminParentCustomer.gif" alt=""/>Customers </a>
+				<li class="submenu_size maintab " id="maintab11 @if(ActiveTab.Contains("KhachHang")) {<text>active</text>}">
+				<a href="@Url.Action("Index","AdminKhachHangs")" class="title">
+				<img src="../img/t/AdminParentCustomer.gif" alt=""/>Khách hàng </a>
 				<ul class="submenu">
-					<li><a href="index.php?controller=AdminCustomers&amp;token=a63897f6b09f19ea042c44d7f543b6b6">Customers</a></li>
-					<li><a href="index.php?controller=AdminAddresses&amp;token=22b990b90f0084ce765afa8abb35357d">Addresses</a></li>
-					<li><a href="index.php?controller=AdminGroups&amp;token=f7198b92f65159e9cb29c903b57a292d">Groups</a></li>
-					<li><a href="index.php?controller=AdminCarts&amp;token=586814dd47729d0bd9b809ee3c9e576e">Shopping Carts</a></li>
-					<li><a href="index.php?controller=AdminCustomerThreads&amp;token=2ca6e722bbb83b079663baeb78896005">Customer Service</a></li>
-					<li><a href="index.php?controller=AdminContacts&amp;token=55d69c7e7bbec40fcf073e224e950489">Contacts</a></li>
-					<li><a href="index.php?controller=AdminGenders&amp;token=8a2ba51dce0d03bb556e06b63d2fece6">Titles</a></li>
+					<li><a href="@Url.Action("Add","AdminKhachHangs")">Thêm khách hàng mới</a></li>
+                    <li><a href="index.php?controller=AdminCustomers&amp;token=a63897f6b09f19ea042c44d7f543b6b6">Thắc mắc của khách hàng</a></li>
 				</ul>
 				</li>
 				<li class="submenu_size maintab " id="maintab12">

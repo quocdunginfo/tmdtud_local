@@ -126,5 +126,23 @@ namespace qdtest.Controllers
             //set active tab
             this._set_activetab(new String[] { "KhachHang" });
         }
+        public ActionResult Add()
+        {
+            //check
+            if (!this._permission.Contains("khachhang_add"))
+            {
+                return this._fail_permission("khachhang_add");
+            }
+            return RedirectToAction("Add", "AdminKhachHang");
+        }
+        public ActionResult Edit(int id=0)
+        {
+            //check
+            if (!this._permission.Contains("khachhang_edit"))
+            {
+                return this._fail_permission("khachhang_edit");
+            }
+            return RedirectToAction("Index", "AdminKhachHang", new { id=id});
+        }
     }
 }

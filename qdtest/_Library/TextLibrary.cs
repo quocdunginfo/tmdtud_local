@@ -12,6 +12,7 @@ namespace qdtest._Library
     {
         public static string GetSHA1HashData(string data)
         {
+            if (data == null) data = "";
             //chu HOA
             return FormsAuthentication.HashPasswordForStoringInConfigFile(data, "SHA1");
         }

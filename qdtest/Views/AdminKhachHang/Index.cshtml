@@ -1,8 +1,8 @@
 ﻿@{
-    //ViewBag.Title = "Index";
+    //ViewBag.Title
     //ViewBag.ActiveTab
-    var NhanVien = (qdtest.Models.NhanVien)ViewBag.NhanVien;
     var State = (List<String>)ViewBag.State;
+    var KhachHang = (qdtest.Models.KhachHang)ViewBag.KhachHang;
 }
 <div id="main">
 	<div id="content">
@@ -10,18 +10,18 @@
 			<div class="toolbarBox toolbarHead">
 				<ul class="cc_button">
 					<li>
-					<a id="desc-employee-save" class="toolbar_btn" href="#" title="Save">
+					<a id="desc-employee-save" class="toolbar_btn" href="#" title="Lưu">
 					<span class="process-icon-save "></span>
 					<div>
-						Save
+					    Lưu
 					</div>
 					</a>
 					</li>
 					<li>
-					<a id="desc-employee-back" class="toolbar_btn" href="@Url.Action("Index","AdminUsers")" title="Back to list">
+					<a id="desc-employee-back" class="toolbar_btn" href="@Url.Action("Index","AdminKhachHangs")" title="Trở về">
 					<span class="process-icon-back "></span>
 					<div>
-						 Back to list
+						 Trở về
 					</div>
 					</a>
 					</li>
@@ -84,9 +84,8 @@
 				<div class="pageTitle">
 					<h3>
 					<span id="current_obj" style="font-weight: normal;">
-					<span class="breadcrumb item-0 ">Administration <img alt=">" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"> </span>
-					<span class="breadcrumb item-1 ">Users <img alt=">" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"> </span>
-					<span class="breadcrumb item-2 ">Edit </span>
+					<span class="breadcrumb item-0 ">Khách hàng <img alt=">" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"> </span>
+					<span class="breadcrumb item-1 ">Chi tiết </span>
 					</span>
 					</h3>
 				</div>
@@ -94,14 +93,14 @@
 		</div>
 		<div class="leadin">
 		</div>
-		<form id="employee_form" class="defaultForm AdminEmployees" action="@Url.Action("Submit","AdminUser")" method="post" enctype="multipart/form-data">
-			<input name="nhanvien_id" id="id_employee" value="@NhanVien.id" type="hidden">
+		<form id="employee_form" class="defaultForm AdminEmployees" action="@Url.Action("Submit","AdminKhachHang")" method="post" enctype="multipart/form-data">
+			<input name="khachhang_id" id="id_employee" value="@KhachHang.id" type="hidden">
 			<fieldset id="fieldset_0">
 				<legend>
-				<img src="../img/admin/nav-user.gif" alt="Employees"> User </legend>
+				<img src="../img/admin/nav-user.gif" alt="Employees"> Thông tin khách hàng </legend>
 				<label>Tên đăng nhập:</label>
 				<div class="margin-form">
-					<input name="nhanvien_tendangnhap" id="firstname" value="@NhanVien.tendangnhap" class="" size="33" type="text">
+					<input name="khachhang_tendangnhap" id="firstname" value="@KhachHang.tendangnhap" class="" size="33" type="text">
 					<sup>*</sup>
                     <span style="color: red;">
                         @if(State.Contains("tendangnhap_fail")) { <text> Không hợp lệ</text> }
@@ -111,7 +110,7 @@
 				</div>
 				<label>Tên đầy đủ:</label>
 				<div class="margin-form">
-					<input name="nhanvien_tendaydu" Value="@NhanVien.tendaydu" class="" size="33" type="text">
+					<input name="khachhang_tendaydu" Value="@KhachHang.tendaydu" class="" size="33" type="text">
 					<sup>*</sup>
                     <span style="color: red;">
                         @if(State.Contains("tendaydu_fail")) { <text> Không hợp lệ</text> }
@@ -121,27 +120,21 @@
 				</div>
 				<label>Mật khẩu: </label>
 				<div class="margin-form">
-					<input name="nhanvien_matkhau" size="33" class="" value="@NhanVien.matkhau" type="password">
+					<input name="khachhang_matkhau" size="33" class="" value="@KhachHang.matkhau" type="password">
 					<sup>*</sup>
-                    <span style="color: red;">
-                        @if(State.Contains("matkhau_fail")) { <text> Mật khẩu không khớp</text> }
-                    </span>
 				</div>
 				<div class="clear">
 				</div>
                 <label>Xác nhận mật khẩu: </label>
 				<div class="margin-form">
-					<input name="nhanvien_matkhau2" size="33" class="" value="@NhanVien.matkhau" type="password">
+					<input name="khachhang_matkhau2" size="33" class="" value="@KhachHang.matkhau" type="password">
 					<sup>*</sup>
-                    <span style="color: red;">
-                        @if(State.Contains("matkhau_fail")) { <text> Mật khẩu không khớp</text> }
-                    </span>
 				</div>
 				<div class="clear">
 				</div>
 				<label>Email: </label>
 				<div class="margin-form">
-					<input name="nhanvien_email" id="email" value="@NhanVien.email" class="" size="33" type="text">
+					<input name="khachhang_email" id="email" value="@KhachHang.email" class="" size="33" type="text">
 					<sup>*</sup>
                     <span style="color: red;">
                         @if(State.Contains("email_fail")) { <text> Không hợp lệ</text> }
@@ -149,31 +142,39 @@
 				</div>
 				<div class="clear">
 				</div>
+                <label>Số điện thoại: </label>
+				<div class="margin-form">
+					<input name="khachhang_sdt" id="sdt" value="@KhachHang.sdt" class="" size="33" type="text">
+					<sup>*</sup>
+                    <span style="color: red;">
+                        @if(State.Contains("sdt_fail")) { <text> Không hợp lệ</text> }
+                    </span>
+				</div>
+				<div class="clear">
+				</div>
+                <label>Địa chỉ: </label>
+				<div class="margin-form">
+					<input name="khachhang_diachi" id="diachi" value="@KhachHang.diachi" class="" size="33" type="text">
+					<sup>*</sup>
+                    <span style="color: red;">
+                        @if(State.Contains("diachi_fail")) { <text> Không hợp lệ</text> }
+                    </span>
+				</div>
+				<div class="clear">
+				</div>
 				<label>Active: </label>
 				<div class="margin-form">
-					<input name="nhanvien_active" id="active_on" value="1" @if(@NhanVien.active==true) {<text>checked="checked"</text>} type="radio">
+					<input name="khachhang_active" id="active_on" value="1" @if(@KhachHang.active==true) {<text>checked="checked"</text>} type="radio">
 					<label class="t" for="active_on">
 					<img src="../img/admin/enabled.gif" alt="Enabled" title="Enabled">
 					</label>
-					<input name="nhanvien_active" id="active_off" value="0" @if(@NhanVien.active==false) {<text>checked="checked"</text>} type="radio">
+					<input name="khachhang_active" id="active_off" value="0" @if(@KhachHang.active==false) {<text>checked="checked"</text>} type="radio">
 					<label class="t" for="active_off">
 					<img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled">
 					</label>
 					<p class="preference_description">
-						 Cho phép người dùng đăng nhập vào hệ thống
+						 Cho phép khách hàng đăng nhập vào hệ thống
 					</p>
-				</div>
-				<div class="clear">
-				</div>
-				<label>Nhóm người dùng:</label>
-				<div class="margin-form">
-					<select name="nhanvien_group_id" class="" id="id_profile">
-						<option value="">-- Choose --</option>
-						<option value="0" @if(NhanVien.group_id==0) {<text>selected="selected"</text>}>Admin</option>
-						<option value="1" @if(NhanVien.group_id==1) {<text>selected="selected"</text>}>Normal user</option>
-						<option value="2" @if(NhanVien.group_id==2) {<text>selected="selected"</text>}>Guest</option>
-					</select>
-					<sup>*</sup>
 				</div>
 				<div class="clear">
 				</div>

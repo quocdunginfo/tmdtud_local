@@ -49,23 +49,23 @@ namespace qdtest.Controllers
         public ActionResult Submit()
         {
             //get nv id first
-            int nvid = Int32.Parse("0"+Request["nhanvien_id"]);
-            NhanVienController nvc=new NhanVienController();
-            NhanVien nv;
+            int obj_id = TextLibrary.ToInt(Request["nhanvien_id"]);
+            NhanVienController ctr=new NhanVienController();
+            NhanVien obj;
             Boolean edit_mode = true;
-            if (nvid == 0)
+            if (obj_id == 0)
             {
                 //add mode
-                nv = new NhanVien();
+                obj = new NhanVien();
                 edit_mode = false;
             }
             else
             {
-                if (new NhanVienController().is_exist(nvid))
+                if (ctr.is_exist(obj_id))
                 {
                     //update model
                     //get instance of record of table
-                    nv = this._db.ds_nhanvien.Where(x => x.id == nvid).FirstOrDefault();
+                    obj = ctr.get_by_id(obj_id);
                 }
                 else
                 {
@@ -74,43 +74,45 @@ namespace qdtest.Controllers
                 }
             }
             //assign data
-            nv.email = Request["nhanvien_email"];
-            nv.group_id = TextLibrary.ToInt(Request["nhanvien_group_id"]);
-            nv.tendangnhap = Request["nhanvien_tendangnhap"];
-            nv.tendaydu = Request["nhanvien_tendaydu"];
-            nv.active = Request["nhanvien_active"]=="1"?true:false;
+            Boolean validate_ok = true;
+            obj.email = TextLibrary.ToString(Request["nhanvien_email"]);
+            obj.group_id = TextLibrary.ToInt(Request["nhanvien_group_id"]);
+            obj.tendangnhap = TextLibrary.ToString(Request["nhanvien_tendangnhap"]);
+            obj.tendaydu = TextLibrary.ToString(Request["nhanvien_tendaydu"]);
+            obj.active = TextLibrary.ToBoolean(Request["nhanvien_active"]);
             //action
-            if (edit_mode)
+            if (validate_ok)
             {
-                if (!this._permission.Contains("user_edit"))
+                if (edit_mode)
                 {
-                    return _fail_permission("user_edit");
+                    if (!this._permission.Contains("user_edit"))
+                    {
+                        return _fail_permission("user_edit");
+                    }
+                    //update properties
+                    ctr._db.SaveChanges();
+                    //call set password
+                    ctr.set_password(obj.id, TextLibrary.ToString(Request["nhanvien_matkhau"]));
+                    this._state.Add("edit_ok");
                 }
-                //call set password
-                nvc.set_password(nv.id, Request["nhanvien_matkhau"]);
-                //call update
-                Debug.WriteLine("Call DB Update");
-                this._db.SaveChanges();
-                ViewBag.State = "edit_ok";
-            }
-            else
-            {
-                if (!this._permission.Contains("user_add"))
+                else
                 {
-                    return _fail_permission("user_add");
+                    if (!this._permission.Contains("user_add"))
+                    {
+                        return _fail_permission("user_add");
+                    }
+                    //hash password before add
+                    obj.matkhau = TextLibrary.GetSHA1HashData(Request["nhanvien_matkhau"]);
+                    //call add
+                    int maxid = ctr.add(obj);
+                    //re assign id
+                    obj.id = maxid;
+                    this._state.Add("add_ok");
                 }
-                //hash password before add
-                nv.matkhau = TextLibrary.GetSHA1HashData(Request["nhanvien_matkhau"]);
-                //call add
-                Debug.WriteLine("Add Nhan vien");
-                int maxid = nvc.add(nv);
-                //re assign id
-                nv.id = maxid;
-                ViewBag.State = "add_ok";
             }
-            ViewBag.NhanVien = nv;
+            ViewBag.NhanVien = obj;
             ViewBag.Title += " - Submit";
-            
+            ViewBag.State = this._state;
             return View("Index");
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

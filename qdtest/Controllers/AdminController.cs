@@ -13,13 +13,14 @@ namespace qdtest.Controllers
     public class AdminController : Controller
     {
         protected NhanVien _user = null;
-        public List<String> _permission = null;
-        public BanGiayDBContext _db = null;
+        protected List<String> _permission = null;
+        protected BanGiayDBContext _db = null;
+        protected List<String> _state = null;//lưu thông báo trả về cho view
         public AdminController()
         {
-            //vi du về sự thay đổi
             this._db = new BanGiayDBContext();
             this._permission = new List<String>();
+            this._state = new List<String>();
         }
         public ActionResult Index2()
         {
@@ -40,8 +41,10 @@ namespace qdtest.Controllers
                 NhanVienController uc = new NhanVienController();
                 Debug.WriteLine("Phát hiện user_id=" + _tmp["user_id"]);
                 this._user = uc.get_by_id_hash_password(TextLibrary.ToInt(_tmp["user_id"]),_tmp["user_password"]);
-                //Gán permission
-                this._reset_permission(this._user.group_id);
+                if (this._user == null)
+                {
+                    return;
+                }
             }
             //nếu chưa đăng nhập thì chuyển tới trang đăng nhập
             if (this._user == null)
@@ -49,6 +52,9 @@ namespace qdtest.Controllers
                 Debug.WriteLine("Kiểm tra User thất bại");
                 filterContext.Result = RedirectToAction("Index", "AdminLogin");
             }
+            //Gán permission
+            this._reset_permission(this._user.group_id);
+            //tạo data ban đầu
             this._build_common_data();
             //Mọi class controller extends từ class AdminController sẽ chạy sau dòng định nghĩa này
             //...
@@ -64,7 +70,7 @@ namespace qdtest.Controllers
         }
         protected ActionResult _fail_permission(String permission)
         {
-            TempData.Add("admin_fail_message","You are not allowed in "+permission+" area!");
+            TempData.Add("admin_fail_message","You are not allowed in \""+permission+"\" area!");
             return RedirectToAction("Index", "AdminFail");
         }
         [NonAction]
@@ -73,6 +79,8 @@ namespace qdtest.Controllers
             //for menu active item
             ViewBag.Title = "Admin";
             ViewBag.ActiveTab = new List<String>();
+            ViewBag.State = new List<String>();
+            ViewBag.Current_User = this._user;
         }
         [NonAction]
         protected void _set_activetab(String[] tabs_name)
@@ -85,23 +93,6 @@ namespace qdtest.Controllers
             }
             ViewBag.ActiveTab = new List<String>(tabs_name);
         }
-        /*
-        [NonAction]
-        protected void _set_timkiem_cookies(String vung_timkiem)
-        {
-            //Clear other search cookies
-            String[] list = new String[] { "timkiem_nhanvien", "timkiem_sanpham","timkiem_nhomsanpham", "timkiem_hangsx" };
-            //Xóa các cookies tìm kiếm khác ngoại trừ item ra
-            foreach (String item in list)
-            {
-                if (item.Equals(vung_timkiem)) continue;
-                HttpCookie _tmp = new HttpCookie(item);
-                _tmp.Expires = DateTime.Now.AddDays(-1);
-                Response.Cookies.Add(_tmp);
-            }
-
-        }
-         * */
         [NonAction]
         private void _reset_permission(int group_id)
         {

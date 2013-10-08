@@ -35,8 +35,8 @@ namespace qdtest.Controllers
         {
             //get data from client
             NhanVienController uc = new NhanVienController();
-            String username = Request["user_username"];
-            String password = Request["user_password"];
+            String username = TextLibrary.ToString(Request["user_username"]);
+            String password = TextLibrary.ToString(Request["user_password"]);
             //validate
             //NhanVienController c = new NhanVienController();
             if (uc.login(username,password))
