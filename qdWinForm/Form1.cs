@@ -38,7 +38,10 @@ namespace qdWinForm
         private void button2_Click(object sender, EventArgs e)
         {
             String username = this.listBox1.SelectedItem.ToString();
-            MessageBox.Show(username);
+            NhanVienController ctr = new NhanVienController();
+            ctr._db.ds_nhanvien.Remove(ctr._db.ds_nhanvien.Where(x => x.tendangnhap == username).FirstOrDefault());
+            ctr._db.SaveChanges();
+            this.button1_Click(sender, e);
         }
     }
 }
