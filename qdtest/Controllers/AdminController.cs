@@ -51,6 +51,7 @@ namespace qdtest.Controllers
             {
                 Debug.WriteLine("Kiểm tra User thất bại");
                 filterContext.Result = RedirectToAction("Index", "AdminLogin");
+                return;
             }
             //Gán permission
             this._reset_permission(this._user.group_id);
