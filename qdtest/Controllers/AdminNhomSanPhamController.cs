@@ -32,7 +32,6 @@ namespace qdtest.Controllers
         public ActionResult Index()
         {
             NhomSanPhamController ctr = new NhomSanPhamController();
-            NhomSanPham root = null;
             ViewBag.NhomSanPham2_List = ctr.timkiem(
                 this.timkiem_nhomsanpham["id"],
                 this.timkiem_nhomsanpham["ten"],

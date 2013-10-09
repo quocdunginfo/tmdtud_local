@@ -21,7 +21,6 @@ namespace qdWinForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            BanGiayDBContext db = new BanGiayDBContext();
             NhanVienController ctr=new NhanVienController();
             List<NhanVien> list = ctr.timkiem();
             if(list!=null)
