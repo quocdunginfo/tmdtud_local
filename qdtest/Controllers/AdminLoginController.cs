@@ -18,6 +18,7 @@ namespace qdtest.Controllers
         // GET: /AdminLogin/
         public ActionResult Index()
         {
+            //vd ve su thay dọic
             HttpCookie _tmp = Request.Cookies.Get("admin");
             if (_tmp == null) return View();
             //Nếu đã đang nhập rồi thì return home
