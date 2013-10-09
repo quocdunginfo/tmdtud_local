@@ -127,6 +127,10 @@
     <Compile Include="Migrations\201310031534039_cap_nhat_tpic_phanhoi.Designer.cs">
       <DependentUpon>201310031534039_cap_nhat_tpic_phanhoi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310090453113_them_thuoc_tinh.cs" />
+    <Compile Include="Migrations\201310090453113_them_thuoc_tinh.Designer.cs">
+      <DependentUpon>201310090453113_them_thuoc_tinh.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\TableModel.cs" />
@@ -3147,6 +3151,10 @@
     <Content Include="Content\admin\themes\default\mobile\js\product.js" />
     <Content Include="Content\admin\themes\default\mobile\js\stores.js" />
     <Content Include="Content\admin\themes\default\preview.jpg" />
+    <Content Include="Content\admin_login\css\style.css" />
+    <Content Include="Content\admin_login\img\arrow.png" />
+    <Content Include="Content\admin_login\img\bg.png" />
+    <Content Include="Content\admin_login\index.html" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -3219,6 +3227,7 @@
     <Content Include="Content\admin\modules\graphartichow\artichow\font\TuffyItalic.ttf" />
     <Content Include="Content\admin\modules\themeinstallator\backward_compatibility\backward.ini" />
     <Content Include="Content\admin\themes\.htaccess" />
+    <Content Include="Content\admin_login\scss\style.scss" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -3285,6 +3294,8 @@
     <Content Include="Views\AdminKhachHangs\_ViewStart.cshtml" />
     <Content Include="Views\AdminKhachHang\Index.cshtml" />
     <Content Include="Views\AdminKhachHang\_ViewStart.cshtml" />
+    <Content Include="Views\AdminUser\Indexghghgh.cshtml" />
+    <Content Include="Views\AdminUser\ghgshdgsdghs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3471,6 +3482,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310031534039_cap_nhat_tpic_phanhoi.resx">
       <DependentUpon>201310031534039_cap_nhat_tpic_phanhoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310090453113_them_thuoc_tinh.resx">
+      <DependentUpon>201310090453113_them_thuoc_tinh.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

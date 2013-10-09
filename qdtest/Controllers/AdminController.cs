@@ -34,18 +34,29 @@ namespace qdtest.Controllers
         {
             Debug.WriteLine("Kiểm tra User");
             base.OnActionExecuting(filterContext);
-            //Lấy thông tin user từ cookies
-            HttpCookie _tmp = Request.Cookies.Get("admin");
-            if (_tmp != null)
+            int uid = 0;
+            String password = "";
+            if (Session["user_id"] != null)
             {
-                NhanVienController uc = new NhanVienController();
-                Debug.WriteLine("Phát hiện user_id=" + _tmp["user_id"]);
-                this._user = uc.get_by_id_hash_password(TextLibrary.ToInt(_tmp["user_id"]),_tmp["user_password"]);
-                if (this._user == null)
+                //uu tien lay thong tin user tu session
+                uid = TextLibrary.ToInt(Session["user_id"].ToString());
+                password = TextLibrary.ToString(Session["user_password"].ToString());
+                Debug.WriteLine("Lay thong tin tu session, uid="+uid);
+            }
+            else
+            {
+                //lay thong tin tu cookies
+                HttpCookie _tmp = Request.Cookies.Get("admin");
+                if (_tmp != null)
                 {
-                    return;
+                    uid = TextLibrary.ToInt(_tmp["user_id"].ToString());
+                    password = TextLibrary.ToString(_tmp["user_password"].ToString());
+                    Debug.WriteLine("Lay thong tin tu cookies, uid=" + uid);
                 }
             }
+            //lay thong tin user theo yeu cau dang nhap
+            NhanVienController ctr = new NhanVienController();
+            this._user = ctr.get_by_id_hash_password(uid, password);
             //nếu chưa đăng nhập thì chuyển tới trang đăng nhập
             if (this._user == null)
             {
@@ -54,9 +65,9 @@ namespace qdtest.Controllers
                 return;
             }
             //Gán permission
-            this._reset_permission(this._user.group_id);
+                this._reset_permission(this._user.group_id);
             //tạo data ban đầu
-            this._build_common_data();
+                this._build_common_data();
             //Mọi class controller extends từ class AdminController sẽ chạy sau dòng định nghĩa này
             //...
             
