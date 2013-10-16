@@ -115,23 +115,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201309291108433_InitialCreate.cs" />
-    <Compile Include="Migrations\201309291108433_InitialCreate.Designer.cs">
-      <DependentUpon>201309291108433_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201309291114551_NhanVien_Them_ThuocTinh_group_id.cs" />
-    <Compile Include="Migrations\201309291114551_NhanVien_Them_ThuocTinh_group_id.Designer.cs">
-      <DependentUpon>201309291114551_NhanVien_Them_ThuocTinh_group_id.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201310031534039_cap_nhat_tpic_phanhoi.cs" />
-    <Compile Include="Migrations\201310031534039_cap_nhat_tpic_phanhoi.Designer.cs">
-      <DependentUpon>201310031534039_cap_nhat_tpic_phanhoi.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201310090453113_them_thuoc_tinh.cs" />
-    <Compile Include="Migrations\201310090453113_them_thuoc_tinh.Designer.cs">
-      <DependentUpon>201310090453113_them_thuoc_tinh.cs</DependentUpon>
+    <Compile Include="Migrations\201310100935243_them_class_quyen_han.cs" />
+    <Compile Include="Migrations\201310100935243_them_class_quyen_han.Designer.cs">
+      <DependentUpon>201310100935243_them_class_quyen_han.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model1.cs" />
+    <Compile Include="Model1.Designer.cs">
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\TableModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -3228,6 +3222,13 @@
     <Content Include="Content\admin\modules\themeinstallator\backward_compatibility\backward.ini" />
     <Content Include="Content\admin\themes\.htaccess" />
     <Content Include="Content\admin_login\scss\style.scss" />
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -3474,17 +3475,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201309291108433_InitialCreate.resx">
-      <DependentUpon>201309291108433_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201309291114551_NhanVien_Them_ThuocTinh_group_id.resx">
-      <DependentUpon>201309291114551_NhanVien_Them_ThuocTinh_group_id.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201310031534039_cap_nhat_tpic_phanhoi.resx">
-      <DependentUpon>201310031534039_cap_nhat_tpic_phanhoi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201310090453113_them_thuoc_tinh.resx">
-      <DependentUpon>201310090453113_them_thuoc_tinh.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201310100935243_them_class_quyen_han.resx">
+      <DependentUpon>201310100935243_them_class_quyen_han.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

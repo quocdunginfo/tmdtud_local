@@ -18,11 +18,12 @@ namespace qdtest.Models
         public SanPham()
         {
             this.ds_sanpham_tag = new List<SanPham_Tag>();
-            this.ds_dathang = new List<DatHang>();
+            //  this.ds_dathang = new List<DatHang>();
             this.ds_hinhanh = new List<HinhAnh>();
             this.masp = "";
             this.ten = "";
             this.mota = "";
+            this.gia = 0;
         }
         [Key]
         public int id { get; set; }
@@ -33,11 +34,11 @@ namespace qdtest.Models
         public Boolean active { get; set; }
         //external
         public virtual List<SanPham_Tag> ds_sanpham_tag { get; set; }
-        public virtual List<DatHang> ds_dathang { get; set; }
+        // public virtual List<DatHang> ds_dathang { get; set; }
         public virtual List<HinhAnh> ds_hinhanh { get; set; }
         public virtual HangSX hangsx { get; set; }
         public virtual NhomSanPham nhomsanpham { get; set; }
-        public virtual NhanVien nguoidung { get; set; }
+        //  public virtual NhanVien nguoidung { get; set; }
     }
     public class Topic
     {
@@ -53,6 +54,7 @@ namespace qdtest.Models
         public String ten { get; set; }
         public String noidung { get; set; }
         public DateTime ngay { get; set; }
+        public Boolean active { get; set; }
         //external
         public virtual KhachHang nguoitao { get; set; }
         public virtual List<PhanHoi> ds_phanhoi { get; set; }
@@ -69,7 +71,8 @@ namespace qdtest.Models
         public int id { get; set; }
         public String ten { get; set; }
         public String noidung { get; set; }
-        public DateTime ngay {get; set; }
+        public DateTime ngay { get; set; }
+        public Boolean active { get; set; }
         //external
         public virtual NhanVien nhanvien { get; set; }//Nhân viên gửi
         public virtual KhachHang khachhang { get; set; }//Khách Hàng gửi
@@ -77,10 +80,21 @@ namespace qdtest.Models
     }
     public class SanPham_Tag
     {
+        public SanPham_Tag()
+        {
+            this.ds_chitiet_donhang = new List<ChiTiet_DonHang>();
+            this.ds_chitiet_nhaphang = new List<ChiTiet_NhapHang>();
+            this.ds_tonkho = new List<TonKho>();
+            this.soluong = 0;
+        }
         [Key]
         public int id { get; set; }
         public int soluong { get; set; }
+        public Boolean active { get; set; }
         //external
+        public virtual List<ChiTiet_DonHang> ds_chitiet_donhang { get; set; }
+        public virtual List<ChiTiet_NhapHang> ds_chitiet_nhaphang { get; set; }
+        public virtual List<TonKho> ds_tonkho { get; set; }
         public virtual KichThuoc kichthuoc { get; set; }
         public virtual MauSac mausac { get; set; }
         public virtual SanPham sanpham { get; set; }
@@ -95,6 +109,7 @@ namespace qdtest.Models
         [Key]
         public int id { get; set; }
         public String giatri { get; set; }
+        public Boolean active { get; set; }
         //external
         public virtual List<SanPham_Tag> ds_sanpham_tag { get; set; }
     }
@@ -108,6 +123,7 @@ namespace qdtest.Models
         [Key]
         public int id { get; set; }
         public String giatri { get; set; }
+        public Boolean active { get; set; }
         //external
         public virtual List<SanPham_Tag> ds_sanpham_tag { get; set; }
     }
@@ -116,11 +132,12 @@ namespace qdtest.Models
         public HangSX()
         {
             this.ds_sanpham = new List<SanPham>();
-            this.ten = "";
+            this.tenhsx = "";
         }
         [Key]
         public int id { get; set; }
-        public String ten { get; set; }
+        public String tenhsx { get; set; }
+        public Boolean active { get; set; }
         //external
         public virtual List<SanPham> ds_sanpham { get; set; }
     }
@@ -143,15 +160,69 @@ namespace qdtest.Models
         public virtual List<NhomSanPham> ds_nhomcon { get; set; }
         public virtual List<SanPham> ds_sanpham { get; set; }
     }
-    public class DatHang
+    public class NhaCC
     {
-        public DatHang()
+        public NhaCC()
         {
-            this.ds_chitiet_dathang = new List<ChiTiet_DatHang>();
+            this.ds_nhaphang = new List<NhapHang>();
+            this.ten_ncc = "";
+            this.diachi_ncc = "";
+            this.sdt_ncc = "";
+        }
+        [Key]
+        public int id { get; set; }
+        public String ten_ncc { get; set; }
+        public String diachi_ncc { get; set; }
+        public String sdt_ncc { get; set; }
+        public Boolean active { get; set; }
+        //external
+        public virtual List<NhapHang> ds_nhaphang { get; set; }
+    }
+    public class NhapHang
+    {
+        public NhapHang()
+        {
+            this.ds_chitiet_nhaphang = new List<ChiTiet_NhapHang>();
+            this.ngay = DateTime.Now;
+            this.tongtien = 0;
+            this.thanhtoan = 0;
+            this.ten_nhacungcap = "";
+            this.ten_nhanvien = "";
+        }
+        [Key]
+        public int id { get; set; }
+        public DateTime ngay { get; set; }
+        public int tongtien { get; set; }
+        public int thanhtoan { get; set; }
+        public String ten_nhanvien { get; set; }
+        public String ten_nhacungcap { get; set; }
+        public Boolean active { get; set; }
+        //external
+        public virtual NhaCC nhacc { get; set; }
+        public virtual NhanVien nhanvien { get; set; }
+        public virtual List<ChiTiet_NhapHang> ds_chitiet_nhaphang { get; set; }
+
+    }
+    public class ChiTiet_NhapHang
+    {
+        [Key]
+        public int id { get; set; }
+        public int soluong { get; set; }
+        public int dongia { get; set; }
+        //external
+        public virtual NhapHang nhaphang { get; set; }
+        public virtual SanPham_Tag sanpham_tag { get; set; }
+    }
+    public class DonHang
+    {
+        public DonHang()
+        {
+            this.ds_chitiet_donhang = new List<ChiTiet_DonHang>();
             this.ngay = DateTime.Now;
             this.diachi_nguoinhan = "";
             this.ten_nguoinhan = "";
             this.sdt_nguoinhan = "";
+            this.tennv = "";
         }
         [Key]
         public int id { get; set; }
@@ -162,25 +233,28 @@ namespace qdtest.Models
         public String diachi_nguoinhan { get; set; }
         public String ten_nguoinhan { get; set; }
         public String sdt_nguoinhan { get; set; }
+        public String tennv { get; set; }
+        public Boolean active { get; set; }
         //external
-        public virtual List<ChiTiet_DatHang> ds_chitiet_dathang { get; set; }
+        public virtual List<ChiTiet_DonHang> ds_chitiet_donhang { get; set; }
         public virtual NhanVien nguoidung { get; set; }
         public virtual KhachHang khachhang { get; set; }
     }
-    public class ChiTiet_DatHang
+    public class ChiTiet_DonHang
     {
         [Key]
         public int id { get; set; }
         public int soluong { get; set; }
         public int dongia { get; set; }
         //external
+        public virtual DonHang donhang { get; set; }
         public virtual SanPham_Tag sanpham_tag { get; set; }
     }
     public class KhachHang
     {
         public KhachHang()
         {
-            this.ds_dathang = new List<DatHang>();
+            this.ds_donhang = new List<DonHang>();
             this.tendangnhap = "";
             this.tendaydu = "";
             this.matkhau = "";
@@ -198,7 +272,7 @@ namespace qdtest.Models
         public String sdt { get; set; }
         public Boolean active { get; set; }
         //external
-        public virtual List<DatHang> ds_dathang { get; set; }
+        public virtual List<DonHang> ds_donhang { get; set; }
     }
     public class NhanVien
     {
@@ -206,9 +280,9 @@ namespace qdtest.Models
         {
             this.id = 0;
             this.active = true;
-            this.group_id = 0;
-            this.ds_sanpham = new List<SanPham>();
-            this.ds_dathang = new List<DatHang>();
+            // this.ds_sanpham = new List<SanPham>();
+            this.ds_donhang = new List<DonHang>();
+            this.ds_nhaphang = new List<NhapHang>();
             this.tendangnhap = "";
             this.tendaydu = "";
             this.email = "";
@@ -221,23 +295,71 @@ namespace qdtest.Models
         public String email { get; set; }
         public String matkhau { get; set; }
         public Boolean active { get; set; }
-        public int group_id { get; set; }//0: Admin, 1: Normal user, 2: Guest
         //external
-        public virtual List<SanPham> ds_sanpham { get; set; }
-        public virtual List<DatHang> ds_dathang { get; set; }
+        //public virtual List<SanPham> ds_sanpham { get; set; }
+        public virtual List<DonHang> ds_donhang { get; set; }
+        public virtual List<NhapHang> ds_nhaphang { get; set; }
+        public virtual LoaiNhanVien loainhanvien { get; set; }
+    }
+    public class LoaiNhanVien
+    {
+        public LoaiNhanVien()
+        {
+            this.ds_nhanvien = new List<NhanVien>();
+            this.ds_quyen = new List<Quyen>();
+            this.ten = "";
+        }
+        [Key]
+        public int id { get; set; }
+        public String ten { get; set; }
+        //external
+        public virtual List<Quyen> ds_quyen { get; set; }
+        public virtual List<NhanVien> ds_nhanvien { get; set; }
+    }
+    public class Quyen
+    {
+        public Quyen()
+        {
+            this.ds_loainhanvien = new List<LoaiNhanVien>();
+            this.ten = "";
+        }
+        [Key]
+        public int id { get; set; }
+        public String ten { get; set; }
+        //external
+        public virtual List<LoaiNhanVien> ds_loainhanvien { get; set; }
+    }
+    public class TonKho
+    {
+        public TonKho()
+        {
+        }
+        [Key]
+        public int id { get; set; }
+        public DateTime ngay { get; set; }
+        public int soluongnhap { get; set; }
+        public int soluongban { get; set; }
+        //external
+        public virtual SanPham_Tag sanpham_tag { get; set; }
     }
     public class BanGiayDBContext : DbContext
     {
-        public DbSet<DatHang> ds_dathang { get; set; }
-        public DbSet<ChiTiet_DatHang> ds_chitiet_dathang { get; set; }
-            public DbSet<SanPham> ds_sanpham { get; set; }
-                public DbSet<SanPham_Tag> ds_sanpham_tag { get; set; }
-                    public DbSet<MauSac> ds_mausac { get; set; }
-                    public DbSet<KichThuoc> ds_kichthuoc { get; set; }
-                public DbSet<HangSX> ds_hangsx { get; set; }
-                public DbSet<NhomSanPham> ds_nhomsanpham { get; set; }
-                public DbSet<HinhAnh> ds_hinhanh { get; set; }
+        public DbSet<DonHang> ds_donhang { get; set; }
+        public DbSet<ChiTiet_DonHang> ds_chitiet_donhang { get; set; }
+        public DbSet<SanPham> ds_sanpham { get; set; }
+        public DbSet<SanPham_Tag> ds_sanpham_tag { get; set; }
+        public DbSet<MauSac> ds_mausac { get; set; }
+        public DbSet<KichThuoc> ds_kichthuoc { get; set; }
+        public DbSet<HangSX> ds_hangsx { get; set; }
+        public DbSet<NhomSanPham> ds_nhomsanpham { get; set; }
+        public DbSet<HinhAnh> ds_hinhanh { get; set; }
         public DbSet<KhachHang> ds_khachhang { get; set; }
         public DbSet<NhanVien> ds_nhanvien { get; set; }
+        public DbSet<ChiTiet_NhapHang> ds_chitiet_nhaphang { get; set; }
+        public DbSet<NhapHang> ds_nhaphang { get; set; }
+        public DbSet<NhaCC> ds_nhacc { get; set; }
+        public DbSet<TonKho> ds_tonkho { get; set; }
+        public DbSet<LoaiNhanVien> ds_loainhanvien { get; set; }
+        public DbSet<Quyen> ds_quyen { get; set; }
     }
 }

@@ -76,7 +76,8 @@ namespace qdtest.Controllers
             //assign data
             Boolean validate_ok = true;
             obj.email = TextLibrary.ToString(Request["nhanvien_email"]);
-            obj.group_id = TextLibrary.ToInt(Request["nhanvien_group_id"]);
+            LoaiNhanVien loai = ctr._db.ds_loainhanvien.Where(x => x.id == TextLibrary.ToInt(Request["nhanvien_group_id"])).FirstOrDefault();
+            obj.loainhanvien = loai;
             obj.tendangnhap = TextLibrary.ToString(Request["nhanvien_tendangnhap"]);
             obj.tendaydu = TextLibrary.ToString(Request["nhanvien_tendaydu"]);
             obj.active = TextLibrary.ToBoolean(Request["nhanvien_active"]);

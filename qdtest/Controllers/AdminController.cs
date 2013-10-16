@@ -65,7 +65,7 @@ namespace qdtest.Controllers
                 return;
             }
             //Gán permission
-                this._reset_permission(this._user.group_id);
+                this._reset_permission(this._user.loainhanvien);
             //tạo data ban đầu
                 this._build_common_data();
             //Mọi class controller extends từ class AdminController sẽ chạy sau dòng định nghĩa này
@@ -106,53 +106,12 @@ namespace qdtest.Controllers
             ViewBag.ActiveTab = new List<String>(tabs_name);
         }
         [NonAction]
-        private void _reset_permission(int group_id)
+        private void _reset_permission(LoaiNhanVien obj)
         {
             this._permission = new List<string>();
-            if (group_id == 0)
+            foreach (Quyen item in obj.ds_quyen)
             {
-                //admin group
-                this._permission.Add("home_view");
-                this._permission.Add("home_edit");
-                this._permission.Add("home_delete");
-                this._permission.Add("home_add");
-
-                this._permission.Add("product_view");
-                this._permission.Add("product_edit");
-                this._permission.Add("product_delete");
-                this._permission.Add("product_add");
-
-                this._permission.Add("user_view");
-                this._permission.Add("user_edit");
-                this._permission.Add("user_delete");
-                this._permission.Add("user_add");
-
-                this._permission.Add("khachhang_view");
-                this._permission.Add("khachhang_edit");
-                this._permission.Add("khachhang_delete");
-                this._permission.Add("khachhang_add");
-            }
-            if (group_id == 1)
-            {
-                //admin group
-                this._permission.Add("home_view");
-                //this._permission.Add("home_edit");
-                //this._permission.Add("home_delete");
-                //this._permission.Add("home_add");
-
-                this._permission.Add("product_view");
-                //this._permission.Add("product_edit");
-                //this._permission.Add("product_delete");
-                //this._permission.Add("product_add");
-
-                //this._permission.Add("user_view");
-                //this._permission.Add("user_edit");
-                //this._permission.Add("user_delete");
-                //this._permission.Add("user_add");
-            }
-            if (group_id == 2)
-            {
-                
+                this._permission.Add(item.ten);
             }
         }
         

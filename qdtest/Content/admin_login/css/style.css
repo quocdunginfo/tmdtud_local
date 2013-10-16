@@ -125,7 +125,7 @@ a:hover {
 .login {
   position: relative;
   margin: 80px auto;
-  width: 400px;
+  width: 450px;
   padding-right: 32px;
   font-weight: 300;
   color: #a8a7a8;
@@ -174,7 +174,7 @@ label {
 }
 
 .forgot-password {
-  padding-left: 100px;
+  padding-left: 150px;
   font-size: 13px;
   font-weight: 100;
   letter-spacing: 1px;

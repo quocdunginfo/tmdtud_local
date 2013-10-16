@@ -105,7 +105,7 @@ namespace qdtest.Controllers.ModelController
             this._db.SaveChanges();
             return true;
         }
-        public List<NhanVien> timkiem(String id="", String tendangnhap="", String tendaydu="", String email="", String active="", String group_id="")
+        public List<NhanVien> timkiem(String id="", String tendangnhap="", String tendaydu="", String email="", String active="", String group_name="")
         {
             List<NhanVien> obj_list = new List<NhanVien>();
             if (!id.Equals(""))
@@ -137,11 +137,10 @@ namespace qdtest.Controllers.ModelController
             {
                 obj_list = new List<NhanVien>();
             }
-            //Filter again by by group_id
-            if (!group_id.Equals(""))
+            //Filter again by by group_name
+            if (!group_name.Equals(""))
             {
-                int group_id_i = TextLibrary.ToInt(group_id);
-                obj_list = obj_list.Where(x => x.group_id == group_id_i).ToList();
+                obj_list = obj_list.Where(x => x.loainhanvien.ten.ToUpper().Contains(group_name.ToUpper())).ToList();
             }
             if (obj_list == null)
             {

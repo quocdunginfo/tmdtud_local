@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="58a010ace50f4ee2a22c1113b3522296" Name="Diagram1">
+        <EntityTypeShape EntityType="BanGiayDBModel.ChiTiet_DonHang" Width="1.5" PointX="9.625" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanGiayDBModel.DonHang" Width="1.5" PointX="9.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanGiayDBModel.HangSX" Width="1.5" PointX="0.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanGiayDBModel.HinhAnh" Width="1.5" PointX="4.375" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanGiayDBModel.KhachHang" Width="1.5" PointX="7.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanGiayDBModel.KichThuoc" Width="1.5" PointX="2.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanGiayDBModel.MauSac" Width="1.5" PointX="5.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanGiayDBModel.NhanVien" Width="1.5" PointX="7.625" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanGiayDBModel.NhomSanPham" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanGiayDBModel.SanPham_Tag" Width="1.5" PointX="6" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="BanGiayDBModel.SanPham" Width="1.5" PointX="2.5" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="BanGiayDBModel.FK_dbo_ChiTiet_DonHang_dbo_DonHangs_donhang_id" ManuallyRouted="false" />
+        <AssociationConnector Association="BanGiayDBModel.FK_dbo_ChiTiet_DonHang_dbo_SanPham_Tag_sanpham_tag_id" ManuallyRouted="false" />
+        <AssociationConnector Association="BanGiayDBModel.FK_dbo_DonHangs_dbo_KhachHangs_khachhang_id" ManuallyRouted="false" />
+        <AssociationConnector Association="BanGiayDBModel.FK_dbo_DonHangs_dbo_NhanViens_nguoidung_id" ManuallyRouted="false" />
+        <AssociationConnector Association="BanGiayDBModel.FK_dbo_SanPhams_dbo_HangSXes_hangsx_id" ManuallyRouted="false" />
+        <AssociationConnector Association="BanGiayDBModel.FK_dbo_HinhAnhs_dbo_SanPhams_SanPham_id" ManuallyRouted="false" />
+        <AssociationConnector Association="BanGiayDBModel.FK_dbo_SanPham_Tag_dbo_KichThuocs_kichthuoc_id" ManuallyRouted="false" />
+        <AssociationConnector Association="BanGiayDBModel.FK_dbo_SanPham_Tag_dbo_MauSacs_mausac_id" ManuallyRouted="false" />
+        <AssociationConnector Association="BanGiayDBModel.FK_dbo_NhomSanPhams_dbo_NhomSanPhams_nhomcha_id" ManuallyRouted="false" />
+        <AssociationConnector Association="BanGiayDBModel.FK_dbo_SanPhams_dbo_NhomSanPhams_nhomsanpham_id" ManuallyRouted="false" />
+        <AssociationConnector Association="BanGiayDBModel.FK_dbo_SanPham_Tag_dbo_SanPhams_sanpham_id" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

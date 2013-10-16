@@ -5,13 +5,13 @@ namespace qdtest.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class them_class_quyen_han : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(them_class_quyen_han));
         
         string IMigrationMetadata.Id
         {
-            get { return "201309291108433_InitialCreate"; }
+            get { return "201310100935243_them_class_quyen_han"; }
         }
         
         string IMigrationMetadata.Source
