@@ -105,7 +105,7 @@ namespace qdtest.Controllers.ModelController
             this._db.SaveChanges();
             return true;
         }
-        public List<NhanVien> timkiem(String id="", String tendangnhap="", String tendaydu="", String email="", String active="", String group_name="")
+        public List<NhanVien> timkiem(String id="", String tendangnhap="", String tendaydu="", String email="", String active="", String loainhanvien_id="", String forgot_password_session="")
         {
             List<NhanVien> obj_list = new List<NhanVien>();
             if (!id.Equals(""))
@@ -119,10 +119,19 @@ namespace qdtest.Controllers.ModelController
                 }
                 return obj_list;
             }
-            //find by LIKE elament
+            //find by LIKE element
             obj_list = this._db.ds_nhanvien.Where(x => x.tendangnhap.Contains(tendangnhap)
                 && x.tendaydu.Contains(tendaydu)
                 && x.email.Contains(email)).ToList();
+            if (obj_list == null)
+            {
+                obj_list = new List<NhanVien>();
+            }
+            //filter by session
+            if (!forgot_password_session.Equals(""))
+            {
+                obj_list = obj_list.Where(x => x.forgot_password_session.ToUpper().Contains(forgot_password_session.ToUpper())).ToList();
+            }
             if (obj_list == null)
             {
                 obj_list = new List<NhanVien>();
@@ -138,9 +147,10 @@ namespace qdtest.Controllers.ModelController
                 obj_list = new List<NhanVien>();
             }
             //Filter again by by group_name
-            if (!group_name.Equals(""))
+            if (!loainhanvien_id.Equals(""))
             {
-                obj_list = obj_list.Where(x => x.loainhanvien.ten.ToUpper().Contains(group_name.ToUpper())).ToList();
+                int lnv_id = TextLibrary.ToInt(loainhanvien_id);
+                obj_list = obj_list.Where(x => x.loainhanvien.id == lnv_id).ToList();
             }
             if (obj_list == null)
             {

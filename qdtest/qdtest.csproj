@@ -101,6 +101,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminFailController.cs" />
+    <Compile Include="Controllers\AdminForgotPasswordController.cs" />
     <Compile Include="Controllers\AdminHomeController.cs" />
     <Compile Include="Controllers\AdminKhachHangController.cs" />
     <Compile Include="Controllers\AdminKhachHangsController.cs" />
@@ -119,6 +120,10 @@
     <Compile Include="Migrations\201310100935243_them_class_quyen_han.Designer.cs">
       <DependentUpon>201310100935243_them_class_quyen_han.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310171438128_them_forgot_password_field.cs" />
+    <Compile Include="Migrations\201310171438128_them_forgot_password_field.Designer.cs">
+      <DependentUpon>201310171438128_them_forgot_password_field.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model1.cs" />
     <Compile Include="Model1.Designer.cs">
@@ -130,6 +135,7 @@
     <Compile Include="Models\TableModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_Library\CookieLibrary.cs" />
+    <Compile Include="_Library\GMailLibrary.cs" />
     <Compile Include="_Library\TextLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -3297,6 +3303,12 @@
     <Content Include="Views\AdminKhachHang\_ViewStart.cshtml" />
     <Content Include="Views\AdminUser\Indexghghgh.cshtml" />
     <Content Include="Views\AdminUser\ghgshdgsdghs.cshtml" />
+    <Content Include="Views\AdminForgotPassword\Index.cshtml">
+      <SubType>
+      </SubType>
+    </Content>
+    <Content Include="Views\AdminForgotPassword\_ViewStart.cshtml" />
+    <Content Include="Views\AdminForgotPassword\Request_Password_Change.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3477,6 +3489,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201310100935243_them_class_quyen_han.resx">
       <DependentUpon>201310100935243_them_class_quyen_han.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310171438128_them_forgot_password_field.resx">
+      <DependentUpon>201310171438128_them_forgot_password_field.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

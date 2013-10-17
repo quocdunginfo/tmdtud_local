@@ -2,6 +2,7 @@
     //ViewBag.Title = "Index";
     //ViewBag.ActiveTab
     var NhanVien = (qdtest.Models.NhanVien)ViewBag.NhanVien;
+    var LoaiNhanVien_List = (List<qdtest.Models.LoaiNhanVien>)ViewBag.LoaiNhanVien_List;
     var State = (List<String>)ViewBag.State;
 }
 <div id="main">
@@ -167,11 +168,13 @@
 				</div>
 				<label>Nhóm người dùng:</label>
 				<div class="margin-form">
-					<select name="nhanvien_group_id" class="" id="id_profile">
-						<option value="">-- Choose --</option>
-						<option value="0" @if(NhanVien.group_id==0) {<text>selected="selected"</text>}>Admin</option>
-						<option value="1" @if(NhanVien.group_id==1) {<text>selected="selected"</text>}>Normal user</option>
-						<option value="2" @if(NhanVien.group_id==2) {<text>selected="selected"</text>}>Guest</option>
+					<select name="nhanvien_loainhanvien_id" class="" id="id_profile">
+						@foreach(var lnv_obj in LoaiNhanVien_List)
+                        {
+                        <text>
+                        <option value="@lnv_obj.id" @if(NhanVien.loainhanvien.id==lnv_obj.id) {<text>selected="selected"</text>}>@lnv_obj.ten</option>
+                        </text>
+                        }
 					</select>
 					<sup>*</sup>
 				</div>

@@ -1,6 +1,8 @@
 ﻿@{
     var User_List = (List<qdtest.Models.NhanVien>)ViewBag.User_List;
     var User_Search = (HttpCookie)ViewBag.User_Search;
+    var LoaiNhanVien_List = (List<qdtest.Models.LoaiNhanVien>)ViewBag.LoaiNhanVien_List;
+    
 }
 <div id="main">
 	<div id="content">
@@ -213,10 +215,14 @@
 							<input type="text" class="filter" name="nhanvien_email" value="@User_Search["email"]" style="width:180px"/>
 						</td>
 						<td>
-							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="nhanvien_group_id" style="width:90px">
-								<option value="" @if(User_Search["id"].Equals("")) {<text>selected="selected"</text> }>--</option>
-								<option value="0" @if(User_Search["group_id"].Equals("0")) {<text>selected="selected"</text> } >Admin</option>
-								<option value="1" @if(User_Search["group_id"].Equals("1")) {<text>selected="selected"</text> }>Normal User</option>
+							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="nhanvien_loainhanvien_id" style="width:90px">
+								<option value="" @if(User_Search["loainhanvien_id"].Equals("")) {<text>selected="selected"</text> }>--</option>
+                                @foreach(var lnv_obj in LoaiNhanVien_List)
+                                {
+                                <text>
+                                <option value="@lnv_obj.id" @if(User_Search["loainhanvien_id"].Equals(lnv_obj.id.ToString())) {<text>selected="selected"</text> }>@lnv_obj.ten</option>
+								</text>
+                                }
 							</select>
 						</td>
 						<td class="center">
@@ -250,7 +256,7 @@
 							 @item.email
 						</td>
 						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
-							 @item.group_id
+							 @item.loainhanvien.ten
 						</td>
 						<td class="pointer center" onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
 							<a href="@Url.Action("Edit", "AdminUsers", new { id = item.id })" title="Enabled">

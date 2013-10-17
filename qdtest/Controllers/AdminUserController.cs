@@ -21,8 +21,8 @@ namespace qdtest.Controllers
             {
                 return _fail_permission("user_view");
             }
-
-            NhanVien u = new NhanVienController().get_by_id(id);
+            NhanVienController ctr = new NhanVienController();
+            NhanVien u = ctr.get_by_id(id);
 
             if (u == null)
             {
@@ -31,6 +31,7 @@ namespace qdtest.Controllers
             }
             ViewBag.NhanVien = u;
             ViewBag.Title += " - View";
+            ViewBag.LoaiNhanVien_List = ctr._db.ds_loainhanvien.ToList();
             return View();
         }
         public ActionResult Add()
@@ -40,9 +41,10 @@ namespace qdtest.Controllers
                 return _fail_permission("user_add");
             }
             NhanVien nv = new NhanVien();
-            
+            NhanVienController ctr=new NhanVienController();
             ViewBag.NhanVien = nv;
             ViewBag.Title += " - Add";
+            ViewBag.LoaiNhanVien_List = ctr._db.ds_loainhanvien.ToList();
             return View("Index");
         }
         [HttpPost]
@@ -76,7 +78,8 @@ namespace qdtest.Controllers
             //assign data
             Boolean validate_ok = true;
             obj.email = TextLibrary.ToString(Request["nhanvien_email"]);
-            LoaiNhanVien loai = ctr._db.ds_loainhanvien.Where(x => x.id == TextLibrary.ToInt(Request["nhanvien_group_id"])).FirstOrDefault();
+            int lnv_id= TextLibrary.ToInt(Request["nhanvien_loainhanvien_id"]);
+            LoaiNhanVien loai = ctr._db.ds_loainhanvien.Where(x => x.id == lnv_id).FirstOrDefault();
             obj.loainhanvien = loai;
             obj.tendangnhap = TextLibrary.ToString(Request["nhanvien_tendangnhap"]);
             obj.tendaydu = TextLibrary.ToString(Request["nhanvien_tendaydu"]);
@@ -111,10 +114,7 @@ namespace qdtest.Controllers
                     this._state.Add("add_ok");
                 }
             }
-            ViewBag.NhanVien = obj;
-            ViewBag.Title += " - Submit";
-            ViewBag.State = this._state;
-            return View("Index");
+            return RedirectToAction("Index", "AdminUser", new { id = obj.id });
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {

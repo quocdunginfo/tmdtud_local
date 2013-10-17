@@ -287,6 +287,7 @@ namespace qdtest.Models
             this.tendaydu = "";
             this.email = "";
             this.matkhau = "";
+            this.forgot_password_session = "";
         }
         [Key]
         public int id { get; set; }
@@ -295,6 +296,7 @@ namespace qdtest.Models
         public String email { get; set; }
         public String matkhau { get; set; }
         public Boolean active { get; set; }
+        public String forgot_password_session { get; set; }
         //external
         //public virtual List<SanPham> ds_sanpham { get; set; }
         public virtual List<DonHang> ds_donhang { get; set; }

@@ -25,7 +25,7 @@ namespace qdtest.Controllers
             this.timkiem_nhanvien["id"] = "";
             this.timkiem_nhanvien["tendangnhap"] = "";
             this.timkiem_nhanvien["tendaydu"] = "";
-            this.timkiem_nhanvien["group_id"] = "";
+            this.timkiem_nhanvien["loainhanvien_id"] = "";
             this.timkiem_nhanvien["active"] = "";
             this.timkiem_nhanvien["email"] = "";
         }
@@ -38,17 +38,18 @@ namespace qdtest.Controllers
             {
                 return this._fail_permission("user_view");
             }
-
+            NhanVienController ctr = new NhanVienController();
             //Chọn danh sách nhân viên để hiển thị theo cookies tìm kiếm
-            ViewBag.User_List = new NhanVienController().timkiem(
+            ViewBag.User_List = ctr.timkiem(
                 timkiem_nhanvien["id"],
                 timkiem_nhanvien["tendangnhap"],
                 timkiem_nhanvien["tendaydu"],
                 timkiem_nhanvien["email"],
                 timkiem_nhanvien["active"],
-                timkiem_nhanvien["group_id"]);
+                timkiem_nhanvien["loainhanvien_id"]);
             //set search cookies
             ViewBag.User_Search = this.timkiem_nhanvien;
+            ViewBag.LoaiNhanVien_List = ctr._db.ds_loainhanvien.ToList();
             //return View(this._db.Users.ToList());
             //this._build_common_data();
             ViewBag.Title += " - Management";
@@ -96,7 +97,7 @@ namespace qdtest.Controllers
                 this.timkiem_nhanvien["tendangnhap"] = Request["nhanvien_tendangnhap"] == null ? "" : Request["nhanvien_tendangnhap"];
                 this.timkiem_nhanvien["tendaydu"] = Request["nhanvien_tendaydu"] == null ? "" : Request["nhanvien_tendaydu"];
                 this.timkiem_nhanvien["email"] = Request["nhanvien_email"] == null ? "" : Request["nhanvien_email"];
-                this.timkiem_nhanvien["group_id"] = Request["nhanvien_group_id"] == null ? "" : Request["nhanvien_group_id"];
+                this.timkiem_nhanvien["loainhanvien_id"] = Request["nhanvien_loainhanvien_id"] == null ? "" : Request["nhanvien_loainhanvien_id"];
                 this.timkiem_nhanvien["active"] = Request["nhanvien_active"] == null ? "" : Request["nhanvien_active"];
             }
             //Save respone cookies
