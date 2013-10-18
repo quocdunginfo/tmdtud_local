@@ -12,9 +12,6 @@ namespace qdtest.Controllers
 {
     public class AdminForgotPasswordController : Controller
     {
-        //
-        // GET: /AdminForgotPassword/
-
         public ActionResult Index()
         {
             return View();
@@ -25,31 +22,38 @@ namespace qdtest.Controllers
             //generate session for NhanVien
             NhanVienController ctr=new NhanVienController();
             String email = TextLibrary.ToString(Request["user_email"]);
-            List<NhanVien> obj_list = ctr.timkiem("", "", "", email, "", "");
-            String session = TextLibrary.GetSHA1HashData(DateTime.Now.ToLongTimeString());
-            foreach (NhanVien obj in obj_list)
+            String session = "";
+            Boolean valid_session = ctr.generate_forgot_password_session(email, out session);
+            if (valid_session && ValidateLibrary.is_valid_email(email))
             {
-                obj.forgot_password_session = session;
-                Debug.WriteLine("Make new "+session);
-                ctr._db.SaveChanges();
+                GMailLibrary gmail = new GMailLibrary();
+                gmail.receive_email = email;
+                gmail.Generate_ForgotPassword_Html(Url.Action("Request_Password_Change", "AdminForgotPassword", new { session = session }, this.Request.Url.Scheme));
+                gmail.Send();
+                ViewBag.Message = "Đường link khôi phục mật khẩu đã được gửi vào email.";
             }
-            GMailLibrary gmail = new GMailLibrary();
-            gmail.receive_email = email;
-            gmail.Generate_ForgotPassword_Html(Url.Action("Request_Password_Change", "AdminForgotPassword", new { session = session }));
-            //gmail.Send();
-            return View("Index");
+            else
+            {
+                ViewBag.Message = "Không tìm thấy nhân viên nào có email đó cả.";
+            }
+            return View("Request_Password_Change_Submit");
         }
+        [HttpGet]
         public ActionResult Request_Password_Change(String session)
         {
-            Debug.WriteLine(session);
+            Debug.WriteLine("Request change password from session " + session);
             NhanVienController ctr = new NhanVienController();
-            List<NhanVien> obj_list = ctr.timkiem("", "", "","", "", "",session);
-            foreach (NhanVien obj in obj_list)
+            NhanVien obj = ctr.timkiem("", "", "","", "", "",session).FirstOrDefault();
+            if(obj!=null)
             {
                 ViewBag.NhanVien = obj;
-                break;
+                return View();
             }
-            return View();
+            else
+            {
+                return RedirectToAction("Index","Admin");
+            }
+            
         }
         [HttpPost]
         public ActionResult Request_Password_Change_Submit()
@@ -58,12 +62,15 @@ namespace qdtest.Controllers
             String session = TextLibrary.ToString(Request["nhanvien_session"]);
             String new_pass = TextLibrary.ToString(Request["nhanvien_matkhau"]);
             NhanVienController ctr = new NhanVienController();
-            List<NhanVien> obj_list = ctr.timkiem(obj_id.ToString(), "", "", "", "", "", session);
-            foreach (NhanVien obj in obj_list)
+            if (ctr.set_password_by_session(obj_id, session, new_pass))
             {
-                ctr.set_password(obj.id, new_pass);
+                ViewBag.Message = "Mật khẩu đã được khôi phục lại.";
             }
-            return View("Index");
+            else
+            {
+                ViewBag.Message = "Oops. Are you trying to hack my system ?";
+            }
+            return View();
         }
 
     }

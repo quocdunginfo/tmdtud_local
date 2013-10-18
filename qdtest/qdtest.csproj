@@ -137,6 +137,7 @@
     <Compile Include="_Library\CookieLibrary.cs" />
     <Compile Include="_Library\GMailLibrary.cs" />
     <Compile Include="_Library\TextLibrary.cs" />
+    <Compile Include="_Library\ValidateLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\admin\admin2109\Administration_Permissions_Edit.html" />
@@ -3309,6 +3310,7 @@
     </Content>
     <Content Include="Views\AdminForgotPassword\_ViewStart.cshtml" />
     <Content Include="Views\AdminForgotPassword\Request_Password_Change.cshtml" />
+    <Content Include="Views\AdminForgotPassword\Request_Password_Change_Submit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -54,15 +54,27 @@ namespace qdtest.Controllers
             int obj_id = TextLibrary.ToInt(Request["nhanvien_id"]);
             NhanVienController ctr=new NhanVienController();
             NhanVien obj;
+            //check mode
             Boolean edit_mode = true;
             if (obj_id == 0)
             {
                 //add mode
+                if (!this._permission.Contains("user_add"))
+                {
+                    return _fail_permission("user_add");
+                }
+
                 obj = new NhanVien();
                 edit_mode = false;
             }
             else
             {
+                //edit mode
+                if (!this._permission.Contains("user_edit"))
+                {
+                    return _fail_permission("user_edit");
+                }
+
                 if (ctr.is_exist(obj_id))
                 {
                     //update model
@@ -73,27 +85,48 @@ namespace qdtest.Controllers
                 {
                     //nvid khong ton tai
                     return RedirectToAction("Index","AdminUsers");
-                }
+                }            
             }
-            //assign data
-            Boolean validate_ok = true;
+            //assign value
             obj.email = TextLibrary.ToString(Request["nhanvien_email"]);
-            int lnv_id= TextLibrary.ToInt(Request["nhanvien_loainhanvien_id"]);
-            LoaiNhanVien loai = ctr._db.ds_loainhanvien.Where(x => x.id == lnv_id).FirstOrDefault();
-            obj.loainhanvien = loai;
             obj.tendangnhap = TextLibrary.ToString(Request["nhanvien_tendangnhap"]);
             obj.tendaydu = TextLibrary.ToString(Request["nhanvien_tendaydu"]);
-            obj.active = TextLibrary.ToBoolean(Request["nhanvien_active"]);
+            //validate properties
+            List<String> validate = ctr.validate(obj,
+                TextLibrary.ToString(Request["nhanvien_matkhau"]),
+                TextLibrary.ToString(Request["nhanvien_matkhau2"]));
+            //check self modify
+            //bản thân không thể tự thay đổi active hoặc nhóm người dùng
+                if (edit_mode && this._user.id != obj.id)
+                {
+                    //active
+                    obj.active = TextLibrary.ToBoolean(Request["nhanvien_active"]);
+                    //loainhanvien
+                    int lnv_id = TextLibrary.ToInt(Request["nhanvien_loainhanvien_id"]);
+                    LoaiNhanVien loai = ctr._db.ds_loainhanvien.Where(x => x.id == lnv_id).FirstOrDefault();
+                    obj.loainhanvien = loai;
+                    if (obj.loainhanvien == null)
+                    {
+                        return RedirectToAction("Index", "AdminUsers");
+                    }
+                }
+                else
+                {
+                    if (obj.active != TextLibrary.ToBoolean(Request["nhanvien_active"]))
+                    {
+                        validate.Add("self_active_edit_fail");
+                    }
+                    if (obj.loainhanvien.id != TextLibrary.ToInt(Request["nhanvien_loainhanvien_id"]))
+                    {
+                        validate.Add("self_loainguoidung_edit_fail");
+                    }
+                }
             //action
-            if (validate_ok)
+            if (validate.Count==0)
             {
                 if (edit_mode)
                 {
-                    if (!this._permission.Contains("user_edit"))
-                    {
-                        return _fail_permission("user_edit");
-                    }
-                    //update properties
+                    //update properties first
                     ctr._db.SaveChanges();
                     //call set password
                     ctr.set_password(obj.id, TextLibrary.ToString(Request["nhanvien_matkhau"]));
@@ -101,10 +134,6 @@ namespace qdtest.Controllers
                 }
                 else
                 {
-                    if (!this._permission.Contains("user_add"))
-                    {
-                        return _fail_permission("user_add");
-                    }
                     //hash password before add
                     obj.matkhau = TextLibrary.GetSHA1HashData(Request["nhanvien_matkhau"]);
                     //call add
@@ -114,7 +143,12 @@ namespace qdtest.Controllers
                     this._state.Add("add_ok");
                 }
             }
-            return RedirectToAction("Index", "AdminUser", new { id = obj.id });
+            this._state.AddRange(validate);
+            ViewBag.State = this._state;
+            ViewBag.NhanVien = obj;
+            ViewBag.Title += " - Submit";
+            ViewBag.LoaiNhanVien_List = ctr._db.ds_loainhanvien.ToList();
+            return View("Index");
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {

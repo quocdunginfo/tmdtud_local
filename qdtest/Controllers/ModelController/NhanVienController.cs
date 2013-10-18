@@ -86,8 +86,29 @@ namespace qdtest.Controllers.ModelController
                   select user).FirstOrDefault();
             return u==null?false:true;
         }
+        public Boolean can_use_email(int obj_id, String email)
+        {
+            NhanVien u = (from user in _db.ds_nhanvien
+                          where user.email.ToUpper().Contains(email.ToUpper())
+                          && user.id!=obj_id
+                          select user).FirstOrDefault();
+            return u == null ? true : false;
+        }
+        public Boolean can_use_tendangnhap(int obj_id, String tendangnhap)
+        {
+            NhanVien u = (from user in _db.ds_nhanvien
+                          where user.tendangnhap.ToUpper().Contains(tendangnhap.ToUpper())
+                          && user.id != obj_id
+                          select user).FirstOrDefault();
+            return u == null ? true : false;
+        }
         public int add(NhanVien obj)
         {
+            //validate obj
+            if (this.can_use_tendangnhap(obj.id, obj.tendangnhap) || this.can_use_email(obj.id, obj.email))
+            {
+                return -1;
+            }
             //hash password first
             obj.matkhau = TextLibrary.GetSHA1HashData(obj.matkhau);
             //call add
@@ -158,6 +179,69 @@ namespace qdtest.Controllers.ModelController
             }
             //FINAL return
             return obj_list;
+        }
+        public List<String> validate(NhanVien obj, String matkhau = "", String matkhau2 = "")
+        {
+            //
+            List<String> re = new List<string>();
+            //check id exist
+            if (this.is_exist(obj.id))
+            {
+                if (!this.can_use_tendangnhap(obj.id, obj.tendangnhap))
+                {
+                    re.Add("tendangnhap_exist_fail");
+                }
+                if (!this.can_use_email(obj.id, obj.email))
+                {
+                    re.Add("email_exist_fail");
+                }
+            }
+            if (obj.email.Equals(""))
+            {
+                re.Add("email_fail");
+            }
+            if (obj.tendangnhap.Equals(""))
+            {
+                re.Add("tendangnhap_fail");
+            }
+            if (obj.tendaydu.Equals(""))
+            {
+                re.Add("tendaydu_fail");
+            }
+            if (!matkhau.Equals(matkhau2))
+            {
+                re.Add("matkhau_fail");
+            }
+            return re;
+        }
+        public Boolean generate_forgot_password_session(String email, out String session_output)
+        {
+            NhanVien obj = this.timkiem("", "", "", email, "", "").FirstOrDefault();
+            String random = DateTime.Now.ToString() + DateTime.Now.Millisecond;
+            String session = TextLibrary.GetSHA1HashData(random);
+            session_output = session;
+            if(obj!=null)
+            {
+                
+                obj.forgot_password_session = session;
+                Debug.WriteLine("Generate new Session " + session + " for email "+email+" ("+random+")");
+                this._db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        public Boolean set_password_by_session(int obj_id, String session, String new_pass)
+        {
+            NhanVien obj = this.timkiem(obj_id.ToString(), "", "", "", "", "", session).FirstOrDefault();
+            if(obj!=null)
+            {
+                this.set_password(obj.id, new_pass);
+                //destroy last session
+                String tmp;
+                this.generate_forgot_password_session(obj.email, out tmp);
+                return true;
+            }
+            return false;
         }
     }
 }

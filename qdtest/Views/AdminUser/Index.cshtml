@@ -106,6 +106,8 @@
 					<sup>*</sup>
                     <span style="color: red;">
                         @if(State.Contains("tendangnhap_fail")) { <text> Không hợp lệ</text> }
+                        @if (State.Contains("tendangnhap_exist_fail"))
+                        { <text> Tên đăng nhập này đã có người sử dụng</text> }
                     </span>
 				</div>
 				<div class="clear">
@@ -146,6 +148,8 @@
 					<sup>*</sup>
                     <span style="color: red;">
                         @if(State.Contains("email_fail")) { <text> Không hợp lệ</text> }
+                        @if (State.Contains("email_exist_fail"))
+                        { <text> Email này đã có người sử dụng</text> }
                     </span>
 				</div>
 				<div class="clear">
@@ -160,6 +164,10 @@
 					<label class="t" for="active_off">
 					<img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled">
 					</label>
+                    <span style="color: red;">
+                        @if (State.Contains("self_active_edit_fail"))
+                        { <text> Không thể tự mình thay đổi Active được!</text> }
+                    </span>
 					<p class="preference_description">
 						 Cho phép người dùng đăng nhập vào hệ thống
 					</p>
@@ -177,6 +185,10 @@
                         }
 					</select>
 					<sup>*</sup>
+                    <span style="color: red;">
+                        @if (State.Contains("self_loainguoidung_edit_fail"))
+                        { <text> Không thể tự mình thay đổi Nhóm người dùng được!</text> }
+                    </span>
 				</div>
 				<div class="clear">
 				</div>
