@@ -104,11 +104,6 @@ namespace qdtest.Controllers.ModelController
         }
         public int add(NhanVien obj)
         {
-            //validate obj
-            if (this.can_use_tendangnhap(obj.id, obj.tendangnhap) || this.can_use_email(obj.id, obj.email))
-            {
-                return -1;
-            }
             //hash password first
             obj.matkhau = TextLibrary.GetSHA1HashData(obj.matkhau);
             //call add
@@ -129,54 +124,37 @@ namespace qdtest.Controllers.ModelController
         public List<NhanVien> timkiem(String id="", String tendangnhap="", String tendaydu="", String email="", String active="", String loainhanvien_id="", String forgot_password_session="")
         {
             List<NhanVien> obj_list = new List<NhanVien>();
-            if (!id.Equals(""))
-            {
-                //find by id
-                int id_i = TextLibrary.ToInt(id);
-                obj_list = this._db.ds_nhanvien.Where(x => x.id == id_i).ToList();
-                if (obj_list == null)
-                {
-                    obj_list = new List<NhanVien>();
-                }
-                return obj_list;
-            }
             //find by LIKE element
             obj_list = this._db.ds_nhanvien.Where(x => x.tendangnhap.Contains(tendangnhap)
                 && x.tendaydu.Contains(tendaydu)
                 && x.email.Contains(email)).ToList();
-            if (obj_list == null)
+            //filter by id
+            if (!id.Equals(""))
             {
-                obj_list = new List<NhanVien>();
+                int id_i = TextLibrary.ToInt(id);
+                obj_list = obj_list.Where(x => x.id == id_i).ToList();
             }
+            
             //filter by session
             if (!forgot_password_session.Equals(""))
             {
                 obj_list = obj_list.Where(x => x.forgot_password_session.ToUpper().Contains(forgot_password_session.ToUpper())).ToList();
             }
-            if (obj_list == null)
-            {
-                obj_list = new List<NhanVien>();
-            }
+            
             //Filter again by by active
             if (!active.Equals(""))
             {
                 Boolean active_b = active.Equals("1") ? true : false;
                 obj_list = obj_list.Where(x => x.active==active_b).ToList();
             }
-            if (obj_list == null)
-            {
-                obj_list = new List<NhanVien>();
-            }
+            
             //Filter again by by group_name
             if (!loainhanvien_id.Equals(""))
             {
                 int lnv_id = TextLibrary.ToInt(loainhanvien_id);
                 obj_list = obj_list.Where(x => x.loainhanvien.id == lnv_id).ToList();
             }
-            if (obj_list == null)
-            {
-                obj_list = new List<NhanVien>();
-            }
+            
             //FINAL return
             return obj_list;
         }
@@ -184,19 +162,16 @@ namespace qdtest.Controllers.ModelController
         {
             //
             List<String> re = new List<string>();
-            //check id exist
-            if (this.is_exist(obj.id))
+            //check
+            if (!this.can_use_tendangnhap(obj.id, obj.tendangnhap))
             {
-                if (!this.can_use_tendangnhap(obj.id, obj.tendangnhap))
-                {
-                    re.Add("tendangnhap_exist_fail");
-                }
-                if (!this.can_use_email(obj.id, obj.email))
-                {
-                    re.Add("email_exist_fail");
-                }
+                re.Add("tendangnhap_exist_fail");
             }
-            if (obj.email.Equals(""))
+            if (!this.can_use_email(obj.id, obj.email))
+            {
+                re.Add("email_exist_fail");
+            }
+            if (obj.email.Equals("") || !ValidateLibrary.is_valid_email(obj.email))
             {
                 re.Add("email_fail");
             }

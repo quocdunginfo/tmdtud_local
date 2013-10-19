@@ -114,28 +114,16 @@ namespace qdtest.Controllers.ModelController
         }
         public List<NhomSanPham2> timkiem(String id="", String ten="", String mota="", String active="")
         {
+            //get all category
             List<NhomSanPham2> list = this.get_tree(null, 0);
-            if (!id.Equals(""))
-            {
-                //find by id
-                int id_i = TextLibrary.ToInt(id);
-                list = list.Where(x => x.id == id_i).ToList();
-                if (list == null)
-                {
-                    list = new List<NhomSanPham2>();
-                }
-                return list;
-            }
-            if (list == null)
-            {
-                list = new List<NhomSanPham2>();
-            }
-            //find by LIKE element
+            //filter by LIKE element
             list = list.Where(x => x.ten.ToUpper().Contains(ten.ToUpper())
                 && x.mota.ToUpper().Contains(mota.ToUpper())).ToList();
-            if (list == null)
+            //filter by id
+            if (!id.Equals(""))
             {
-                list = new List<NhomSanPham2>();
+                int id_i = TextLibrary.ToInt(id);
+                list = list.Where(x => x.id == id_i).ToList();
             }
             
             //Filter again by by active
@@ -144,10 +132,7 @@ namespace qdtest.Controllers.ModelController
                 Boolean active_b = TextLibrary.ToBoolean(active);
                 list = list.Where(x => x.active == active_b).ToList();
             }
-            if (list == null)
-            {
-                list = new List<NhomSanPham2>();
-            }
+           
             //FINAL return
             return list;
         }

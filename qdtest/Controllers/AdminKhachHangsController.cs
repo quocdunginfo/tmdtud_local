@@ -30,9 +30,7 @@ namespace qdtest.Controllers
             this.timkiem_khachhang["diachi"] = "";
             this.timkiem_khachhang["max_item_per_page"] = "5";
         }
-        //
-        // GET: /AdminKhachHangs/
-
+        [HttpGet]
         public ActionResult Index(int page=1)
         {
             //check

@@ -109,6 +109,7 @@ namespace qdtest.Models
         [Key]
         public int id { get; set; }
         public String giatri { get; set; }
+        public String mota { get; set; }
         public Boolean active { get; set; }
         //external
         public virtual List<SanPham_Tag> ds_sanpham_tag { get; set; }
@@ -123,6 +124,7 @@ namespace qdtest.Models
         [Key]
         public int id { get; set; }
         public String giatri { get; set; }
+        public String mota { get; set; }
         public Boolean active { get; set; }
         //external
         public virtual List<SanPham_Tag> ds_sanpham_tag { get; set; }

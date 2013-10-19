@@ -115,28 +115,22 @@ namespace qdtest.Controllers.ModelController
         public List<KhachHang> timkiem(String id = "", String tendangnhap = "", String tendaydu = "", String email = "", String sdt = "", String diachi = "", String active = "", String order_by="id", Boolean order_desc=true, int start_point=0, int count=-1)
         {
             List<KhachHang> obj_list = new List<KhachHang>();
+            //find by LIKE element
+            obj_list = this._db.ds_khachhang.Where(x => x.tendangnhap.Contains(tendangnhap)
+                && x.tendaydu.Contains(tendaydu)
+                && x.email.Contains(email)
+                && x.sdt.Contains(sdt)
+                && x.diachi.Contains(diachi)
+                ).ToList();
+
+            //filter by id
             if (!id.Equals(""))
             {
                 //find by id
                 int id_i = TextLibrary.ToInt(id);
-                obj_list = this._db.ds_khachhang.Where(x => x.id == id_i).ToList();
-                if (obj_list == null)
-                {
-                    return new List<KhachHang>();
-                }
+                obj_list = obj_list.Where(x => x.id == id_i).ToList();
             }
-            //filter by LIKE element
-                obj_list = this._db.ds_khachhang.Where(x => x.tendangnhap.Contains(tendangnhap)
-                    && x.tendaydu.Contains(tendaydu)
-                    && x.email.Contains(email)
-                    && x.sdt.Contains(sdt)
-                    && x.diachi.Contains(diachi)
-                    ).ToList();
-
-                if (obj_list == null)
-                {
-                    return new List<KhachHang>();
-                }
+            
             //Filter again by by active
                 if (!active.Equals(""))
                 {
@@ -144,10 +138,6 @@ namespace qdtest.Controllers.ModelController
                     obj_list = obj_list.Where(x => x.active==active_b).ToList();
                 }
 
-                if (obj_list == null)
-                {
-                    return new List<KhachHang>();
-                }
             //order
                 if (order_desc)
                 {
@@ -158,19 +148,10 @@ namespace qdtest.Controllers.ModelController
                     obj_list = obj_list.OrderBy(x => x.id).ToList();
                 }
 
-                if (obj_list == null)
-                {
-                    return new List<KhachHang>();
-                }
             //limit
                 if (count >= 0)
                 {
                     obj_list = obj_list.Skip(start_point).Take(count).ToList();
-
-                    if (obj_list == null)
-                    {
-                        return new List<KhachHang>();
-                    }
                 }
             //FINAL return
             return obj_list;

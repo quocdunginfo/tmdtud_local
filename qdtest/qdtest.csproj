@@ -105,11 +105,13 @@
     <Compile Include="Controllers\AdminHomeController.cs" />
     <Compile Include="Controllers\AdminKhachHangController.cs" />
     <Compile Include="Controllers\AdminKhachHangsController.cs" />
+    <Compile Include="Controllers\AdminKichThuocsController.cs" />
     <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\AdminNhomSanPhamController.cs" />
     <Compile Include="Controllers\AdminUserController.cs" />
     <Compile Include="Controllers\AdminUsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ModelController\KichThuocController.cs" />
     <Compile Include="Controllers\ModelController\KhachHangController.cs" />
     <Compile Include="Controllers\ModelController\NhanVienController.cs" />
     <Compile Include="Controllers\ModelController\NhomSanPhamController.cs" />
@@ -123,6 +125,10 @@
     <Compile Include="Migrations\201310171438128_them_forgot_password_field.cs" />
     <Compile Include="Migrations\201310171438128_them_forgot_password_field.Designer.cs">
       <DependentUpon>201310171438128_them_forgot_password_field.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201310191620297_them_mota_cho_kichthuoc_giatri.cs" />
+    <Compile Include="Migrations\201310191620297_them_mota_cho_kichthuoc_giatri.Designer.cs">
+      <DependentUpon>201310191620297_them_mota_cho_kichthuoc_giatri.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model1.cs" />
@@ -3302,8 +3308,6 @@
     <Content Include="Views\AdminKhachHangs\_ViewStart.cshtml" />
     <Content Include="Views\AdminKhachHang\Index.cshtml" />
     <Content Include="Views\AdminKhachHang\_ViewStart.cshtml" />
-    <Content Include="Views\AdminUser\Indexghghgh.cshtml" />
-    <Content Include="Views\AdminUser\ghgshdgsdghs.cshtml" />
     <Content Include="Views\AdminForgotPassword\Index.cshtml">
       <SubType>
       </SubType>
@@ -3311,6 +3315,11 @@
     <Content Include="Views\AdminForgotPassword\_ViewStart.cshtml" />
     <Content Include="Views\AdminForgotPassword\Request_Password_Change.cshtml" />
     <Content Include="Views\AdminForgotPassword\Request_Password_Change_Submit.cshtml" />
+    <Content Include="Views\AdminKichThuocs\Index.cshtml">
+      <SubType>
+      </SubType>
+    </Content>
+    <Content Include="Views\AdminKichThuocs\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3494,6 +3503,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310171438128_them_forgot_password_field.resx">
       <DependentUpon>201310171438128_them_forgot_password_field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310191620297_them_mota_cho_kichthuoc_giatri.resx">
+      <DependentUpon>201310191620297_them_mota_cho_kichthuoc_giatri.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

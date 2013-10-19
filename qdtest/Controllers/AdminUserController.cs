@@ -40,8 +40,9 @@ namespace qdtest.Controllers
             {
                 return _fail_permission("user_add");
             }
-            NhanVien nv = new NhanVien();
             NhanVienController ctr=new NhanVienController();
+            NhanVien nv = new NhanVien();
+            nv.loainhanvien = ctr._db.ds_loainhanvien.FirstOrDefault();
             ViewBag.NhanVien = nv;
             ViewBag.Title += " - Add";
             ViewBag.LoaiNhanVien_List = ctr._db.ds_loainhanvien.ToList();
@@ -95,11 +96,39 @@ namespace qdtest.Controllers
             List<String> validate = ctr.validate(obj,
                 TextLibrary.ToString(Request["nhanvien_matkhau"]),
                 TextLibrary.ToString(Request["nhanvien_matkhau2"]));
-            //check self modify
-            //bản thân không thể tự thay đổi active hoặc nhóm người dùng
-                if (edit_mode && this._user.id != obj.id)
+            //xét ràng buộc
+                if (edit_mode)
                 {
-                    //active
+                    if (this._user.id != obj.id)
+                    {
+                        //active
+                        obj.active = TextLibrary.ToBoolean(Request["nhanvien_active"]);
+                        //loainhanvien
+                        int lnv_id = TextLibrary.ToInt(Request["nhanvien_loainhanvien_id"]);
+                        LoaiNhanVien loai = ctr._db.ds_loainhanvien.Where(x => x.id == lnv_id).FirstOrDefault();
+                        obj.loainhanvien = loai;
+                        if (obj.loainhanvien == null)
+                        {
+                            return RedirectToAction("Index", "AdminUsers");
+                        }
+                    }
+                    else
+                    {
+                        //bản thân không thể tự thay đổi active hoặc nhóm người dùng
+                        if (obj.active != TextLibrary.ToBoolean(Request["nhanvien_active"]))
+                        {
+                            validate.Add("self_active_edit_fail");
+                        }
+                        if (obj.loainhanvien.id != TextLibrary.ToInt(Request["nhanvien_loainhanvien_id"]))
+                        {
+                            validate.Add("self_loainguoidung_edit_fail");
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    //add mode
                     obj.active = TextLibrary.ToBoolean(Request["nhanvien_active"]);
                     //loainhanvien
                     int lnv_id = TextLibrary.ToInt(Request["nhanvien_loainhanvien_id"]);
@@ -110,17 +139,7 @@ namespace qdtest.Controllers
                         return RedirectToAction("Index", "AdminUsers");
                     }
                 }
-                else
-                {
-                    if (obj.active != TextLibrary.ToBoolean(Request["nhanvien_active"]))
-                    {
-                        validate.Add("self_active_edit_fail");
-                    }
-                    if (obj.loainhanvien.id != TextLibrary.ToInt(Request["nhanvien_loainhanvien_id"]))
-                    {
-                        validate.Add("self_loainguoidung_edit_fail");
-                    }
-                }
+            
             //action
             if (validate.Count==0)
             {
@@ -135,7 +154,7 @@ namespace qdtest.Controllers
                 else
                 {
                     //hash password before add
-                    obj.matkhau = TextLibrary.GetSHA1HashData(Request["nhanvien_matkhau"]);
+                    obj.matkhau = TextLibrary.ToString( Request["nhanvien_matkhau"] );
                     //call add
                     int maxid = ctr.add(obj);
                     //re assign id
