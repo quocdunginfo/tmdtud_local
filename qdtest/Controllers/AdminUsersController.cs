@@ -124,6 +124,5 @@ namespace qdtest.Controllers
             //set active tab
             this._set_activetab(new String[] { "NhanVien", "QuanTriHeThong" });
         }
-
     }
 }

@@ -105,12 +105,16 @@
     <Compile Include="Controllers\AdminHomeController.cs" />
     <Compile Include="Controllers\AdminKhachHangController.cs" />
     <Compile Include="Controllers\AdminKhachHangsController.cs" />
+    <Compile Include="Controllers\AdminKichThuocController.cs" />
     <Compile Include="Controllers\AdminKichThuocsController.cs" />
     <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\AdminNhomSanPhamController.cs" />
     <Compile Include="Controllers\AdminUserController.cs" />
     <Compile Include="Controllers\AdminUsersController.cs" />
+    <Compile Include="Controllers\AdminMauSacController.cs" />
+    <Compile Include="Controllers\AdminMauSacsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ModelController\MauSacController.cs" />
     <Compile Include="Controllers\ModelController\KichThuocController.cs" />
     <Compile Include="Controllers\ModelController\KhachHangController.cs" />
     <Compile Include="Controllers\ModelController\NhanVienController.cs" />
@@ -131,12 +135,6 @@
       <DependentUpon>201310191620297_them_mota_cho_kichthuoc_giatri.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Model1.cs" />
-    <Compile Include="Model1.Designer.cs">
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\TableModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -3235,13 +3233,6 @@
     <Content Include="Content\admin\modules\themeinstallator\backward_compatibility\backward.ini" />
     <Content Include="Content\admin\themes\.htaccess" />
     <Content Include="Content\admin_login\scss\style.scss" />
-    <EntityDeploy Include="Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -3298,8 +3289,6 @@
     <Content Include="Views\AdminUsers\Delete.cshtml" />
     <Content Include="Views\AdminFail\_ViewStart.cshtml" />
     <Content Include="Views\AdminNhomSanPham\Index.cshtml" />
-    <Content Include="Views\AdminNhomSanPham\Submit.cshtml" />
-    <Content Include="Views\AdminNhomSanPham\Add.cshtml" />
     <Content Include="Views\AdminNhomSanPham\Edit.cshtml" />
     <Content Include="Views\AdminKhachHangs\Index.cshtml">
       <SubType>
@@ -3320,6 +3309,10 @@
       </SubType>
     </Content>
     <Content Include="Views\AdminKichThuocs\_ViewStart.cshtml" />
+    <Content Include="Views\AdminKichThuoc\Index.cshtml" />
+    <Content Include="Views\AdminMauSac\Index.cshtml" />
+    <Content Include="Views\AdminMauSacs\_ViewStart.cshtml" />
+    <Content Include="Views\AdminMauSacs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

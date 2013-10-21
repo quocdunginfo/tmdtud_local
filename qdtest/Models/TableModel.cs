@@ -105,6 +105,7 @@ namespace qdtest.Models
         {
             this.ds_sanpham_tag = new List<SanPham_Tag>();
             this.giatri = "";
+            this.active = true;
         }
         [Key]
         public int id { get; set; }
@@ -120,6 +121,7 @@ namespace qdtest.Models
         {
             this.ds_sanpham_tag = new List<SanPham_Tag>();
             this.giatri = "";
+            this.active = true;
         }
         [Key]
         public int id { get; set; }
@@ -135,6 +137,7 @@ namespace qdtest.Models
         {
             this.ds_sanpham = new List<SanPham>();
             this.tenhsx = "";
+            this.active = true;
         }
         [Key]
         public int id { get; set; }
@@ -263,6 +266,7 @@ namespace qdtest.Models
             this.diachi = "";
             this.email = "";
             this.sdt = "";
+            this.active = true;
         }
         [Key]
         public int id { get; set; }

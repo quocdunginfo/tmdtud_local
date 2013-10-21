@@ -48,7 +48,7 @@
 <link href="@qRootAdminTemplatePath../admin2109/../js/jquery/plugins/alerts/jquery.alerts.css" rel="stylesheet" type="text/css" media="all"/>
 <link href="@qRootAdminTemplatePath../admin2109/../js/jquery/plugins/chosen/jquery.chosen.css" rel="stylesheet" type="text/css" media="all"/>
 <script type="text/javascript" src="@qRootAdminTemplatePath../admin2109/../js/jquery/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="@qRootAdminTemplatePath../modules/gamification/views/js/gamification.js"></script>
+<!-- <script type="text/javascript" src="@qRootAdminTemplatePath../modules/gamification/views/js/gamification.js"></script> -->
 <script type="text/javascript" src="@qRootAdminTemplatePath../admin2109/../js/jquery/plugins/fancybox/jquery.fancybox.js"></script>
 <script type="text/javascript" src="@qRootAdminTemplatePath../admin2109/../js/jquery/plugins/cluetip/jquery.cluetip.js"></script>
 <script type="text/javascript" src="@qRootAdminTemplatePath../admin2109/../js/jquery/plugins/jquery.hoverIntent.js"></script>
@@ -189,6 +189,7 @@
 				<ul class="submenu">
 					<li ><a href="index.php?controller=AdminProducts&amp;token=c4ecb5500c32302d072130315b268033">Sản phẩm</a></li>
 					<li class="@if(ActiveTab.Contains("NhomSanPham")) {<text>active</text>}"><a href="@Url.Action("Index","AdminNhomSanPham")">Nhóm sản phẩm</a></li>
+                    <li class="@if(ActiveTab.Contains("KichThuoc")) {<text>active</text>}"><a href="@Url.Action("Index","AdminKichThuocs")">Kích thước</a></li>
 					<li><a href="index.php?controller=AdminManufacturers&amp;token=964bd0d9a4cef08503cdb5ed437faa22">Manufacturers</a></li>
 				</ul>
 				</li>
@@ -205,10 +206,11 @@
 					<li><a href="index.php?controller=AdminOrderMessage&amp;token=5c96440da44d74636408404ba88bc804">Order Messages</a></li>
 				</ul>
 				</li>
-				<li class="submenu_size maintab " id="maintab11 @if(ActiveTab.Contains("KhachHang")) {<text>active</text>}">
+				<li class="submenu_size maintab @if(ActiveTab.Contains("KhachHang")) {<text>active</text>}" id="maintab11">
 				<a href="@Url.Action("Index","AdminKhachHangs")" class="title">
 				<img src="../img/t/AdminParentCustomer.gif" alt=""/>Khách hàng </a>
 				<ul class="submenu">
+                    <li><a href="@Url.Action("Index","AdminKhachHangs")">Danh sách khách hàng</a></li>
 					<li><a href="@Url.Action("Add","AdminKhachHangs")">Thêm khách hàng mới</a></li>
                     <li><a href="index.php?controller=AdminCustomers&amp;token=a63897f6b09f19ea042c44d7f543b6b6">Thắc mắc của khách hàng</a></li>
 				</ul>

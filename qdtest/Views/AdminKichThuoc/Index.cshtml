@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    var nhom_san_pham = (qdtest.Models.NhomSanPham)ViewBag.nhom_san_pham;
-    var NhomSanPham2_List_All = (List<qdtest.Models.NhomSanPham2>)ViewBag.NhomSanPham2_List_All;
+    var KichThuoc = (qdtest.Models.KichThuoc)ViewBag.KichThuoc;
+    var State = (List<String>)ViewBag.State;
 }
 
 <div id="main">
@@ -26,22 +26,14 @@
 		<div class="toolbar-placeholder">
 			<div class="toolbarBox toolbarHead">
 				<ul class="cc_button">
-                    <li>
-					<a id="desc-category-save" class="toolbar_btn" href="#" title="Save">
-					<span class="process-icon-save "></span>
-					<div>
-						Lưu
-					</div>
-					</a>
-					</li>
-                    <li>
-					<a id="desc-employee-back" class="toolbar_btn" href="@Url.Action("Index","AdminNhomSanPham")" title="Back to list">
+					<li>
+					<a id="desc-employee-back" class="toolbar_btn" href="@Url.Action("Index","AdminKichThuocs")" title="Back to list">
 					<span class="process-icon-back "></span>
 					<div>
 						 Quay lại
 					</div>
 					</a>
-                    </li>
+					</li>
 				</ul>
 				<script language="javascript" type="text/javascript">
 				    //<![CDATA[
@@ -134,7 +126,7 @@
 					<h3>
 					<span id="current_obj" style="font-weight: normal;">
 					<span class="breadcrumb item-0 ">Catalog <img alt=">" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"> </span>
-					<span class="breadcrumb item-1 ">Nhóm sản phẩm </span>
+					<span class="breadcrumb item-1 ">Kích thước</span>
 					</span>
 					</h3>
 				</div>
@@ -147,69 +139,45 @@
 			</div>
 		</div>
 		
-        <form id="category_form" name="update_cat" action="@Url.Action("EditSubmit","AdminNhomSanPham")" method="post">
+        <form id="category_form" name="category_form" action="@Url.Action("Submit","AdminKichThuoc")" method="post">
             <fieldset id="fieldset_0">
-	            <legend> <img src="../img/admin/nav-user.gif" alt="Employees"> Thông tin nhóm sản phẩm</legend>
-                <input name="cat_id" type="hidden" value="@nhom_san_pham.id" type="text">
-                <label>Nhóm cha:</label>
-                <div class="margin-form">
-                    <select name="cat_parent_id" style="width:400px">
-					    <option value="0" @if(nhom_san_pham.nhomcha == null) {<text>selected="selected"</text>}>Nhóm gốc</option>
-					    @foreach (var cat in NhomSanPham2_List_All)
-                         {
-                             String pre_fix = "";
-                             for (int i = 0; i < cat.level; i++)
-                             {
-                                 pre_fix += "--";
-                             }
-                        <option value="@cat.id" @if (nhom_san_pham.nhomcha != null && nhom_san_pham.nhomcha.id == cat.id)
-                                {<text>selected="selected"</text>} >@pre_fix @cat.ten</option>
-                        }
-				    </select>
-                </div>
-                <label>Tên: </label>
+	            <legend> <img src="../img/admin/nav-user.gif" alt="Employees"> Thông tin kích thước</legend>
+                <input name="kichthuoc_id" type="hidden" value="@KichThuoc.id" type="text">
+                <label>Giá trị</label>
 	            <div class="margin-form">
-		            <input name="cat_name" id="lastname" value="@nhom_san_pham.ten" class="" size="33" type="text">
+		            <input name="kichthuoc_giatri" id="lastname" value="@KichThuoc.giatri" class="" size="33" type="text">
+                    <sub>*</sub>
+                    <span style="color: red;">
+                        @if(State.Contains("giatri_fail")) { <text> Không hợp lệ</text> }
+                    </span>
 	            </div>
 	            <div class="clear">
 	            </div>
 	            
 	            <label>Mô tả: </label>
 	            <div class="margin-form">
-		            <input name="cat_description" id="email" value="@nhom_san_pham.mota" class="" size="33" type="text">
+		            <input name="kichthuoc_mota" id="email" value="@KichThuoc.mota" class="" size="33" type="text">
 	            </div>
 	            <div class="clear">
 	            </div>
-	
-	            <div class="clear">
-	            </div>
-
 	            <label>Active: </label>
 	            <div class="margin-form">
-		            <input name="cat_active" id="active_on" value="1" @if(nhom_san_pham.active==true) {<text>checked="checked"</text>} type="radio">
+		            <input name="kichthuoc_active" id="active_on" value="1" @if(KichThuoc.active==true) {<text>checked="checked"</text>} type="radio">
 		            <label class="t" for="active_on">
 		            <img src="../img/admin/enabled.gif" alt="Enabled" title="Enabled">
 		            </label>
-		            <input name="cat_active" id="active_off" value="0" @if(nhom_san_pham.active==false) {<text>checked="checked"</text>} type="radio">
+		            <input name="kichthuoc_active" id="active_off" value="0" @if(KichThuoc.active==false) {<text>checked="checked"</text>} type="radio">
 		            <label class="t" for="active_off">
 		            <img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled">
 		            </label>
 		            <p class="preference_description">
-			                Hiển thị hoặc không hiển thị Nhón sản phẩm này.
+			                Hiển thị hoặc không hiển thị Kích thước này.
 		            </p>
 	            </div>
 	            <div class="clear">
 	            </div>
-                <div class="clear">
-	            </div>
 	            <div class="margin-form">
-		            <input id="category_form_submit_btn" value="Lưu" name="Submit" class="button" type="submit">
-	            </div>
-
-	            <div class="clear">
-	            </div>
-	            <div class="margin-form">
-		            <input id="category_form_submit_btn2" value="Lưu" name="Submit" class="button" type="submit">
+		            <input id="employee_form_submit_btn" value="Lưu" name="Submit" class="button" type="submit">
 	            </div>
             </fieldset>                        
         </form>

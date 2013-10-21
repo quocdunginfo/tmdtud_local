@@ -8,36 +8,36 @@ using qdtest._Library;
 
 namespace qdtest.Controllers.ModelController
 {
-    public class KichThuocController
+    public class MauSacController
     {
         public BanGiayDBContext _db = new BanGiayDBContext();
-        public KichThuoc get_by_id(int obj_id)
+        public MauSac get_by_id(int obj_id)
         {
-            return _db.ds_kichthuoc.FirstOrDefault(x => x.id == obj_id);
+            return _db.ds_mausac.FirstOrDefault(x => x.id == obj_id);
         }
         public Boolean is_exist(int obj_id)
         {
-            KichThuoc obj = (from obj_tmp in _db.ds_kichthuoc
+            MauSac obj = (from obj_tmp in _db.ds_mausac
                   where obj_tmp.id == obj_id
                   select obj_tmp).FirstOrDefault();
             return obj==null?false:true;
         }
-        public int add(KichThuoc obj)
+        public int add(MauSac obj)
         {
-            this._db.ds_kichthuoc.Add(obj);
+            this._db.ds_mausac.Add(obj);
             //commit
             this._db.SaveChanges();
             //return ma moi nhat
-            return this._db.ds_kichthuoc.Max(x => x.id);
+            return this._db.ds_mausac.Max(x => x.id);
         }
         public Boolean delete(int obj_id)
         {
             //get entity
-            KichThuoc obj = this.get_by_id(obj_id);
+            MauSac obj = this.get_by_id(obj_id);
             //check null
             if (obj == null) return false;
             //remove
-            this._db.ds_kichthuoc.Remove(obj);
+            this._db.ds_mausac.Remove(obj);
             //commit
             this._db.SaveChanges();
             return true;
@@ -46,11 +46,11 @@ namespace qdtest.Controllers.ModelController
         {
             return timkiem(id, giatri, mota, active).Count;
         }
-        public List<KichThuoc> timkiem(String id = "", String giatri = "", String mota="",String active = "", String order_by="id", Boolean order_desc=true, int start_point=0, int count=-1)
+        public List<MauSac> timkiem(String id = "", String giatri = "", String mota="",String active = "", String order_by="id", Boolean order_desc=true, int start_point=0, int count=-1)
         {
-            List<KichThuoc> obj_list = new List<KichThuoc>();
+            List<MauSac> obj_list = new List<MauSac>();
             //find by LIKE element
-            obj_list = this._db.ds_kichthuoc.Where(x => x.giatri.Contains(giatri)
+            obj_list = this._db.ds_mausac.Where(x => x.giatri.Contains(giatri)
                 && x.mota.Contains(mota)
                 ).ToList();
             //filter by id                
@@ -85,7 +85,7 @@ namespace qdtest.Controllers.ModelController
             return obj_list;
         }
 
-        public List<string> validate(KichThuoc obj)
+        public List<string> validate(MauSac obj)
         {
             List<String> re = new List<string>();
             if (obj.giatri.Equals(""))
