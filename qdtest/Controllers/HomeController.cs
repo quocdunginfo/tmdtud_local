@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using qdtest.Controllers.ModelController;
 
-namespace qdtest.Controllers
+namespace CuaHangBanGiay.Controllers.View_Controller
 {
-    public class HomeController : Controller
+    public class FrontHomeController : FrontController
     {
         //
-        // GET: /Home/
+        // GET: /Default/
 
-        public ActionResult Index(int id=0)
-        {
+        public ActionResult Index()
+        {   
             return View();
         }
 

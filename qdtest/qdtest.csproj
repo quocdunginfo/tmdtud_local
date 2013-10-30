@@ -115,12 +115,15 @@
     <Compile Include="Controllers\AdminMauSacController.cs" />
     <Compile Include="Controllers\AdminMauSacsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\FrontController.cs" />
+    <Compile Include="Controllers\ModelController\HinhAnhController.cs" />
     <Compile Include="Controllers\ModelController\MauSacController.cs" />
     <Compile Include="Controllers\ModelController\KichThuocController.cs" />
     <Compile Include="Controllers\ModelController\KhachHangController.cs" />
     <Compile Include="Controllers\ModelController\NhanVienController.cs" />
     <Compile Include="Controllers\ModelController\NhomSanPhamController.cs" />
     <Compile Include="Controllers\ModelController\SanPhamController.cs" />
+    <Compile Include="Controllers\ModelController\ChiTietSPController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -139,6 +142,10 @@
     <Compile Include="Migrations\201310220310293_sua_tenhsx_to_ten.cs" />
     <Compile Include="Migrations\201310220310293_sua_tenhsx_to_ten.Designer.cs">
       <DependentUpon>201310220310293_sua_tenhsx_to_ten.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201310301518297_sua_SanPhamTag_ChiTietSP.cs" />
+    <Compile Include="Migrations\201310301518297_sua_SanPhamTag_ChiTietSP.Designer.cs">
+      <DependentUpon>201310301518297_sua_SanPhamTag_ChiTietSP.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Models.cs" />
@@ -3166,6 +3173,59 @@
     <Content Include="Content\admin_login\img\arrow.png" />
     <Content Include="Content\admin_login\img\bg.png" />
     <Content Include="Content\admin_login\index.html" />
+    <Content Include="Content\front\css\ddsmoothmenu.css" />
+    <Content Include="Content\front\css\nivo-slider.css" />
+    <Content Include="Content\front\css\slimbox2.css" />
+    <Content Include="Content\front\css\templatemo_style.css" />
+    <Content Include="Content\front\images\2co.gif" />
+    <Content Include="Content\front\images\arrows.png" />
+    <Content Include="Content\front\images\bullets.png" />
+    <Content Include="Content\front\images\closelabel.gif" />
+    <Content Include="Content\front\images\loading.gif" />
+    <Content Include="Content\front\images\menu-outline.gif" />
+    <Content Include="Content\front\images\nextlabel.gif" />
+    <Content Include="Content\front\images\paypal.gif" />
+    <Content Include="Content\front\images\prevlabel.gif" />
+    <Content Include="Content\front\images\product\01.jpg" />
+    <Content Include="Content\front\images\product\02.jpg" />
+    <Content Include="Content\front\images\product\03.jpg" />
+    <Content Include="Content\front\images\product\04.jpg" />
+    <Content Include="Content\front\images\product\05.jpg" />
+    <Content Include="Content\front\images\product\06.jpg" />
+    <Content Include="Content\front\images\product\07.jpg" />
+    <Content Include="Content\front\images\product\08.jpg" />
+    <Content Include="Content\front\images\product\09.jpg" />
+    <Content Include="Content\front\images\product\10.jpg" />
+    <Content Include="Content\front\images\product\10_l.jpg" />
+    <Content Include="Content\front\images\product\Hình ảnh0108.jpg" />
+    <Content Include="Content\front\images\product\Hình ảnh0199.jpg" />
+    <Content Include="Content\front\images\product\Hình ảnh0259.jpg" />
+    <Content Include="Content\front\images\product\ss %2816%29.JPG" />
+    <Content Include="Content\front\images\product\Ảnh-0A.jpg" />
+    <Content Include="Content\front\images\remove_x.gif" />
+    <Content Include="Content\front\images\slider\01.jpg" />
+    <Content Include="Content\front\images\slider\02.jpg" />
+    <Content Include="Content\front\images\slider\03.jpg" />
+    <Content Include="Content\front\images\slider\04.jpg" />
+    <Content Include="Content\front\images\templatemo_addtocart.png" />
+    <Content Include="Content\front\images\templatemo_body.jpg" />
+    <Content Include="Content\front\images\templatemo_body_top.jpg" />
+    <Content Include="Content\front\images\templatemo_detail.png" />
+    <Content Include="Content\front\images\templatemo_footer.png" />
+    <Content Include="Content\front\images\templatemo_header_bg.png" />
+    <Content Include="Content\front\images\templatemo_image_01.jpg" />
+    <Content Include="Content\front\images\templatemo_list.png" />
+    <Content Include="Content\front\images\templatemo_logo.png" />
+    <Content Include="Content\front\images\templatemo_main_bg.png" />
+    <Content Include="Content\front\images\templatemo_menubar.png" />
+    <Content Include="Content\front\images\templatemo_search_bg.png" />
+    <Content Include="Content\front\images\templatemo_sidebar_header.png" />
+    <Content Include="Content\front\js\ddsmoothmenu.js" />
+    <Content Include="Content\front\js\jquery-1.4.3.min.js" />
+    <Content Include="Content\front\js\jquery.min.js" />
+    <Content Include="Content\front\js\jquery.nivo.slider.pack.js" />
+    <Content Include="Content\front\js\logging.js" />
+    <Content Include="Content\front\js\slimbox2.js" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -3270,8 +3330,6 @@
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_LogOnPartial.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\AdminHome\Index.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
@@ -3288,7 +3346,6 @@
     <Content Include="Views\AdminFail\Index.cshtml" />
     <Content Include="Views\AdminUser\Index.cshtml" />
     <Content Include="Views\AdminUser\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Admin\fu.cshtml" />
     <Content Include="Views\AdminFail\_ViewStart.cshtml" />
     <Content Include="Views\AdminNhomSanPham\Index.cshtml" />
@@ -3321,6 +3378,8 @@
       </SubType>
     </Content>
     <Content Include="Views\AdminSanPhams\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_FrontLayout.cshtml" />
+    <Content Include="Views\FrontHome\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3510,6 +3569,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310220310293_sua_tenhsx_to_ten.resx">
       <DependentUpon>201310220310293_sua_tenhsx_to_ten.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310301518297_sua_SanPhamTag_ChiTietSP.resx">
+      <DependentUpon>201310301518297_sua_SanPhamTag_ChiTietSP.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
