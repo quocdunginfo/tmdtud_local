@@ -127,25 +127,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201310100935243_them_class_quyen_han.cs" />
-    <Compile Include="Migrations\201310100935243_them_class_quyen_han.Designer.cs">
-      <DependentUpon>201310100935243_them_class_quyen_han.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201310171438128_them_forgot_password_field.cs" />
-    <Compile Include="Migrations\201310171438128_them_forgot_password_field.Designer.cs">
-      <DependentUpon>201310171438128_them_forgot_password_field.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201310191620297_them_mota_cho_kichthuoc_giatri.cs" />
-    <Compile Include="Migrations\201310191620297_them_mota_cho_kichthuoc_giatri.Designer.cs">
-      <DependentUpon>201310191620297_them_mota_cho_kichthuoc_giatri.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201310220310293_sua_tenhsx_to_ten.cs" />
-    <Compile Include="Migrations\201310220310293_sua_tenhsx_to_ten.Designer.cs">
-      <DependentUpon>201310220310293_sua_tenhsx_to_ten.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201310301518297_sua_SanPhamTag_ChiTietSP.cs" />
-    <Compile Include="Migrations\201310301518297_sua_SanPhamTag_ChiTietSP.Designer.cs">
-      <DependentUpon>201310301518297_sua_SanPhamTag_ChiTietSP.cs</DependentUpon>
+    <Compile Include="Migrations\201310301657581_tatca.cs" />
+    <Compile Include="Migrations\201310301657581_tatca.Designer.cs">
+      <DependentUpon>201310301657581_tatca.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Models.cs" />
@@ -3558,20 +3542,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201310100935243_them_class_quyen_han.resx">
-      <DependentUpon>201310100935243_them_class_quyen_han.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201310171438128_them_forgot_password_field.resx">
-      <DependentUpon>201310171438128_them_forgot_password_field.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201310191620297_them_mota_cho_kichthuoc_giatri.resx">
-      <DependentUpon>201310191620297_them_mota_cho_kichthuoc_giatri.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201310220310293_sua_tenhsx_to_ten.resx">
-      <DependentUpon>201310220310293_sua_tenhsx_to_ten.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201310301518297_sua_SanPhamTag_ChiTietSP.resx">
-      <DependentUpon>201310301518297_sua_SanPhamTag_ChiTietSP.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201310301657581_tatca.resx">
+      <DependentUpon>201310301657581_tatca.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

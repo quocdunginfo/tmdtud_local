@@ -5,13 +5,13 @@ namespace qdtest.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    public sealed partial class them_forgot_password_field : IMigrationMetadata
+    public sealed partial class tatca : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(them_forgot_password_field));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(tatca));
         
         string IMigrationMetadata.Id
         {
-            get { return "201310171438128_them_forgot_password_field"; }
+            get { return "201310301657581_tatca"; }
         }
         
         string IMigrationMetadata.Source
