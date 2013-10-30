@@ -1,0 +1,253 @@
+﻿@{
+    var HangSX_List = (List<qdtest.Models.HangSX>)ViewBag.HangSX_List;
+    var timkiem_hangsx = (HttpCookie)ViewBag.timkiem_hangsx;
+}
+<div id="main">
+	<div id="content">
+		<script type="text/javascript">
+		    $(document).ready(function () {
+		        $('table.employee .filter').keypress(function (event) {
+		            formSubmit(event, 'submitFilterButtonemployee')
+		        })
+		    });
+	</script>
+		<script type="text/javascript">
+		    $(function () {
+		        if ($("table.employee .datepicker").length > 0)
+		            $("table.employee .datepicker").datepicker({
+		                prevText: '',
+		                nextText: '',
+		                dateFormat: 'yy-mm-dd'
+		            });
+		    });
+	</script>
+		<div class="toolbar-placeholder">
+			<div class="toolbarBox toolbarHead">
+				<ul class="cc_button">
+					<li>
+					<a id="desc-employee-new" class="toolbar_btn" href="@Url.Action("Add","AdminHangSXs")" title="Thêm">
+					<span class="process-icon-new "></span>
+					<div>
+						Thêm
+					</div>
+					</a>
+					</li>
+				</ul>
+				<script language="javascript" type="text/javascript">
+				    //<![CDATA[
+				    var submited = false
+				    var modules_list_loaded = false;
+				    $(function () {
+				        //get reference on save link
+				        btn_save = $('span[class~="process-icon-save"]').parent();
+				        //get reference on form submit button
+				        btn_submit = $('#employee_form_submit_btn');
+				        if (btn_save.length > 0 && btn_submit.length > 0) {
+				            //get reference on save and stay link
+				            btn_save_and_stay = $('span[class~="process-icon-save-and-stay"]').parent();
+				            //get reference on current save link label
+				            lbl_save = $('#desc-employee-save div');
+				            //override save link label with submit button value
+				            if (btn_submit.val().length > 0)
+				                lbl_save.html(btn_submit.attr("value"));
+				            if (btn_save_and_stay.length > 0) {
+				                //get reference on current save link label
+				                lbl_save_and_stay = $('#desc-employee-save-and-stay div');
+				                //override save and stay link label with submit button value
+				                if (btn_submit.val().length > 0 && lbl_save_and_stay && !lbl_save_and_stay.hasClass('locked')) {
+				                    lbl_save_and_stay.html(btn_submit.val() + " and stay ");
+				                }
+				            }
+				            //hide standard submit button
+				            btn_submit.hide();
+				            //bind enter key press to validate form
+				            $('#employee_form').keypress(function (e) {
+				                if (e.which == 13 && e.target.localName != 'textarea')
+				                    $('#desc-employee-save').click();
+				            });
+				            //submit the form
+				            btn_save.click(function () {
+				                // Avoid double click
+				                if (submited)
+				                    return false;
+				                submited = true;
+				                //add hidden input to emulate submit button click when posting the form -> field name posted
+				                btn_submit.before('<input type="hidden" name="' + btn_submit.attr("name") + '" value="1" />');
+				                $('#employee_form').submit();
+				                return false;
+				            });
+				            if (btn_save_and_stay) {
+				                btn_save_and_stay.click(function () {
+				                    //add hidden input to emulate submit button click when posting the form -> field name posted
+				                    btn_submit.before('<input type="hidden" name="' + btn_submit.attr("name") + 'AndStay" value="1" />');
+				                    $('#employee_form').submit();
+				                    return false;
+				                });
+				            }
+				        }
+				    });
+				    //]]>
+			</script>
+				<div class="pageTitle">
+					<h3>
+					<span id="current_obj" style="font-weight: normal;">
+					<span class="breadcrumb item-0 ">Catalog <img alt="&gt;" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"/>
+					</span>
+					<span class="breadcrumb item-1 ">Hãng sản xuất </span>
+					</span>
+					</h3>
+				</div>
+			</div>
+		</div>
+		<div class="leadin">
+		</div>
+		<form method="post" action="@Url.Action("Submit", "AdminHangSXs")" class="form">
+			<input type="hidden" id="submitFilteremployee" name="submitFilteremployee" value="0"/>
+			<table class="table_grid" name="list_table">
+			<tr>
+				<td style="vertical-align: bottom;">
+					<span style="float: left;">
+					Page <b>1</b> / 1 | Display
+					<select name="hangsx_max_item_per_page" onchange="submit()">
+						<option value="20" selected="selected">20</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+						<option value="300">300</option>
+					</select>
+					 / 1 result(s) </span>
+					<span style="float: right;">
+					<input type="submit" id="submitFilterButtonemployee" name="submit_search" value="Tìm kiếm" class="button"/>
+					<input type="submit" name="submit_reset" value="Reset" class="button"/>
+					</span>
+					<span class="clear"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table class="table employee" cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom:10px;">
+					<col width="10px"/>
+					<col width="25px"/>
+					<col />
+					<col width="30px"/>
+					<col width="52px"/>
+					<thead>
+					<tr class="nodrag nodrop" style="height: 40px">
+						<th class="center">
+							<input type="checkbox" name="checkme" class="noborder" onclick="checkDelBoxes(this.form, 'employeeBox[]', this.checked)"/>
+						</th>
+						<th class="center">
+							<span class="title_box">
+							ID </span>
+							<br/>
+							<a href="index.php?controller=AdminEmployees&employeeOrderby=id_employee&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<img border="0" src="../img/admin/down.gif"/></a>
+							<a href="index.php?controller=AdminEmployees&employeeOrderby=id_employee&employeeOrderway=asc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<img border="0" src="../img/admin/up_d.gif"/></a>
+						</th>
+						<th>
+							<span class="title_box">
+							Tên </span>
+							<br/>
+							<a href="index.php?controller=AdminEmployees&employeeOrderby=lastname&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<img border="0" src="../img/admin/down.gif"/></a>
+							<a href="index.php?controller=AdminEmployees&employeeOrderby=lastname&employeeOrderway=asc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<img border="0" src="../img/admin/up.gif"/></a>
+						</th>
+						
+						<th class="center">
+							<span class="title_box">
+							Active </span>
+							<br/>
+							<a href="index.php?controller=AdminEmployees&employeeOrderby=active&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<img border="0" src="../img/admin/down.gif"/></a>
+							<a href="index.php?controller=AdminEmployees&employeeOrderby=active&employeeOrderway=asc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<img border="0" src="../img/admin/up.gif"/></a>
+						</th>
+						<th class="center">
+							Tác vụ<br/>&nbsp;
+						</th>
+					</tr>
+					<tr class="nodrag nodrop filter row_hover" style="height: 35px;">
+						<td class="center">
+							 --
+						</td>
+						<td class="center">
+							<input type="text" class="filter" name="hangsx_id" value="@timkiem_hangsx["id"]" style="width:25px"/>
+						</td>
+						<td>
+							<input type="text" class="filter" name="hangsx_ten" value="@timkiem_hangsx["ten"]" style="width:98%"/>
+						</td>
+						
+						<td class="center">
+							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="hangsx_active">
+								<option value="" @if(timkiem_hangsx["active"].Equals("")) {<text>selected="selected"</text> }>--</option>
+								<option value="1" @if(timkiem_hangsx["active"].Equals("1")) {<text>selected="selected"</text> }>Yes</option>
+								<option value="0" @if(timkiem_hangsx["active"].Equals("0")) {<text>selected="selected"</text> }>No</option>
+							</select>
+						</td>
+						<td class="center">
+							--
+						</td>
+					</tr>
+					</thead>
+					<tbody>
+                    @foreach(var item in HangSX_List)
+                    {
+					<tr class=" row_hover">
+						<td class="center">
+						</td>
+						<td class="pointer center" onclick="document.location = '@Url.Action("Edit", "AdminHangSXs", new { id = item.id })'">
+							 @item.id
+						</td>
+						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminHangSXs", new { id = item.id })'">
+							 @item.ten
+						</td>
+						
+						<td class="pointer center" onclick="document.location = '@Url.Action("Edit", "AdminHangSXs", new { id = item.id })'">
+							<a href="@Url.Action("Edit", "AdminHangSXs", new { id = item.id })" title="Enabled">
+							    @if(item.active==true)
+                                {
+                                    <text>
+                                        <img src="../img/admin/enabled.gif" alt="Enabled"/>
+                                    </text>
+                                }
+                                else
+                                {
+                                    <text>
+                                        <img src="../img/admin/disabled.gif" alt="Disabled"/>
+                                    </text>
+                                }
+							</a>
+						</td>
+						<td class="center" style="white-space: nowrap;">
+							<a href="@Url.Action("Edit", "AdminHangSXs", new { id = item.id })" class="edit" title="Edit">
+							<img src="../img/admin/edit.gif" alt="Edit"/>
+							</a>
+                            &nbsp;&nbsp;
+                            <a href="@Url.Action("Delete", "AdminHangSXs", new { id = item.id })" class="edit" title="Delete">
+							<img src="../img/admin/delete.gif" alt="Delete"/>
+							</a>
+						</td>
+					</tr>
+                    }
+					</tbody>
+					</table>
+				</td>
+			</tr>
+			</table>
+		</form>
+		
+		<div class="leadin">
+		</div>
+		<script type="text/javascript">
+		    id_language = Number(1);
+		</script>
+		
+		<div style="clear:both;height:0;line-height:0">
+			&nbsp;
+		</div>
+	</div>
+	<div style="clear:both;height:0;line-height:0">
+		&nbsp;
+	</div>
+</div>

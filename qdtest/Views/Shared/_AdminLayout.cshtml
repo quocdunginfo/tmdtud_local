@@ -187,10 +187,13 @@
 				<a href="#" class="title">
 				<img src="../img/t/AdminCatalog.gif" alt=""/>Catalog </a>
 				<ul class="submenu">
-					<li ><a href="index.php?controller=AdminProducts&amp;token=c4ecb5500c32302d072130315b268033">Sản phẩm</a></li>
+					<li class="@if(ActiveTab.Contains("SanPham")) {<text>active</text>}"><a href="@Url.Action("Index","AdminSanPhams")">Sản phẩm</a></li>
 					<li class="@if(ActiveTab.Contains("NhomSanPham")) {<text>active</text>}"><a href="@Url.Action("Index","AdminNhomSanPham")">Nhóm sản phẩm</a></li>
+                    <li class="@if (ActiveTab.Contains("HangSX"))
+                               {<text>active</text>}"><a href="@Url.Action("Index","AdminHangSX")">Hãng sản xuất</a></li>
                     <li class="@if(ActiveTab.Contains("KichThuoc")) {<text>active</text>}"><a href="@Url.Action("Index","AdminKichThuocs")">Kích thước</a></li>
-					<li><a href="index.php?controller=AdminManufacturers&amp;token=964bd0d9a4cef08503cdb5ed437faa22">Manufacturers</a></li>
+                    <li class="@if (ActiveTab.Contains("MauSac"))
+                               {<text>active</text>}"><a href="@Url.Action("Index", "AdminMauSacs")">Màu sắc</a></li>
 				</ul>
 				</li>
 				<li class="submenu_size maintab " id="maintab10">

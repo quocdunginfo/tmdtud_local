@@ -114,8 +114,12 @@
     <Compile Include="Controllers\AdminUsersController.cs" />
     <Compile Include="Controllers\AdminMauSacController.cs" />
     <Compile Include="Controllers\AdminMauSacsController.cs" />
+    <Compile Include="Controllers\AdminSanPhamController.cs" />
+    <Compile Include="Controllers\AdminHangSXController.cs" />
+    <Compile Include="Controllers\AdminHangSXsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\FrontController.cs" />
+    <Compile Include="Controllers\ModelController\HangSXController.cs" />
     <Compile Include="Controllers\ModelController\HinhAnhController.cs" />
     <Compile Include="Controllers\ModelController\MauSacController.cs" />
     <Compile Include="Controllers\ModelController\KichThuocController.cs" />
@@ -3364,6 +3368,15 @@
     <Content Include="Views\AdminSanPhams\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_FrontLayout.cshtml" />
     <Content Include="Views\FrontHome\Index.cshtml" />
+    <Content Include="Views\AdminHangSXs\Index.cshtml">
+      <SubType>
+      </SubType>
+    </Content>
+    <Content Include="Views\AdminHangSXs\_ViewStart.cshtml" />
+    <Content Include="Views\AdminHangSX\Index.cshtml">
+      <SubType>
+      </SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
