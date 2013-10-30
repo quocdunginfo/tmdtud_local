@@ -109,6 +109,7 @@
     <Compile Include="Controllers\AdminKichThuocsController.cs" />
     <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\AdminNhomSanPhamController.cs" />
+    <Compile Include="Controllers\AdminSanPhamsController.cs" />
     <Compile Include="Controllers\AdminUserController.cs" />
     <Compile Include="Controllers\AdminUsersController.cs" />
     <Compile Include="Controllers\AdminMauSacController.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Controllers\ModelController\KhachHangController.cs" />
     <Compile Include="Controllers\ModelController\NhanVienController.cs" />
     <Compile Include="Controllers\ModelController\NhomSanPhamController.cs" />
+    <Compile Include="Controllers\ModelController\SanPhamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -133,6 +135,10 @@
     <Compile Include="Migrations\201310191620297_them_mota_cho_kichthuoc_giatri.cs" />
     <Compile Include="Migrations\201310191620297_them_mota_cho_kichthuoc_giatri.Designer.cs">
       <DependentUpon>201310191620297_them_mota_cho_kichthuoc_giatri.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201310220310293_sua_tenhsx_to_ten.cs" />
+    <Compile Include="Migrations\201310220310293_sua_tenhsx_to_ten.Designer.cs">
+      <DependentUpon>201310220310293_sua_tenhsx_to_ten.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Models.cs" />
@@ -3277,8 +3283,6 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Fail.cshtml" />
     <Content Include="Views\AdminUsers\Index.cshtml" />
-    <Content Include="Views\AdminUsers\Edit.cshtml" />
-    <Content Include="Views\AdminUsers\Add.cshtml" />
     <Content Include="Views\AdminUsers\_ViewStart.cshtml" />
     <Content Include="Views\Admin\_fail_permission.cshtml" />
     <Content Include="Views\AdminFail\Index.cshtml" />
@@ -3286,7 +3290,6 @@
     <Content Include="Views\AdminUser\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Admin\fu.cshtml" />
-    <Content Include="Views\AdminUsers\Delete.cshtml" />
     <Content Include="Views\AdminFail\_ViewStart.cshtml" />
     <Content Include="Views\AdminNhomSanPham\Index.cshtml" />
     <Content Include="Views\AdminNhomSanPham\Edit.cshtml" />
@@ -3313,6 +3316,11 @@
     <Content Include="Views\AdminMauSac\Index.cshtml" />
     <Content Include="Views\AdminMauSacs\_ViewStart.cshtml" />
     <Content Include="Views\AdminMauSacs\Index.cshtml" />
+    <Content Include="Views\AdminSanPhams\Index.cshtml">
+      <SubType>
+      </SubType>
+    </Content>
+    <Content Include="Views\AdminSanPhams\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3499,6 +3507,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310191620297_them_mota_cho_kichthuoc_giatri.resx">
       <DependentUpon>201310191620297_them_mota_cho_kichthuoc_giatri.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310220310293_sua_tenhsx_to_ten.resx">
+      <DependentUpon>201310220310293_sua_tenhsx_to_ten.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

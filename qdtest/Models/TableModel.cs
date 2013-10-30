@@ -136,12 +136,12 @@ namespace qdtest.Models
         public HangSX()
         {
             this.ds_sanpham = new List<SanPham>();
-            this.tenhsx = "";
+            this.ten = "";
             this.active = true;
         }
         [Key]
         public int id { get; set; }
-        public String tenhsx { get; set; }
+        public String ten { get; set; }
         public Boolean active { get; set; }
         //external
         public virtual List<SanPham> ds_sanpham { get; set; }

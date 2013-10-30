@@ -239,7 +239,7 @@
 							<img src="../img/admin/edit.gif" alt="Edit"/>
 							</a>
                             &nbsp;&nbsp;
-                            <a href="@Url.Action("Delete", "AdminUsers", new { id = item.id })" class="edit" title="Delete">
+                            <a href="@Url.Action("Delete", "AdminMauSacs", new { id = item.id })" class="edit" title="Delete">
 							<img src="../img/admin/delete.gif" alt="Delete"/>
 							</a>
 						</td>
@@ -247,13 +247,9 @@
                     }
 					</tbody>
 					</table>
-					<p>
-						<input type="submit" class="button" name="submitBulkdeleteemployee" value="Delete selected" onclick="return confirm('Delete selected items?');"/>
-					</p>
 				</td>
 			</tr>
 			</table>
-			<input type="hidden" name="token" value="0eb4238fbc37dd9ef96cdfa5f4b6b90c"/>
 		</form>
 		
 		<div class="leadin">

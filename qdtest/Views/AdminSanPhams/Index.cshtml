@@ -1,7 +1,7 @@
 ﻿@{
-    var User_List = (List<qdtest.Models.NhanVien>)ViewBag.User_List;
-    var User_Search = (HttpCookie)ViewBag.User_Search;
-    var LoaiNhanVien_List = (List<qdtest.Models.LoaiNhanVien>)ViewBag.LoaiNhanVien_List;
+    //var ViewBag.Title
+    var timkiem_sanpham = (HttpCookie)ViewBag.timkiem_sanpham;
+    var SanPham_List = (List<qdtest.Models.SanPham>)ViewBag.SanPham_List;
     
 }
 <div id="main">
@@ -27,7 +27,7 @@
 			<div class="toolbarBox toolbarHead">
 				<ul class="cc_button">
 					<li>
-					<a id="desc-employee-new" class="toolbar_btn" href="@Url.Action("Add","AdminUsers")" title="Add new">
+					<a id="desc-employee-new" class="toolbar_btn" href="@Url.Action("Add","AdminSanPhams")" title="Add new">
 					<span class="process-icon-new "></span>
 					<div>
 						Thêm
@@ -93,9 +93,9 @@
 				<div class="pageTitle">
 					<h3>
 					<span id="current_obj" style="font-weight: normal;">
-					<span class="breadcrumb item-0 ">Administration <img alt="&gt;" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"/>
+					<span class="breadcrumb item-0 ">Catalog <img alt="&gt;" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"/>
 					</span>
-					<span class="breadcrumb item-1 ">Users </span>
+					<span class="breadcrumb item-1 ">Sản phẩm </span>
 					</span>
 					</h3>
 				</div>
@@ -103,14 +103,14 @@
 		</div>
 		<div class="leadin">
 		</div>
-		<form method="post" action="@Url.Action("Submit", "AdminUsers")" class="form">
+		<form method="post" action="@Url.Action("Submit", "AdminSanPhams")" class="form">
 			<input type="hidden" id="submitFilteremployee" name="submitFilteremployee" value="0"/>
 			<table class="table_grid" name="list_table">
 			<tr>
 				<td style="vertical-align: bottom;">
 					<span style="float: left;">
 					Page <b>1</b> / 1 | Display
-					<select name="employee_pagination" onchange="submit()">
+					<select name="sanpham_max_item_per_page" onchange="submit()">
 						<option value="20" selected="selected">20</option>
 						<option value="50">50</option>
 						<option value="100">100</option>
@@ -151,7 +151,7 @@
 						</th>
 						<th>
 							<span class="title_box">
-							Tên đăng nhập </span>
+							Mã SP </span>
 							<br/>
 							<a href="index.php?controller=AdminEmployees&employeeOrderby=lastname&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
 							<img border="0" src="../img/admin/down.gif"/></a>
@@ -160,7 +160,7 @@
 						</th>
 						<th>
 							<span class="title_box">
-							Tên đầy đủ </span>
+							Tên </span>
 							<br/>
 							<a href="index.php?controller=AdminEmployees&employeeOrderby=firstname&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
 							<img border="0" src="../img/admin/down.gif"/></a>
@@ -169,7 +169,7 @@
 						</th>
 						<th>
 							<span class="title_box">
-							Email </span>
+							Mô tả </span>
 							<br/>
 							<a href="index.php?controller=AdminEmployees&employeeOrderby=email&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
 							<img border="0" src="../img/admin/down.gif"/></a>
@@ -203,33 +203,32 @@
 							 --
 						</td>
 						<td class="center">
-							<input type="text" class="filter" name="nhanvien_id" value="@User_Search["id"]" style="width:25px"/>
+                            <input type="hidden" class="filter" name="sanpham_gia_from" value="@timkiem_sanpham["gia_from"]" style="width:25px"/>
+                            <input type="hidden" class="filter" name="sanpham_gia_to" value="@timkiem_sanpham["gia_to"]" style="width:25px"/>
+                            <input type="hidden" class="filter" name="sanpham_hangsx_ten" value="@timkiem_sanpham["hangsx_ten"]" style="width:25px"/>
+                            <input type="hidden" class="filter" name="sanpham_nhomsanpham_ten" value="@timkiem_sanpham["nhomsanpham_ten"]" style="width:25px"/>
+
+							<input type="text" class="filter" name="sanpham_id" value="@timkiem_sanpham["id"]" style="width:25px"/>
 						</td>
 						<td>
-							<input type="text" class="filter" name="nhanvien_tendangnhap" value="@User_Search["tendangnhap"]" style="width:95%"/>
+							<input type="text" class="filter" name="sanpham_masp" value="@timkiem_sanpham["masp"]" style="width:95%"/>
 						</td>
 						<td>
-							<input type="text" class="filter" name="nhanvien_tendaydu" value="@User_Search["tendaydu"]" style="width:95%"/>
+							<input type="text" class="filter" name="sanpham_ten" value="@timkiem_sanpham["ten"]" style="width:95%"/>
 						</td>
 						<td>
-							<input type="text" class="filter" name="nhanvien_email" value="@User_Search["email"]" style="width:95%"/>
+							<input type="text" class="filter" name="sanpham_mota" value="@timkiem_sanpham["mota"]" style="width:95%"/>
 						</td>
 						<td>
-							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="nhanvien_loainhanvien_id" style="width:95%">
-								<option value="" @if(User_Search["loainhanvien_id"].Equals("")) {<text>selected="selected"</text> }>--</option>
-                                @foreach(var lnv_obj in LoaiNhanVien_List)
-                                {
-                                <text>
-                                <option value="@lnv_obj.id" @if(User_Search["loainhanvien_id"].Equals(lnv_obj.id.ToString())) {<text>selected="selected"</text> }>@lnv_obj.ten</option>
-								</text>
-                                }
+							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="sanpham_loaisanpham_id" style="width:95%"
+								
 							</select>
 						</td>
 						<td class="center">
-							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="nhanvien_active">
-								<option value="" @if(User_Search["active"].Equals("")) {<text>selected="selected"</text> }>--</option>
-								<option value="1" @if(User_Search["active"].Equals("1")) {<text>selected="selected"</text> }>Yes</option>
-								<option value="0" @if(User_Search["active"].Equals("0")) {<text>selected="selected"</text> }>No</option>
+							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="sanpham_active">
+								<option value="" @if(timkiem_sanpham["active"].Equals("")) {<text>selected="selected"</text> }>--</option>
+								<option value="1" @if(timkiem_sanpham["active"].Equals("1")) {<text>selected="selected"</text> }>Yes</option>
+								<option value="0" @if(timkiem_sanpham["active"].Equals("0")) {<text>selected="selected"</text> }>No</option>
 							</select>
 						</td>
 						<td class="center">
@@ -238,28 +237,28 @@
 					</tr>
 					</thead>
 					<tbody>
-                    @foreach(var item in User_List)
+                    @foreach(var item in SanPham_List)
                     {
 					<tr class=" row_hover">
 						<td class="center">
 						</td>
-						<td class="pointer center" onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
+						<td class="pointer center" onclick="document.location = '@Url.Action("Edit", "AdminSanPhams", new { id = item.id })'">
 							 @item.id
 						</td>
-						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
-							 @item.tendangnhap
+						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminSanPhams", new { id = item.id })'">
+							 @item.masp
 						</td>
-						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
-							 @item.tendaydu
+						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminSanPhams", new { id = item.id })'">
+							 @item.ten
 						</td>
-						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
-							 @item.email
+						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminSanPhams", new { id = item.id })'">
+							 @item.mota
 						</td>
-						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
-							 @item.loainhanvien.ten
+						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminSanPhams", new { id = item.id })'">
+							 
 						</td>
-						<td class="pointer center" onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
-							<a href="@Url.Action("Edit", "AdminUsers", new { id = item.id })" title="Enabled">
+						<td class="pointer center" onclick="document.location = '@Url.Action("Edit", "AdminSanPhams", new { id = item.id })'">
+							<a href="@Url.Action("Edit", "AdminSanPhams", new { id = item.id })" title="Enabled">
 							    @if(item.active==true)
                                 {
                                     <text>
@@ -275,11 +274,11 @@
 							</a>
 						</td>
 						<td class="center" style="white-space: nowrap;">
-							<a href="@Url.Action("Edit", "AdminUsers", new { id = item.id })" class="edit" title="Edit">
+							<a href="@Url.Action("Edit", "AdminSanPhams", new { id = item.id })" class="edit" title="Edit">
 							<img src="../img/admin/edit.gif" alt="Edit"/>
 							</a>
                             &nbsp;&nbsp;
-                            <a href="@Url.Action("Delete", "AdminUsers", new { id = item.id })" class="edit" title="Delete">
+                            <a href="@Url.Action("Delete", "AdminSanPhams", new { id = item.id })" class="edit" title="Delete">
 							<img src="../img/admin/delete.gif" alt="Delete"/>
 							</a>
 						</td>
