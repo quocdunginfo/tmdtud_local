@@ -11,6 +11,14 @@ namespace qdtest.Controllers.ModelController
     public class KichThuocController
     {
         public BanGiayDBContext _db = new BanGiayDBContext();
+        public KichThuocController()
+        {
+
+        }
+        public KichThuocController(BanGiayDBContext db)
+        {
+            this._db = db;
+        }
         public KichThuoc get_by_id(int obj_id)
         {
             return _db.ds_kichthuoc.FirstOrDefault(x => x.id == obj_id);

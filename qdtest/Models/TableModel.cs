@@ -17,7 +17,7 @@ namespace qdtest.Models
     {
         public SanPham()
         {
-            this.ds_sanpham_tag = new List<ChiTietSP>();
+            this.ds_chitietsp = new List<ChiTietSP>();
             //  this.ds_dathang = new List<DatHang>();
             this.ds_hinhanh = new List<HinhAnh>();
             this.masp = "";
@@ -33,7 +33,7 @@ namespace qdtest.Models
         public int gia { get; set; }
         public Boolean active { get; set; }
         //external
-        public virtual List<ChiTietSP> ds_sanpham_tag { get; set; }
+        public virtual List<ChiTietSP> ds_chitietsp { get; set; }
         // public virtual List<DatHang> ds_dathang { get; set; }
         public virtual List<HinhAnh> ds_hinhanh { get; set; }
         public virtual HangSX hangsx { get; set; }
@@ -103,7 +103,7 @@ namespace qdtest.Models
     {
         public KichThuoc()
         {
-            this.ds_sanpham_tag = new List<ChiTietSP>();
+            this.ds_chitietsp = new List<ChiTietSP>();
             this.giatri = "";
             this.active = true;
         }
@@ -113,13 +113,13 @@ namespace qdtest.Models
         public String mota { get; set; }
         public Boolean active { get; set; }
         //external
-        public virtual List<ChiTietSP> ds_sanpham_tag { get; set; }
+        public virtual List<ChiTietSP> ds_chitietsp { get; set; }
     }
     public class MauSac
     {
         public MauSac()
         {
-            this.ds_sanpham_tag = new List<ChiTietSP>();
+            this.ds_chitietsp = new List<ChiTietSP>();
             this.giatri = "";
             this.active = true;
         }
@@ -129,7 +129,7 @@ namespace qdtest.Models
         public String mota { get; set; }
         public Boolean active { get; set; }
         //external
-        public virtual List<ChiTietSP> ds_sanpham_tag { get; set; }
+        public virtual List<ChiTietSP> ds_chitietsp { get; set; }
     }
     public class HangSX
     {
@@ -216,7 +216,7 @@ namespace qdtest.Models
         public int dongia { get; set; }
         //external
         public virtual NhapHang nhaphang { get; set; }
-        public virtual ChiTietSP sanpham_tag { get; set; }
+        public virtual ChiTietSP chitietsp { get; set; }
     }
     public class DonHang
     {
@@ -253,7 +253,7 @@ namespace qdtest.Models
         public int dongia { get; set; }
         //external
         public virtual DonHang donhang { get; set; }
-        public virtual ChiTietSP sanpham_tag { get; set; }
+        public virtual ChiTietSP chitietsp { get; set; }
     }
     public class KhachHang
     {
@@ -348,14 +348,14 @@ namespace qdtest.Models
         public int soluongnhap { get; set; }
         public int soluongban { get; set; }
         //external
-        public virtual ChiTietSP sanpham_tag { get; set; }
+        public virtual ChiTietSP chitietsp { get; set; }
     }
     public class BanGiayDBContext : DbContext
     {
         public DbSet<DonHang> ds_donhang { get; set; }
         public DbSet<ChiTiet_DonHang> ds_chitiet_donhang { get; set; }
         public DbSet<SanPham> ds_sanpham { get; set; }
-        public DbSet<ChiTietSP> ds_sanpham_tag { get; set; }
+        public DbSet<ChiTietSP> ds_chitietsp { get; set; }
         public DbSet<MauSac> ds_mausac { get; set; }
         public DbSet<KichThuoc> ds_kichthuoc { get; set; }
         public DbSet<HangSX> ds_hangsx { get; set; }

@@ -10,15 +10,31 @@ namespace qdtest.Controllers.ModelController
     public class SanPhamController
     {
         public BanGiayDBContext _db = new BanGiayDBContext();
-        
+        public SanPhamController()
+        {
+
+        }
+        public SanPhamController(BanGiayDBContext db)
+        {
+            this._db = db;
+        }
         public SanPham get_by_id(int obj_id)
         {
             return _db.ds_sanpham.FirstOrDefault(x => x.id == obj_id);
+        }
+        public SanPham get_by_masp(String masp)
+        {
+            return _db.ds_sanpham.FirstOrDefault(x => x.masp.ToUpper().Equals(masp.ToUpper()));
         }
 
         public Boolean is_exist(int obj_id)
         {
             SanPham obj = this.get_by_id(obj_id);
+            return obj == null ? false : true;
+        }
+        public Boolean is_exist_masp(String masp)
+        {
+            SanPham obj = this.get_by_masp(masp);
             return obj == null ? false : true;
         }
         public int add(SanPham obj)
@@ -110,6 +126,14 @@ namespace qdtest.Controllers.ModelController
             }
             //FINAL return
             return obj_list;
+        }
+        public List<String> validate(SanPham obj)
+        {
+            //
+            List<String> re = new List<string>();
+            //check
+            
+            return re;
         }
     }
 }

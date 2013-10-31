@@ -11,6 +11,14 @@ namespace qdtest.Controllers.ModelController
     public class HangSXController
     {
         public BanGiayDBContext _db = new BanGiayDBContext();
+        public HangSXController()
+        {
+
+        }
+        public HangSXController(BanGiayDBContext db)
+        {
+            this._db = db;
+        }
         public HangSX get_by_id(int obj_id)
         {
             return _db.ds_hangsx.FirstOrDefault(x => x.id == obj_id);

@@ -24,28 +24,28 @@ namespace CuaHangBanGiay.Controllers
         }
         public ChiTietSP get_by_id(int id)
         {
-            return _db.ds_sanpham_tag.FirstOrDefault(x => x.id == id);
+            return _db.ds_chitietsp.FirstOrDefault(x => x.id == id);
         }
         public Boolean is_exist(int id)
         {
-           ChiTietSP u = (from spt in _db.ds_sanpham_tag
+           ChiTietSP u = (from spt in _db.ds_chitietsp
                              where spt.id == id
                              select spt).FirstOrDefault();
             return u == null ? false : true;
         }
         public int add(ChiTietSP obj)
         {
-            this._db.ds_sanpham_tag.Add(obj);
+            this._db.ds_chitietsp.Add(obj);
             this._db.SaveChanges();
             //return ma moi nhat
-            return this._db.ds_sanpham_tag.Max(x => x.id);
+            return this._db.ds_chitietsp.Max(x => x.id);
         }
         public Boolean delete(int id)
         {
             //Xóa object có dính khóa ngoại trước
-            ChiTietSP obj = this._db.ds_sanpham_tag.Where(x => x.id == id).FirstOrDefault();
+            ChiTietSP obj = this._db.ds_chitietsp.Where(x => x.id == id).FirstOrDefault();
             if (obj == null) return false;
-            this._db.ds_sanpham_tag.Remove(obj);
+            this._db.ds_chitietsp.Remove(obj);
             this._db.SaveChanges();
             return true;
         }
@@ -64,12 +64,12 @@ namespace CuaHangBanGiay.Controllers
         }
         public List<ChiTietSP> timkiem(String id = "", String mausac_id = "", String kichthuoc_id = "", String active = "",String id_sp="")
         {
-            List<ChiTietSP> list=_db.ds_sanpham_tag.ToList();
+            List<ChiTietSP> list=_db.ds_chitietsp.ToList();
             if (!id.Equals(""))
             {
                 //find by id
                 int id_i = TextLibrary.ToInt(id);
-                list =_db.ds_sanpham_tag.Where(x => x.id == id_i).ToList();
+                list =_db.ds_chitietsp.Where(x => x.id == id_i).ToList();
                 if (list == null)
                 {
                     list = new List<ChiTietSP>();

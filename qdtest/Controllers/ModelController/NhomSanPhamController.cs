@@ -11,7 +11,14 @@ namespace qdtest.Controllers.ModelController
     public class NhomSanPhamController : Controller
     {
         public BanGiayDBContext _db = new BanGiayDBContext();
-       
+        public NhomSanPhamController()
+        {
+
+        }
+        public NhomSanPhamController(BanGiayDBContext db)
+        {
+            this._db = db;
+        }
         public NhomSanPham get_by_id(int id)
         {
             return _db.ds_nhomsanpham.FirstOrDefault(x => x.id == id);
@@ -90,7 +97,6 @@ namespace qdtest.Controllers.ModelController
             {
                  list = root.ds_nhomcon;
             }
-            
             if (list == null) return new List<NhomSanPham2>();
             foreach (NhomSanPham item in list)
             {

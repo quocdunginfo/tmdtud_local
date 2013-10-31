@@ -31,7 +31,7 @@
             // Update-Database -TargetMigration:"MigrationName"
             
             //them quyen
-            String[] quyens = { "home", "sanpham", "user", "khachhang", "nhomsanpham", "kichthuoc", "mausac", "hinhanh", "hangsx","nhacc","nhaphang","donhang" };
+            String[] quyens = { "home", "sanpham", "user", "khachhang", "nhomsanpham", "kichthuoc", "mausac", "hinhanh", "hangsx","nhacc","nhaphang","donhang","chitietsp" };
                 List<Quyen> ds = new List<Quyen>();
                 foreach (String item in quyens)
                 {
@@ -62,12 +62,13 @@
             //them loai nhan vien
                 LoaiNhanVien lnv = new LoaiNhanVien();
                 lnv.ten = "Admin";
-                lnv.ds_quyen.AddRange(ds);
                 context.ds_loainhanvien.AddOrUpdate(
                     q => q.ten,
                     lnv
                     );
-                
+                lnv = context.ds_loainhanvien.Where(x => x.ten.Equals("Admin")).FirstOrDefault();
+                lnv.ds_quyen.Clear();
+                lnv.ds_quyen.AddRange(context.ds_quyen.ToList());
             //them user
                 NhanVien nv = new NhanVien();
                 nv.tendangnhap = "admin";

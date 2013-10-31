@@ -131,10 +131,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201310301657581_tatca.cs" />
-    <Compile Include="Migrations\201310301657581_tatca.Designer.cs">
-      <DependentUpon>201310301657581_tatca.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\TableModel.cs" />
@@ -3377,6 +3373,8 @@
       <SubType>
       </SubType>
     </Content>
+    <Content Include="Views\AdminSanPham\Index.cshtml" />
+    <Content Include="Views\AdminSanPham\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3553,11 +3551,6 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201310301657581_tatca.resx">
-      <DependentUpon>201310301657581_tatca.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

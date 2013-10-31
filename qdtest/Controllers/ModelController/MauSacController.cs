@@ -11,6 +11,14 @@ namespace qdtest.Controllers.ModelController
     public class MauSacController
     {
         public BanGiayDBContext _db = new BanGiayDBContext();
+        public MauSacController()
+        {
+
+        }
+        public MauSacController(BanGiayDBContext db)
+        {
+            this._db = db;
+        }
         public MauSac get_by_id(int obj_id)
         {
             return _db.ds_mausac.FirstOrDefault(x => x.id == obj_id);
