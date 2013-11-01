@@ -136,6 +136,20 @@ namespace qdtest.Controllers
             {
                 return this._fail_permission("sanpham_add");
             }
+            //check nhom sanpham co it nhat 1
+                NhomSanPhamController ctr_nhomsanpham = new NhomSanPhamController();
+                if (ctr_nhomsanpham.timkiem_count("", "", "", "1") <= 0)
+                {
+                    return this._show_notification("Yêu cầu phải có ít nhất 1 nhóm sản phẩm active mới được thêm sản phẩm mới!");
+                }
+            //check hangsx co it nhat 1
+                HangSXController ctr_hangsx = new HangSXController();
+                if (ctr_hangsx.timkiem_count("", "", "1") <= 0)
+                {
+                    return this._show_notification("Yêu cầu phải có ít nhất 1 hãng sản xuất active mới được thêm sản phẩm mới!");
+                }
+            
+
             return RedirectToAction("Add", "AdminSanPham");
         }
         public ActionResult Edit(int id=0)

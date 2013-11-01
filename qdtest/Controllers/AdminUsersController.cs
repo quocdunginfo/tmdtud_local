@@ -78,7 +78,19 @@ namespace qdtest.Controllers
             {
                 return _fail_permission("user_delete");
             }
-            new NhanVienController().delete(id);
+            try
+            {
+                if (this._user.id == id)
+                {
+                    //xóa chính mình
+                    return _show_notification("Không thể tự xóa bản thân khỏi hệ thống!");
+                }
+                new NhanVienController().delete(id);
+            }
+            catch (Exception ex)
+            {
+                return _show_notification("Nhân viên này có dính khóa ngoại, không thể xóa được");
+            }
             return RedirectToAction("Index","AdminUsers");
         }
         [HttpPost]

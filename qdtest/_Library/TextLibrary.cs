@@ -34,5 +34,19 @@ namespace qdtest._Library
             if (input == null) return false;
             return input.Equals("1") ? true : false;
         }
+        public static List<String> ToListString(String input, Char separator = ',')
+        {
+            return input.Split(separator).ToList();
+        }
+        public static List<int> ToListInt(String input, Char separator = ',')
+        {
+            string[] tmp= input.Split(separator);
+            List<int> re = new List<int>();
+            foreach (var item in tmp)
+            {
+                re.Add(ToInt(item));
+            }
+            return re;
+        }
     }
 }

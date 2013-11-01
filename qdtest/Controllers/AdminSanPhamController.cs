@@ -57,9 +57,9 @@ namespace qdtest.Controllers
             }
             SanPhamController ctr = new SanPhamController();
             SanPham obj = new SanPham();
-            ViewBag.SanPham = obj;
-            ViewBag.Title += " - Add";
-            return View("Index");
+            //add new blank record
+            int id = ctr.add(obj);
+            return RedirectToAction("Index", "AdminSanPham", new {id=id });
         }
         [HttpPost]
         public ActionResult Submit()
@@ -165,6 +165,8 @@ namespace qdtest.Controllers
             int sanpham_id = TextLibrary.ToInt(Request["sanpham_id"]);
             SanPhamController ctr = new SanPhamController();
             ChiTietSPController ctr_chitietsp = new ChiTietSPController(ctr._db);
+            KichThuocController ctr_kichthuoc = new KichThuocController(ctr._db);
+            MauSacController ctr_mausac = new MauSacController(ctr._db);
             SanPham sanpham_obj = ctr.get_by_id(sanpham_id);
             //create new
             ChiTietSP obj = new ChiTietSP();
@@ -185,15 +187,25 @@ namespace qdtest.Controllers
                 {
                     return _fail_permission("chitietsp_add");
                 }
+                //kiểm tra phải có ít nhất 1 kích thước
+                    if (ctr_kichthuoc.timkiem_count("", "", "", "1") <= 0)
+                    {
+                        return _show_notification("Yêu cầu phải có ít nhất 1 kích thước active mới thêm được chi tiết sản phẩm");
+                    }
+                //kiểm tra phải có ít nhất 1 màu sắc
+                    if (ctr_mausac.timkiem_count("", "", "", "1") <= 0)
+                    {
+                        return _show_notification("Yêu cầu phải có ít nhất 1 màu sắc active mới thêm được chi tiết sản phẩm");
+                }
             }
             
             
             //assign data
                 obj.soluong = TextLibrary.ToInt(Request["chitietsp_soluong"]);
-                KichThuocController ctr_kichthuoc = new KichThuocController(ctr._db);
+                //ctr_kichthuoc = new KichThuocController(ctr._db);
                 obj.kichthuoc = ctr_kichthuoc.get_by_id(TextLibrary.ToInt(Request["chitietsp_kichthuoc_id"]));
 
-                MauSacController ctr_mausac = new MauSacController(ctr._db);
+                //ctr_mausac = new MauSacController(ctr._db);
                 obj.mausac = ctr_mausac.get_by_id(TextLibrary.ToInt(Request["chitietsp_mausac_id"]));
 
                 obj.active = TextLibrary.ToBoolean(Request["chitietsp_active"]);

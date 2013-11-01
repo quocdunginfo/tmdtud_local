@@ -118,6 +118,10 @@ namespace qdtest.Controllers.ModelController
             this._tmp_for_get_tree = new List<NhomSanPham2>();
             return tmp;
         }
+        public int timkiem_count(String id = "", String ten = "", String mota = "", String active = "")
+        {
+            return timkiem(id,ten,mota,active).Count;
+        }
         public List<NhomSanPham2> timkiem(String id="", String ten="", String mota="", String active="")
         {
             //get all category

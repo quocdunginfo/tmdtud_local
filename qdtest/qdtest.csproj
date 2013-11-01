@@ -107,6 +107,8 @@
     <Compile Include="Controllers\AdminKhachHangsController.cs" />
     <Compile Include="Controllers\AdminKichThuocController.cs" />
     <Compile Include="Controllers\AdminKichThuocsController.cs" />
+    <Compile Include="Controllers\AdminLoaiNhanVienController.cs" />
+    <Compile Include="Controllers\AdminLoaiNhanViensController.cs" />
     <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\AdminNhomSanPhamController.cs" />
     <Compile Include="Controllers\AdminSanPhamsController.cs" />
@@ -119,8 +121,10 @@
     <Compile Include="Controllers\AdminHangSXsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\FrontController.cs" />
+    <Compile Include="Controllers\ModelController\QuyenController.cs" />
     <Compile Include="Controllers\ModelController\HangSXController.cs" />
     <Compile Include="Controllers\ModelController\HinhAnhController.cs" />
+    <Compile Include="Controllers\ModelController\LoaiNhanVienController.cs" />
     <Compile Include="Controllers\ModelController\MauSacController.cs" />
     <Compile Include="Controllers\ModelController\KichThuocController.cs" />
     <Compile Include="Controllers\ModelController\KhachHangController.cs" />
@@ -130,6 +134,10 @@
     <Compile Include="Controllers\ModelController\ChiTietSPController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201311010217526_base.cs" />
+    <Compile Include="Migrations\201311010217526_base.Designer.cs">
+      <DependentUpon>201311010217526_base.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Models.cs" />
@@ -3375,6 +3383,12 @@
     </Content>
     <Content Include="Views\AdminSanPham\Index.cshtml" />
     <Content Include="Views\AdminSanPham\_ViewStart.cshtml" />
+    <Content Include="Views\AdminLoaiNhanVien\Index.cshtml" />
+    <Content Include="Views\AdminLoaiNhanViens\Index.cshtml">
+      <SubType>
+      </SubType>
+    </Content>
+    <Content Include="Views\AdminLoaiNhanViens\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3551,6 +3565,11 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201311010217526_base.resx">
+      <DependentUpon>201311010217526_base.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

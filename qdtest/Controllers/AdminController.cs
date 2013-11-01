@@ -85,6 +85,11 @@ namespace qdtest.Controllers
             TempData.Add("admin_fail_message","You are not allowed in \""+permission+"\" area!");
             return RedirectToAction("Index", "AdminFail");
         }
+        protected ActionResult _show_notification(String message)
+        {
+            TempData.Add("admin_fail_message", message);
+            return RedirectToAction("Index", "AdminFail");
+        }
         [NonAction]
         protected void _build_common_data()
         {

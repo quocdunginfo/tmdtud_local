@@ -142,7 +142,14 @@ namespace qdtest.Controllers
                 Debug.WriteLine("Delete Nhóm sản phẩm id không tồn tại");
                 return RedirectToAction("Index", "AdminNhomSanPham");
             }
-            controller.delete(id);
+            try
+            {
+                controller.delete(id);
+            }
+            catch (Exception ex)
+            {
+                return _show_notification("Nhóm sản phẩm này có dính khóa ngoại với sản phẩm hiện có nên không xóa được");
+            }
             Debug.WriteLine("Delete Nhóm sản phẩm thành công (xóa luôn con)");
             return RedirectToAction("Index", "AdminNhomSanPham");
         }
