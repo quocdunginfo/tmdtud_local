@@ -44,7 +44,7 @@ namespace qdtest
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "AdminUsers", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                new { controller = "FrontHome", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
         }
 
