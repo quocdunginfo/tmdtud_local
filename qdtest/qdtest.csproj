@@ -139,12 +139,17 @@
     <Compile Include="Migrations\201311010217526_base.Designer.cs">
       <DependentUpon>201311010217526_base.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201311020354200_the_quanhe_sanpham_hinhanh.cs" />
+    <Compile Include="Migrations\201311020354200_the_quanhe_sanpham_hinhanh.Designer.cs">
+      <DependentUpon>201311020354200_the_quanhe_sanpham_hinhanh.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\TableModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="_Library\CookieLibrary.cs" />
     <Compile Include="_Library\GMailLibrary.cs" />
+    <Compile Include="_Library\ImageLibrary.cs" />
     <Compile Include="_Library\TextLibrary.cs" />
     <Compile Include="_Library\ValidateLibrary.cs" />
   </ItemGroup>
@@ -3558,6 +3563,7 @@
     <Folder Include="Content\admin\themes\default\modules\homefeatured\" />
     <Folder Include="Content\admin\themes\default\modules\productcomments\" />
     <Folder Include="Content\admin\themes\default\pdf\" />
+    <Folder Include="_Upload\HinhAnh\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -3569,6 +3575,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201311010217526_base.resx">
       <DependentUpon>201311010217526_base.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311020354200_the_quanhe_sanpham_hinhanh.resx">
+      <DependentUpon>201311020354200_the_quanhe_sanpham_hinhanh.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

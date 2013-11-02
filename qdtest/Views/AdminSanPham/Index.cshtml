@@ -176,6 +176,63 @@
 				</div>
 				<div class="clear">
 				</div>
+                
+                <label>Hình ảnh: </label>
+				<div class="margin-form">
+			        <p><input type="file" name="sanpham_hinhanh"></p>
+			        <p class="preference_description">Thêm hình ảnh cho sản phẩm này (10.00 MB max.)</p>
+		        </div>
+				<div class="clear">
+				</div>
+                <div class="margin-form">
+			        <input type="submit" value="Upload" name="sanpham_upload_hinhanh" class="button">
+		        </div>
+                <div class="clear">
+				</div>
+
+                <label>Danh sách hình ảnh: </label>
+                <div class="margin-form">
+			        <table cellspacing="0" cellpadding="0" class="table tableDnD" id="imageTable">
+						<thead>
+						<tr class="nodrag nodrop"> 
+							<th style="width: 100px;">Hình</th>
+							<th>Đặt làm mặc định</th>
+							<th>Tác vụ</th>
+						</tr>
+						</thead>
+						<tbody id="imageList">
+		                    @foreach(var hinhanh in SanPham.ds_hinhanh.OrderByDescending(x=>x.id).ToList())
+                            {
+                            <tr>
+			                    <td style="padding: 4px;">
+				                    <a href="@Url.Content("~/_Upload/HinhAnh/"+hinhanh.duongdan)" class="fancybox">
+					                    <img src="@Url.Content("~/_Upload/HinhAnh/"+hinhanh.duongdan_thumb)" style="max-width:70px;">
+				                    </a>
+			                    </td>
+			                    
+						        <td class="center cover"><a href="@Url.Action("HinhAnh_SetDefault", "AdminSanPham", new {for_sanpham_id=SanPham.id,hinhanh_id=hinhanh.id })">
+				                    @{
+                                        String macdinh_img = "disabled.gif";
+                                        if (hinhanh.macdinh)
+                                        {
+                                            macdinh_img = "enabled.gif";
+                                        }
+                                    }
+                                    <img class="covered" src="../img/admin/@macdinh_img" alt="Đặt làm mặc định"></a>
+			                    </td>
+			                    <td class="center">
+				                    <a href="@Url.Action("HinhAnh_Delete", "AdminSanPham", new {for_sanpham_id=SanPham.id,hinhanh_id=hinhanh.id })" class="delete_product_image">
+					                    <img src="../img/admin/delete.gif" alt="Delete this image" title="Xóa hình này">
+				                    </a>
+			                    </td>
+		                    </tr>
+                            }
+	                    </tbody>
+				    </table>
+		        </div>
+                <div class="clear">
+				</div>
+
 				<div class="margin-form">
 					<input style="display: none;" id="employee_form_submit_btn" value="Save" name="submitAddemployee" class="button" type="submit">
 				</div>
@@ -247,7 +304,7 @@
 		            $('.assoShop input[type=checkbox]').attr('disabled', false);
 		    }
 	</script>
-		<div style="clear:both;height:0;line-height:0">
+		<div style="clear:both;height:10px;line-height:0;">
 			 &nbsp;
 		</div>
         <!-- DS chi tiet sp-->
@@ -256,7 +313,11 @@
 			<tbody>
             <tr>
 				<td style="vertical-align: bottom;">
-					Danh sách chi tiết sản phẩm
+					<strong style="float:left">Danh sách chi tiết sản phẩm</strong>
+                    <a href="@Url.Action("ChiTietSP_Add", "AdminSanPham", new { for_sanpham_id=SanPham.id })" style="float:right" class ="button bt-icon" id="show_specific_price"><img src="../img/admin/add.gif" alt=""><span>Thêm chi tiết sản phẩm mới</span></a>
+                    <div style="clear:both;height:0;line-height:0">
+			             &nbsp;
+		            </div>
 				</td>
 			</tr>
 			<tr>
@@ -278,47 +339,25 @@
 						<th class="center">
 							<span class="title_box">
 							ID </span>
-							<br>
-							<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=id_employee&amp;employeeOrderway=desc&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/down.gif"></a>
-							<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=id_employee&amp;employeeOrderway=asc&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/up_d.gif"></a>
 						</th>
 						<th>
 							<span class="title_box">
 							Kích thước </span>
-							<br>
-							<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=firstname&amp;employeeOrderway=desc&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/down.gif"></a>
-							<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=firstname&amp;employeeOrderway=asc&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/up.gif"></a>
+							
 						</th>
 						<th>
 							<span class="title_box">
 							Màu sắc </span>
-							<br>
-							<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=email&amp;employeeOrderway=desc&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/down.gif"></a>
-							<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=email&amp;employeeOrderway=asc&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/up.gif"></a>
 						</th>
 						<th>
 							<span class="title_box">
 							Số lượng tồn kho </span>
-							<br>
-							<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=profile&amp;employeeOrderway=desc&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/down.gif"></a>
-							<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=profile&amp;employeeOrderway=asc&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/up.gif"></a>
+							
 						</th>
 						<th class="center">
 							<span class="title_box">
 							Active </span>
-							<br>
-							<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=active&amp;employeeOrderway=desc&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/down.gif"></a>
-							<a href="index.php?controller=AdminEmployees&amp;employeeOrderby=active&amp;employeeOrderway=asc&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/up.gif"></a>
+							
 						</th>
 						<th class="center">
 							Tác vụ<br>&nbsp;
@@ -327,7 +366,7 @@
 					</thead>
 					<tbody>
                     
-					@foreach(var item in SanPham.ds_chitietsp)
+					@foreach(var item in SanPham.ds_chitietsp.OrderByDescending(x=>x.id))
                     {
                     <tr class=" row_hover">
 						<td class="center">
@@ -442,10 +481,7 @@
 				</div>
 				<div class="clear">
 				</div>
-				<div class="margin-form">
-					<input value="@if(chitietsp_edit_mode)
-                   {<text>Lưu</text>} else {<text>Thêm</text>}" name="submitAddemployee" class="button" type="submit">
-				</div>
+
 				<div class="small">
 					<sup>*</sup> Trường bắt buộc
 				</div>

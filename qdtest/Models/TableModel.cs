@@ -10,15 +10,24 @@ namespace qdtest.Models
 {
     public class HinhAnh
     {
+        public HinhAnh()
+        {
+            this.id = 0;
+            this.duongdan = this.duongdan_thumb = "";
+            this.macdinh = false;
+        }
         public int id { get; set; }
         public String duongdan { get; set; }//đường dẫn tương đối
+        public String duongdan_thumb { get; set; }//đường dẫn tương đối
+        public Boolean macdinh { get; set; }//Hình ảnh hiện trên trang danh mục
+        //external
+        public virtual SanPham sanpham { get; set; }
     }
     public class SanPham
     {
         public SanPham()
         {
             this.ds_chitietsp = new List<ChiTietSP>();
-            //  this.ds_dathang = new List<DatHang>();
             this.ds_hinhanh = new List<HinhAnh>();
             this.masp = "";
             this.ten = "";
@@ -34,11 +43,9 @@ namespace qdtest.Models
         public Boolean active { get; set; }
         //external
         public virtual List<ChiTietSP> ds_chitietsp { get; set; }
-        // public virtual List<DatHang> ds_dathang { get; set; }
         public virtual List<HinhAnh> ds_hinhanh { get; set; }
         public virtual HangSX hangsx { get; set; }
         public virtual NhomSanPham nhomsanpham { get; set; }
-        //  public virtual NhanVien nguoidung { get; set; }
     }
     public class Topic
     {

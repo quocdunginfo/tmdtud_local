@@ -5,6 +5,8 @@ using qdtest.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -134,8 +136,16 @@ namespace qdtest.Controllers
                     obj.id = maxid;
                     this._state.Add("add_ok");
                 }
+                //get search value
+                if (!TextLibrary.ToString(Request["sanpham_upload_hinhanh"]).Equals(""))
+                {
+                    HinhAnhController ctr_hinhanh = new HinhAnhController(ctr._db);
+                    List<HinhAnh> hinhanh_list = ctr_hinhanh.Upload(Server,Request.Files);
+                    obj.ds_hinhanh.AddRange(hinhanh_list);
+                    ctr._db.SaveChanges();
+                }
                 //successfull redirect
-                return RedirectToAction("Index", "AdminSanPhams");
+                return RedirectToAction("Index", "AdminSanPham", new { id=obj.id});
             }
             //fail redirect
             this._state.AddRange(validate);
@@ -143,6 +153,11 @@ namespace qdtest.Controllers
             ViewBag.SanPham = obj;
             ViewBag.Title += " - Submit";
             return View("Index");
+        }
+        [HttpGet]
+        public ActionResult ChiTietSP_Add(int for_sanpham_id=0)
+        {
+            return RedirectToAction("Index", "AdminSanPham", new { id = for_sanpham_id });
         }
         [HttpGet]
         public ActionResult ChiTietSP_Edit(int id)
@@ -222,6 +237,16 @@ namespace qdtest.Controllers
             //finally call update
             ctr._db.SaveChanges();
             return RedirectToAction("Index", "AdminSanPham", new { id = sanpham_id});
+        }
+        [HttpGet]
+        public ActionResult HinhAnh_SetDefault(int for_sanpham_id, int hinhanh_id)
+        {
+            return RedirectToAction("Index", "AdminSanPham", new { id=for_sanpham_id });
+        }
+        [HttpGet]
+        public ActionResult HinhAnh_Delete(int for_sanpham_id, int hinhanh_id)
+        {
+            return RedirectToAction("Index", "AdminSanPham", new { id = for_sanpham_id });
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
