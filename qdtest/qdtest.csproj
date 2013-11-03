@@ -135,14 +135,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201311010217526_base.cs" />
-    <Compile Include="Migrations\201311010217526_base.Designer.cs">
-      <DependentUpon>201311010217526_base.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201311020354200_the_quanhe_sanpham_hinhanh.cs" />
-    <Compile Include="Migrations\201311020354200_the_quanhe_sanpham_hinhanh.Designer.cs">
-      <DependentUpon>201311020354200_the_quanhe_sanpham_hinhanh.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\TableModel.cs" />
@@ -3571,14 +3563,6 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201311010217526_base.resx">
-      <DependentUpon>201311010217526_base.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201311020354200_the_quanhe_sanpham_hinhanh.resx">
-      <DependentUpon>201311020354200_the_quanhe_sanpham_hinhanh.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

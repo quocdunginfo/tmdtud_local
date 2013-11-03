@@ -28,7 +28,7 @@
             //      new Person { FullName = "Brice Lambson" },
             //      new Person { FullName = "Rowan Miller" }
             //    );
-            // Update-Database -TargetMigration:"MigrationName"
+            // Update-Database
             
             //them quyen
             String[] quyens = { "home", "sanpham", "user", "khachhang", "nhomsanpham", "kichthuoc", "mausac", "hinhanh", "hangsx","nhacc","nhaphang","donhang","chitietsp","loainhanvien" };
@@ -59,17 +59,18 @@
                     item
                     );
                 }
-                
+                context.SaveChanges();
             //them loai nhan vien
                 LoaiNhanVien lnv = new LoaiNhanVien();
                 lnv.ten = "Admin";
-                lnv.ds_quyen.AddRange(context.ds_quyen.ToList());
+                //lnv.ds_quyen.AddRange(context.ds_quyen.ToList());
                 context.ds_loainhanvien.AddOrUpdate(
                     q => q.ten,
                     lnv
                     );
+                context.SaveChanges();
                 lnv = context.ds_loainhanvien.Where(x => x.ten.Equals("Admin")).FirstOrDefault();
-                lnv.ds_quyen = new List<Quyen>();
+                lnv.ds_quyen.Clear();
                 lnv.ds_quyen.AddRange(context.ds_quyen.ToList());
             //them user
                 NhanVien nv = new NhanVien();
@@ -83,7 +84,7 @@
                     q => q.tendangnhap,
                     nv
                     );
-            
+                context.SaveChanges();
         }
     }
 }
