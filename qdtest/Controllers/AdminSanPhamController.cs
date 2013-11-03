@@ -140,7 +140,7 @@ namespace qdtest.Controllers
                 if (!TextLibrary.ToString(Request["sanpham_upload_hinhanh"]).Equals(""))
                 {
                     HinhAnhController ctr_hinhanh = new HinhAnhController(ctr._db);
-                    List<HinhAnh> hinhanh_list = ctr_hinhanh.Upload(Server,Request.Files);
+                    List<HinhAnh> hinhanh_list = ctr_hinhanh.upload(Server,Request.Files);
                     obj.ds_hinhanh.AddRange(hinhanh_list);
                     ctr._db.SaveChanges();
                 }
@@ -241,11 +241,16 @@ namespace qdtest.Controllers
         [HttpGet]
         public ActionResult HinhAnh_SetDefault(int for_sanpham_id, int hinhanh_id)
         {
+            HinhAnhController ctr = new HinhAnhController();
+            ctr.set_default(hinhanh_id);
             return RedirectToAction("Index", "AdminSanPham", new { id=for_sanpham_id });
         }
         [HttpGet]
         public ActionResult HinhAnh_Delete(int for_sanpham_id, int hinhanh_id)
         {
+            HinhAnhController ctr = new HinhAnhController();
+            ctr.delete(hinhanh_id, Server);
+            //final action
             return RedirectToAction("Index", "AdminSanPham", new { id = for_sanpham_id });
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

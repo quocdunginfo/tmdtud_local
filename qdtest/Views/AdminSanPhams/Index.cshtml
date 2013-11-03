@@ -130,6 +130,7 @@
 					<col width="10px"/>
 					<col width="25px"/>
 					<col width="250px"/>
+                    <col width="150px"/>
 					<col />
 					<col width="300px"/>
 					<col width="150px"/>
@@ -157,6 +158,10 @@
 							<img border="0" src="../img/admin/down.gif"/></a>
 							<a href="index.php?controller=AdminEmployees&employeeOrderby=lastname&employeeOrderway=asc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
 							<img border="0" src="../img/admin/up.gif"/></a>
+						</th>
+                        <th>
+							<span class="title_box">
+							Hình ảnh </span>
 						</th>
 						<th>
 							<span class="title_box">
@@ -213,6 +218,9 @@
 						<td>
 							<input type="text" class="filter" name="sanpham_masp" value="@timkiem_sanpham["masp"]" style="width:95%"/>
 						</td>
+                        <td>
+							
+						</td>
 						<td>
 							<input type="text" class="filter" name="sanpham_ten" value="@timkiem_sanpham["ten"]" style="width:95%"/>
 						</td>
@@ -220,7 +228,7 @@
 							<input type="text" class="filter" name="sanpham_mota" value="@timkiem_sanpham["mota"]" style="width:95%"/>
 						</td>
 						<td>
-							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="sanpham_loaisanpham_id" style="width:95%"
+							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="sanpham_loaisanpham_id" style="width:95%" >
 								
 							</select>
 						</td>
@@ -247,6 +255,16 @@
 						</td>
 						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminSanPhams", new { id = item.id })'">
 							 @item.masp
+						</td>
+                        <td class="pointer center" onclick="document.location = '@Url.Action("Edit", "AdminSanPhams", new { id = item.id })'">
+							@if (item._get_hinhanh_macdinh() == null)
+                            {
+                                <text>(chưa có hình)</text>
+                            } 
+                            else
+                            {
+                            <img src="@Url.Content("~/_Upload/HinhAnh/"+item._get_hinhanh_macdinh().duongdan_thumb)" style="max-width:70px; max-height:70px"/>
+                            }
 						</td>
 						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminSanPhams", new { id = item.id })'">
 							 @item.ten

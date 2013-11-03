@@ -9,6 +9,7 @@ using qdtest._Library;
 using System.Drawing;
 using System.IO;
 using System.Diagnostics;
+using qdtest.Controllers.ModelController;
 
 namespace CuaHangBanGiay.Controllers
 {
@@ -53,15 +54,53 @@ namespace CuaHangBanGiay.Controllers
             db.SaveChanges();
             return db.ds_hinhanh.Max(x => x.id);
         }
-        public Boolean delete(int id)
+        public Boolean delete(int id, HttpServerUtilityBase server_context)
         {
-            HinhAnh kq = db.ds_hinhanh.Where(x => x.id == id).FirstOrDefault();
+            HinhAnh kq = this.get_by_id(id);
             if (kq == null) return false;
+            //first delete file
+            try
+            {
+                String directory = "~/_Upload/HinhAnh/";
+                System.IO.File.Delete(server_context.MapPath(Path.Combine(directory, kq.duongdan)));
+                System.IO.File.Delete(server_context.MapPath(Path.Combine(directory, kq.duongdan_thumb)));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+            //delete in database
             db.ds_hinhanh.Remove(kq);
             db.SaveChanges();
             return true;
         }
-        public List<HinhAnh> Upload(HttpServerUtilityBase server_context, HttpFileCollectionBase file_list)
+        public Boolean set_default(int id)
+        {
+            //get hinhanh obj
+            HinhAnh obj = this.get_by_id(id);
+            if (obj == null || obj.sanpham == null)
+            {
+                return false;
+            }
+            //get sanpham obj
+            SanPhamController ctr_sanpham=new SanPhamController(this.db);
+            SanPham sanpham = ctr_sanpham.get_by_id(obj.sanpham.id);
+            //get all hinhanh belong to this sanpham
+            List<HinhAnh> hinhanh_list = this.db.ds_hinhanh.Where(x => x.sanpham.id == sanpham.id).ToList();
+            //set all to non-default
+            foreach (HinhAnh item in hinhanh_list)
+            {
+                item.macdinh = false;
+                //set to default
+                if (item.id == obj.id)
+                {
+                    item.macdinh = true;
+                }
+            }
+            this.db.SaveChanges();
+            return true;
+        }
+        public List<HinhAnh> upload(HttpServerUtilityBase server_context, HttpFileCollectionBase file_list)
         {
             Debug.WriteLine("file count: "+file_list.Count);
             List<HinhAnh> re=new List<HinhAnh>();

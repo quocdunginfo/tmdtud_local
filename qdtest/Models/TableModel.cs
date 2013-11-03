@@ -46,6 +46,10 @@ namespace qdtest.Models
         public virtual List<HinhAnh> ds_hinhanh { get; set; }
         public virtual HangSX hangsx { get; set; }
         public virtual NhomSanPham nhomsanpham { get; set; }
+        public HinhAnh _get_hinhanh_macdinh()
+        {
+            return this.ds_hinhanh.Where(x => x.macdinh == true).FirstOrDefault();
+        }
     }
     public class Topic
     {

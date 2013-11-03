@@ -23,20 +23,17 @@ namespace qdtest._Library
             int destX = 0;
             int destY = 0;
 
-            // Resize Image to have the height = logoSize/2 or width = logoSize.
-            // Height is greater than width, set Height = logoSize and resize width accordingly
-            if (sourceWidth > (2 * sourceHeight))
+            //landscape
+            if (sourceWidth >= sourceHeight)
             {
                 destWidth = logoSize;
-                destHeight = (float)(sourceHeight * logoSize / sourceWidth);
+                destHeight = (float)(sourceHeight * destWidth / sourceWidth);
             }
             else
             {
-                int h = logoSize / 2;
-                destHeight = h;
-                destWidth = (float)(sourceWidth * h / sourceHeight);
+                destHeight = logoSize;
+                destWidth = (float)(sourceWidth * destHeight / sourceHeight);
             }
-            // Width is greater than height, set Width = logoSize and resize height accordingly
 
             Bitmap bmPhoto = new Bitmap((int)destWidth, (int)destHeight,
                                         PixelFormat.Format32bppPArgb);
