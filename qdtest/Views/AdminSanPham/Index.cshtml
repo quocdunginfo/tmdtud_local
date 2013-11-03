@@ -234,7 +234,7 @@
 				</div>
 
 				<div class="margin-form">
-					<input style="display: none;" id="employee_form_submit_btn" value="Save" name="submitAddemployee" class="button" type="submit">
+					<input  id="employee_form_submit_btn" value="Lưu" name="submitAddemployee" class="button" type="submit">
 				</div>
 				<div class="small">
 					<sup>*</sup> Trường bắt buộc
@@ -481,7 +481,11 @@
 				</div>
 				<div class="clear">
 				</div>
-
+                <div class="margin-form">
+					<input value="@if(chitietsp_edit_mode) {<text>Lưu</text>}
+                   else
+                   {<text>Thêm</text>}" name="submitAddemployee" class="button" type="submit">
+				</div>
 				<div class="small">
 					<sup>*</sup> Trường bắt buộc
 				</div>
