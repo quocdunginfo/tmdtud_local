@@ -121,7 +121,6 @@
     <Compile Include="Controllers\AdminHangSXsController.cs" />
     <Compile Include="Controllers\FrontHomeController.cs" />
     <Compile Include="Controllers\FrontController.cs" />
-    <Compile Include="Controllers\FrontHomeController.cs" />
     <Compile Include="Controllers\ModelController\QuyenController.cs" />
     <Compile Include="Controllers\ModelController\HangSXController.cs" />
     <Compile Include="Controllers\ModelController\HinhAnhController.cs" />
