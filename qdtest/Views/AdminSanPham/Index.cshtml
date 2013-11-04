@@ -100,6 +100,10 @@
 		</div>
 		<form id="employee_form" class="defaultForm AdminEmployees" action="@Url.Action("Submit","AdminSanPham")" method="post" enctype="multipart/form-data">
 			<input name="sanpham_id" id="id_employee" value="@SanPham.id" type="hidden">
+               @if (State.Contains("edit_ok"))
+               {
+                   @: 
+               }
 			<fieldset id="fieldset_0">
 				<legend>
 				<img src="../img/admin/nav-user.gif" alt="Employees"> Thông tin sản phẩm </legend>
@@ -108,8 +112,8 @@
 					<input name="sanpham_masp" id="firstname" value="@SanPham.masp" class="" size="33" type="text">
 					<sup>*</sup>
                     <span style="color: red;">
-                        @if (State.Contains("masp_fail"))
-                        { <text> Không hợp lệ</text> }
+                        @if (State.Contains("masp_exist_fail"))
+                        { <text> Không hợp lệ, bị trùng mã với sản phẩm có sẵn</text> }
                     </span>
 				</div>
 				<div class="clear">

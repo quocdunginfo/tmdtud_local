@@ -48,7 +48,16 @@ namespace qdtest.Models
         public virtual NhomSanPham nhomsanpham { get; set; }
         public HinhAnh _get_hinhanh_macdinh()
         {
-            return this.ds_hinhanh.Where(x => x.macdinh == true).FirstOrDefault();
+            HinhAnh re= this.ds_hinhanh.Where(x => x.macdinh == true).FirstOrDefault();
+            if (re == null)
+            {
+                re = new HinhAnh();
+                re.duongdan = "default_no_image.jpg";
+                re.duongdan_thumb = "_thumb_default_no_image.jpg";
+                re.macdinh = true;
+                re.sanpham = this;
+            }
+            return re;
         }
     }
     public class Topic

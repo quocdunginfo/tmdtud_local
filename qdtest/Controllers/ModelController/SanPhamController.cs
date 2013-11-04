@@ -156,12 +156,23 @@ namespace qdtest.Controllers.ModelController
             //FINAL return
             return obj_list;
         }
+        public Boolean can_use_masp(int obj_id, String masp)
+        {
+            SanPham u = (from obj in _db.ds_sanpham
+                          where obj.masp.ToUpper().Contains(masp.ToUpper())
+                          && obj.id != obj_id
+                          select obj).FirstOrDefault();
+            return u == null ? true : false;
+        }
         public List<String> validate(SanPham obj)
         {
             //
             List<String> re = new List<string>();
             //check
-            
+            if (!this.can_use_masp(obj.id, obj.masp))
+            {
+                re.Add("masp_exist_fail");
+            }
             return re;
         }
     }
