@@ -24,10 +24,10 @@ namespace CuaHangBanGiay.Controllers.View_Controller
             List<SanPham> listnew = ctrl.timkiem("", "", "", "", -1, -1, null, null, "1", "id", true, 0, 6);
             if (listnew != null)
             {
-                foreach (var item in listnew)
-                {
-                    item.mota = sub(item.mota);    
-                }
+                //foreach (var item in listnew)
+                //{
+                //    item.mota = sub(item.mota);    
+                //}
                 return listnew;
             }
             return new List<SanPham>();
