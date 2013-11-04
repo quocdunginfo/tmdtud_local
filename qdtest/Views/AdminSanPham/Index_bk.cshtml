@@ -1,0 +1,499 @@
+﻿@{
+    //ViewBag.Title
+    //ViewBag.ActiveTab
+    var State = (List<String>)ViewBag.State;
+    var SanPham = (qdtest.Models.SanPham)ViewBag.SanPham;
+    var NhomSanPham2_ListAll = (List<qdtest.Models.NhomSanPham2>)ViewBag.NhomSanPham2_ListAll;
+    var HangSX_ListAll = (List<qdtest.Models.HangSX>)ViewBag.HangSX_ListAll;
+    var KichThuoc_ListAll = (List<qdtest.Models.KichThuoc>)ViewBag.KichThuoc_ListAll;
+    var MauSac_ListAll = (List<qdtest.Models.MauSac>)ViewBag.MauSac_ListAll;
+    var ChiTietSP = (qdtest.Models.ChiTietSP)ViewBag.ChiTietSP;
+}
+<div id="main">
+	<div id="content">
+		<div class="toolbar-placeholder">
+			<div class="toolbarBox toolbarHead">
+				<ul class="cc_button">
+					<li>
+					<a id="desc-employee-save" class="toolbar_btn" href="#" title="Lưu">
+					<span class="process-icon-save "></span>
+					<div>
+					    Lưu
+					</div>
+					</a>
+					</li>
+					<li>
+					<a id="desc-employee-back" class="toolbar_btn" href="@Url.Action("Index","AdminSanPhams")" title="Trở về">
+					<span class="process-icon-back "></span>
+					<div>
+						 Trở về
+					</div>
+					</a>
+					</li>
+				</ul>
+				<script language="javascript" type="text/javascript">
+				    //<![CDATA[
+				    var submited = false
+				    var modules_list_loaded = false;
+				    $(function () {
+				        //get reference on save link
+				        btn_save = $('span[class~="process-icon-save"]').parent();
+				        //get reference on form submit button
+				        btn_submit = $('#employee_form_submit_btn');
+				        if (btn_save.length > 0 && btn_submit.length > 0) {
+				            //get reference on save and stay link
+				            btn_save_and_stay = $('span[class~="process-icon-save-and-stay"]').parent();
+				            //get reference on current save link label
+				            lbl_save = $('#desc-employee-save div');
+				            //override save link label with submit button value
+				            if (btn_submit.val().length > 0)
+				                lbl_save.html(btn_submit.attr("value"));
+				            if (btn_save_and_stay.length > 0) {
+				                //get reference on current save link label
+				                lbl_save_and_stay = $('#desc-employee-save-and-stay div');
+				                //override save and stay link label with submit button value
+				                if (btn_submit.val().length > 0 && lbl_save_and_stay && !lbl_save_and_stay.hasClass('locked')) {
+				                    lbl_save_and_stay.html(btn_submit.val() + " and stay ");
+				                }
+				            }
+				            //hide standard submit button
+				            btn_submit.hide();
+				            //bind enter key press to validate form
+				            $('#employee_form').keypress(function (e) {
+				                if (e.which == 13 && e.target.localName != 'textarea')
+				                    $('#desc-employee-save').click();
+				            });
+				            //submit the form
+				            btn_save.click(function () {
+				                // Avoid double click
+				                if (submited)
+				                    return false;
+				                submited = true;
+				                //add hidden input to emulate submit button click when posting the form -> field name posted
+				                btn_submit.before('<input type="hidden" name="' + btn_submit.attr("name") + '" value="1" />');
+				                $('#employee_form').submit();
+				                return false;
+				            });
+				            if (btn_save_and_stay) {
+				                btn_save_and_stay.click(function () {
+				                    //add hidden input to emulate submit button click when posting the form -> field name posted
+				                    btn_submit.before('<input type="hidden" name="' + btn_submit.attr("name") + 'AndStay" value="1" />');
+				                    $('#employee_form').submit();
+				                    return false;
+				                });
+				            }
+				        }
+				    });
+				    //]]>
+			</script>
+				<div class="pageTitle">
+					<h3>
+					<span id="current_obj" style="font-weight: normal;">
+					<span class="breadcrumb item-0 ">Sản phẩm <img alt=">" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"> </span>
+					<span class="breadcrumb item-1 ">Chi tiết </span>
+					</span>
+					</h3>
+				</div>
+			</div>
+		</div>
+		<div class="leadin">
+		</div>
+		<form id="employee_form" class="defaultForm AdminEmployees" action="@Url.Action("Submit","AdminSanPham")" method="post" enctype="multipart/form-data">
+			<input name="sanpham_id" id="id_employee" value="@SanPham.id" type="hidden">
+			<fieldset id="fieldset_0">
+				<legend>
+				<img src="../img/admin/nav-user.gif" alt="Employees"> Thông tin sản phẩm </legend>
+				<label>Mã sản phẩm:</label>
+				<div class="margin-form">
+					<input name="sanpham_masp" id="firstname" value="@SanPham.masp" class="" size="33" type="text">
+					<sup>*</sup>
+                    <span style="color: red;">
+                        @if (State.Contains("masp_fail"))
+                        { <text> Không hợp lệ</text> }
+                    </span>
+				</div>
+				<div class="clear">
+				</div>
+				<label>Tên:</label>
+				<div class="margin-form">
+					<input name="sanpham_ten" Value="@SanPham.ten" class="" size="33" type="text">
+					<sup>*</sup>
+                    <span style="color: red;">
+                        @if(State.Contains("ten_fail")) { <text> Không hợp lệ</text> }
+                    </span>
+				</div>
+				<div class="clear">
+				</div>
+				<label>Mô tả: </label>
+				<div class="margin-form">
+					<input name="sanpham_mota" size="33" class="" value="@SanPham.mota" type="text">
+				</div>
+				<div class="clear">
+				</div>
+				
+                <label>Nhóm sản phẩm:</label>
+                <div class="margin-form">
+                    <select name="sanpham_nhomsanpham_id" style="width:400px">
+					    @foreach(var cat in NhomSanPham2_ListAll) {
+                            String pre_fix = "";
+                            for (int i = 0; i < cat.level; i++)
+                            {
+                                pre_fix += "--";
+                            }
+                            <option value="@cat.id" @if(SanPham.nhomsanpham!=null && cat.id==SanPham.nhomsanpham.id) { <text>selected="selected"</text> }>@pre_fix @cat.ten</option>
+                        }
+				    </select>
+                    <sup>*</sup>
+                </div>
+                <div class="clear">
+                </div>
+                <label>Hãng sản xuất:</label>
+                <div class="margin-form">
+                    <select name="sanpham_hangsx_id" style="width:400px">
+					    @foreach (var hangsx in HangSX_ListAll)
+                        {
+                            <option value="@hangsx.id" @if(SanPham.hangsx!=null && hangsx.id==SanPham.hangsx.id) { <text>selected="selected"</text> }>@hangsx.ten</option>
+                        }
+				    </select>
+                    <sup>*</sup>
+                </div>
+                <div class="clear">
+                </div>
+
+				<label>Active: </label>
+				<div class="margin-form">
+					<input name="sanpham_active" id="active_on" value="1" @if(@SanPham.active==true) {<text>checked="checked"</text>} type="radio">
+					<label class="t" for="active_on">
+					<img src="../img/admin/enabled.gif" alt="Enabled" title="Enabled">
+					</label>
+					<input name="sanpham_active" id="active_off" value="0" @if(@SanPham.active==false) {<text>checked="checked"</text>} type="radio">
+					<label class="t" for="active_off">
+					<img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled">
+					</label>
+					<p class="preference_description">
+						 Hiển thị hoặc không hiển thị sản phẩm
+					</p>
+				</div>
+				<div class="clear">
+				</div>
+                
+                <label>Hình ảnh: </label>
+				<div class="margin-form">
+			        <p><input type="file" name="sanpham_hinhanh"></p>
+			        <p class="preference_description">Thêm hình ảnh cho sản phẩm này (10.00 MB max.)</p>
+		        </div>
+				<div class="clear">
+				</div>
+                <div class="margin-form">
+			        <input type="submit" value="Upload" name="sanpham_upload_hinhanh" class="button">
+		        </div>
+                <div class="clear">
+				</div>
+
+                <label>Danh sách hình ảnh: </label>
+                <div class="margin-form">
+			        <table cellspacing="0" cellpadding="0" class="table tableDnD" id="imageTable">
+						<thead>
+						<tr class="nodrag nodrop"> 
+							<th style="width: 100px;">Hình</th>
+							<th>Đặt làm mặc định</th>
+							<th>Tác vụ</th>
+						</tr>
+						</thead>
+						<tbody id="imageList">
+		                    @foreach(var hinhanh in SanPham.ds_hinhanh.OrderByDescending(x=>x.id).ToList())
+                            {
+                            <tr>
+			                    <td style="padding: 4px;">
+				                    <a href="@Url.Content("~/_Upload/HinhAnh/"+hinhanh.duongdan)" class="fancybox">
+					                    <img src="@Url.Content("~/_Upload/HinhAnh/"+hinhanh.duongdan_thumb)" style="max-width:70px;">
+				                    </a>
+			                    </td>
+			                    
+						        <td class="center cover"><a href="@Url.Action("HinhAnh_SetDefault", "AdminSanPham", new {for_sanpham_id=SanPham.id,hinhanh_id=hinhanh.id })">
+				                    @{
+                                        String macdinh_img = "disabled.gif";
+                                        if (hinhanh.macdinh)
+                                        {
+                                            macdinh_img = "enabled.gif";
+                                        }
+                                    }
+                                    <img class="covered" src="../img/admin/@macdinh_img" alt="Đặt làm mặc định"></a>
+			                    </td>
+			                    <td class="center">
+				                    <a href="@Url.Action("HinhAnh_Delete", "AdminSanPham", new {for_sanpham_id=SanPham.id,hinhanh_id=hinhanh.id })" class="delete_product_image">
+					                    <img src="../img/admin/delete.gif" alt="Delete this image" title="Xóa hình này">
+				                    </a>
+			                    </td>
+		                    </tr>
+                            }
+	                    </tbody>
+				    </table>
+		        </div>
+                <div class="clear">
+				</div>
+
+				<div class="margin-form">
+					<input  id="employee_form_submit_btn" value="Lưu" name="submitAddemployee" class="button" type="submit">
+				</div>
+				<div class="small">
+					<sup>*</sup> Trường bắt buộc
+				</div>
+			</fieldset>
+		</form>
+		<script type="text/javascript">
+		    var module_dir = '/ps/modules/';
+		    var id_language = 1;
+		    var languages = new Array();
+		    var vat_number = 1;
+		    // Multilang field setup must happen before document is ready so that calls to displayFlags() to avoid
+		    // precedence conflicts with other document.ready() blocks
+		    languages[0] = {
+		        id_lang: 1,
+		        iso_code: 'en',
+		        name: 'English (United States)',
+		        is_default: '1'
+		    };
+		    // we need allowEmployeeFormLang var in ajax request
+		    allowEmployeeFormLang = 0;
+		    displayFlags(languages, id_language, allowEmployeeFormLang);
+		    $(document).ready(function () {
+		        if ($(".datepicker").length > 0)
+		            $(".datepicker").datepicker({
+		                prevText: '',
+		                nextText: '',
+		                dateFormat: 'yy-mm-dd'
+		            });
+		    });
+		    $(document).ready(function () {
+		        $('select[name=id_profile]').change(function () {
+		            ifSuperAdmin($(this));
+		            $.ajax({
+		                url: "index.php?controller=AdminEmployees&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c",
+		                cache: false,
+		                data: {
+		                    ajax: '1',
+		                    action: 'getTabByIdProfile',
+		                    id_profile: $(this).val()
+		                },
+		                dataType: 'json',
+		                success: function (resp, textStatus, jqXHR) {
+		                    if (resp != false) {
+		                        $('select[name=default_tab]').html('');
+		                        $.each(resp, function (key, r) {
+		                            if (r.id_parent == 0) {
+		                                $('select[name=default_tab]').append('<optgroup label="' + r.name + '"></optgroup>');
+		                                $.each(r.children, function (k, value) {
+		                                    $('select[name=default_tab]').append('<option value="' + r.id_tab + '">' + value.name + '</option>')
+		                                });
+		                            }
+		                        });
+		                    }
+		                }
+		            });
+		        });
+		        ifSuperAdmin($('select[name=id_profile]'));
+		    });
+		    function ifSuperAdmin(el) {
+		        var val = $(el).val();
+		        if (!val || val == 1) {
+		            $('.assoShop input[type=checkbox]').attr('disabled', true);
+		            $('.assoShop input[type=checkbox]').attr('checked', true);
+		        }
+		        else
+		            $('.assoShop input[type=checkbox]').attr('disabled', false);
+		    }
+	</script>
+		<div style="clear:both;height:10px;line-height:0;">
+			 &nbsp;
+		</div>
+        <!-- DS chi tiet sp-->
+        <form method="post" action="/AdminSanPham/ChiTietSP_Submit" class="form">
+			<table class="table_grid" name="list_table">
+			<tbody>
+            <tr>
+				<td style="vertical-align: bottom;">
+					<strong style="float:left">Danh sách chi tiết sản phẩm</strong>
+                    <a href="@Url.Action("ChiTietSP_Add", "AdminSanPham", new { for_sanpham_id=SanPham.id })" style="float:right" class ="button bt-icon" id="show_specific_price"><img src="../img/admin/add.gif" alt=""><span>Thêm chi tiết sản phẩm mới</span></a>
+                    <div style="clear:both;height:0;line-height:0">
+			             &nbsp;
+		            </div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table class="table employee" cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom:10px;">
+					<colgroup><col width="10px">
+					<col width="40px">
+					<col width="250px">
+					<col>
+					<col width="300px">
+					<col width="150px">
+					<col width="30px">
+					<col width="52px">
+					</colgroup><thead>
+					<tr class="nodrag nodrop" style="height: 40px">
+						<th class="center">
+							
+						</th>
+						<th class="center">
+							<span class="title_box">
+							ID </span>
+						</th>
+						<th>
+							<span class="title_box">
+							Kích thước </span>
+							
+						</th>
+						<th>
+							<span class="title_box">
+							Màu sắc </span>
+						</th>
+						<th>
+							<span class="title_box">
+							Số lượng tồn kho </span>
+							
+						</th>
+						<th class="center">
+							<span class="title_box">
+							Active </span>
+							
+						</th>
+						<th class="center">
+							Tác vụ<br>&nbsp;
+						</th>
+					</tr>
+					</thead>
+					<tbody>
+                    
+					@foreach(var item in SanPham.ds_chitietsp.OrderByDescending(x=>x.id))
+                    {
+                    <tr class=" row_hover">
+						<td class="center">
+						</td>
+						<td class="pointer center" onclick="document.location = '@Url.Action("ChiTietSP_Edit", "AdminSanPham", new { id = item.id })'">
+				            @item.id
+						</td>
+						<td class="pointer" onclick="document.location = '@Url.Action("ChiTietSP_Edit", "AdminSanPham", new { id = item.id })'">
+							@item.kichthuoc.giatri
+						</td>
+						<td class="pointer" onclick="document.location = '@Url.Action("ChiTietSP_Edit", "AdminSanPham", new { id = item.id })'">
+							@item.mausac.giatri
+						</td>
+						<td class="pointer" onclick="document.location = '@Url.Action("ChiTietSP_Edit", "AdminSanPham", new { id = item.id })'">
+							@item.soluong
+						</td>
+						<td class="pointer center" onclick="document.location = '@Url.Action("ChiTietSP_Edit", "AdminSanPham", new { id = item.id })'">
+							<a href="@Url.Action("ChiTietSP_Edit", "AdminSanPham", new { id = item.id })" title="Enabled">
+							    @if(item.active==true)
+                                {
+                                    <text>
+                                        <img src="../img/admin/enabled.gif" alt="Enabled"/>
+                                    </text>
+                                }
+                                else
+                                {
+                                    <text>
+                                        <img src="../img/admin/disabled.gif" alt="Disabled"/>
+                                    </text>
+                                }
+							</a>
+						</td>
+						<td class="center" style="white-space: nowrap;">
+							<a href="@Url.Action("ChiTietSP_Edit", "AdminSanPham", new { id = item.id })" class="edit" title="Edit">
+							<img src="../img/admin/edit.gif" alt="Edit"/>
+							</a>
+                            &nbsp;&nbsp;
+                            <a href="@Url.Action("Delete", "AdminChiTietSP", new { id = item.id })" class="edit" title="Delete">
+							<img src="../img/admin/delete.gif" alt="Delete"/>
+							</a>
+						</td>
+					</tr>
+                    }
+					</tbody>
+					</table>
+				</td>
+			</tr>
+			</tbody>
+
+			</table>
+		</form>
+        <!-- END DS chi tiet sp -->
+
+        <!-- Them chi tiet SP moi -->
+        <form class="defaultForm AdminEmployees" action="@Url.Action("ChiTietSP_Submit","AdminSanPham")" method="post" enctype="multipart/form-data">
+			<input name="sanpham_id" value="@SanPham.id" type="hidden">
+            <input name="chitietsp_id" value="@ChiTietSP.id" type="hidden">
+            @{
+                Boolean chitietsp_edit_mode = ChiTietSP.id>0?true:false;
+            }
+			<fieldset>
+				<legend>
+				<img src="../img/admin/nav-user.gif" alt="Employees"> Thông tin chi tiết sản phẩm </legend>
+				
+                <label>Kích thước:</label>
+                <div class="margin-form">
+                    <select name="chitietsp_kichthuoc_id" style="width:400px">
+					    @foreach (var item in KichThuoc_ListAll)
+                        {
+                            <option value="@item.id" @if (chitietsp_edit_mode && ChiTietSP.kichthuoc.id == item.id)
+                                                     {<text>selected="selected"</text>}>@item.giatri</option>
+                        }
+				    </select>
+                    <sup>*</sup>
+                </div>
+                <div class="clear">
+                </div>
+                <label>Màu sắc:</label>
+                <div class="margin-form">
+                    <select name="chitietsp_mausac_id" style="width:400px">
+					    @foreach (var item in MauSac_ListAll)
+                        {
+                            <option value="@item.id" @if (chitietsp_edit_mode && ChiTietSP.mausac.id == item.id)
+                                                     {<text>selected="selected"</text>}>@item.giatri</option>
+                        }
+				    </select>
+                    <sup>*</sup>
+                </div>
+                <div class="clear">
+                </div>
+
+                <label>Số lượng:</label>
+				<div class="margin-form">
+					<input name="chitietsp_soluong" value="@ChiTietSP.soluong" class="" size="33" type="text">
+				</div>
+				<div class="clear">
+				</div>
+
+				<label>Active: </label>
+				<div class="margin-form">
+					<input name="chitietsp_active" value="1" type="radio" checked="checked">
+					<label class="t" for="active_on">
+					<img src="../img/admin/enabled.gif" alt="Enabled" title="Enabled">
+					</label>
+					<input name="chitietsp_active" value="0"  type="radio">
+					<label class="t" for="active_off">
+					<img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled">
+					</label>
+					<p class="preference_description">
+						 Hiển thị hoặc không hiển thị chi tiết sản phẩm này
+					</p>
+				</div>
+				<div class="clear">
+				</div>
+                <div class="margin-form">
+					<input value="@if(chitietsp_edit_mode) {<text>Lưu</text>}
+                   else
+                   {<text>Thêm</text>}" name="submitAddemployee" class="button" type="submit">
+				</div>
+				<div class="small">
+					<sup>*</sup> Trường bắt buộc
+				</div>
+			</fieldset>
+		</form>
+        <!-- END them chi tiet sp moi -->
+	</div>
+	<div style="clear:both;height:0;line-height:0">
+		 &nbsp;
+	</div>
+</div>

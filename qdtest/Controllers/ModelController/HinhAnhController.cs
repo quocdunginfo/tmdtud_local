@@ -114,9 +114,10 @@ namespace CuaHangBanGiay.Controllers
             {
                 Debug.WriteLine("file name: " + file_name);
                 HttpPostedFileBase hpf = file_list[file_name];
-                server_path = server_context.MapPath(Path.Combine(relative_directory, Path.GetFileName(hpf.FileName)));
-                
-                server_path_thumb = server_context.MapPath(Path.Combine(relative_directory, "_thumb_" + Path.GetFileName(hpf.FileName)));
+                String random_prefix = TextLibrary.GetSHA1HashData(DateTime.Now.ToLongDateString() + DateTime.Now.ToLongTimeString()).Substring(0,5);
+                server_path = server_context.MapPath(Path.Combine(relative_directory, random_prefix + Path.GetFileName(hpf.FileName)));
+
+                server_path_thumb = server_context.MapPath(Path.Combine(relative_directory, "_thumb_" + random_prefix + Path.GetFileName(hpf.FileName)));
                 if (hpf.ContentLength == 0)
                 {
                     continue;
@@ -124,14 +125,14 @@ namespace CuaHangBanGiay.Controllers
                 HinhAnh hinhanh = new HinhAnh();
                 //save origin
                     hpf.SaveAs(server_path);
-                    hinhanh.duongdan = hpf.FileName;
+                    hinhanh.duongdan = random_prefix+hpf.FileName;
                 //save thumb
                     Image imgOriginal = Image.FromFile(server_path);
                     Image hinhanh_thumb = ImageLibrary.ScaleBySize(imgOriginal, max_width_height);
                     imgOriginal.Dispose();
                     hinhanh_thumb.Save(server_path_thumb);
                     hinhanh_thumb.Dispose();
-                    hinhanh.duongdan_thumb = "_thumb_" + hpf.FileName;
+                    hinhanh.duongdan_thumb = "_thumb_" + random_prefix+hpf.FileName;
                 //add to re
                     re.Add(hinhanh);
                 Debug.WriteLine("uploaded: " + server_path);

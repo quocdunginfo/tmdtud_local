@@ -21,6 +21,7 @@ namespace qdtest
 
         public static void RegisterRoutes(RouteCollection routes)
         {
+            
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             /* begin Admin Controller*/
             routes.MapRoute(
@@ -40,12 +41,20 @@ namespace qdtest
                 new { controller = "Admin", action = "Index2" } // Parameter defaults
             );
             /* end Admin Controller*/
-
+            /*
+            routes.MapRoute(
+                "ErrorHandler",
+                "{ErrorHandler}/{action}/{errMsg}",
+                new { controller = "FrontHome", action = "Index", errMsg = UrlParameter.Optional }
+            );
+            */
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "FrontHome", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
+
+            
         }
 
         protected void Application_Start()

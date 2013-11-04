@@ -80,6 +80,27 @@ namespace qdtest.Controllers
 
             return View();
         }
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            if (!this._permission.Contains("sanpham_delete"))
+            {
+                return this._fail_permission("sanpham_delete");
+            }
+            SanPhamController ctr = new SanPhamController();
+            try
+            {
+                if (ctr.delete(id))
+                {
+                    //notification
+                }
+                return RedirectToAction("Index", "AdminSanPhams");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index", "AdminSanPhams");
+            }
+        }
         [HttpPost]
         public ActionResult Submit()
         {

@@ -118,7 +118,6 @@ namespace qdtest.Controllers
             {
                 this._permission.Add(item.ten);
             }
-        }
-        
+        }       
     }
 }

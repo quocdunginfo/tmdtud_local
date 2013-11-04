@@ -119,7 +119,7 @@
     <Compile Include="Controllers\AdminSanPhamController.cs" />
     <Compile Include="Controllers\AdminHangSXController.cs" />
     <Compile Include="Controllers\AdminHangSXsController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\FrontHomeController.cs" />
     <Compile Include="Controllers\FrontController.cs" />
     <Compile Include="Controllers\ModelController\QuyenController.cs" />
     <Compile Include="Controllers\ModelController\HangSXController.cs" />
@@ -132,6 +132,7 @@
     <Compile Include="Controllers\ModelController\NhomSanPhamController.cs" />
     <Compile Include="Controllers\ModelController\SanPhamController.cs" />
     <Compile Include="Controllers\ModelController\ChiTietSPController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -3386,6 +3387,8 @@
       </SubType>
     </Content>
     <Content Include="Views\AdminLoaiNhanViens\_ViewStart.cshtml" />
+    <Content Include="Views\AdminSanPham\Index_bk.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
