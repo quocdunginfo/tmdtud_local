@@ -1,32 +1,37 @@
 ﻿@{
-    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_FrontLayout.cshtml";
+    var sanpham = (qdtest.Models.SanPham)ViewBag.SanPhamDetail;
+    var listsplienquan = (List<qdtest.Models.SanPham>)ViewBag.SanPhamRelate;
 }
 <div id="content" class="float_r">
-        	<h1>Product Detail</h1>
+        	<h1>@sanpham.ten</h1>
             <div class="content_half float_l">
-        	<a  rel="lightbox[portfolio]" href="images/product/10_l.jpg"><img src="images/product/10.jpg" alt="image" /></a>
+        	<a id="qd_main_a_tag" rel="lightbox[portfolio]" href="@Url.Content("~/_Upload/HinhAnh/" + sanpham._get_hinhanh_macdinh().duongdan)"><img id="qd_main_img_tag"  src="@Url.Content("~/_Upload/HinhAnh/" + sanpham._get_hinhanh_macdinh().duongdan_thumb)" alt="image" style="max-width:250px;max-height:250px"/></a>
             </div>
             <div class="content_half float_r">
                 <table>
                     <tr>
-                        <td style="width:160px">Price:</td>
-                        <td>$100</td>
+                        <td style="width:160px">Mã sản phẩm:</td>
+                        <td>@sanpham.masp đ</td>
                     </tr>
                     <tr>
-                        <td>Availability:</td>
-                        <td>In Stock</td>
+                        <td>Tình trạng:</td>
+                        <td>...</td>
                     </tr>
                     <tr>
-                        <td>Model:</td>
-                        <td>Product 14</td>
+                        <td>Giá:</td>
+                        <td>@sanpham.gia đ</td>
                     </tr>
                     <tr>
-                        <td>Manufacturer:</td>
-                        <td>Apple</td>
+                        <td>Hãng sản xuất:</td>
+                        <td>@sanpham.hangsx.ten</td>
                     </tr>
                     <tr>
-                    	<td>Quantity</td>
+                    	<td>Bảo hành:</td>
+                        <td>1 năm</td>
+                    </tr>
+                    <tr>
+                    	<td>Số lượng đặt: </td>
                         <td><input type="text" value="1" style="width: 20px; text-align: right" /></td>
                     </tr>
                 </table>
@@ -36,32 +41,93 @@
 
 			</div>
             <div class="cleaner h30"></div>
-            
-            <h5>Product Description</h5>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur semper quam sit amet turpis rhoncus id venenatis tellus sollicitudin. Fusce ullamcorper, dolor non mollis pulvinar, turpis tortor commodo nisl, et semper lectus augue blandit tellus. Quisque id bibendum libero. Validate <a href="http://validator.w3.org/check?uri=referer" rel="nofollow">XHTML</a> &amp; <a href="http://jigsaw.w3.org/css-validator/check/referer" rel="nofollow">CSS</a>.</p>	
-            
+            <script type="text/javascript">
+                function qd_replace_main(sender)
+                {
+                    document.getElementById('qd_main_a_tag').href = sender.getAttribute("alt");
+                    document.getElementById('qd_main_img_tag').src = sender.getAttribute("src");
+                    document.getElementsByClassName("qd_image_div qd_main")[0].className = "qd_image_div";
+                    document.getElementById(sender.getAttribute("id")).className = "qd_image_div qd_main";
+                }
+            </script>
+            <style type="text/css">
+                .qd_image_div {
+                    float:left;
+                    padding:5px;
+                    border: solid 1px #808080;
+                    margin-bottom: 7px;
+                    margin-right: 7px;
+                }
+                .qd_image_div img{
+                    height:70px;
+                    opacity:0.5;
+                    filter:alpha(opacity=50); /* For IE8 and earlier */
+                }
+                .qd_main {
+                  /* border: solid 1px #0026ff;*/
+                  border: solid 1px #1e90ff ;
+                }
+                .qd_main img{
+                    opacity:1;
+                    filter:alpha(opacity=100);
+                    }
+                .qd_image_div img:hover {
+                    border: 0px;
+                    opacity:1;
+                    filter:alpha(opacity=100); /* For IE8 and earlier */
+                }
+            </style>
+        <div class="qd_sanpham_list_hinhanh">
+               @{
+                   foreach (var hinh in sanpham.ds_hinhanh.ToList())
+                   {
+                        <!-- alt: hình gốc, src: hình thumb -->
+                       if (hinh.duongdan_thumb==sanpham._get_hinhanh_macdinh().duongdan_thumb)
+                       {
+                       @: <div id="@hinh.id" class="qd_image_div qd_main">
+                       }
+                       else
+                       {
+                       @: <div id="@hinh.id" class="qd_image_div">
+                       }                           <a rel="lightbox[portfolio]" href="@Url.Content("~/_Upload/HinhAnh/" + hinh.duongdan)" style="display:none"></a>
+                        <img id="@hinh.id" alt="@Url.Content("~/_Upload/HinhAnh/" + hinh.duongdan)" src="@Url.Content("~/_Upload/HinhAnh/" + hinh.duongdan_thumb)" onclick="qd_replace_main(this)"/>
+                       @:</div>
+                   }
+                   }
+                <div style="clear:both;"></div>
+        </div>
+            <br />
+            <h5 style="font-size:20px">Mô tả sản phẩm</h5>
+            <p>@sanpham.mota</p>	
           <div class="cleaner h50"></div>
             
-            <h3>Related Products</h3>
-        	<div class="product_box">
-            	<a href="productdetail.html"><img src="images/product/01.jpg" alt="" /></a>
-                <h3>Ut eu feugiat</h3>
-                <p class="product_price">$ 100</p>
+            <h3>Sản phẩm liên quan</h3>
+            @{
+                int i=1;
+                foreach(var item in listsplienquan)
+                {
+                    if(item.id != sanpham.id) {
+                    if(i%3==0)
+                       {
+                      @:<div class="product_box no_margin_right">
+                       }
+                       else 
+                       {
+                      @:<div class="product_box">
+                       }
+                     
+            	<a href="@Url.Action("Index","FrontSanPhamDetail",new { id = item.id})"><img src="@Url.Content("~/_Upload/HinhAnh/"+item._get_hinhanh_macdinh().duongdan_thumb)" style="max-width:200px; max-height:150px" alt="Shoes @i" /></a>
+                <h3>@item.ten</h3>
+                <p class="product_price">@item.gia đ</p>
                 <a href="shoppingcart.html" class="addtocart"></a>
                 <a href="productdetail.html" class="detail"></a>
-            </div>        	
-            <div class="product_box">
-            	<a href="productdetail.html"><img src="images/product/02.jpg" alt="" /></a>
-                <h3>Curabitur et turpis</h3>
-                <p class="product_price">$ 200</p>
-                <a href="shoppingcart.html" class="addtocart"></a>
-                <a href="productdetail.html" class="detail"></a>
-            </div>        	
-            <div class="product_box no_margin_right">
-            	<a href="productdetail.html"><img src="images/product/03.jpg" alt="" /></a>
-                <h3>Mauris consectetur</h3>
-                <p class="product_price">$ 120</p>
-                <a href="shoppingcart.html" class="addtocart"></a>
-                <a href="productdetail.html" class="detail"></a>
-            </div>     
-        </div> 
+                @:</div> 
+               if(i%3==0)
+                       {               
+                     @: <div class="cleaner"></div>      	
+                       }
+                    i++;
+                }
+                }
+            }
+</div> 

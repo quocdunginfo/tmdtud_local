@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using qdtest.Controllers.ModelController;
 using qdtest.Models;
 
-namespace CuaHangBanGiay.Controllers.View_Controller
+namespace qdtest.Controllers
 {
     public class FrontController : Controller
     {
@@ -18,8 +18,19 @@ namespace CuaHangBanGiay.Controllers.View_Controller
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             NhomSanPhamController ctr = new NhomSanPhamController();
-            ViewBag.NhomSanPham2_List_All = ctr.timkiem("", "", "", "");
-           
+            List<NhomSanPham2> list1 = ctr.timkiem("", "", "", "");
+            SanPhamController ctr2 = new SanPhamController(ctr._db);
+            List<SanPham>list2=ctr2.get_bestseller(4);
+            if (list1 != null && list2 != null)
+            {
+                ViewBag.NhomSanPham2_List_All = list1;
+                ViewBag.SanPham_BestSeller = list2;
+            }
+            else
+            {
+                ViewBag.NhomSanPham2_List_All = new List<NhomSanPham2>();
+                ViewBag.SanPham_BestSeller = new List<SanPham>();
+            }
         }
 
     }

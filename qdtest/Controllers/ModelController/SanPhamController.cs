@@ -19,7 +19,7 @@ namespace qdtest.Controllers.ModelController
         {
             this._db = db;
         }
-        public List<SanPham> get_bestseller()
+        public List<SanPham> get_bestseller(int limit)
         {
             // var list = ctr._db.Database.SqlQuery<int>("drop table table2 select ChiTietSPs.sanpham_id,sum(ChiTiet_DonHang.soluong) as sl into table2 from ChiTiet_DonHang inner join ChiTietSPs on ChiTiet_DonHang.chitietsp_id=ChiTietSPs.id group by ChiTietSPs.sanpham_id order by sl DESC select sanpham_id from table2 order by sl  DESC").ToList();
             var list = (from p in _db.ds_sanpham
@@ -40,11 +40,14 @@ namespace qdtest.Controllers.ModelController
                             sl = c.sl
                         }).OrderByDescending(x => x.sl);
             List<SanPham> listbest = new List<SanPham>();
-            foreach (var item in list)
-            {
-                Debug.WriteLine("Kim =" + item.sp.id + "//loai=" + item.sp.nhomsanpham.ten + "//sl=" + item.sl);
+            int i=1;
+         foreach(var item in list)
+         {
+             if (i == limit) break;
+                Debug.WriteLine("Kim =" + item.sp.id + "//tên="+item.sp.ten+"//loai=" + item.sp.nhomsanpham.ten + "//sl=" + item.sl);
                 listbest.Add(item.sp);
-            }
+                i++;
+         }
             return listbest;
         }
         public SanPham get_by_id(int obj_id)

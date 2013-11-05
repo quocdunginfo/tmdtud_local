@@ -5,8 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using qdtest.Controllers.ModelController;
 using qdtest.Models;
-
-namespace CuaHangBanGiay.Controllers.View_Controller
+using qdtest.Controllers;
+namespace qdtest.Controllers
 {
     public class FrontHomeController : FrontController
     {
