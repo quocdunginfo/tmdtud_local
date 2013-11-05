@@ -128,9 +128,34 @@
 				</div>
 				<div class="clear">
 				</div>
-				<label>Mô tả: </label>
+				<label>Giá: </label>
 				<div class="margin-form">
-					<input name="sanpham_mota" size="33" class="" value="@SanPham.mota" type="text">
+					<input name="sanpham_gia" class="" value="@SanPham.gia" type="text">
+				</div>
+				<div class="clear">
+				</div>
+                <label>Mô tả: </label>
+				<div class="margin-form">
+                    <!-- Place inside the <head> of your HTML -->
+                    <script type="text/javascript" src="@Url.Content("~/Content/tinymce-4-0-4/tinymce.min.js")"></script>
+                    <script type="text/javascript">
+                        tinymce.init({
+                            selector: "textarea#sanpham_mota",
+                            theme: "modern",
+                            entity_encoding : "raw",
+                            height: 100,
+                            width:700,
+                            plugins: [
+                                 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                                 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                                 "save table contextmenu directionality emoticons template paste textcolor"
+                            ],
+                            relative_urls: false,
+                            image_advtab: true,
+                        });
+                    </script>
+
+                    <textarea name="sanpham_mota" id="sanpham_mota">@SanPham.mota</textarea>
 				</div>
 				<div class="clear">
 				</div>

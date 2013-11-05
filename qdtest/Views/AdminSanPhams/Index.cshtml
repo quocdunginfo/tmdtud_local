@@ -109,14 +109,38 @@
 			<tr>
 				<td style="vertical-align: bottom;">
 					<span style="float: left;">
-					Page <b>1</b> / 1 | Display
-					<select name="sanpham_max_item_per_page" onchange="submit()">
-						<option value="20" selected="selected">20</option>
-						<option value="50">50</option>
-						<option value="100">100</option>
-						<option value="300">300</option>
-					</select>
-					 / 1 result(s) </span>
+					    @if(ViewBag.CanPrevPage==true)
+                        {
+                            <text>
+                                <img src="../img/admin/list-prev2.gif" onclick="document.location='@Url.Action("Index", "AdminSanPhams", new { page = 1 })'"/>
+                                &nbsp;&nbsp;
+                                <img src="../img/admin/list-prev.gif" onclick="document.location='@Url.Action("Index", "AdminSanPhams", new { page = ViewBag.Current_Page - 1 })'"/>
+                                &nbsp;&nbsp;
+                            </text>
+                        }
+                        Trang <b>@ViewBag.Current_Page</b> / @ViewBag.Total_Page
+                        @if(ViewBag.CanNextPage==true)
+                        {
+                            <text>
+                            &nbsp;&nbsp;
+                            <img src="../img/admin/list-next.gif" onclick="document.location='@Url.Action("Index", "AdminSanPhams", new { page = ViewBag.Current_Page + 1 })'"/>
+                            &nbsp;&nbsp;
+                            <img src="../img/admin/list-next2.gif" onclick="document.location='@Url.Action("Index", "AdminSanPhams", new { page = ViewBag.Total_Page})'"/>
+                            &nbsp;
+                            </text>
+                        }
+                        | Hiển thị
+                        
+					    <select name="sanpham_max_item_per_page" onchange="submit()">
+						    <option value="5" @if(timkiem_sanpham["max_item_per_page"].Equals("5")) {<text>selected="selected"</text>} >5</option>
+						    <option value="10" @if(timkiem_sanpham["max_item_per_page"].Equals("10")) {<text>selected="selected"</text>}>10</option>
+						    <option value="20" @if(timkiem_sanpham["max_item_per_page"].Equals("20")) {<text>selected="selected"</text>}>20</option>
+						    <option value="50" @if(timkiem_sanpham["max_item_per_page"].Equals("50")) {<text>selected="selected"</text>}>50</option>
+                            <option value="100" @if(timkiem_sanpham["max_item_per_page"].Equals("100")) {<text>selected="selected"</text>}>100</option>
+					    </select>
+					     / kết quả trên 1 trang
+					</span>
+
 					<span style="float: right;">
 					<input type="submit" id="submitFilterButtonemployee" name="submit_search" value="Tìm kiếm" class="button"/>
 					<input type="submit" name="submit_reset" value="Reset" class="button"/>
@@ -270,7 +294,7 @@
 							 @item.ten
 						</td>
 						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminSanPhams", new { id = item.id })'">
-							 @item.mota
+							 @qdtest._Library.TextLibrary.HTML_Strip(item.mota);
 						</td>
 						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminSanPhams", new { id = item.id })'">
 							 

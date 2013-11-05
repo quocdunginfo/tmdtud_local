@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Security;
 
@@ -10,6 +11,10 @@ namespace qdtest._Library
 {
     public class TextLibrary
     {
+        public static string HTML_Strip(string data)
+        {
+            return Regex.Replace(data, @"<(.|\n)*?>", string.Empty);
+        }
         public static string GetSHA1HashData(string data)
         {
             if (data == null) data = "";

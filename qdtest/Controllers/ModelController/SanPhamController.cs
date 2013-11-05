@@ -159,7 +159,7 @@ namespace qdtest.Controllers.ModelController
         public Boolean can_use_masp(int obj_id, String masp)
         {
             SanPham u = (from obj in _db.ds_sanpham
-                          where obj.masp.ToUpper().Contains(masp.ToUpper())
+                          where obj.masp.ToUpper().Equals(masp.ToUpper())
                           && obj.id != obj_id
                           select obj).FirstOrDefault();
             return u == null ? true : false;
