@@ -3479,6 +3479,8 @@
     <Content Include="Views\AdminLoaiNhanViens\_ViewStart.cshtml" />
     <Content Include="Views\AdminSanPham\Index_bk.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\AdminDonHang\Index.cshtml" />
+    <Content Include="Views\AdminDonHang\_ViewStart.cshtml" />
     <Content Include="Views\FrontSanPhamDetail\Index.cshtml" />
     <Content Include="Views\FrontTimKiem\Index.cshtml" />
     <Content Include="Views\AdminDonHang\Index.cshtml" />
