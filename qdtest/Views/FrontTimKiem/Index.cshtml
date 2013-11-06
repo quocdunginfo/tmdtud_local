@@ -2,7 +2,8 @@
     Layout = "~/Views/Shared/_FrontLayout.cshtml";
     ViewBag.Title = "Trang chủ";
     var _Template_Path = "~/Content/front/";
-    var SanPhamNew_List = (List<qdtest.Models.SanPham>)ViewBag.SanPhamNew_List;
+    var SanPham_List = (List<qdtest.Models.SanPham>)ViewBag.SanPham_List;
+    var timkiem_sanpham = (HttpCookie)ViewBag.timkiem_sanpham;
 }
 <div id="content" class="float_r">
         	<div id="slider-wrapper">
@@ -26,7 +27,7 @@
         	<h1>Sản phẩm mới</h1>
                 @{
                     var i=1;
-                   foreach(var item in SanPhamNew_List)
+                   foreach(var item in SanPham_List)
                     {
                         
                        if(i%3==0)
@@ -51,6 +52,21 @@
                        }
                         i++;
                     }
-                    }
+                }
+            <div class="qd_pagination">
+                @for (int tmp = 1; tmp <= ViewBag.Total_page; tmp++)
+                {
+                    @: <a href="@Url.Action("Index", "FrontTimKiem", new { page =  tmp} ) ">@tmp</a>
+                }
+                @if(ViewBag.CanPrevPage==true)
+                {
+                @: <a href="@Url.Action("Index", "FrontTimKiem", new { page =  ViewBag.Current_Page - 1 })">Prev</a>
+                }
+                @if(ViewBag.CanNextPage==true)
+                {
+                @: <a href="@Url.Action("Index", "FrontTimKiem", new { page =  ViewBag.Current_Page + 1 })">Next</a>
+                }
+
+            </div>
 </div>  	
 
