@@ -122,6 +122,7 @@
     <Compile Include="Controllers\FrontHomeController.cs" />
     <Compile Include="Controllers\FrontController.cs" />
     <Compile Include="Controllers\FrontSanPhamDetailController.cs" />
+    <Compile Include="Controllers\FrontTimKiemController.cs" />
     <Compile Include="Controllers\ModelController\QuyenController.cs" />
     <Compile Include="Controllers\ModelController\HangSXController.cs" />
     <Compile Include="Controllers\ModelController\HinhAnhController.cs" />
@@ -3478,6 +3479,7 @@
     <Content Include="Views\AdminSanPham\Index_bk.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\FrontSanPhamDetail\Index.cshtml" />
+    <Content Include="Views\FrontTimKiem\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

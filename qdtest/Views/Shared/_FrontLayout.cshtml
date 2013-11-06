@@ -2,6 +2,7 @@
     var NhomSanPham2_List_All = (List<qdtest.Models.NhomSanPham2>)ViewBag.NhomSanPham2_List_All;
     var SanPham_BestSeller = (List<qdtest.Models.SanPham>)ViewBag.SanPham_BestSeller;
     var _Template_Path = "~/Content/front/";
+    var timkiem_sanpham = (HttpCookie)ViewBag.timkiem_sanpham;
 }
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -103,9 +104,10 @@
             <br style="clear: left" />
         </div> <!-- end of ddsmoothmenu -->
         <div id="templatemo_search">
-            <form action="#" method="get">
-              <input type="text" value=" " name="keyword" id="keyword" title="keyword" onfocus="clearText(this)" onblur="clearText(this)" class="txt_field" />
-              <input type="submit" name="Search" value=" " alt="Search" id="searchbutton" title="Search" class="sub_btn"  />
+            <form action="@Url.Action("Submit","FrontTimKiem")" method="post">
+              <input type="text" value="@timkiem_sanpham["ten"]" name="sanpham_ten" id="keyword" title="keyword" onfocus="clearText(this)" onblur="clearText(this)" class="txt_field" />
+              <input type="hidden" value="@timkiem_sanpham["max_item_per_page"]" name="sanpham_max_item_per_page" />
+              <input type="submit" name="Search" value="" alt="Search" id="searchbutton" title="Search" class="sub_btn"  />
             </form>
         </div>
     </div> <!-- END of templatemo_menubar -->

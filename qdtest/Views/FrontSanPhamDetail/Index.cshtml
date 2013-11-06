@@ -90,7 +90,7 @@
                        {
                        @: <div id="@hinh.id" class="qd_image_div">
                        }                           <a rel="lightbox[portfolio]" href="@Url.Content("~/_Upload/HinhAnh/" + hinh.duongdan)" style="display:none"></a>
-                        <img id="@hinh.id" alt="@Url.Content("~/_Upload/HinhAnh/" + hinh.duongdan)" src="@Url.Content("~/_Upload/HinhAnh/" + hinh.duongdan_thumb)" onclick="qd_replace_main(this)"/>
+                        <img id="@hinh.id" alt="@Url.Content("~/_Upload/HinhAnh/" + hinh.duongdan)" src="@Url.Content("~/_Upload/HinhAnh/" + hinh.duongdan_thumb)" style="width:100px; height:70px" onclick="qd_replace_main(this)"/>
                        @:</div>
                    }
                    }
@@ -98,7 +98,7 @@
         </div>
             <br />
             <h5 style="font-size:20px">Mô tả sản phẩm</h5>
-            <p>@sanpham.mota</p>	
+            <p>@Html.Raw(sanpham.mota)</p>	
           <div class="cleaner h50"></div>
             
             <h3>Sản phẩm liên quan</h3>
