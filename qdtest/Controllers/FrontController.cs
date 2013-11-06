@@ -19,7 +19,7 @@ namespace qdtest.Controllers
         }
         //
         // GET: /Layout/
-        protected HttpCookie _timkiem_sanpham;
+        protected HttpCookie front_timkiem_sanpham;
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             NhomSanPhamController ctr = new NhomSanPhamController();
@@ -37,40 +37,40 @@ namespace qdtest.Controllers
                 ViewBag.SanPham_BestSeller = new List<SanPham>();
             }
             //tim kiem
-            //build timkiem_nhanvien
+            //build timkiem_sanpham
             if (Request.Cookies.Get("front_timkiem_sanpham") == null)
             {
                 //chưa set cookies trước => tiến hành set cookies
                 this._khoitao_cookie();
-                Response.Cookies.Add(CookieLibrary.Base64Encode(this._timkiem_sanpham));
+                Response.Cookies.Add(CookieLibrary.Base64Encode(this.front_timkiem_sanpham));
             }
             else
             {
                 try
                 {
-                    this._timkiem_sanpham = CookieLibrary.Base64Decode(Request.Cookies.Get("timkiem_sanpham"));
+                    this.front_timkiem_sanpham = CookieLibrary.Base64Decode(Request.Cookies.Get("front_timkiem_sanpham"));
                 }
                 catch (Exception ex)
                 {
                     this._khoitao_cookie();
-                    Response.Cookies.Add(CookieLibrary.Base64Encode(this._timkiem_sanpham));
+                    Response.Cookies.Add(CookieLibrary.Base64Encode(this.front_timkiem_sanpham));
                 }
             }
-            ViewBag.timkiem_sanpham = this._timkiem_sanpham;
+            ViewBag.front_timkiem_sanpham = this.front_timkiem_sanpham;
         }
         [NonAction]
         protected void _khoitao_cookie()
         {
-            _timkiem_sanpham = new HttpCookie("front_timkiem_sanpham");
-            _timkiem_sanpham.Expires = DateTime.Now.AddDays(1);
-            this._timkiem_sanpham["ten"] = "";
-            this._timkiem_sanpham["masp"] = "";
-            this._timkiem_sanpham["mota"] = "";
-            this._timkiem_sanpham["gia_from"] = "-1";
-            this._timkiem_sanpham["gia_to"] = "-1";
-            this._timkiem_sanpham["hangsx_ten"] = "";
-            this._timkiem_sanpham["nhomsanpham_ten"] = "";
-            this._timkiem_sanpham["max_item_per_page"] = "9";
+            front_timkiem_sanpham = new HttpCookie("front_timkiem_sanpham");
+            front_timkiem_sanpham.Expires = DateTime.Now.AddSeconds(30);
+            this.front_timkiem_sanpham["front_ten"] = "";
+            this.front_timkiem_sanpham["front_masp"] = "";
+            this.front_timkiem_sanpham["front_mota"] = "";
+            this.front_timkiem_sanpham["front_gia_from"] = "-1";
+            this.front_timkiem_sanpham["front_gia_to"] = "-1";
+            this.front_timkiem_sanpham["front_hangsx_ten"] = "";
+            this.front_timkiem_sanpham["front_nhomsanpham_ten"] = "";
+            this.front_timkiem_sanpham["front_max_item_per_page"] = "1";
         }
 
     }

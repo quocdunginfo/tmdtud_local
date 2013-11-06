@@ -3,19 +3,81 @@
     ViewBag.Title = "Trang chủ";
     var _Template_Path = "~/Content/front/";
     var SanPham_List = (List<qdtest.Models.SanPham>)ViewBag.SanPham_List;
-    var timkiem_sanpham = (HttpCookie)ViewBag.timkiem_sanpham;
+    var front_timkiem_sanpham = (HttpCookie)ViewBag.front_timkiem_sanpham;
 }
 <div id="content" class="float_r">
-        	<div id="slider-wrapper">
-                <div id="slider" class="nivoSlider">
-                    <img src="@Url.Content(_Template_Path + "images/slider/02.jpg")" alt="" />
-                    <a href="#"><img src="@Url.Content(_Template_Path + "images/slider/01.jpg")" alt="" title="This is an example of a caption" /></a>
-                    <img src="@Url.Content(_Template_Path + "images/slider/03.jpg")" alt="" />
-                    <img src="@Url.Content(_Template_Path + "images/slider/04.jpg")" alt="" title="#htmlcaption" />
-                </div>
-                <div id="htmlcaption" class="nivo-html-caption">
-                    <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
-                </div>
+            	<h1>Kết quả tìm kiếm (Có @ViewBag.Result_Count sản phẩm)</h1>
+                <div class="qd_pagination" style="text-align:center;font-size:14px">
+                @{
+                    int start = 0, end = 0;
+                    if (ViewBag.Current_Page - 2 > 0 && ViewBag.Current_Page + 2 <= ViewBag.Total_page)
+                    {
+                        start = ViewBag.Current_Page - 2;
+                        end = ViewBag.Current_Page + 1;
+                    }
+                    else if (ViewBag.Current_Page - 2 <= 0 && ViewBag.Current_Page + 2 > ViewBag.Total_Page)
+                    {
+                        start = 1;
+                        end = ViewBag.Total_page;
+                    }
+                    else if (ViewBag.Current_Page - 2 <= 0)
+                    {
+                        start = 1; end = ViewBag.Current_Page + 2;
+                    }
+                    else if (ViewBag.Current_Page + 2 > ViewBag.Total_Page)
+                    {
+                        start = ViewBag.Current_Page - 2;
+                        end = ViewBag.Total_Page;
+                    }
+                    if (ViewBag.Current_Page - 2 > 1)
+                    {
+                            <a href="@Url.Action("Index", "FrontTimKiem", new { page = 1 })" style="text-align:center">[Trang đầu]</a>
+                    }
+                    if (ViewBag.CanPrevPage == true)
+                    {
+                            <a href="@Url.Action("Index", "FrontTimKiem", new { page = ViewBag.Current_Page - 1 })" style="text-align:center">[Trước]</a>
+                    }
+                    if (ViewBag.Current_Page - 2 > 1)
+                    {
+                            <a href="#">...</a>
+                    }
+
+                    for (int tmp = start; tmp <= end; tmp++)
+                    {
+                        if (ViewBag.Current_Page == tmp)
+                        {
+                                <a href="@Url.Action("Index", "FrontTimKiem", new { page = tmp })" style="text-align:center"><b><u>@tmp</u></b></a>
+                        }
+                        else
+                        {
+                                <a href="@Url.Action("Index", "FrontTimKiem", new { page = tmp })" style="text-align:center">@tmp</a>
+                        }
+                    }
+
+
+                    if (ViewBag.Current_Page + 1 < ViewBag.Total_page)
+                    {
+                            <a href="#">...</a>
+                    }
+                    if (ViewBag.CanNextPage == true)
+                    {
+                            <a href="@Url.Action("Index", "FrontTimKiem", new { page = ViewBag.Current_Page + 1 })" style="text-align:center">[Tiếp]</a>
+                    }
+                    if (ViewBag.Current_Page + 1 < ViewBag.Total_page)
+                    {
+                            <a href="@Url.Action("Index", "FrontTimKiem", new { page = ViewBag.Total_Page })" style="text-align:center">[Trang cuối]</a>
+                    }
+                    }   
+                    <form method="post" action="@Url.Action("Index", "FrontTimKiem", new { page = int.Parse((Request["front_current_page"])==null?"1":Request["front_current_page"])})"  class="form">
+                        Trang 
+                       <select name="front_current_page" onchange="submit()">
+                            @{
+                                for (int j = 1; j <= ViewBag.Total_Page; j++)
+                                {<option value="@j" @if(ViewBag.Current_Page==j) {<text>selected="selected"</text>}>@j</option>}
+                            }
+                        </select>
+                    / @ViewBag.Total_Page
+               </form>
             </div>
             <script type="text/javascript" src="@Url.Content(_Template_Path + "js/jquery-1.4.3.min.js")"></script>
             <script type="text/javascript" src="@Url.Content(_Template_Path + "js/jquery.nivo.slider.pack.js")"></script>
@@ -24,49 +86,38 @@
                     $('#slider').nivoSlider();
                 });
             </script>
-        	<h1>Sản phẩm mới</h1>
+        <br />
+    <div class="ketquatimkiem">
                 @{
-                    var i=1;
-                   foreach(var item in SanPham_List)
+                    var i = 1;
+                    foreach (var item in SanPham_List)
                     {
-                        
-                       if(i%3==0)
-                       {
+
+                        if (i % 3 == 0)
+                        {
                       @:<div class="product_box no_margin_right">
                        }
-                       else 
-                       {
+                        else
+                        {
                       @:<div class="product_box">
                        }
                        
-            	        <a href="@Url.Action("Index","FrontSanPhamDetail",new { id = item.id})"><img src="@Url.Content("~/_Upload/HinhAnh/"+item._get_hinhanh_macdinh().duongdan_thumb)" style="max-width:200px; height:150px" alt="Shoes @i" /></a>
+            	        <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })"><img src="@Url.Content("~/_Upload/HinhAnh/" + item._get_hinhanh_macdinh().duongdan_thumb)" style="max-width:200px; height:150px" alt="Shoes @i" /></a>
                         
-                        <a href="@Url.Action("Index","FrontSanPhamDetail",new { id = item.id})"><h3>@item.ten</h3></a>
+                        <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })"><h3>@item.ten</h3></a>
                         <p class="product_price">@item.gia đ</p>
                         <a href="shoppingcart.html" class="addtocart"></a>
                         <a href="productdetail.html" class="detail"></a>
                         @: </div>   
-                        if(i%3==0)
-                       {               
+                        if (i % 3 == 0)
+                        {               
                      @: <div class="cleaner"></div>      	
                        }
                         i++;
                     }
                 }
-            <div class="qd_pagination">
-                @for (int tmp = 1; tmp <= ViewBag.Total_page; tmp++)
-                {
-                    @: <a href="@Url.Action("Index", "FrontTimKiem", new { page =  tmp} ) ">@tmp</a>
-                }
-                @if(ViewBag.CanPrevPage==true)
-                {
-                @: <a href="@Url.Action("Index", "FrontTimKiem", new { page =  ViewBag.Current_Page - 1 })">Prev</a>
-                }
-                @if(ViewBag.CanNextPage==true)
-                {
-                @: <a href="@Url.Action("Index", "FrontTimKiem", new { page =  ViewBag.Current_Page + 1 })">Next</a>
-                }
-
             </div>
-</div>  	
+        <div class="cleaner"></div>    
+            
+</div>  
 

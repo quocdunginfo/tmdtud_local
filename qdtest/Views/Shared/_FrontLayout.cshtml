@@ -2,7 +2,7 @@
     var NhomSanPham2_List_All = (List<qdtest.Models.NhomSanPham2>)ViewBag.NhomSanPham2_List_All;
     var SanPham_BestSeller = (List<qdtest.Models.SanPham>)ViewBag.SanPham_BestSeller;
     var _Template_Path = "~/Content/front/";
-    var timkiem_sanpham = (HttpCookie)ViewBag.timkiem_sanpham;
+    var front_timkiem_sanpham = (HttpCookie)ViewBag.front_timkiem_sanpham;
 }
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -105,8 +105,10 @@
         </div> <!-- end of ddsmoothmenu -->
         <div id="templatemo_search">
             <form action="@Url.Action("Submit","FrontTimKiem")" method="post">
-              <input type="text" value="@timkiem_sanpham["ten"]" name="sanpham_ten" id="keyword" title="keyword" onfocus="clearText(this)" onblur="clearText(this)" class="txt_field" />
-              <input type="hidden" value="@timkiem_sanpham["max_item_per_page"]" name="sanpham_max_item_per_page" />
+              <input type="text" value="@front_timkiem_sanpham["front_ten"]" name="sanpham_ten" id="keyword" title="keyword" onfocus="clearText(this)" onblur="clearText(this)" class="txt_field" />
+              <input type="hidden" value="@front_timkiem_sanpham["front_max_item_per_page"]" name="front_sanpham_max_item_per_page" />
+              <input type="hidden" value="@front_timkiem_sanpham["front_gia_from"]" name="front_sanpham_gia_from" />
+              <input type="hidden" value="@front_timkiem_sanpham["front_gia_to"]" name="front_sanpham_gia_to" />
               <input type="submit" name="Search" value="" alt="Search" id="searchbutton" title="Search" class="sub_btn"  />
             </form>
         </div>

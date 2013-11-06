@@ -20,26 +20,29 @@ namespace qdtest.Controllers
         {
             SanPhamController ctr = new SanPhamController();
             //calculate offset
-                int max_item_per_page = 3;//TextLibrary.ToInt(this._timkiem_sanpham["max_item_per_page"]);
+            if (TextLibrary.ToString(Request["front_current_page"]) != "") page = int.Parse(TextLibrary.ToString(Request["front_current_page"]));
+            int max_item_per_page = TextLibrary.ToInt(this.front_timkiem_sanpham["front_max_item_per_page"]);
                 int start_point = (page - 1) * max_item_per_page;
                 if (start_point <= 0) start_point = 0;
             //get list
-                List<SanPham> listnew = ctr.timkiem("", "", this._timkiem_sanpham["ten"], "", -1, -1, null, null, "1", "id", true, start_point, max_item_per_page);
+                List<SanPham> listnew = ctr.timkiem("", "", this.front_timkiem_sanpham["front_ten"], "", -1, -1, null, null, "1", "id", true, start_point, max_item_per_page);
                 ViewBag.SanPham_List = listnew;
-                ViewBag._timkiem_sanpham = this._timkiem_sanpham;
+                ViewBag.front_timkiem_sanpham = this.front_timkiem_sanpham;
             //pagination
                 int Current_Page = page;
-                int Total_Page = ctr.timkiem_count(
+                int Result_Count = ctr.timkiem_count(
                     "",
-                    _timkiem_sanpham["masp"],
-                    _timkiem_sanpham["ten"],
-                    _timkiem_sanpham["mota"],
-                    TextLibrary.ToInt(_timkiem_sanpham["gia_from"]),
-                    TextLibrary.ToInt(_timkiem_sanpham["gia_to"]),
+                    front_timkiem_sanpham["front_masp"],
+                    front_timkiem_sanpham["front_ten"],
+                    front_timkiem_sanpham["front_mota"],
+                    TextLibrary.ToInt(front_timkiem_sanpham["front_gia_from"]),
+                    TextLibrary.ToInt(front_timkiem_sanpham["front_gia_to"]),
                     null, null, "1"
-                    ) / max_item_per_page + 1;
+                    );
+                int Total_Page = (Result_Count / max_item_per_page) + (Result_Count % max_item_per_page);
                 Boolean CanNextPage = Current_Page >= Total_Page ? false : true;
                 Boolean CanPrevPage = Current_Page == 1 ? false : true;
+                ViewBag.Result_Count = Result_Count;
                 ViewBag.CanNextPage = CanNextPage;
                 ViewBag.CanPrevPage = CanPrevPage;
                 ViewBag.Current_Page = Current_Page;
@@ -50,7 +53,7 @@ namespace qdtest.Controllers
         public ActionResult Submit()
         {
             //get search value
-            if (!TextLibrary.ToString(Request["submit_reset"]).Equals(""))
+            if (!TextLibrary.ToString(Request["front_submit_reset"]).Equals(""))
             {
                 //reset button click
                 this._khoitao_cookie();
@@ -58,17 +61,17 @@ namespace qdtest.Controllers
             else
             {
                 //search button click
-                this._timkiem_sanpham["masp"] = TextLibrary.ToString(Request["sanpham_masp"]);
-                this._timkiem_sanpham["ten"] = TextLibrary.ToString(Request["sanpham_ten"]);
-                this._timkiem_sanpham["mota"] = TextLibrary.ToString(Request["sanpham_mota"]);
-                this._timkiem_sanpham["gia_from"] = TextLibrary.ToString(Request["sanpham_gia_from"]);
-                this._timkiem_sanpham["gia_to"] = TextLibrary.ToString(Request["sanpham_gia_to"]);
-                this._timkiem_sanpham["hangsx_ten"] = TextLibrary.ToString(Request["sanpham_hangsx_ten"]);
-                this._timkiem_sanpham["nhomsanpham_ten"] = TextLibrary.ToString(Request["sanpham_nhomsanpham_ten"]);
-                this._timkiem_sanpham["max_item_per_page"] = TextLibrary.ToString(Request["sanpham_max_item_per_page"]);
+                this.front_timkiem_sanpham["front_masp"] = TextLibrary.ToString(Request["front_sanpham_masp"]);
+                this.front_timkiem_sanpham["front_ten"] = TextLibrary.ToString(Request["front_sanpham_ten"]);
+                this.front_timkiem_sanpham["front_mota"] = TextLibrary.ToString(Request["front_sanpham_mota"]);
+                this.front_timkiem_sanpham["front_gia_from"] = TextLibrary.ToString(Request["front_sanpham_gia_from"]);
+                this.front_timkiem_sanpham["front_gia_to"] = TextLibrary.ToString(Request["front_sanpham_gia_to"]);
+                this.front_timkiem_sanpham["front_hangsx_ten"] = TextLibrary.ToString(Request["front_sanpham_hangsx_ten"]);
+                this.front_timkiem_sanpham["front_nhomsanpham_ten"] = TextLibrary.ToString(Request["front_sanpham_nhomsanpham_ten"]);
+                this.front_timkiem_sanpham["front_max_item_per_page"] = TextLibrary.ToString(Request["front_sanpham_max_item_per_page"]);
             }
             //Save respone cookies
-            Response.Cookies.Add(CookieLibrary.Base64Encode(this._timkiem_sanpham));
+            Response.Cookies.Add(CookieLibrary.Base64Encode(this.front_timkiem_sanpham));
             //redirect
             return RedirectToAction("Index", "FrontTimKiem");
         }
