@@ -14,34 +14,11 @@
 <meta name="robots" content="NOFOLLOW, NOINDEX"/>
 <title>@ViewBag.Title</title>
 <base href="@qRootAdminTemplatePath"/>
-<script type="text/javascript">
-    var help_class_name = 'AdminHome';
-    var iso_user = 'en';
-    var country_iso_code = 'US';
-    var _PS_VERSION_ = '1.5.5.0';
-    var helpboxes = 1;
-    var roundMode = 2;
-    var youEditFieldFor = '';
-    var autorefresh_notifications = '';
-    var new_order_msg = 'A new order has been placed on your shop.';
-    var order_number_msg = 'Order number:';
-    var total_msg = 'Total:';
-    var from_msg = 'From:';
-    var see_order_msg = 'View this order';
-    var new_customer_msg = 'A new customer registered on your shop.';
-    var customer_name_msg = 'Customer name:';
-    var see_customer_msg = 'View this customer';
-    var new_msg = 'A new message posted on your shop.';
-    var excerpt_msg = 'Excerpt:';
-    var see_msg = 'Read this message';
-    var token_admin_orders = '03b97c0470d2242e7ad0b01a281a087b';
-    var token_admin_customers = 'a63897f6b09f19ea042c44d7f543b6b6';
-    var token_admin_customer_threads = '2ca6e722bbb83b079663baeb78896005';
-    var currentIndex = 'index.php?controller=AdminHome';
-    var choose_language_translate = "Choose language";
-	</script>
 <link href="@qRootAdminTemplatePath../modules/gamification/views/css/gamification.css" rel="stylesheet" type="text/css" media="all"/>
 <link href="@qRootAdminTemplatePath../admin2109/../js/jquery/plugins/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="@qRootAdminTemplatePath../admin2109/../admin2109/../js/jquery/ui/themes/base/jquery.ui.datepicker.css" rel="stylesheet" type="text/css" media="all" />
+<link href="@qRootAdminTemplatePath../admin2109/../admin2109/../js/jquery/ui/themes/base/jquery.ui.core.css" rel="stylesheet" type="text/css" media="all" />
+<link href="@qRootAdminTemplatePath../admin2109/../admin2109/../js/jquery/ui/themes/base/jquery.ui.theme.css" rel="stylesheet" type="text/css" media="all" />
 <link href="@qRootAdminTemplatePath../css/admin.css" rel="stylesheet" type="text/css" media="all"/>
 <link href="@qRootAdminTemplatePath../admin2109/themes/default/css/admin.css" rel="stylesheet" type="text/css" media="all"/>
 <link href="@qRootAdminTemplatePath../admin2109/../js/jquery/plugins/cluetip/jquery.cluetip.css" rel="stylesheet" type="text/css" media="all"/>
@@ -63,12 +40,11 @@
 <!-- <script type="text/javascript" src="@qRootAdminTemplatePath../js/notifications.js"></script> -->
 <!-- <script type="text/javascript" src="@qRootAdminTemplatePath../js/helpAccess.js"></script> -->
 <script type="text/javascript" src="@qRootAdminTemplatePath../admin2109/../js/jquery/plugins/jquery.flot.js"></script>
+<script type="text/javascript" src="@qRootAdminTemplatePath../admin2109/../admin2109/../js/jquery/ui/jquery.ui.core.min.js"></script>
+<script type="text/javascript" src="@qRootAdminTemplatePath../admin2109/../admin2109/../js/jquery/ui/jquery.ui.datepicker.min.js"></script>
+<script type="text/javascript" src="@qRootAdminTemplatePath../admin2109/../admin2109/../js/jquery/ui/i18n/jquery.ui.datepicker-en.js"></script>
 <link rel="icon" type="image/vnd.microsoft.icon" href="/ps/img/favicon.ico"/>
 <link rel="shortcut icon" type="image/x-icon" href="/ps/img/favicon.ico"/>
-<script>
-    var admin_gamification_ajax_url = 'index.php?controller=AdminGamification&token=ed4504a18ef6ead39695897d952cd543';
-    var current_id_tab = 1;
-			</script>
 <!--[if IE]>
 	<link type="text/css" rel="stylesheet" href="http://localhost/ps/css/admin-ie.css" />
 	<![endif]-->
