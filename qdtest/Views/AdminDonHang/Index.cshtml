@@ -1,0 +1,716 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div id="main">
+	<div id="content">
+		<div class="toolbar-placeholder">
+			<div class="toolbarBox toolbarHead">
+				<ul class="cc_button">
+					<li>
+					<a id="desc-order-back" class="toolbar_btn" href="index.php?controller=AdminOrders&amp;token=03b97c0470d2242e7ad0b01a281a087b" title="Back to list">
+					<span class="process-icon-back "></span>
+					<div>
+						Trở về
+					</div>
+					</a>
+					</li>
+				</ul>
+				<script language="javascript" type="text/javascript">
+			//<![CDATA[
+				var submited = false
+				var modules_list_loaded = false;
+				$(function() {
+					//get reference on save link
+					btn_save = $('span[class~="process-icon-save"]').parent();
+					//get reference on form submit button
+					btn_submit = $('#order_form_submit_btn');
+					if (btn_save.length > 0 && btn_submit.length > 0)
+					{
+						//get reference on save and stay link
+						btn_save_and_stay = $('span[class~="process-icon-save-and-stay"]').parent();
+						//get reference on current save link label
+						lbl_save = $('#desc-order-save div');
+						//override save link label with submit button value
+						if (btn_submit.val().length > 0)
+							lbl_save.html(btn_submit.attr("value"));
+						if (btn_save_and_stay.length > 0)
+						{
+							//get reference on current save link label
+							lbl_save_and_stay = $('#desc-order-save-and-stay div');
+							//override save and stay link label with submit button value
+							if (btn_submit.val().length > 0 && lbl_save_and_stay && !lbl_save_and_stay.hasClass('locked'))
+							{
+								lbl_save_and_stay.html(btn_submit.val() + " and stay ");
+							}
+						}
+						//hide standard submit button
+						btn_submit.hide();
+						//bind enter key press to validate form
+						$('#order_form').keypress(function (e) {
+							if (e.which == 13 && e.target.localName != 'textarea')
+								$('#desc-order-save').click();
+						});
+						//submit the form
+							btn_save.click(function() {
+								// Avoid double click
+								if (submited)
+									return false;
+								submited = true;
+								//add hidden input to emulate submit button click when posting the form -> field name posted
+								btn_submit.before('<input type="hidden" name="'+btn_submit.attr("name")+'" value="1" />');
+								$('#order_form').submit();
+								return false;
+							});
+							if (btn_save_and_stay)
+							{
+								btn_save_and_stay.click(function() {
+									//add hidden input to emulate submit button click when posting the form -> field name posted
+									btn_submit.before('<input type="hidden" name="'+btn_submit.attr("name")+'AndStay" value="1" />');
+									$('#order_form').submit();
+									return false;
+								});
+							}
+					}
+				});							//]]>
+			</script>
+				<div class="pageTitle">
+					<h3>
+					<span id="current_obj" style="font-weight: normal;">
+					<span class="breadcrumb item-0 ">Đơn hàng</span>
+					</span>
+					</h3>
+				</div>
+			</div>
+		</div>
+		<div class="leadin">
+		</div>
+		<div class="bloc-command">
+			<div class="button-command">
+				<img src="../img/admin/charged_ko.gif" alt="No invoice"> No invoice | <img src="../img/admin/delivery_ko.gif" alt="No delivery slip"> No delivery slip | <a class="button" href="javascript:window.print()"><img src="../img/admin/printer.gif" alt="Print order" title="Print order"> Print order</a>
+			</div>
+			<div class="metadata-command">
+				<dl>
+					<dt>Date </dt>
+					<dd>2013-09-20 10:08:12</dd>
+					|
+				</dl>
+				<dl>
+					<dt>Messages:</dt>
+					<dd>0</dd>
+					|
+				</dl>
+				<dl>
+					<dt><a href="index.php?controller=AdminCustomerThreads&amp;token=2ca6e722bbb83b079663baeb78896005">New Customer Messages:</a></dt>
+					<dd><a href="index.php?controller=AdminCustomerThreads&amp;token=2ca6e722bbb83b079663baeb78896005">0</a></dd>
+					|
+				</dl>
+				<dl>
+					<dt>Products:</dt>
+					<dd id="product_number">2</dd>
+					|
+				</dl>
+				<dl>
+					<dt>Total</dt>
+					<dd class="total_paid">$626.37</dd>
+				</dl>
+				<div class="clear">
+				</div>
+			</div>
+		</div>
+		<div class="container-command">
+			<!-- Left column -->
+			<div style="width: 49%; float:left;">
+				<!-- Change status form -->
+				<form action="index.php?controller=AdminOrders&amp;vieworder&amp;token=03b97c0470d2242e7ad0b01a281a087b" method="post">
+					<input type="hidden" name="id_order" value="1">
+				</form>
+				<br>
+				<!-- History of status -->
+				<!-- Customer informations -->
+				<br>
+				<fieldset>
+					<legend><img src="../img/admin/tab-customers.gif"> Customer information</legend>
+					<span style="font-weight: bold; font-size: 14px;"><a href="?tab=AdminCustomers&amp;id_customer=1&amp;viewcustomer&amp;token=a63897f6b09f19ea042c44d7f543b6b6"> John DOE</a></span> (#1)<br>
+					 (<a href="mailto:pub@prestashop.com">pub@prestashop.com</a>)<br>
+					<br>
+					 Account registered: <b>2013-09-20 10:07:57</b><br>
+					 Valid orders placed: <b>0</b><br>
+					 Total spent since registration: <b>$0.00</b><br>
+				</fieldset>
+				<!-- Sources block -->
+				<!-- Admin order hook -->
+			</div>
+			<!-- END Left column -->
+			<!-- Right column -->
+			<div style="width: 49%; float:right;">
+				<div class="button-command-prev-next">
+					<b>Orders</b> :
+				</div>
+				<div class="clear">
+				</div>
+				<!-- linked orders block -->
+				<!-- Documents block -->
+				<br>
+				<!-- Payments block -->
+				<fieldset>
+					<legend><img src="../img/admin/money.gif"> Payment:</legend>
+					<form id="formAddPayment" method="post" action="index.php?controller=AdminOrders&amp;vieworder&amp;id_order=1&amp;token=03b97c0470d2242e7ad0b01a281a087b">
+						<table class="table" width="100%" cellspacing="0" cellpadding="0">
+						<colgroup>
+						<col width="15%">
+						<col width="">
+						<col width="20%">
+						<col width="10%">
+						<col width="10%">
+						<col width="1%">
+						</colgroup>
+						<thead>
+						<tr>
+							<th>
+								Date
+							</th>
+							<th>
+								Payment method
+							</th>
+							<th>
+								Transaction ID
+							</th>
+							<th>
+								Amount
+							</th>
+							<th>
+								Invoice
+							</th>
+							<th>
+								&nbsp;
+							</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td colspan="6" class="center">
+								<h3>No payments are available</h3>
+							</td>
+						</tr>
+						<tr class="current-edit">
+							<td>
+								<input type="text" name="payment_date" class="datepicker" size="17" value="2013-11-05 03:37:23">
+							</td>
+							<td>
+								<select name="payment_method" class="payment_method">
+									<option value="Bank Wire">Bank Wire</option>
+									<option value="Payment by check">Payment by check</option>
+								</select>
+							</td>
+							<td>
+								<input type="text" name="payment_transaction_id" value="">
+							</td>
+							<td>
+								<input type="text" name="payment_amount" size="5" value="">
+								<select name="payment_currency" class="payment_currency">
+									<option value="1" selected="selected">$</option>
+								</select>
+							</td>
+							<td>
+								<input class="button" type="submit" name="submitAddPayment" value="Add">
+							</td>
+						</tr>
+						</tbody>
+						</table>
+					</form>
+				</fieldset>
+				<br>
+				<!-- Shipping block -->
+				<fieldset>
+					<legend><img src="../img/admin/delivery.gif"> Shipping</legend>
+					<div class="clear" style="float: left; margin-right: 10px;">
+						<span>Recycled packaging</span>
+						<img src="../img/admin/disabled.gif">
+					</div>
+					<div style="float: left;">
+						<span>Gift wrapping</span>
+						<img src="../img/admin/disabled.gif">
+					</div>
+					<div class="clear" style="margin-bottom: 10px;">
+					</div>
+					<table class="table" width="100%" cellspacing="0" cellpadding="0" id="shipping_table">
+					<colgroup>
+					<col width="15%">
+					<col width="15%">
+					<col width="">
+					<col width="10%">
+					<col width="20%">
+					</colgroup>
+					<thead>
+					<tr>
+						<th>
+							Date
+						</th>
+						<th>
+							Type
+						</th>
+						<th>
+							Carrier
+						</th>
+						<th>
+							Weight
+						</th>
+						<th>
+							Shipping cost
+						</th>
+						<th>
+							Tracking number
+						</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>
+							2013-09-20 10:08:12
+						</td>
+						<td>
+							Delivery
+						</td>
+						<td>
+							My carrier
+						</td>
+						<td class="weight">
+							0.000 lb
+						</td>
+						<td>
+							 $0.00
+						</td>
+						<td>
+							<span id="shipping_number_show"></span>
+							<form style="display: inline;" method="post" action="index.php?controller=AdminOrders&amp;token=03b97c0470d2242e7ad0b01a281a087b&amp;vieworder&amp;id_order=1">
+								<span class="shipping_number_edit" style="display:none;">
+								<input type="hidden" name="id_order_carrier" value="1">
+								<input type="text" name="tracking_number" value="">
+								<input type="submit" class="button" name="submitShippingNumber" value="Update">
+								</span>
+								<a href="#" class="edit_shipping_number_link"><img src="../img/admin/edit.gif" alt="Edit"></a>
+								<a href="#" class="cancel_shipping_number_link" style="display: none;"><img src="../img/admin/disabled.gif" alt="Cancel"></a>
+							</form>
+						</td>
+					</tr>
+					</tbody>
+					</table>
+				</fieldset>
+				<br>
+				<!-- Return block -->
+			</div>
+			<!-- END Right column -->
+			<div class="clear" style="margin-bottom: 10px;">
+			</div>
+		</div>
+		<div class="container-command container-command-top-spacing">
+			<!-- Addresses -->
+			<div style="width: 49%; float:left;">
+				<!-- Shipping address -->
+			</div>
+			<div style="width: 49%; float:right;">
+				<!-- Invoice address -->
+			</div>
+			<div class="clear" style="margin-bottom: 10px;">
+			</div>
+		</div>
+		<form style="width: 98%" class="container-command-top-spacing" action="index.php?controller=AdminOrders&amp;vieworder&amp;token=03b97c0470d2242e7ad0b01a281a087b&amp;id_order=1" method="post" onsubmit="return orderDeleteProduct('This product cannot be returned.', 'Quantity to cancel is greater than quantity available.');">
+			<input type="hidden" name="id_order" value="1">
+			<fieldset style="width: 100%; ">
+				<div style="display: none">
+					<input type="hidden" value="0" id="warehouse_list">
+				</div>
+				<legend><img src="../img/admin/cart.gif" alt="Products:">Products:</legend>
+				<div style="float:left;width: 100%;">
+					<div style="float: left;">
+						<a href="#" class="add_product button"><img src="../img/admin/add.gif" alt="Add a product"> Add a product</a>
+					</div>
+					<div style="float: right; margin-right: 10px" id="refundForm">
+						<!--
+					<a href="#" class="standard_refund"><img src="../img/admin/add.gif" alt="Process a standard refund" /> Process a standard refund</a>
+					<a href="#" class="partial_refund"><img src="../img/admin/add.gif" alt="Process a partial refund" /> Process a partial refund</a>
+				-->
+					</div>
+					<br clear="left">
+					<br>
+					<table style="width: 100%;" cellspacing="0" cellpadding="0" class="table" id="orderProducts">
+					<tbody>
+					<tr>
+						<th height="39" align="center" style="width: 7%">
+							&nbsp;
+						</th>
+						<th>
+							Product
+						</th>
+						<th style="width: 15%; text-align: center">
+							Unit Price <sup>*</sup>
+						</th>
+						<th style="width: 4%; text-align: center">
+							Qty
+						</th>
+						<th style="width: 10%; text-align: center">
+							Available quantity
+						</th>
+						<th style="width: 10%; text-align: center">
+							Total <sup>*</sup>
+						</th>
+						<th colspan="2" style="display: none;" class="add_product_fields">
+							&nbsp;
+						</th>
+						<th colspan="2" style="display: none;" class="edit_product_fields">
+							&nbsp;
+						</th>
+						<th colspan="2" style="display: none;" class="standard_refund_fields">
+							<img src="../img/admin/delete.gif" alt="Products:">
+							Cancel
+						</th>
+						<th style="width: 12%;text-align:right;display:none" class="partial_refund_fields">
+							 Partial refund
+						</th>
+						<th style="width: 8%;text-align:center;">
+							 Action
+						</th>
+					</tr>
+					<tr height="52">
+						<td align="center">
+							<img src="../img/tmp/product_mini_5_11.jpg?time=1383640642" alt="" class="imgm">
+						</td>
+						<td>
+							<a href="index.php?controller=adminproducts&amp;id_product=5&amp;updateproduct&amp;token=c4ecb5500c32302d072130315b268033">
+							<span class="productName">iPod touch - Capacité: 32Go</span><br>
+							</a>
+						</td>
+						<td align="center">
+							<span class="product_price_show">$392.14</span>
+							<span class="product_price_edit" style="display:none;">
+							<input type="hidden" name="product_id_order_detail" class="edit_product_id_order_detail" value="1">
+							<input type="text" name="product_price_tax_excl" class="edit_product_price_tax_excl edit_product_price" value="392.14" size="5"> $ tax excl.<br>
+							<input type="text" name="product_price_tax_incl" class="edit_product_price_tax_incl edit_product_price" value="469" size="5"> $ tax incl. </span>
+						</td>
+						<td align="center" class="productQuantity">
+							<span class="product_quantity_show">1</span>
+							<span class="product_quantity_edit" style="display:none;">
+							<input type="text" name="product_quantity" class="edit_product_quantity" value="1" size="2">
+							</span>
+						</td>
+						<td align="center" class="productQuantity product_stock">
+							41
+						</td>
+						<td align="center" class="total_product">
+							 $392.14
+						</td>
+						<td colspan="2" style="display: none;" class="add_product_fields">
+							&nbsp;
+						</td>
+						<td align="center" class="cancelCheck standard_refund_fields current-edit" style="display:none">
+							<input type="hidden" name="totalQtyReturn" id="totalQtyReturn" value="0">
+							<input type="hidden" name="totalQty" id="totalQty" value="1">
+							<input type="hidden" name="productName" id="productName" value="iPod touch - Capacité: 32Go">
+							<input type="checkbox" name="id_order_detail[1]" id="id_order_detail[1]" value="1" onchange="setCancelQuantity(this, 1, 1)">
+						</td>
+						<td class="cancelQuantity standard_refund_fields current-edit" style="display:none">
+							<input type="text" id="cancelQuantity_1" name="cancelQuantity[1]" size="2" onclick="selectCheckbox(this);" value="">
+							0/1
+						</td>
+						<td class="partial_refund_fields current-edit" style="text-align:left;display:none">
+							<div style="width:40%;margin-top:5px;float:left">
+								Quantity:
+							</div>
+							<div style="width:60%;margin-top:2px;float:left">
+								<input onchange="checkPartialRefundProductQuantity(this)" type="text" size="3" name="partialRefundProductQuantity[1]" value="0"> 0/1
+							</div>
+							<div style="width:40%;margin-top:5px;float:left">
+								Amount:
+							</div>
+							<div style="width:60%;margin-top:2px;float:left">
+								$ <input onchange="checkPartialRefundProductAmount(this)" type="text" size="3" name="partialRefundProduct[1]">
+							</div>
+							<input type="hidden" value="1" class="partialRefundProductQuantity">
+							<input type="hidden" value="469" class="partialRefundProductAmount">
+						</td>
+						<td class="product_invoice" colspan="2" style="display: none;text-align:center;">
+							 &nbsp;
+						</td>
+						<td class="product_action" style="text-align:right">
+							<a href="#" class="edit_product_change_link"><img src="../img/admin/edit.gif" alt="Edit"></a>
+							<input type="submit" class="button" name="submitProductChange" value="Update" style="display: none;">
+							<a href="#" class="cancel_product_change_link" style="display: none;"><img src="../img/admin/disabled.gif" alt="Cancel"></a>
+							<a href="#" class="delete_product_line"><img src="../img/admin/delete.gif" alt="Delete"></a>
+						</td>
+					</tr>
+					<tr height="52">
+						<td align="center">
+							<img src="../img/tmp/product_mini_7_0.jpg?time=1383640642" alt="" class="imgm">
+						</td>
+						<td>
+							<a href="index.php?controller=adminproducts&amp;id_product=7&amp;updateproduct&amp;token=c4ecb5500c32302d072130315b268033">
+							<span class="productName">Écouteurs à isolation sonore Shure SE210</span><br>
+							</a>
+						</td>
+						<td align="center">
+							<span class="product_price_show">$124.58</span>
+							<span class="product_price_edit" style="display:none;">
+							<input type="hidden" name="product_id_order_detail" class="edit_product_id_order_detail" value="2">
+							<input type="text" name="product_price_tax_excl" class="edit_product_price_tax_excl edit_product_price" value="124.58" size="5"> $ tax excl.<br>
+							<input type="text" name="product_price_tax_incl" class="edit_product_price_tax_incl edit_product_price" value="149" size="5"> $ tax incl. </span>
+						</td>
+						<td align="center" class="productQuantity">
+							<span class="product_quantity_show">1</span>
+							<span class="product_quantity_edit" style="display:none;">
+							<input type="text" name="product_quantity" class="edit_product_quantity" value="1" size="2">
+							</span>
+						</td>
+						<td align="center" class="productQuantity product_stock">
+							16
+						</td>
+						<td align="center" class="total_product">
+							 $124.58
+						</td>
+						<td colspan="2" style="display: none;" class="add_product_fields">
+							&nbsp;
+						</td>
+						<td align="center" class="cancelCheck standard_refund_fields current-edit" style="display:none">
+							<input type="hidden" name="totalQtyReturn" id="totalQtyReturn" value="0">
+							<input type="hidden" name="totalQty" id="totalQty" value="1">
+							<input type="hidden" name="productName" id="productName" value="Écouteurs à isolation sonore Shure SE210">
+							<input type="checkbox" name="id_order_detail[2]" id="id_order_detail[2]" value="2" onchange="setCancelQuantity(this, 2, 1)">
+						</td>
+						<td class="cancelQuantity standard_refund_fields current-edit" style="display:none">
+							<input type="text" id="cancelQuantity_2" name="cancelQuantity[2]" size="2" onclick="selectCheckbox(this);" value="">
+							0/1
+						</td>
+						<td class="partial_refund_fields current-edit" style="text-align:left;display:none">
+							<div style="width:40%;margin-top:5px;float:left">
+								Quantity:
+							</div>
+							<div style="width:60%;margin-top:2px;float:left">
+								<input onchange="checkPartialRefundProductQuantity(this)" type="text" size="3" name="partialRefundProductQuantity[2]" value="0"> 0/1
+							</div>
+							<div style="width:40%;margin-top:5px;float:left">
+								Amount:
+							</div>
+							<div style="width:60%;margin-top:2px;float:left">
+								$ <input onchange="checkPartialRefundProductAmount(this)" type="text" size="3" name="partialRefundProduct[2]">
+							</div>
+							<input type="hidden" value="1" class="partialRefundProductQuantity">
+							<input type="hidden" value="149" class="partialRefundProductAmount">
+						</td>
+						<td class="product_invoice" colspan="2" style="display: none;text-align:center;">
+							 &nbsp;
+						</td>
+						<td class="product_action" style="text-align:right">
+							<a href="#" class="edit_product_change_link"><img src="../img/admin/edit.gif" alt="Edit"></a>
+							<input type="submit" class="button" name="submitProductChange" value="Update" style="display: none;">
+							<a href="#" class="cancel_product_change_link" style="display: none;"><img src="../img/admin/disabled.gif" alt="Cancel"></a>
+							<a href="#" class="delete_product_line"><img src="../img/admin/delete.gif" alt="Delete"></a>
+						</td>
+					</tr>
+					<tr id="new_product" height="52" style="display:none;background-color:#e9f1f6">
+						<td style="display:none;" colspan="2">
+							<input type="hidden" id="add_product_product_id" name="add_product[product_id]" value="0">
+							Product: <input type="text" id="add_product_product_name" value="" size="42" autocomplete="off" class="ac_input">
+							<div id="add_product_product_attribute_area" style="margin-top: 5px;display: none;">
+								 Combinations
+								<select name="add_product[product_attribute_id]" id="add_product_product_attribute_id">
+								</select>
+							</div>
+							<div id="add_product_product_warehouse_area" style="margin-top: 5px; display: none;">
+								 Warehouse
+								<select id="add_product_warehouse" name="add_product_warehouse">
+								</select>
+							</div>
+						</td>
+						<td style="display:none;">
+							<input type="text" name="add_product[product_price_tax_excl]" id="add_product_product_price_tax_excl" value="" size="4" disabled="disabled"> $ tax excl.<br>
+							<input type="text" name="add_product[product_price_tax_incl]" id="add_product_product_price_tax_incl" value="" size="4" disabled="disabled"> $ tax incl.<br>
+						</td>
+						<td style="display:none;" align="center" class="productQuantity">
+							<input type="text" name="add_product[product_quantity]" id="add_product_product_quantity" value="1" size="3" disabled="disabled">
+						</td>
+						<td style="display:none;" align="center" class="productQuantity" id="add_product_product_stock">
+							0
+						</td>
+						<td style="display:none;" align="center" id="add_product_product_total">
+							$0.00
+						</td>
+						<td style="display:none;" align="center" colspan="2">
+						</td>
+						<td style="display:none;">
+							<input type="button" class="button" id="submitAddProduct" value="Add product" disabled="disabled">
+						</td>
+					</tr>
+					<tr id="new_invoice" style="display:none;background-color:#e9f1f6;">
+						<td colspan="10">
+							<h3>New invoice information</h3>
+							<label>Carrier</label>
+							<div class="margin-form">
+								 My carrier
+							</div>
+							<div class="margin-form">
+								<input type="checkbox" name="add_invoice[free_shipping]" value="1">
+								<label class="t">Free shipping</label>
+								<p>
+									If you don't select "Free shipping," the normal shipping cost will be applied.
+								</p>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+					</table>
+					<div style="float:left; width:280px; margin-top:15px;">
+						<sup>*</sup> For this customer group, prices are displayed as: tax excluded. <br>
+						<br>
+						Merchandise returns are disabled
+					</div>
+					<div style="float:right; margin-top: 20px;">
+						<table class="table" width="450px;" style="border-radius:0px;" cellspacing="0" cellpadding="0">
+						<tbody>
+						<tr id="total_products">
+							<td width="150px;">
+								<b>Products:</b>
+							</td>
+							<td class="amount" align="right">
+								$618.00
+							</td>
+							<td class="partial_refund_fields current-edit" style="display:none;">
+								&nbsp;
+							</td>
+						</tr>
+						<tr id="total_discounts" style="display: none;">
+							<td>
+								<b>Discounts</b>
+							</td>
+							<td class="amount" align="right">
+								-$0.00
+							</td>
+							<td class="partial_refund_fields current-edit" style="display:none;">
+								&nbsp;
+							</td>
+						</tr>
+						<tr id="total_wrapping" style="display: none;">
+							<td>
+								<b>Wrapping</b>
+							</td>
+							<td class="amount" align="right">
+								$0.00
+							</td>
+							<td class="partial_refund_fields current-edit" style="display:none;">
+								&nbsp;
+							</td>
+						</tr>
+						<tr id="total_shipping">
+							<td>
+								<b>Shipping</b>
+							</td>
+							<td class="amount" align="right">
+								$8.37
+							</td>
+							<td class="partial_refund_fields current-edit" style="display:none;">
+								$ <input type="text" size="3" name="partialRefundShippingCost" value="0">
+							</td>
+						</tr>
+						<tr style="font-size: 20px" id="total_order">
+							<td style="font-size: 20px">
+								Total
+							</td>
+							<td class="amount" style="font-size: 20px" align="right">
+								 $626.37
+							</td>
+							<td class="partial_refund_fields current-edit" style="display:none;">
+								&nbsp;
+							</td>
+						</tr>
+						</tbody>
+						</table>
+					</div>
+					<div class="clear">
+					</div>
+					<div style="float:right; width:450px; margin-top:15px;">
+						<table cellspacing="0" cellpadding="0" class="table" style="width:100%;">
+						<tbody>
+						<tr>
+							<th>
+								<img src="../img/admin/coupon.gif" alt="Discounts">Discount name
+							</th>
+							<th align="center" style="width: 100px">
+								Value
+							</th>
+							<th align="center" style="width: 30px">
+								Action
+							</th>
+						</tr>
+						<tr>
+							<td colspan="3" class="center">
+								<a class="button" href="#" id="add_voucher"><img src="../img/admin/add.gif" alt="Add"> Add a new discount</a>
+							</td>
+						</tr>
+						<tr style="display: none">
+							<td colspan="3" class="current-edit" id="voucher_form">
+								<label>Name</label>
+								<div class="margin-form">
+									<input type="text" name="discount_name" value="">
+								</div>
+								<label>Type</label>
+								<div class="margin-form">
+									<select name="discount_type" id="discount_type">
+										<option value="1">Percent</option>
+										<option value="2">Amount</option>
+										<option value="3">Free shipping</option>
+									</select>
+								</div>
+								<div id="discount_value_field">
+									<label>Value</label>
+									<div class="margin-form">
+										<span id="discount_currency_sign" style="display: none;">$</span>
+										<input type="text" name="discount_value" size="3">
+										<span id="discount_percent_symbol">%</span>
+										<p class="preference_description" id="discount_value_help" style="width: 95%;display: none;">
+											 This value must include taxes.
+										</p>
+									</div>
+								</div>
+								<p class="center">
+									<input class="button" type="submit" name="submitNewVoucher" value="Add">&nbsp; <a href="#" id="cancel_add_voucher">Cancel</a>
+								</p>
+							</td>
+						</tr>
+						</tbody>
+						</table>
+					</div>
+				</div>
+				<div style="clear:both; height:15px;">
+					&nbsp;
+				</div>
+				<div style="float: right; width: 160px; display: none;" class="standard_refund_fields">
+					<div style="text-align:center; margin-top:5px;">
+						<input type="submit" name="cancelProduct" value="Cancel products" class="button" style="margin-top:8px;">
+					</div>
+				</div>
+				<div style="float: right; width: 160px; display:none;" class="partial_refund_fields">
+					<input type="checkbox" name="reinjectQuantities" class="button">&nbsp;<label for="reinjectQuantities" style="float:none; font-weight:normal;">Re-stock products</label><br>
+					<input type="checkbox" id="generateDiscountRefund" name="generateDiscountRefund" class="button" onclick="toggleShippingCost(this)">&nbsp;<label for="generateDiscount" style="float:none; font-weight:normal;">Generate a voucher</label><br>
+					<input type="submit" name="partialRefund" value="Partial refund" class="button" style="margin-top:8px;">
+				</div>
+			</fieldset>
+		</form>
+		<div class="clear" style="height:20px;">
+			&nbsp;
+		</div>
+		<div style="float: left">
+			<form action="/ps/admin2109/index.php?controller=AdminOrders&amp;id_order=1&amp;vieworder&amp;token=03b97c0470d2242e7ad0b01a281a087b&amp;token=03b97c0470d2242e7ad0b01a281a087b" method="post" onsubmit="if (getE('visibility').checked == true) return confirm('Do you want to send this message to the customer?');">
+			</form>
+		</div>
+		<div class="clear">
+			&nbsp;
+		</div>
+		<br>
+		<br>
+		<a href="index.php?controller=AdminOrders&amp;token=03b97c0470d2242e7ad0b01a281a087b"><img src="../img/admin/arrow2.gif"> Back to list</a><br>
+		<div style="clear:both;height:0;line-height:0">
+			&nbsp;
+		</div>
+	</div>
+	<div style="clear:both;height:0;line-height:0">
+		&nbsp;
+	</div>
+</div>
