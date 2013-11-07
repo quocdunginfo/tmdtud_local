@@ -42,7 +42,8 @@
     
 <script type="text/javascript" src="@Url.Content(_Template_Path+"/jquery-1-4-2.min.js")"></script> 
 <link rel="stylesheet" href="@Url.Content(_Template_Path+"css/slimbox2.css")" type="text/css" media="screen" /> 
-<script type="text/JavaScript" src="@Url.Content(_Template_Path+"js/slimbox2.js")"></script> 
+<script type="text/JavaScript" src="@Url.Content(_Template_Path+"js/slimbox2.js")"></script> 
+
 </head>
 
 <body>
@@ -105,7 +106,7 @@
         </div> <!-- end of ddsmoothmenu -->
         <div id="templatemo_search">
             <form action="@Url.Action("Submit","FrontTimKiem")" method="post">
-              <input type="text" value="@front_timkiem_sanpham["front_ten"]" name="sanpham_ten" id="keyword" title="keyword" onfocus="clearText(this)" onblur="clearText(this)" class="txt_field" />
+              <input type="text" value="@front_timkiem_sanpham["front_ten"]" name="front_sanpham_ten" id="keyword" title="keyword" onfocus="clearText(this)" onblur="clearText(this)" class="txt_field" />
               <input type="hidden" value="@front_timkiem_sanpham["front_max_item_per_page"]" name="front_sanpham_max_item_per_page" />
               <input type="hidden" value="@front_timkiem_sanpham["front_gia_from"]" name="front_sanpham_gia_from" />
               <input type="hidden" value="@front_timkiem_sanpham["front_gia_to"]" name="front_sanpham_gia_to" />

@@ -19,7 +19,7 @@ namespace qdtest.Controllers
         }
         //
         // GET: /Layout/
-        protected HttpCookie front_timkiem_sanpham;
+        protected HttpCookie front_timkiem_sanpham=null;
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             NhomSanPhamController ctr = new NhomSanPhamController();
@@ -42,7 +42,7 @@ namespace qdtest.Controllers
             {
                 //chưa set cookies trước => tiến hành set cookies
                 this._khoitao_cookie();
-                Response.Cookies.Add(CookieLibrary.Base64Encode(this.front_timkiem_sanpham));
+                this._luu_cookie();
             }
             else
             {
@@ -53,16 +53,23 @@ namespace qdtest.Controllers
                 catch (Exception ex)
                 {
                     this._khoitao_cookie();
-                    Response.Cookies.Add(CookieLibrary.Base64Encode(this.front_timkiem_sanpham));
+                    this._luu_cookie();
                 }
             }
             ViewBag.front_timkiem_sanpham = this.front_timkiem_sanpham;
         }
         [NonAction]
+        protected void _luu_cookie()
+        {
+            if (this.front_timkiem_sanpham != null)
+            {
+                Response.Cookies.Add(CookieLibrary.Base64Encode(this.front_timkiem_sanpham));
+            }
+        }
+        [NonAction]
         protected void _khoitao_cookie()
         {
             front_timkiem_sanpham = new HttpCookie("front_timkiem_sanpham");
-            front_timkiem_sanpham.Expires = DateTime.Now.AddSeconds(30);
             this.front_timkiem_sanpham["front_ten"] = "";
             this.front_timkiem_sanpham["front_masp"] = "";
             this.front_timkiem_sanpham["front_mota"] = "";

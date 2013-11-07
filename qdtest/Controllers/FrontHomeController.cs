@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using qdtest.Controllers.ModelController;
 using qdtest.Models;
 using qdtest.Controllers;
+using qdtest._Library;
 namespace qdtest.Controllers
 {
     public class FrontHomeController : FrontController
@@ -64,6 +65,14 @@ namespace qdtest.Controllers
             if (!s.Substring(s.Length - 3, 3).Equals("..."))
                 s += "...";
             return s;
+        }
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            base.OnActionExecuting(filterContext);
+            //khi click lai trang chu thi tu dong xoa cookies
+            this._khoitao_cookie();
+            this._luu_cookie();
+
         }
     }
 }
