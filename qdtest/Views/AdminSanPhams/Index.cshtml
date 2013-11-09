@@ -2,7 +2,7 @@
     //var ViewBag.Title
     var timkiem_sanpham = (HttpCookie)ViewBag.timkiem_sanpham;
     var SanPham_List = (List<qdtest.Models.SanPham>)ViewBag.SanPham_List;
-    
+    var pagination = (qdtest.Models.Pagination)ViewBag.pagination;
 }
 <div id="main">
 	<div id="content">
@@ -109,23 +109,33 @@
 			<tr>
 				<td style="vertical-align: bottom;">
 					<span style="float: left;">
-					    @if(ViewBag.CanPrevPage==true)
+					    @if (pagination.can_first_page)
                         {
                             <text>
                                 <img src="../img/admin/list-prev2.gif" onclick="document.location='@Url.Action("Index", "AdminSanPhams", new { page = 1 })'"/>
                                 &nbsp;&nbsp;
-                                <img src="../img/admin/list-prev.gif" onclick="document.location='@Url.Action("Index", "AdminSanPhams", new { page = ViewBag.Current_Page - 1 })'"/>
+                            </text>
+                        }
+                        @if (pagination.can_prev_page)
+                        {
+                            <text>
+                                <img src="../img/admin/list-prev.gif" onclick="document.location='@Url.Action("Index", "AdminSanPhams", new { page = pagination.current_page - 1 })'"/>
                                 &nbsp;&nbsp;
                             </text>
                         }
-                        Trang <b>@ViewBag.Current_Page</b> / @ViewBag.Total_Page
-                        @if(ViewBag.CanNextPage==true)
+                        Trang <b>@pagination.current_page</b> / @pagination.total_page
+                        @if (pagination.can_next_page)
                         {
                             <text>
                             &nbsp;&nbsp;
-                            <img src="../img/admin/list-next.gif" onclick="document.location='@Url.Action("Index", "AdminSanPhams", new { page = ViewBag.Current_Page + 1 })'"/>
+                            <img src="../img/admin/list-next.gif" onclick="document.location='@Url.Action("Index", "AdminSanPhams", new { page = pagination.current_page + 1 })'"/>
                             &nbsp;&nbsp;
-                            <img src="../img/admin/list-next2.gif" onclick="document.location='@Url.Action("Index", "AdminSanPhams", new { page = ViewBag.Total_Page})'"/>
+                            </text>
+                        }
+                        @if (pagination.can_last_page)
+                        {
+                            <text>    
+                            <img src="../img/admin/list-next2.gif" onclick="document.location='@Url.Action("Index", "AdminSanPhams", new { page = pagination.total_page})'"/>
                             &nbsp;
                             </text>
                         }

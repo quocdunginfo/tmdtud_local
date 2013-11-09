@@ -1,6 +1,7 @@
 ﻿@{
     var KhachHang_List = (List<qdtest.Models.KhachHang>)ViewBag.KhachHang_List;
     var timkiem_khachhang = (HttpCookie)ViewBag.timkiem_khachhang;
+    var pagination = (qdtest.Models.Pagination)ViewBag.pagination;
 }
 <div id="main">
 	<div id="content">
@@ -107,34 +108,49 @@
 			<tr>
 				<td style="vertical-align: bottom;">
 					<span style="float: left;">
-					    @if(ViewBag.CanPrevPage==true)
-                        {
+					    @if (pagination.can_first_page)
+         {
                             <text>
                                 <img src="../img/admin/list-prev2.gif" onclick="document.location='@Url.Action("Index", "AdminKhachHangs", new { page = 1 })'"/>
                                 &nbsp;&nbsp;
-                                <img src="../img/admin/list-prev.gif" onclick="document.location='@Url.Action("Index", "AdminKhachHangs", new { page = ViewBag.Current_Page - 1 })'"/>
+                            </text>
+         }
+                        @if (pagination.can_prev_page)
+                        {
+                            <text>
+                                <img src="../img/admin/list-prev.gif" onclick="document.location='@Url.Action("Index", "AdminKhachHangs", new { page = pagination.current_page - 1 })'"/>
                                 &nbsp;&nbsp;
                             </text>
                         }
-                        Trang <b>@ViewBag.Current_Page</b> / @ViewBag.Total_Page
-                        @if(ViewBag.CanNextPage==true)
+                        Trang <b>@pagination.current_page</b> / @pagination.total_page
+                        @if (pagination.can_next_page)
                         {
                             <text>
                             &nbsp;&nbsp;
-                            <img src="../img/admin/list-next.gif" onclick="document.location='@Url.Action("Index", "AdminKhachHangs", new { page = ViewBag.Current_Page + 1 })'"/>
+                            <img src="../img/admin/list-next.gif" onclick="document.location='@Url.Action("Index", "AdminKhachHangs", new { page = pagination.current_page + 1 })'"/>
                             &nbsp;&nbsp;
-                            <img src="../img/admin/list-next2.gif" onclick="document.location='@Url.Action("Index", "AdminKhachHangs", new { page = ViewBag.Total_Page})'"/>
+                            </text>
+                        }
+                        @if (pagination.can_last_page)
+                        {
+                            <text>    
+                            <img src="../img/admin/list-next2.gif" onclick="document.location='@Url.Action("Index", "AdminKhachHangs", new { page = pagination.total_page })'"/>
                             &nbsp;
                             </text>
                         }
                         | Hiển thị
                         
 					    <select name="khachhang_max_item_per_page" onchange="submit()">
-						    <option value="5" @if(timkiem_khachhang["max_item_per_page"].Equals("5")) {<text>selected="selected"</text>} >5</option>
-						    <option value="10" @if(timkiem_khachhang["max_item_per_page"].Equals("10")) {<text>selected="selected"</text>}>10</option>
-						    <option value="20" @if(timkiem_khachhang["max_item_per_page"].Equals("20")) {<text>selected="selected"</text>}>20</option>
-						    <option value="50" @if(timkiem_khachhang["max_item_per_page"].Equals("50")) {<text>selected="selected"</text>}>50</option>
-                            <option value="100" @if(timkiem_khachhang["max_item_per_page"].Equals("100")) {<text>selected="selected"</text>}>100</option>
+						    <option value="5" @if (timkiem_khachhang["max_item_per_page"].Equals("5"))
+                            {<text>selected="selected"</text>} >5</option>
+						    <option value="10" @if (timkiem_khachhang["max_item_per_page"].Equals("10"))
+                             {<text>selected="selected"</text>}>10</option>
+						    <option value="20" @if (timkiem_khachhang["max_item_per_page"].Equals("20"))
+                             {<text>selected="selected"</text>}>20</option>
+						    <option value="50" @if (timkiem_khachhang["max_item_per_page"].Equals("50"))
+                             {<text>selected="selected"</text>}>50</option>
+                            <option value="100" @if (timkiem_khachhang["max_item_per_page"].Equals("100"))
+                                                {<text>selected="selected"</text>}>100</option>
 					    </select>
 					     / kết quả trên 1 trang
 					</span>
@@ -241,9 +257,12 @@
 						</td>
 						<td class="center">
 							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="khachhang_active">
-								<option value="" @if(timkiem_khachhang["active"].Equals("")) {<text>selected="selected"</text> }>--</option>
-								<option value="1" @if(timkiem_khachhang["active"].Equals("1")) {<text>selected="selected"</text> }>Yes</option>
-								<option value="0" @if(timkiem_khachhang["active"].Equals("0")) {<text>selected="selected"</text> }>No</option>
+								<option value="" @if (timkiem_khachhang["active"].Equals(""))
+                         {<text>selected="selected"</text> }>--</option>
+								<option value="1" @if (timkiem_khachhang["active"].Equals("1"))
+                          {<text>selected="selected"</text> }>Yes</option>
+								<option value="0" @if (timkiem_khachhang["active"].Equals("0"))
+                          {<text>selected="selected"</text> }>No</option>
 							</select>
 						</td>
 						<td class="center">
@@ -252,7 +271,7 @@
 					</tr>
 					</thead>
 					<tbody>
-                    @foreach(var item in KhachHang_List)
+                    @foreach (var item in KhachHang_List)
                     {
 					<tr class=" row_hover">
 						<td class="center">
@@ -275,18 +294,18 @@
 						</td>
 						<td class="pointer center" onclick="document.location = '@Url.Action("Edit", "AdminKhachHangs", new { id = item.id })'">
 							<a href="@Url.Action("Edit", "AdminKhachHangs", new { id = item.id })" title="">
-							    @if(item.active==true)
-                                {
+							    @if (item.active == true)
+           {
                                     <text>
                                         <img src="../img/admin/enabled.gif" alt="Enabled"/>
                                     </text>
-                                }
-                                else
-                                {
+           }
+           else
+           {
                                     <text>
                                         <img src="../img/admin/disabled.gif" alt="Disabled"/>
                                     </text>
-                                }
+           }
 							</a>
 						</td>
 						<td class="center" style="white-space: nowrap;">

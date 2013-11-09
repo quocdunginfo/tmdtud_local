@@ -1,5 +1,6 @@
 ﻿using qdtest._Library;
 using qdtest.Controllers.ModelController;
+using qdtest.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -40,13 +41,26 @@ namespace qdtest.Controllers
             {
                 return this._fail_permission("sanpham_view");
             }
-            //calculate offset limit
-                int max_item_per_page = TextLibrary.ToInt(this.timkiem_sanpham["max_item_per_page"]);
-                Debug.WriteLine("max_item_per_page"+page);
-                int start_point = (page - 1) * max_item_per_page;
-                if (start_point <= 0) start_point = 0;
-            //Chọn danh sách nhân viên để hiển thị theo cookies tìm kiếm
             SanPhamController ctr = new SanPhamController();
+            //pagination
+                int max_item_per_page = TextLibrary.ToInt(this.timkiem_sanpham["max_item_per_page"]);
+                Pagination pg = new Pagination();
+                pg.set_current_page(page);
+                pg.set_max_item_per_page(max_item_per_page);
+                pg.set_total_item(
+                    ctr.timkiem_count(
+                        timkiem_sanpham["id"],
+                        timkiem_sanpham["masp"],
+                        timkiem_sanpham["ten"],
+                        timkiem_sanpham["mota"],
+                        TextLibrary.ToInt(timkiem_sanpham["gia_from"]),
+                        TextLibrary.ToInt(timkiem_sanpham["gia_to"]),
+                        null, null, timkiem_sanpham["active"]
+                        )
+                    );
+                pg.update();
+            //Chọn danh sách nhân viên để hiển thị theo cookies tìm kiếm
+            
             ViewBag.SanPham_List = ctr.timkiem(
                 timkiem_sanpham["id"],
                 timkiem_sanpham["masp"],
@@ -54,30 +68,12 @@ namespace qdtest.Controllers
                 timkiem_sanpham["mota"],
                 TextLibrary.ToInt( timkiem_sanpham["gia_from"]),
                 TextLibrary.ToInt(timkiem_sanpham["gia_to"]),
-                null, null, timkiem_sanpham["active"],"id",true, start_point, max_item_per_page
+                null, null, timkiem_sanpham["active"],"id",true, pg.start_point, max_item_per_page
                 );
             //set search cookies
             ViewBag.timkiem_sanpham = this.timkiem_sanpham;
             ViewBag.Title += " - Quản lý";
-            //pagination
-                int Current_Page = page;
-                int Total_Page = ctr.timkiem_count(
-                    timkiem_sanpham["id"],
-                    timkiem_sanpham["masp"],
-                    timkiem_sanpham["ten"],
-                    timkiem_sanpham["mota"],
-                    TextLibrary.ToInt(timkiem_sanpham["gia_from"]),
-                    TextLibrary.ToInt(timkiem_sanpham["gia_to"]),
-                    null, null, timkiem_sanpham["active"]
-                    ) / max_item_per_page + 1;
-                Boolean CanNextPage = Current_Page >= Total_Page ? false : true;
-                Boolean CanPrevPage = Current_Page == 1 ? false : true;
-                ViewBag.CanNextPage = CanNextPage;
-                ViewBag.CanPrevPage = CanPrevPage;
-                ViewBag.Current_Page = Current_Page;
-                ViewBag.Total_page = Total_Page;
-
-
+            ViewBag.pagination = pg;
             return View();
         }
         [HttpGet]
