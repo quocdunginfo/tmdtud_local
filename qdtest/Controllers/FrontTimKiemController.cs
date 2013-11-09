@@ -39,7 +39,7 @@ namespace qdtest.Controllers
                     TextLibrary.ToInt(front_timkiem_sanpham["front_gia_to"]),
                     null, null, "1"
                     );
-                int Total_Page = (Result_Count / max_item_per_page) + (Result_Count % max_item_per_page);
+                int Total_Page = TextLibrary.ToInt(Math.Ceiling((decimal)(Result_Count / max_item_per_page)).ToString());
                 Boolean CanNextPage = Current_Page >= Total_Page ? false : true;
                 Boolean CanPrevPage = Current_Page == 1 ? false : true;
                 ViewBag.Result_Count = Result_Count;
