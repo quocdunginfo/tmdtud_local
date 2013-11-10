@@ -65,5 +65,24 @@ namespace qdtest._Library
 
             return result;
         }
+        public static DateTime ToDateTime(String input, out Boolean convert_ok, String format="dd/MM/yyyy")
+        {
+            if (input.Equals(""))
+            {
+                convert_ok = false;
+                return new DateTime();
+            }
+            try
+            {
+                DateTime tmp = DateTime.ParseExact(input, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                convert_ok = true;
+                return tmp;
+            }
+            catch (Exception ex)
+            {
+                convert_ok = false;
+                return new DateTime();
+            }
+        }
     }
 }

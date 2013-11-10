@@ -1,6 +1,7 @@
 ﻿@{
-    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var DonHang_List = (List<qdtest.Models.DonHang>)ViewBag.DonHang_List;
+    var timkiem_donhang = (HttpCookie)ViewBag.timkiem_donhang;
 }
 <style type="text/css">
     .datepick-month-year option {
@@ -17,17 +18,6 @@
     </script>
     <div class="toolbar-placeholder">
         <div class="toolbarBox toolbarHead" style="width: 1319px;">
-
-            <ul class="cc_button">
-                <li>
-                    <a id="desc-order-new" class="toolbar_btn" href="index.php?controller=AdminOrders&amp;addorder&amp;token=03b97c0470d2242e7ad0b01a281a087b" title="Add new">
-                        <span class="process-icon-new "></span>
-                        <div>Add new</div>
-                    </a>
-                </li>
-                
-            </ul>
-
             <script language="javascript" type="text/javascript">
                 //<![CDATA[
                 var submited = false
@@ -103,7 +93,7 @@
                 <h3>
                     <span id="current_obj" style="font-weight: normal;">
 
-                        <span class="breadcrumb item-0 ">Orders
+                        <span class="breadcrumb item-0 ">Đơn hàng
                         </span>
                     </span>
 
@@ -111,21 +101,8 @@
             </div>
         </div>
     </div>
-
-
     <div class="leadin"></div>
-
-
-
-
-
-
-
-
-    <form method="post" action="#" class="form">
-
-
-
+    <form method="post" action="@Url.Action("Submit","AdminDonHangs")" class="form">
         <input type="hidden" id="submitFilterorder" name="submitFilterorder" value="0">
         <table class="table_grid" name="list_table">
             <tbody>
@@ -143,8 +120,8 @@
                             / 1 result(s)
                         </span>
                         <span style="float: right;">
-                            <input type="submit" id="submitFilterButtonorder" name="submitFilter" value="Filter" class="button">
-                            <input type="submit" name="submitResetorder" value="Reset" class="button">
+                            <input type="submit" id="submitFilterButtonorder" name="submitFilter" value="Tìm kiếm" class="button">
+                            <input type="submit" name="submit_reset" value="Reset" class="button">
                         </span>
                         <span class="clear"></span>
                     </td>
@@ -165,7 +142,7 @@
                                 <tr class="nodrag nodrop" style="height: 40px">
                                     <th class="center"></th>
                                     <th class="center">
-                                        <span class="title_box">ID
+                                        <span class="title_box">Mã
                                         </span>
                                         <br>
                                         <a href="index.php?controller=AdminOrders&amp;orderOrderby=id_order&amp;orderOrderway=desc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
@@ -174,7 +151,7 @@
                                             <img border="0" src="../img/admin/up.gif"></a>
                                     </th>
                                     <th>
-                                        <span class="title_box">Customer
+                                        <span class="title_box">Tên khách hàng
                                         </span>
                                         <br>
                                         <a href="index.php?controller=AdminOrders&amp;orderOrderby=customer&amp;orderOrderway=desc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
@@ -183,7 +160,7 @@
                                             <img border="0" src="../img/admin/up.gif"></a>
                                     </th>
                                     <th class="right">
-                                        <span class="title_box">Total
+                                        <span class="title_box">Tổng tiền
                                         </span>
                                         <br>
                                         <a href="index.php?controller=AdminOrders&amp;orderOrderby=total_paid_tax_incl&amp;orderOrderway=desc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
@@ -193,7 +170,7 @@
                                     </th>
                                     
                                     <th>
-                                        <span class="title_box">Status
+                                        <span class="title_box">Trạng thái
                                         </span>
                                         <br>
                                         <a href="index.php?controller=AdminOrders&amp;orderOrderby=osname&amp;orderOrderway=desc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
@@ -202,7 +179,7 @@
                                             <img border="0" src="../img/admin/up.gif"></a>
                                     </th>
                                     <th class="right">
-                                        <span class="title_box">Date
+                                        <span class="title_box">Ngày đặt
                                         </span>
                                         <br>
                                         <a href="index.php?controller=AdminOrders&amp;orderOrderby=date_add&amp;orderOrderway=desc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
@@ -210,90 +187,75 @@
                                         <a href="index.php?controller=AdminOrders&amp;orderOrderby=date_add&amp;orderOrderway=asc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
                                             <img border="0" src="../img/admin/up.gif"></a>
                                     </th>
-                                    <th class="center">Actions<br>
+                                    <th class="center">Tác vụ<br>
                                         &nbsp;
 
                                     </th>
                                 </tr>
                                 <tr class="nodrag nodrop filter row_hover" style="height: 35px;">
                                     <td class="center"></td>
-
-
                                     <td class="center">
-                                        <input type="text" class="filter" name="orderFilter_id_order" value="" style="width: 25px">
+                                        <input type="text" class="filter" name="donhang_id" value="@timkiem_donhang["id"]" style="width: 25px">
                                     </td>
                                     <td>
-                                        <input type="text" class="filter" name="orderFilter_customer" value="" style="width: 98%">
+                                        <input type="text" class="filter" name="donhang_khachhang_ten" value="@timkiem_donhang["khachhang_ten"]" style="width: 98%">
                                     </td>
-                                    <td class="right">
-                                        <input type="text" class="filter" name="orderFilter_total_paid_tax_incl" value="" style="width: 90%">
+                                    <td class="right">từ
+                                        <input type="text" class="filter" name="donhang_tongtien_from" value="@timkiem_donhang["tongtien_from"]" style="width: 75%"><br />
+                                        đến
+                                        <input type="text" class="filter" name="donhang_tongtien_to" value="@timkiem_donhang["tongtien_to"]" style="width: 75%">
                                     </td>
                                     <td>
-                                        <select onchange="$('#submitFilterButtonorder').focus();$('#submitFilterButtonorder').click();" name="orderFilter_os!id_order_state" style="width: 280px">
-                                            <option value="" selected="selected">(Tất cả)</option>
-                                            <option value="">Chưa liên lạc</option>
-                                            <option value="">Chưa giao</option>
-                                            <option value="">Đã giao</option>
-                                            <option value="">Bị hủy</option>
+                                        <select onchange="$('#submitFilterButtonorder').focus();$('#submitFilterButtonorder').click();" name="donhang_trangthai" style="width: 280px">
+                                            <option value="" @if (timkiem_donhang["trangthai"].Equals("")) {<text>selected="selected"</text>}>(Tất cả)</option>
+                                            <option value="chualienlac" @if (timkiem_donhang["trangthai"].Equals("chualienlac")) {<text>selected="selected"</text>}>Chưa liên lạc - đơn hàng mới</option>
+                                            <option value="chuagiao" @if (timkiem_donhang["trangthai"].Equals("chuagiao")) {<text>selected="selected"</text>}>Đã thanh toán - chưa giao</option>
+                                            <option value="dagiao" @if (timkiem_donhang["trangthai"].Equals("dagiao")) {<text>selected="selected"</text>}>Đã giao - hoàn tất</option>
+                                            <option value="dabihuy" @if (timkiem_donhang["trangthai"].Equals("dabihuy")) {<text>selected="selected"</text>}>Đã bị hủy</option>
                                         </select>
                                     </td>
-                                    <td class="right">From
-                                        <input type="text" class="filter datepicker hasDatepicker" id="qdDatePickerFrom" value="" style="width: 70px"><br>
-                                        To
-                                        <input type="text" class="filter datepicker hasDatepicker" id="qdDatePickerTo" value="" style="width: 70px">
-                                    </td>
-                                    
+                                    <td class="right">từ
+                                        <input name="donhang_ngay_from" type="text" class="filter datepicker hasDatepicker" id="qdDatePickerFrom" value="@timkiem_donhang["ngay_from"]" style="width: 70px"><br>
+                                        đến
+                                        <input name="donhang_ngay_to" type="text" class="filter datepicker hasDatepicker" id="qdDatePickerTo" value="@timkiem_donhang["ngay_to"]" style="width: 70px">
+                                    </td>                                   
 
                                     <td class="center">--</td>
                                 </tr>
                             </thead>
 
                             <tbody>
+                                @foreach(var item in DonHang_List)
+                                {
                                 <tr class=" row_hover">
                                     <td class="center"></td>
 
-                                    <td class="pointer										 center" onclick="document.location = 'index.php?controller=AdminOrders&amp;id_order=1&amp;vieworder&amp;token=03b97c0470d2242e7ad0b01a281a087b'">1
-																				
-			
+                                    <td class="pointer center" onclick="document.location = '@Url.Action("Index","AdminDonHang", new {id=item.id})'">
+                                        @item.id
                                     </td>
-
-
-                                    <td class="pointer										" onclick="document.location = 'index.php?controller=AdminOrders&amp;id_order=1&amp;vieworder&amp;token=03b97c0470d2242e7ad0b01a281a087b'">J. DOE
-																				
-			
+                                    <td class="pointer" onclick="document.location = '@Url.Action("Index","AdminDonHang", new {id=item.id})'">
+                                        @item.khachhang.tendaydu
                                     </td>
-
-
-                                    <td class="pointer										 right" onclick="document.location = 'index.php?controller=AdminOrders&amp;id_order=1&amp;vieworder&amp;token=03b97c0470d2242e7ad0b01a281a087b'">
-
-
-                                        <b>$626.37
+                                    <td class="pointer right" onclick="document.location = '@Url.Action("Index","AdminDonHang", new {id=item.id})'">
+                                        <b>
+                                            @item.tongtien
                                         </b>
-
                                     </td>
-
-
-                                    <td class="pointer										" onclick="document.location = 'index.php?controller=AdminOrders&amp;id_order=1&amp;vieworder&amp;token=03b97c0470d2242e7ad0b01a281a087b'">
-
-
-                                        <span class="color_field" style="background-color: Crimson; color: white">Chưa giao
+                                    <td class="pointer" onclick="document.location = '@Url.Action("Index","AdminDonHang", new {id=item.id})'">
+                                        <span class="color_field" style="background-color:#575757; color: white">
+                                            @item._get_trangthai()
                                         </span>
-
-
                                     </td>
-
-
-                                    <td class="pointer										 right" onclick="document.location = 'index.php?controller=AdminOrders&amp;id_order=1&amp;vieworder&amp;token=03b97c0470d2242e7ad0b01a281a087b'">2013-09-20 10:08:12
-																				
-			
+                                    <td class="pointer right" onclick="document.location = '@Url.Action("Index","AdminDonHang", new {id=item.id})'">
+                                        @item._get_ngay()
                                     </td>
-
                                     <td class="center" style="white-space: nowrap;">
-                                        <a href="index.php?controller=AdminOrders&amp;id_order=1&amp;vieworder&amp;token=03b97c0470d2242e7ad0b01a281a087b" title="View">
+                                        <a href="@Url.Action("Index","AdminDonHang", new {id=item.id})" title="View">
                                             <img src="../img/admin/details.gif" alt="View">
                                         </a>
                                     </td>
                                 </tr>
+                                }
                             </tbody>
 
 

@@ -101,6 +101,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminDonHangController.cs" />
+    <Compile Include="Controllers\AdminDonHangsController.cs" />
     <Compile Include="Controllers\AdminFailController.cs" />
     <Compile Include="Controllers\AdminForgotPasswordController.cs" />
     <Compile Include="Controllers\AdminHomeController.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Controllers\FrontController.cs" />
     <Compile Include="Controllers\FrontSanPhamDetailController.cs" />
     <Compile Include="Controllers\FrontTimKiemController.cs" />
+    <Compile Include="Controllers\ModelController\DonHangController.cs" />
     <Compile Include="Controllers\ModelController\QuyenController.cs" />
     <Compile Include="Controllers\ModelController\HangSXController.cs" />
     <Compile Include="Controllers\ModelController\HinhAnhController.cs" />
@@ -138,6 +140,18 @@
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201311101642018_sua_class_donhang.cs" />
+    <Compile Include="Migrations\201311101642018_sua_class_donhang.Designer.cs">
+      <DependentUpon>201311101642018_sua_class_donhang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201311101708104_sua_class_donhang_2.cs" />
+    <Compile Include="Migrations\201311101708104_sua_class_donhang_2.Designer.cs">
+      <DependentUpon>201311101708104_sua_class_donhang_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201311101734156_sua_class_donhang_3.cs" />
+    <Compile Include="Migrations\201311101734156_sua_class_donhang_3.Designer.cs">
+      <DependentUpon>201311101734156_sua_class_donhang_3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Models.cs" />
@@ -2920,6 +2934,9 @@
     <Content Include="Content\admin\modules\watermark\logo.gif" />
     <Content Include="Content\admin\modules\watermark\logo.png" />
     <Content Include="Content\admin\modules\watermark\watermark.gif" />
+    <Content Include="Content\admin\qd_date_picker\jquery.datepick-vi.js" />
+    <Content Include="Content\admin\qd_date_picker\jquery.datepick.css" />
+    <Content Include="Content\admin\qd_date_picker\jquery.datepick.js" />
     <Content Include="Content\admin\themes\default\css\addresses.css" />
     <Content Include="Content\admin\themes\default\css\authentication.css" />
     <Content Include="Content\admin\themes\default\css\category.css" />
@@ -3483,8 +3500,7 @@
     <Content Include="Views\AdminDonHang\_ViewStart.cshtml" />
     <Content Include="Views\FrontSanPhamDetail\Index.cshtml" />
     <Content Include="Views\FrontTimKiem\Index.cshtml" />
-    <Content Include="Views\AdminDonHang\Index.cshtml" />
-    <Content Include="Views\AdminDonHang\_ViewStart.cshtml" />
+    <Content Include="Views\AdminDonHangs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3662,6 +3678,17 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201311101642018_sua_class_donhang.resx">
+      <DependentUpon>201311101642018_sua_class_donhang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311101708104_sua_class_donhang_2.resx">
+      <DependentUpon>201311101708104_sua_class_donhang_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311101734156_sua_class_donhang_3.resx">
+      <DependentUpon>201311101734156_sua_class_donhang_3.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

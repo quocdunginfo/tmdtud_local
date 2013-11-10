@@ -244,26 +244,61 @@ namespace qdtest.Models
         {
             this.ds_chitiet_donhang = new List<ChiTiet_DonHang>();
             this.ngay = DateTime.Now;
-            this.diachi_nguoinhan = "";
-            this.ten_nguoinhan = "";
-            this.sdt_nguoinhan = "";
-            this.tennv = "";
+            this.nguoinhan_diachi = "";
+            this.nguoinhan_ten = "";
+            this.nguoinhan_sdt = "";
+            this.trangthai = "chualienlac";
+            this.thanhtoan_tructuyen = false;
+            this.tongtien = 0;
+            this.active = true;
+            this.phivanchuyen = 0;
         }
         [Key]
         public int id { get; set; }
         public DateTime ngay { get; set; }
         public int tongtien { get; set; }
-        public Boolean dathanhtoan { get; set; }
-        public Boolean dagiaohang { get; set; }
-        public String diachi_nguoinhan { get; set; }
-        public String ten_nguoinhan { get; set; }
-        public String sdt_nguoinhan { get; set; }
-        public String tennv { get; set; }
+        public String trangthai { get; set; }//"chualienlac","chuagiao","dagiao", "dabihuy"
+        public String nguoinhan_diachi { get; set; }
+        public String nguoinhan_ten { get; set; }
+        public String nguoinhan_sdt { get; set; }
         public Boolean active { get; set; }
+        public Boolean thanhtoan_tructuyen { get; set; }//thanhtoantructuyen, thanhtoantainha
+        public int phivanchuyen { get; set; }//dua vao tinhtp nguoi nhan
         //external
         public virtual List<ChiTiet_DonHang> ds_chitiet_donhang { get; set; }
-        public virtual NhanVien nguoidung { get; set; }
+        public virtual NhanVien nhanvien { get; set; }
         public virtual KhachHang khachhang { get; set; }
+        public TinhTP nguoinhan_diachi_tinhtp { get; set; }
+        //method
+        public String _get_trangthai()
+        {
+            if (!this.active)
+            {
+                return "Đã bị hủy";
+            }
+            if (this.trangthai.Equals("dabihuy"))
+            {
+                return "Đã bị hủy";
+            }
+            if (this.trangthai.Equals("chualienlac"))
+            {
+                return "Chưa liên lạc - đơn hàng mới";
+            }
+            if (this.trangthai.Equals("chuagiao"))
+            {
+                return "Đã thanh toán - chưa giao hàng";
+            }
+            if (this.trangthai.Equals("dagiao"))
+            {
+                return "Đã giao hàng - hoàn tất";
+            }
+            return "Unknown";
+        }
+        public String _get_ngay()
+        {
+            String format = "dd/MM/yyyy";
+            return String.Format("{0:"+format+"}", this.ngay);
+        }
     }
     public class ChiTiet_DonHang
     {
@@ -370,6 +405,23 @@ namespace qdtest.Models
         //external
         public virtual ChiTietSP chitietsp { get; set; }
     }
+    public class TinhTP
+    {
+        public TinhTP()
+        {
+            this.id = 0;
+            this.ten = "";
+            this.noithanh = true;
+            this.phivanchuyen = 0;
+        }
+        [Key]
+        public int id { get; set; }
+        public String ten { get; set; }
+        public int phivanchuyen { get; set; }
+        public Boolean noithanh { get; set; }
+        //external
+        public virtual List<DonHang> ds_donhang { get; set; }
+    }
     public class BanGiayDBContext : DbContext
     {
         public DbSet<DonHang> ds_donhang { get; set; }
@@ -389,5 +441,6 @@ namespace qdtest.Models
         public DbSet<TonKho> ds_tonkho { get; set; }
         public DbSet<LoaiNhanVien> ds_loainhanvien { get; set; }
         public DbSet<Quyen> ds_quyen { get; set; }
+        public DbSet<TinhTP> ds_tinhtp { get; set; }
     }
 }
