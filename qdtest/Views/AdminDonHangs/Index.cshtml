@@ -1,0 +1,308 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style type="text/css">
+    .datepick-month-year option {
+        color: white;
+    }
+</style>
+<div id="content">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('table.order .filter').keypress(function (event) {
+                formSubmit(event, 'submitFilterButtonorder')
+            })
+        });
+    </script>
+    <div class="toolbar-placeholder">
+        <div class="toolbarBox toolbarHead" style="width: 1319px;">
+
+            <ul class="cc_button">
+                <li>
+                    <a id="desc-order-new" class="toolbar_btn" href="index.php?controller=AdminOrders&amp;addorder&amp;token=03b97c0470d2242e7ad0b01a281a087b" title="Add new">
+                        <span class="process-icon-new "></span>
+                        <div>Add new</div>
+                    </a>
+                </li>
+                
+            </ul>
+
+            <script language="javascript" type="text/javascript">
+                //<![CDATA[
+                var submited = false
+                var modules_list_loaded = false;
+                $(function () {
+                    //get reference on save link
+                    btn_save = $('span[class~="process-icon-save"]').parent();
+
+                    //get reference on form submit button
+                    btn_submit = $('#order_form_submit_btn');
+
+                    if (btn_save.length > 0 && btn_submit.length > 0) {
+                        //get reference on save and stay link
+                        btn_save_and_stay = $('span[class~="process-icon-save-and-stay"]').parent();
+
+                        //get reference on current save link label
+                        lbl_save = $('#desc-order-save div');
+
+                        //override save link label with submit button value
+                        if (btn_submit.val().length > 0)
+                            lbl_save.html(btn_submit.attr("value"));
+
+                        if (btn_save_and_stay.length > 0) {
+
+                            //get reference on current save link label
+                            lbl_save_and_stay = $('#desc-order-save-and-stay div');
+
+                            //override save and stay link label with submit button value
+                            if (btn_submit.val().length > 0 && lbl_save_and_stay && !lbl_save_and_stay.hasClass('locked')) {
+                                lbl_save_and_stay.html(btn_submit.val() + " and stay ");
+                            }
+
+                        }
+
+                        //hide standard submit button
+                        btn_submit.hide();
+                        //bind enter key press to validate form
+                        $('#order_form').keypress(function (e) {
+                            if (e.which == 13 && e.target.localName != 'textarea')
+                                $('#desc-order-save').click();
+                        });
+                        //submit the form
+
+                        btn_save.click(function () {
+                            // Avoid double click
+                            if (submited)
+                                return false;
+                            submited = true;
+
+                            //add hidden input to emulate submit button click when posting the form -> field name posted
+                            btn_submit.before('<input type="hidden" name="' + btn_submit.attr("name") + '" value="1" />');
+
+                            $('#order_form').submit();
+                            return false;
+                        });
+
+                        if (btn_save_and_stay) {
+                            btn_save_and_stay.click(function () {
+                                //add hidden input to emulate submit button click when posting the form -> field name posted
+                                btn_submit.before('<input type="hidden" name="' + btn_submit.attr("name") + 'AndStay" value="1" />');
+
+                                $('#order_form').submit();
+                                return false;
+                            });
+                        }
+
+                    }
+                });
+                //]]>
+            </script>
+
+            <div class="pageTitle">
+                <h3>
+                    <span id="current_obj" style="font-weight: normal;">
+
+                        <span class="breadcrumb item-0 ">Orders
+                        </span>
+                    </span>
+
+                </h3>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="leadin"></div>
+
+
+
+
+
+
+
+
+    <form method="post" action="#" class="form">
+
+
+
+        <input type="hidden" id="submitFilterorder" name="submitFilterorder" value="0">
+        <table class="table_grid" name="list_table">
+            <tbody>
+                <tr>
+                    <td style="vertical-align: bottom;">
+                        <span style="float: left;">Page <b>1</b> / 1
+												| Display
+						<select name="order_pagination" onchange="submit()">
+
+                            <option value="20" selected="selected">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="300">300</option>
+                        </select>
+                            / 1 result(s)
+                        </span>
+                        <span style="float: right;">
+                            <input type="submit" id="submitFilterButtonorder" name="submitFilter" value="Filter" class="button">
+                            <input type="submit" name="submitResetorder" value="Reset" class="button">
+                        </span>
+                        <span class="clear"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="table  order" cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom: 10px;">
+                            <colgroup>
+                                <col width="10px">
+                                <col width="25px">
+                                <col>
+                                <col width="200px">
+                                <col width="280px">
+                                <col width="130px">
+                                <col width="52px">
+                            </colgroup>
+                            <thead>
+                                <tr class="nodrag nodrop" style="height: 40px">
+                                    <th class="center"></th>
+                                    <th class="center">
+                                        <span class="title_box">ID
+                                        </span>
+                                        <br>
+                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=id_order&amp;orderOrderway=desc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
+                                            <img border="0" src="../img/admin/down_d.gif"></a>
+                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=id_order&amp;orderOrderway=asc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
+                                            <img border="0" src="../img/admin/up.gif"></a>
+                                    </th>
+                                    <th>
+                                        <span class="title_box">Customer
+                                        </span>
+                                        <br>
+                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=customer&amp;orderOrderway=desc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
+                                            <img border="0" src="../img/admin/down.gif"></a>
+                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=customer&amp;orderOrderway=asc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
+                                            <img border="0" src="../img/admin/up.gif"></a>
+                                    </th>
+                                    <th class="right">
+                                        <span class="title_box">Total
+                                        </span>
+                                        <br>
+                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=total_paid_tax_incl&amp;orderOrderway=desc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
+                                            <img border="0" src="../img/admin/down.gif"></a>
+                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=total_paid_tax_incl&amp;orderOrderway=asc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
+                                            <img border="0" src="../img/admin/up.gif"></a>
+                                    </th>
+                                    
+                                    <th>
+                                        <span class="title_box">Status
+                                        </span>
+                                        <br>
+                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=osname&amp;orderOrderway=desc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
+                                            <img border="0" src="../img/admin/down.gif"></a>
+                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=osname&amp;orderOrderway=asc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
+                                            <img border="0" src="../img/admin/up.gif"></a>
+                                    </th>
+                                    <th class="right">
+                                        <span class="title_box">Date
+                                        </span>
+                                        <br>
+                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=date_add&amp;orderOrderway=desc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
+                                            <img border="0" src="../img/admin/down.gif"></a>
+                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=date_add&amp;orderOrderway=asc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
+                                            <img border="0" src="../img/admin/up.gif"></a>
+                                    </th>
+                                    <th class="center">Actions<br>
+                                        &nbsp;
+
+                                    </th>
+                                </tr>
+                                <tr class="nodrag nodrop filter row_hover" style="height: 35px;">
+                                    <td class="center"></td>
+
+
+                                    <td class="center">
+                                        <input type="text" class="filter" name="orderFilter_id_order" value="" style="width: 25px">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="filter" name="orderFilter_customer" value="" style="width: 98%">
+                                    </td>
+                                    <td class="right">
+                                        <input type="text" class="filter" name="orderFilter_total_paid_tax_incl" value="" style="width: 90%">
+                                    </td>
+                                    <td>
+                                        <select onchange="$('#submitFilterButtonorder').focus();$('#submitFilterButtonorder').click();" name="orderFilter_os!id_order_state" style="width: 280px">
+                                            <option value="" selected="selected">(Tất cả)</option>
+                                            <option value="">Chưa liên lạc</option>
+                                            <option value="">Chưa giao</option>
+                                            <option value="">Đã giao</option>
+                                            <option value="">Bị hủy</option>
+                                        </select>
+                                    </td>
+                                    <td class="right">From
+                                        <input type="text" class="filter datepicker hasDatepicker" id="qdDatePickerFrom" value="" style="width: 70px"><br>
+                                        To
+                                        <input type="text" class="filter datepicker hasDatepicker" id="qdDatePickerTo" value="" style="width: 70px">
+                                    </td>
+                                    
+
+                                    <td class="center">--</td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr class=" row_hover">
+                                    <td class="center"></td>
+
+                                    <td class="pointer										 center" onclick="document.location = 'index.php?controller=AdminOrders&amp;id_order=1&amp;vieworder&amp;token=03b97c0470d2242e7ad0b01a281a087b'">1
+																				
+			
+                                    </td>
+
+
+                                    <td class="pointer										" onclick="document.location = 'index.php?controller=AdminOrders&amp;id_order=1&amp;vieworder&amp;token=03b97c0470d2242e7ad0b01a281a087b'">J. DOE
+																				
+			
+                                    </td>
+
+
+                                    <td class="pointer										 right" onclick="document.location = 'index.php?controller=AdminOrders&amp;id_order=1&amp;vieworder&amp;token=03b97c0470d2242e7ad0b01a281a087b'">
+
+
+                                        <b>$626.37
+                                        </b>
+
+                                    </td>
+
+
+                                    <td class="pointer										" onclick="document.location = 'index.php?controller=AdminOrders&amp;id_order=1&amp;vieworder&amp;token=03b97c0470d2242e7ad0b01a281a087b'">
+
+
+                                        <span class="color_field" style="background-color: Crimson; color: white">Chưa giao
+                                        </span>
+
+
+                                    </td>
+
+
+                                    <td class="pointer										 right" onclick="document.location = 'index.php?controller=AdminOrders&amp;id_order=1&amp;vieworder&amp;token=03b97c0470d2242e7ad0b01a281a087b'">2013-09-20 10:08:12
+																				
+			
+                                    </td>
+
+                                    <td class="center" style="white-space: nowrap;">
+                                        <a href="index.php?controller=AdminOrders&amp;id_order=1&amp;vieworder&amp;token=03b97c0470d2242e7ad0b01a281a087b" title="View">
+                                            <img src="../img/admin/details.gif" alt="View">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="hidden" name="token" value="03b97c0470d2242e7ad0b01a281a087b">
+    </form>
+    <div style="clear: both; height: 0; line-height: 0">&nbsp;</div>
+</div>
