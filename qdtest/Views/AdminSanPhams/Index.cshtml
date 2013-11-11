@@ -302,7 +302,7 @@
 							 @item.ten
 						</td>
 						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminSanPhams", new { id = item.id })'">
-							 @qdtest._Library.TextLibrary.HTML_Strip(item.mota);
+							 @item._get_mota_lite()
 						</td>
 						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminSanPhams", new { id = item.id })'">
 							 

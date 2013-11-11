@@ -11,9 +11,12 @@ namespace qdtest._Library
 {
     public class TextLibrary
     {
-        public static string HTML_Strip(string data)
+        public static string HTML_Strip(string text)
         {
-            return Regex.Replace(data, @"<(.|\n)*?>", string.Empty);
+            System.Text.RegularExpressions.Regex rx = new System.Text.RegularExpressions.Regex("<[^>]*>");
+            // replace all matches with empty string
+            text = rx.Replace(text, "");
+            return text;
         }
         public static string GetSHA1HashData(string data)
         {
@@ -53,7 +56,7 @@ namespace qdtest._Library
             }
             return re;
         }
-        public static string Unicode_Substring(string text, int length)
+        public static string Unicode_Substring(string text, int length=200)
         {
             var bytes = Encoding.UTF8.GetBytes(text);
             var result = Encoding.UTF8.GetString(bytes, 0, Math.Min(bytes.Length, length));

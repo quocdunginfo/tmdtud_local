@@ -141,18 +141,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201311101642018_sua_class_donhang.cs" />
-    <Compile Include="Migrations\201311101642018_sua_class_donhang.Designer.cs">
-      <DependentUpon>201311101642018_sua_class_donhang.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201311101708104_sua_class_donhang_2.cs" />
-    <Compile Include="Migrations\201311101708104_sua_class_donhang_2.Designer.cs">
-      <DependentUpon>201311101708104_sua_class_donhang_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201311101734156_sua_class_donhang_3.cs" />
-    <Compile Include="Migrations\201311101734156_sua_class_donhang_3.Designer.cs">
-      <DependentUpon>201311101734156_sua_class_donhang_3.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\TableModel.cs" />
@@ -3678,17 +3666,6 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201311101642018_sua_class_donhang.resx">
-      <DependentUpon>201311101642018_sua_class_donhang.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201311101708104_sua_class_donhang_2.resx">
-      <DependentUpon>201311101708104_sua_class_donhang_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201311101734156_sua_class_donhang_3.resx">
-      <DependentUpon>201311101734156_sua_class_donhang_3.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

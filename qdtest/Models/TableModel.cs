@@ -1,4 +1,5 @@
-﻿using System;
+﻿using qdtest._Library;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -58,6 +59,14 @@ namespace qdtest.Models
                 re.sanpham = this;
             }
             return re;
+        }
+        public string _get_mota_lite(int max_length=200)
+        {
+            string tmp = this.mota;
+            tmp = TextLibrary.HTML_Strip(tmp);
+            //tmp = TextLibrary.Unicode_Substring(tmp, max_length);
+            tmp = tmp.Substring(0,max_length);
+            return tmp;
         }
     }
     public class Topic
