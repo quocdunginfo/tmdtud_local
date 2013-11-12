@@ -52,7 +52,6 @@
     </style>
     <!-- qd date picker -->
     <link type="text/css" href="@qRootAdminTemplatePath../qd_date_picker/jquery.datepick.css" rel="stylesheet" />
-    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
     <script type="text/javascript" src="@qRootAdminTemplatePath../qd_date_picker/jquery.datepick.js"></script>
     <script type="text/javascript" src="@qRootAdminTemplatePath../qd_date_picker/jquery.datepick-vi.js"></script>
     <script type="text/javascript">
@@ -60,7 +59,7 @@
             $('#qdDatePickerFrom').datepick();
             $('#qdDatePickerTo').datepick();
         });
-    </script>
+    </script>    <!-- qd color picker -->    <script type="text/javascript" src="@qRootAdminTemplatePath../qd_color_picker/jscolor.js"></script>
 </head>
 <body style="">
     <div id="ajax_running">
@@ -131,11 +130,11 @@
                             <div class="clear">
                             </div>
                             <ul id="employee_links">
-                                <li><a href="index.php?controller=AdminEmployees&amp;token=0eb4238fbc37dd9ef96cdfa5f4b6b90c&id_employee=1&amp;updateemployee">My preferences</a></li>
+                                <li><a href="@Url.Action("Index", "AdminUser", new { id = Current_User.id })">Cài đặt tài khoản</a></li>
                                 <li class="separator">&nbsp;</li>
                                 <li><a id="header_logout" href="@Url.Action("Logout", "AdminLogin")">logout</a></li>
                                 <li class="separator">&nbsp;</li>
-                                <a href="http://localhost/ps/" id="header_foaccess" target="_blank" title="View my shop">View my shop</a>
+                                <a href="@Url.Action("Index","FrontHome")" id="header_foaccess" target="_blank" title="View my shop">Trang chủ website</a>
                             </ul>
                         </div>
                     </div>
@@ -186,17 +185,25 @@
                                        {<text>active</text>}"><a href="@Url.Action("Index", "AdminMauSacs")">Màu sắc</a></li>
                         </ul>
                     </li>
-                    <li class="submenu_size maintab " id="maintab10">
-                        <a href="#" class="title">
-                            <img src="../img/t/AdminParentOrders.gif" alt="" />Orders </a>
+                    <li class="submenu_size maintab @if (ActiveTab.Contains("QuanLyDonHang"))
+                                       {<text>active</text>}" id="maintab10">
+                        <a href="@Url.Action("Index","AdminDonHangs")" class="title">
+                            <img src="../img/t/AdminParentOrders.gif" alt="" />Đơn hàng </a>
                         <ul class="submenu">
-                            <li><a href="index.php?controller=AdminOrders&amp;token=03b97c0470d2242e7ad0b01a281a087b">Orders</a></li>
-                            <li><a href="index.php?controller=AdminInvoices&amp;token=9adc75ff9ddcf8972b47567f13338e35">Invoices</a></li>
-                            <li><a href="index.php?controller=AdminReturn&amp;token=d1ea899dc400d59e2e42dd7202d68fb4">Merchandise Returns</a></li>
-                            <li><a href="index.php?controller=AdminDeliverySlip&amp;token=8e1a0cb7e82854b5c992a659a6f1ac4a">Delivery Slips</a></li>
-                            <li><a href="index.php?controller=AdminSlip&amp;token=f7c9c3c582de293d73835a4a48402240">Credit Slips</a></li>
-                            <li><a href="index.php?controller=AdminStatuses&amp;token=bcbcde9789b0539fa910f73599c01bfd">Statuses</a></li>
-                            <li><a href="index.php?controller=AdminOrderMessage&amp;token=5c96440da44d74636408404ba88bc804">Order Messages</a></li>
+                            <li class="@if (ActiveTab.Contains("DonHang_"))
+                                        {<text>active</text>}"><a href="@Url.Action("Index_All","AdminDonHangs")">Danh sách đơn hàng</a></li>
+                            <li class="@if (ActiveTab.Contains("DonHang_chualienlac"))
+                                        {<text>active</text>}"><a href="@Url.Action("Index_TrangThai", "AdminDonHangs", new { trangthai = "chualienlac"})">Đơn hàng chưa liên lạc - đơn hàng mới</a></li>
+                            <li class="@if (ActiveTab.Contains("DonHang_chuagiao"))
+                                        {<text>active</text>}"><a href="@Url.Action("Index_TrangThai", "AdminDonHangs", new { trangthai = "chuagiao"})">Đơn hàng đã thanh toán - chưa giao</a></li>
+                            <li class="@if (ActiveTab.Contains("DonHang_dagiao"))
+                                        {<text>active</text>}"><a href="@Url.Action("Index_TrangThai", "AdminDonHangs", new { trangthai = "dagiao"})">Đơn hàng đã giao - hoàn tất</a></li>
+                            <li class="@if (ActiveTab.Contains("DonHang_dabihuy"))
+                                        {<text>active</text>}"><a href="@Url.Action("Index_TrangThai", "AdminDonHangs", new { trangthai = "dabihuy"})">Đơn hàng đã bị hủy</a></li>
+
+                            <li class=""><a href="@Url.Action("Index_NgayTruoc", "AdminDonHangs", new { songay = 0})">Đơn hàng hôm nay</a></li>
+                            <li class=""><a href="@Url.Action("Index_NgayTruoc", "AdminDonHangs", new { songay = -7})">Đơn hàng 7 ngày trước</a></li>
+                            <li class=""><a href="@Url.Action("Index_NgayTruoc", "AdminDonHangs", new { songay = -30})">Đơn hàng 30 ngày trước</a></li>
                         </ul>
                     </li>
                     <li class="submenu_size maintab @if (ActiveTab.Contains("KhachHang"))
@@ -210,82 +217,6 @@
                             <li><a href="index.php?controller=AdminCustomers&amp;token=a63897f6b09f19ea042c44d7f543b6b6">Thắc mắc của khách hàng</a></li>
                         </ul>
                     </li>
-                    <li class="submenu_size maintab " id="maintab12">
-                        <a href="#" class="title">
-                            <img src="../img/t/AdminPriceRule.gif" alt="" />Price Rules </a>
-                        <ul class="submenu">
-                            <li><a href="index.php?controller=AdminCartRules&amp;token=f6a0e29f52582cbe259d36183cf3e097">Cart Rules</a></li>
-                            <li><a href="index.php?controller=AdminSpecificPriceRule&amp;token=7e1e080469c68950db777983034df528">Catalog Price Rules</a></li>
-                            <li><a href="index.php?controller=AdminMarketing&amp;token=4cf6e572d4d41b22bd2daaa6583ba45f">Marketing</a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu_size maintab " id="maintab13">
-                        <a href="#" class="title">
-                            <img src="../img/t/AdminParentShipping.gif" alt="" />Shipping </a>
-                        <ul class="submenu">
-                            <li><a href="index.php?controller=AdminShipping&amp;token=161c0d3f6b4a9c9c183c4815b5add567">Shipping</a></li>
-                            <li><a href="index.php?controller=AdminCarriers&amp;token=8aa5d6c46f577e3a07c310c479d0d456">Carriers</a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu_size maintab " id="maintab14">
-                        <a href="#" class="title">
-                            <img src="../img/t/AdminParentLocalization.gif" alt="" />Localization </a>
-                        <ul class="submenu">
-                            <li><a href="index.php?controller=AdminLocalization&amp;token=9270950b97a9f3463f65ad376f49b60f">Localization</a></li>
-                            <li><a href="index.php?controller=AdminLanguages&amp;token=59dca24731e175a975c4363251f35135">Languages</a></li>
-                            <li><a href="index.php?controller=AdminZones&amp;token=ab937f2e107666f7fb793da55d1fdc9d">Zones</a></li>
-                            <li><a href="index.php?controller=AdminCountries&amp;token=ea638640e467b049a7a4080007145f90">Countries</a></li>
-                            <li><a href="index.php?controller=AdminStates&amp;token=02879985f668a88172ebccbde5dfe1e3">States</a></li>
-                            <li><a href="index.php?controller=AdminCurrencies&amp;token=8560e036405f6079797e243cb95f35fd">Currencies</a></li>
-                            <li><a href="index.php?controller=AdminTaxes&amp;token=b5dcf911c94c040224e1caeff1c1e954">Taxes</a></li>
-                            <li><a href="index.php?controller=AdminTaxRulesGroup&amp;token=d13265b90d7110ef8ac667123eaa4eb3">Tax Rules</a></li>
-                            <li><a href="index.php?controller=AdminTranslations&amp;token=de24c0d6a8824183118e50ca479a7073">Translations</a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu_size maintab " id="maintab15">
-                        <a href="#" class="title">
-                            <img src="../img/t/AdminParentModules.gif" alt="" />Modules </a>
-                        <ul class="submenu">
-                            <li><a href="index.php?controller=AdminModules&amp;token=9979b7fa2b0ec644bc06d7fd1e9c4d20">Modules</a></li>
-                            <li><a href="index.php?controller=AdminAddonsCatalog&amp;token=4e2eda1864cd5c037f95002338c56591">Modules &amp; Themes Catalog</a></li>
-                            <li><a href="index.php?controller=AdminModulesPositions&amp;token=c29feb66ca36083aafd447422b818e4b">Positions</a></li>
-                            <li><a href="index.php?controller=AdminPayment&amp;token=2a4c1ce2a24dc8b3fe82185126622e42">Payment</a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu_size maintab " id="maintab16">
-                        <a href="#" class="title">
-                            <img src="../img/t/AdminParentPreferences.gif" alt="" />Preferences </a>
-                        <ul class="submenu">
-                            <li><a href="index.php?controller=AdminPreferences&amp;token=c893f05da9d476e55787cf2927b7b314">General</a></li>
-                            <li><a href="index.php?controller=AdminOrderPreferences&amp;token=8c9508816fd0814275d4118c067c8be4">Orders</a></li>
-                            <li><a href="index.php?controller=AdminPPreferences&amp;token=e89a7a6df2de924b7167b4a93d0ea651">Products</a></li>
-                            <li><a href="index.php?controller=AdminCustomerPreferences&amp;token=fa215a90129f4faf0812babfb4539573">Customers</a></li>
-                            <li><a href="index.php?controller=AdminThemes&amp;token=e11bd725b7ed317d7257524e778115b5">Themes</a></li>
-                            <li><a href="index.php?controller=AdminMeta&amp;token=668f98dda880af20741c0bc0676f2979">SEO &amp; URLs</a></li>
-                            <li><a href="index.php?controller=AdminCmsContent&amp;token=2f17510697ef098a6fbc27372234c9ef">CMS</a></li>
-                            <li><a href="index.php?controller=AdminImages&amp;token=1cae2cc37d366438f79e8d4e27d8065a">Images</a></li>
-                            <li><a href="index.php?controller=AdminStores&amp;token=14584b012154e1358dc0c07d13de40d0">Store Contacts</a></li>
-                            <li><a href="index.php?controller=AdminSearchConf&amp;token=1335b70da0a0a198eb6ad9a39deab313">Search</a></li>
-                            <li><a href="index.php?controller=AdminMaintenance&amp;token=db903acdc898a121f3dc92c94bbbae58">Maintenance</a></li>
-                            <li><a href="index.php?controller=AdminGeolocation&amp;token=89f5d26b050b0227a0f72791447d1e7f">Geolocation</a></li>
-                        </ul>
-                    </li>
-                    <!--
-				<li class="submenu_size maintab " id="maintab17">
-				<a href="#" class="title">
-				<img src="../img/t/AdminTools.gif" alt=""/>Advanced Parameters </a>
-				<ul class="submenu">
-					<li><a href="index.php?controller=AdminInformation&amp;token=a2ace0aabe0fe7313ddc17d50277a095">Configuration Information</a></li>
-					<li><a href="index.php?controller=AdminPerformance&amp;token=61f0e8a223841fdf959b988c7bbd8651">Performance</a></li>
-					<li><a href="index.php?controller=AdminEmails&amp;token=aad9fa350a1502a26ae4c3b746af2728">E-mail</a></li>
-					<li><a href="index.php?controller=AdminImport&amp;token=835b866e0e75cd5ca98c5dec14876640">CSV Import</a></li>
-					<li><a href="index.php?controller=AdminBackup&amp;token=e9bb936b730d169f3b9ee36f8052096a">DB Backup</a></li>
-					<li><a href="index.php?controller=AdminRequestSql&amp;token=11a3fd5c83cd97b83ee9696f75d2ade2">SQL Manager</a></li>
-					<li><a href="index.php?controller=AdminLogs&amp;token=01b0b8f276084a7cadb7cf8a4cde1f61">Logs</a></li>
-					<li><a href="index.php?controller=AdminWebservice&amp;token=01e4d48c5734d3c6a66cd0a8a9c256f1">Webservice</a></li>
-				</ul>
-				</li>
-                -->
                     <li class="submenu_size maintab @if (ActiveTab.Contains("QuanTriHeThong"))
                                                     {<text>active</text>}" id="maintab18">
                         <a href="#" class="title">
@@ -297,15 +228,6 @@
                                        {<text>active</text>}" ><a href="@Url.Action("Index", "AdminUsers")">Nhân viên</a></li>
                             <li class="@if (ActiveTab.Contains("LoaiNhanVien"))
                                        {<text>active</text>}" ><a href="@Url.Action("Index", "AdminLoaiNhanViens")">Nhóm quyền hạn</a></li>
-                        </ul>
-                    </li>
-                    <li class="submenu_size maintab " id="maintab19">
-                        <a href="#" class="title">
-                            <img src="../img/t/AdminParentStats.gif" alt="" />Stats </a>
-                        <ul class="submenu">
-                            <li><a href="index.php?controller=AdminStats&amp;token=f039fe6f78d94d87076fa6f2368225a4">Stats</a></li>
-                            <li><a href="index.php?controller=AdminSearchEngines&amp;token=27302fc4612fe01a038f986386468956">Search Engines</a></li>
-                            <li><a href="index.php?controller=AdminReferrers&amp;token=abf62b8ed049a103d8255f3ddaa18420">Referrers</a></li>
                         </ul>
                     </li>
                 </ul>

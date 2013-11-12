@@ -54,6 +54,7 @@ namespace qdtest.Controllers
                 "id",true,0,-1
                 );
             ViewBag.timkiem_donhang = timkiem_donhang;
+            this._set_activetab(new String[] { "QuanLyDonHang","DonHang_"+timkiem_donhang["trangthai"] });
             return View();
         }
         [HttpPost]
@@ -84,6 +85,34 @@ namespace qdtest.Controllers
             //redirect
             return RedirectToAction("Index", "AdminDonHangs");
         }
+        [HttpGet]
+        public ActionResult Index_All()
+        {
+            this.khoitao_cookie();
+            this.timkiem_donhang["trangthai"] = "chualienlac";
+            Response.Cookies.Add(CookieLibrary.Base64Encode(this.timkiem_donhang));
+            return RedirectToAction("Index", "AdminDonHangs");
+        }
+        [HttpGet]
+        public ActionResult Index_TrangThai(string trangthai="chualienlac")
+        {
+            this.khoitao_cookie();
+            this.timkiem_donhang["trangthai"] = trangthai;
+            Response.Cookies.Add(CookieLibrary.Base64Encode(this.timkiem_donhang));
+            return RedirectToAction("Index","AdminDonHangs");
+        }
+        [HttpGet]
+        public ActionResult Index_NgayTruoc(int songay=0)
+        {
+            this.khoitao_cookie();
+            this.timkiem_donhang["trangthai"] = "";
+            //lay ngay hom nay
+            DateTime tmp = DateTime.Now;
+            this.timkiem_donhang["ngay_from"] = tmp.AddDays(songay).ToString("dd/MM/yyyy");
+            this.timkiem_donhang["ngay_to"] = tmp.ToString("dd/MM/yyyy");
+            Response.Cookies.Add(CookieLibrary.Base64Encode(this.timkiem_donhang));
+            return RedirectToAction("Index", "AdminDonHangs");
+        }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
@@ -109,7 +138,7 @@ namespace qdtest.Controllers
             }
             
             //set active tab
-            this._set_activetab(new String[] { "SanPham" });
+            this._set_activetab(new String[] { "DonHang" });
         }
 
     }

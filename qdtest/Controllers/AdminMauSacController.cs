@@ -84,6 +84,7 @@ namespace qdtest.Controllers
             //assign value
             obj.giatri = TextLibrary.ToString(Request["mausac_giatri"]);
             obj.mota = TextLibrary.ToString(Request["mausac_mota"]);
+            obj.mamau = TextLibrary.ToString(Request["mausac_mamau"]);
             obj.active = TextLibrary.ToBoolean(Request["mausac_active"]);
             //validate properties
             List<String> validate = ctr.validate(obj);

@@ -105,12 +105,12 @@ namespace qdtest.Controllers
             else
             {
                 //search button click
-                this.timkiem_nhanvien["id"] = Request["nhanvien_id"] == null ? "" : Request["nhanvien_id"];
-                this.timkiem_nhanvien["tendangnhap"] = Request["nhanvien_tendangnhap"] == null ? "" : Request["nhanvien_tendangnhap"];
-                this.timkiem_nhanvien["tendaydu"] = Request["nhanvien_tendaydu"] == null ? "" : Request["nhanvien_tendaydu"];
-                this.timkiem_nhanvien["email"] = Request["nhanvien_email"] == null ? "" : Request["nhanvien_email"];
-                this.timkiem_nhanvien["loainhanvien_id"] = Request["nhanvien_loainhanvien_id"] == null ? "" : Request["nhanvien_loainhanvien_id"];
-                this.timkiem_nhanvien["active"] = Request["nhanvien_active"] == null ? "" : Request["nhanvien_active"];
+                this.timkiem_nhanvien["id"] = TextLibrary.ToString(Request["nhanvien_id"]);
+                this.timkiem_nhanvien["tendangnhap"] = TextLibrary.ToString(Request["nhanvien_tendangnhap"]);
+                this.timkiem_nhanvien["tendaydu"] = TextLibrary.ToString(Request["nhanvien_tendaydu"]);
+                this.timkiem_nhanvien["email"] = TextLibrary.ToString(Request["nhanvien_email"]);
+                this.timkiem_nhanvien["loainhanvien_id"] = TextLibrary.ToString(Request["nhanvien_loainhanvien_id"]);
+                this.timkiem_nhanvien["active"] = TextLibrary.ToString(Request["nhanvien_active"]);
             }
             //Save respone cookies
             Response.Cookies.Add(CookieLibrary.Base64Encode(this.timkiem_nhanvien));
@@ -131,7 +131,14 @@ namespace qdtest.Controllers
             }
             else
             {
-                this.timkiem_nhanvien = CookieLibrary.Base64Decode(Request.Cookies.Get("timkiem_nhanvien"));
+                try
+                {
+                    this.timkiem_nhanvien = CookieLibrary.Base64Decode(Request.Cookies.Get("timkiem_nhanvien"));
+                }catch(Exception ex)
+                {
+                    this.khoitao_cookie();
+                    Response.Cookies.Add(CookieLibrary.Base64Encode(this.timkiem_nhanvien));
+                }
             }
             //set active tab
             this._set_activetab(new String[] { "NhanVien", "QuanTriHeThong" });

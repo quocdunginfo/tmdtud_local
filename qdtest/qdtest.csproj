@@ -2922,6 +2922,11 @@
     <Content Include="Content\admin\modules\watermark\logo.gif" />
     <Content Include="Content\admin\modules\watermark\logo.png" />
     <Content Include="Content\admin\modules\watermark\watermark.gif" />
+    <Content Include="Content\admin\qd_color_picker\arrow.gif" />
+    <Content Include="Content\admin\qd_color_picker\cross.gif" />
+    <Content Include="Content\admin\qd_color_picker\hs.png" />
+    <Content Include="Content\admin\qd_color_picker\hv.png" />
+    <Content Include="Content\admin\qd_color_picker\jscolor.js" />
     <Content Include="Content\admin\qd_date_picker\jquery.datepick-vi.js" />
     <Content Include="Content\admin\qd_date_picker\jquery.datepick.css" />
     <Content Include="Content\admin\qd_date_picker\jquery.datepick.js" />

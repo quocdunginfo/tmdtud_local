@@ -160,10 +160,12 @@ namespace qdtest.Models
             this.ds_chitietsp = new List<ChiTietSP>();
             this.giatri = "";
             this.active = true;
+            this.mamau = "#000000";//mac dinh la mau den
         }
         [Key]
         public int id { get; set; }
         public String giatri { get; set; }
+        public String mamau { get; set; }
         public String mota { get; set; }
         public Boolean active { get; set; }
         //external

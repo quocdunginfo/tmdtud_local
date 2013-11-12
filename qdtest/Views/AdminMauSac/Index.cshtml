@@ -126,7 +126,7 @@
 					<h3>
 					<span id="current_obj" style="font-weight: normal;">
 					<span class="breadcrumb item-0 ">Catalog <img alt=">" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"> </span>
-					<span class="breadcrumb item-1 ">Kích thước</span>
+					<span class="breadcrumb item-1 ">Màu sắc</span>
 					</span>
 					</h3>
 				</div>
@@ -141,11 +141,11 @@
 		
         <form id="category_form" name="category_form" action="@Url.Action("Submit","AdminMauSac")" method="post">
             <fieldset id="fieldset_0">
-	            <legend> <img src="../img/admin/nav-user.gif" alt="Employees"> Thông tin kích thước</legend>
-                <input name="mausac_id" type="hidden" value="@MauSac.id" type="text">
+	            <legend> <img src="../img/admin/nav-user.gif" alt="Employees"> Thông tin màu sắc</legend>
+                <input name="mausac_id" type="hidden" value="@MauSac.id">
                 <label>Giá trị</label>
 	            <div class="margin-form">
-		            <input name="mausac_giatri" id="lastname" value="@MauSac.giatri" class="" size="33" type="text">
+		            <input name="mausac_giatri" value="@MauSac.giatri" class="" type="text" size="33">
                     <sub>*</sub>
                     <span style="color: red;">
                         @if(State.Contains("giatri_fail")) { <text> Không hợp lệ</text> }
@@ -154,9 +154,20 @@
 	            <div class="clear">
 	            </div>
 	            
+                <label>Chọn màu</label>
+	            <div class="margin-form">
+		            <input name="mausac_mamau" value="@MauSac.mamau" class="color {hash:true,caps:false}" type="text" size="5" readonly="readonly">
+                    <sub>*</sub>
+                    <span style="color: red;">
+                        @if(State.Contains("mamau_fail")) { <text> Không hợp lệ</text> }
+                    </span>
+	            </div>
+	            <div class="clear">
+	            </div>
+
 	            <label>Mô tả: </label>
 	            <div class="margin-form">
-		            <input name="mausac_mota" id="email" value="@MauSac.mota" class="" size="33" type="text">
+		            <input name="mausac_mota" id="email" value="@MauSac.mota" class="" type="text" size="33">
 	            </div>
 	            <div class="clear">
 	            </div>
