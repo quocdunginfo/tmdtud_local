@@ -77,7 +77,7 @@ namespace qdtest.Controllers
             this.front_timkiem_sanpham["front_gia_to"] = "-1";
             this.front_timkiem_sanpham["front_hangsx_ten"] = "";
             this.front_timkiem_sanpham["front_nhomsanpham_ten"] = "";
-            this.front_timkiem_sanpham["front_max_item_per_page"] = "1";
+            this.front_timkiem_sanpham["front_max_item_per_page"] = "6";
         }
 
     }
