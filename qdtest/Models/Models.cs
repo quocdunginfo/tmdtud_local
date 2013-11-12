@@ -29,6 +29,16 @@ namespace qdtest.Models
             this.mota = TextLibrary.ToString(obj.mota);
             this.active = obj.active;
         }
+        public NhomSanPham Export_To()
+        {
+            NhomSanPham tmp = new NhomSanPham();
+            tmp.id = this.id;
+            //đề phòng null, 
+            tmp.ten = this.ten;
+            tmp.mota = this.mota;
+            tmp.active = this.active;
+            return tmp;
+        }
     }
     public class Pagination
     {

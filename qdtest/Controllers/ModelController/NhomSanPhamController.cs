@@ -122,6 +122,16 @@ namespace qdtest.Controllers.ModelController
         {
             return timkiem(id,ten,mota,active).Count;
         }
+        public List<NhomSanPham> timkiem2(String id = "", String ten = "", String mota = "", String active = "")
+        {
+            List<NhomSanPham2> list = this.timkiem(id,ten,mota,active);
+            List<NhomSanPham> re = new List<NhomSanPham>();
+            foreach (NhomSanPham2 item in list)
+            {
+                re.Add(item.Export_To());
+            }
+            return re;
+        }
         public List<NhomSanPham2> timkiem(String id="", String ten="", String mota="", String active="")
         {
             //get all category
