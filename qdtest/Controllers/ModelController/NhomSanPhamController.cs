@@ -114,13 +114,48 @@ namespace qdtest.Controllers.ModelController
         public List<NhomSanPham2> get_tree(NhomSanPham root=null, int level=0)
         {
             this._tmp_for_get_tree = new List<NhomSanPham2>();
-            List<NhomSanPham2> tmp = this._get_tree(root,0);
+            //để dành level cho root
+            if (root != null)
+            {
+                level++;
+            }
+            List<NhomSanPham2> tmp = this._get_tree(root, level);
             this._tmp_for_get_tree = new List<NhomSanPham2>();
+            //nếu root!=null thì add root vào trước tiên
+            if (root != null)
+            {
+                NhomSanPham2 root_ = new NhomSanPham2();
+                root_.Load_From(root);
+                root_.level = level--;
+                tmp.Insert(0,root_);
+            }
             return tmp;
+        }
+        public List<NhomSanPham> get_tree2(NhomSanPham root = null)
+        {
+            this._tmp_for_get_tree = new List<NhomSanPham2>();
+            List<NhomSanPham2> tmp = this._get_tree(root, 1);
+            this._tmp_for_get_tree = new List<NhomSanPham2>();
+            List<NhomSanPham> re = new List<NhomSanPham>();
+            //nếu root!=null thì add root vào trước tiên
+            if (root != null)
+            {
+                re.Add(root);
+            }
+            //chuyển tmo vào trong re
+            foreach (NhomSanPham2 item in tmp)
+            {
+                re.Add(item.Export_To());
+            }
+            return re;
         }
         public int timkiem_count(String id = "", String ten = "", String mota = "", String active = "")
         {
             return timkiem(id,ten,mota,active).Count;
+        }
+        public int timkiem2_count(String id = "", String ten = "", String mota = "", String active = "")
+        {
+            return timkiem2(id, ten, mota, active).Count;
         }
         public List<NhomSanPham> timkiem2(String id = "", String ten = "", String mota = "", String active = "")
         {
