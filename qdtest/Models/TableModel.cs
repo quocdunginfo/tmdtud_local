@@ -62,12 +62,20 @@ namespace qdtest.Models
         }
         public string _get_mota_lite(int max_length=200)
         {
-            string tmp = this.mota;
-            tmp = TextLibrary.HTML_Strip(tmp);
-            //tmp = TextLibrary.Unicode_Substring(tmp, max_length);
-            //max_length = tmp.Length > max_length ? tmp.Length-1 : max_length-1;
-            //tmp = tmp.Substring(0,max_length);
-            return tmp;
+            if (this.mota.Equals(""))
+            {
+                return "(Chưa có mô tả cho sản phẩm)";
+            }
+            try
+            {
+                string tmp = this.mota;
+                tmp = TextLibrary.HTML_Strip(tmp);
+                tmp = TextLibrary.Unicode_Substring(tmp, max_length);
+                return tmp+"...";
+            }catch(Exception ex)
+            {
+                return this.mota+"...";
+            }
         }
     }
     public class Topic

@@ -58,15 +58,22 @@ namespace qdtest._Library
         }
         public static string Unicode_Substring(string text, int length=200)
         {
-            var bytes = Encoding.UTF8.GetBytes(text);
-            var result = Encoding.UTF8.GetString(bytes, 0, Math.Min(bytes.Length, length));
-
-            while ('\uFFFD' == result[result.Length - 1])
+            try
             {
-                result = result.Substring(0, result.Length - 1);
-            }
+                var bytes = Encoding.UTF8.GetBytes(text);
+                var result = Encoding.UTF8.GetString(bytes, 0, Math.Min(bytes.Length, length));
 
-            return result;
+                while ('\uFFFD' == result[result.Length - 1])
+                {
+                    result = result.Substring(0, result.Length - 1);
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return text;
+            }
         }
         public static DateTime ToDateTime(String input, out Boolean convert_ok, String format="dd/MM/yyyy")
         {
