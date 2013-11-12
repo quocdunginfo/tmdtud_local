@@ -65,7 +65,8 @@ namespace qdtest.Models
             string tmp = this.mota;
             tmp = TextLibrary.HTML_Strip(tmp);
             //tmp = TextLibrary.Unicode_Substring(tmp, max_length);
-            tmp = tmp.Substring(0,max_length);
+            //max_length = tmp.Length > max_length ? tmp.Length-1 : max_length-1;
+            //tmp = tmp.Substring(0,max_length);
             return tmp;
         }
     }
