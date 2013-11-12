@@ -49,11 +49,11 @@ namespace qdtest.Controllers.ModelController
             this._db.SaveChanges();
             return true;
         }
-        public int timkiem_count(String id = "", String khachhang_ten = "", int tongtien_from = -1, int tongtien_to = -1, Boolean timkiem_ngay = false, DateTime ngay_from = new DateTime(), DateTime ngay_to = new DateTime(), String trangthai = "", String active = "")
+        public int timkiem_count(String id = "", String khachhang_ten = "", int tongtien_from = 0, int tongtien_to = 0, Boolean timkiem_ngay = false, DateTime ngay_from = new DateTime(), DateTime ngay_to = new DateTime(), String trangthai = "", String active = "")
         {
             return timkiem(id, khachhang_ten, tongtien_from, tongtien_to, timkiem_ngay, ngay_from, ngay_to, trangthai, active).Count;
         }
-        public List<DonHang> timkiem(String id = "", String khachhang_ten = "", int tongtien_from = -1, int tongtien_to = -1, Boolean timkiem_ngay = false, DateTime ngay_from = new DateTime(), DateTime ngay_to = new DateTime(), String trangthai = "", String active = "", String order_by = "id", Boolean order_desc = true, int start_point = 0, int count = -1)
+        public List<DonHang> timkiem(String id = "", String khachhang_ten = "", int tongtien_from = 0, int tongtien_to = 0, Boolean timkiem_ngay = false, DateTime ngay_from = new DateTime(), DateTime ngay_to = new DateTime(), String trangthai = "", String active = "", String order_by = "id", Boolean order_desc = true, int start_point = 0, int count = -1)
         {
             List<DonHang> obj_list = new List<DonHang>();
             //find by LIKE element

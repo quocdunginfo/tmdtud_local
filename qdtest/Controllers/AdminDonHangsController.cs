@@ -1,5 +1,6 @@
 ﻿using qdtest._Library;
 using qdtest.Controllers.ModelController;
+using qdtest.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,16 +32,36 @@ namespace qdtest.Controllers
             this.timkiem_donhang["max_item_per_page"] = "5";
         }
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int page=1)
         {
             DonHangController ctr=new DonHangController();
-
+            //
             Boolean timkiem_ngay_from;
             Boolean timkiem_ngay_to;
             DateTime ngay_from = TextLibrary.ToDateTime(timkiem_donhang["ngay_from"], out timkiem_ngay_from);
             DateTime ngay_to = TextLibrary.ToDateTime(timkiem_donhang["ngay_to"], out timkiem_ngay_to);
             Boolean timkiem_ngay = timkiem_ngay_from && timkiem_ngay_to;
+            //Pagination
+                Pagination pg = new Pagination();
+                int max_item_per_page = TextLibrary.ToInt(this.timkiem_donhang["max_item_per_page"]);//get from setting
+                pg.set_current_page(page);
+                pg.set_max_item_per_page(max_item_per_page);
+                pg.set_total_item(
+                    ctr.timkiem_count(
+                        timkiem_donhang["id"],
+                        timkiem_donhang["khachhang_ten"],
+                        TextLibrary.ToInt(timkiem_donhang["tongtien_from"]),
+                        TextLibrary.ToInt(timkiem_donhang["tongtien_to"]),
+                        timkiem_ngay,
+                        ngay_from,
+                        ngay_to,
+                        timkiem_donhang["trangthai"],
+                        timkiem_donhang["active"]
+                        )
+                    );
+                pg.update();
 
+            ViewBag.pagination = pg;
             ViewBag.DonHang_List = ctr.timkiem(
                 timkiem_donhang["id"],
                 timkiem_donhang["khachhang_ten"],
@@ -51,9 +72,11 @@ namespace qdtest.Controllers
                 ngay_to,
                 timkiem_donhang["trangthai"],
                 timkiem_donhang["active"],
-                "id",true,0,-1
+                "id",true,pg.start_point,pg.max_item_per_page
                 );
             ViewBag.timkiem_donhang = timkiem_donhang;
+            //pagination
+
             this._set_activetab(new String[] { "QuanLyDonHang","DonHang_"+timkiem_donhang["trangthai"] });
             return View();
         }
