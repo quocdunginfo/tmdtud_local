@@ -67,7 +67,7 @@
     	<div id="top_nav" class="ddsmoothmenu">
             <ul>
                 <li><a href="index.html" class="selected">Trang chủ</a></li>
-                <li><a href="products.html">Sản phẩm</a>
+                <li><a href="@Url.Action("Index", "FrontSanPham", new {id_loaisp=0, level_loaisp=0})">Sản phẩm</a>
                     <ul>
                          @{
                         for(int i=0;i<NhomSanPham2_List_All.Count;i++)
@@ -78,7 +78,7 @@
                             {
                                 pre = "--" + pre;
                             }
-                             <li><a href="@Url.Action("")">@pre @item.ten</a></li>
+                             <li><a href="@Url.Action("Index", "FrontSanPham", new {id_loaisp=item.id, level_loaisp=item.level})">@pre @item.ten</a></li>
                         }
                          
                         }
@@ -110,6 +110,10 @@
               <input type="hidden" value="@front_timkiem_sanpham["front_max_item_per_page"]" name="front_sanpham_max_item_per_page" />
               <input type="hidden" value="@front_timkiem_sanpham["front_gia_from"]" name="front_sanpham_gia_from" />
               <input type="hidden" value="@front_timkiem_sanpham["front_gia_to"]" name="front_sanpham_gia_to" />
+              <input type="hidden" value="@front_timkiem_sanpham["front_nhomsanpham_id"]" name="front_sanpham_nhomsanpham_id" />
+              <input type="hidden" value="@front_timkiem_sanpham["front_hangsx_ten"]" name="front_sanpham_hangsx_ten" />
+              <input type="hidden" value="@front_timkiem_sanpham["front_orderby"]" name="front_sanpham_orderby" />
+              <input type="hidden" value="@front_timkiem_sanpham["front_desc"]" name="front_sanpham_desc" />
               <input type="submit" name="Search" value="" alt="Search" id="searchbutton" title="Search" class="sub_btn"  />
             </form>
         </div>
@@ -135,14 +139,14 @@
                             }}
                             if(i==0)
                             {
-                           <li class="first"><a href="@Url.Action("")">@pre @item.ten</a></li>
+                           <li class="first"><a href="@Url.Action("Index", "FrontSanPham", new {id_loaisp=item.id, level_loaisp=item.level})">@pre @item.ten</a></li>
                         }
                         else if(i==NhomSanPham2_List_All.Count-1)
                         {
-                             <li class="last"><a href="@Url.Action("")">@pre @item.ten</a></li>
+                             <li class="last"><a href="@Url.Action("Index", "FrontSanPham", new {id_loaisp=item.id, level_loaisp=item.level})">@pre @item.ten</a></li>
                         }
                         else{
-                             <li><a href="@Url.Action("")">@pre @item.ten</a></li>
+                             <li><a href="@Url.Action("Index", "FrontSanPham", new {id_loaisp=item.id, level_loaisp=item.level})">@pre @item.ten</a></li>
                         }
                         }
                          
@@ -170,8 +174,9 @@
             </div>
         </div>
         @RenderBody()
-        <div class="cleaner"></div>
-    </div> <!-- END of templatemo_main -->
+                <div class="cleaner"></div>
+</div>
+      <!-- END of templatemo_main -->
     
     <div id="templatemo_footer">
     	<p><a href="#">Trang chủ</a> | <a href="#">Sản phẩm</a> | <a href="#">Giới thiệu</a> | <a href="#">Tìm kiếm</a> | <a href="#">Phản hồi</a> | <a href="#">Liên hệ</a>

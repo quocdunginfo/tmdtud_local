@@ -123,6 +123,7 @@
     <Compile Include="Controllers\AdminHangSXsController.cs" />
     <Compile Include="Controllers\FrontHomeController.cs" />
     <Compile Include="Controllers\FrontController.cs" />
+    <Compile Include="Controllers\FrontSanPhamController.cs" />
     <Compile Include="Controllers\FrontSanPhamDetailController.cs" />
     <Compile Include="Controllers\FrontTimKiemController.cs" />
     <Compile Include="Controllers\ModelController\DonHangController.cs" />
@@ -3494,6 +3495,7 @@
     <Content Include="Views\FrontSanPhamDetail\Index.cshtml" />
     <Content Include="Views\FrontTimKiem\Index.cshtml" />
     <Content Include="Views\AdminDonHangs\Index.cshtml" />
+    <Content Include="Views\FrontSanPham\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

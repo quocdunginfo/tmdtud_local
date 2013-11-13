@@ -142,13 +142,71 @@ namespace qdtest.Controllers.ModelController
             }
 
             //order
-            if (order_desc)
+            if (order_by.Equals("id"))
             {
-                obj_list = obj_list.OrderByDescending(x => x.id).ToList();
+                if (order_desc)
+                {
+                    obj_list = obj_list.OrderByDescending(x => x.id).ToList();
+                }
+                else
+                {
+                    obj_list = obj_list.OrderBy(x => x.id).ToList();
+                }
             }
-            else
+            else if (order_by.Equals("masp"))
             {
-                obj_list = obj_list.OrderBy(x => x.id).ToList();
+                if (order_desc)
+                {
+                    obj_list = obj_list.OrderByDescending(x => x.masp).ToList();
+                }
+                else
+                {
+                    obj_list = obj_list.OrderBy(x => x.masp).ToList();
+                }
+            }
+            else if (order_by.Equals("ten"))
+            {
+                if (order_desc)
+                {
+                    obj_list = obj_list.OrderByDescending(x => x.ten).ToList();
+                }
+                else
+                {
+                    obj_list = obj_list.OrderBy(x => x.ten).ToList();
+                }
+            }
+            else if (order_by.Equals("gia"))
+            {
+                if (order_desc)
+                {
+                    obj_list = obj_list.OrderByDescending(x => x.gia).ToList();
+                }
+                else
+                {
+                    obj_list = obj_list.OrderBy(x => x.gia).ToList();
+                }
+            }
+            else if (order_by.Equals("nhomsanpham"))
+            {
+                if (order_desc)
+                {
+                    obj_list = obj_list.OrderByDescending(x => x.nhomsanpham.ten).ToList();
+                }
+                else
+                {
+                    obj_list = obj_list.OrderBy(x => x.nhomsanpham.ten).ToList();
+                }
+            }
+            else if (order_by.Equals("hangsx"))
+            {
+                if (order_desc)
+                {
+                    obj_list = obj_list.OrderByDescending(x => x.hangsx.ten).ToList();
+                }
+                else
+                {
+                    obj_list = obj_list.OrderBy(x => x.hangsx.ten).ToList();
+                }
             }
 
             //limit

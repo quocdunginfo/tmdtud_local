@@ -15,23 +15,15 @@ namespace qdtest.Controllers
         public ActionResult Index(int page=1)
         {
             List<NhomSanPham> nhomsp = null;
-            List<HangSX> hangsx = null; 
-            if(!front_timkiem_sanpham["front_nhomsanpham_ten"].Equals(""))
+            List<HangSX> hangsx = null;
+            String orderby = TextLibrary.ToString(front_timkiem_sanpham["front_orderby"]);
+            Boolean desc = TextLibrary.ToBoolean(front_timkiem_sanpham["front_desc"]);
+            if(!front_timkiem_sanpham["front_nhomsanpham_id"].Equals(""))
             {
                 nhomsp = new List<NhomSanPham>();
                 NhomSanPhamController ctr2 = new NhomSanPhamController(ctr._db);
-                NhomSanPham tmp = ctr2.get_by_id(TextLibrary.ToInt(front_timkiem_sanpham["front_nhomsanpham_ten"]));
+                NhomSanPham tmp = ctr2.get_by_id(TextLibrary.ToInt(front_timkiem_sanpham["front_nhomsanpham_id"]));
                 nhomsp = ctr2.get_tree2(tmp);
-                //List<NhomSanPham2> nhomsp2 = ctr2.timkiem("", TextLibrary.ToString(front_timkiem_sanpham["front_nhomsanpham_ten"]), "", "1");
-                //if (nhomsp2 != null)
-                //{
-                //    foreach (NhomSanPham2 item in nhomsp2)
-                //    {
-                //        NhomSanPham a = ctr2.get_by_id(item.id);
-                //        nhomsp.Add(a);
-                //    }
-                //}
-               // nhomsp.Add(ctr2.get_by_id(front_timkiem_sanpham["front_nhomsanpham_ten"]
             }
             if(!front_timkiem_sanpham["front_hangsx_ten"].Equals(""))
             {
@@ -46,7 +38,7 @@ namespace qdtest.Controllers
                 if (start_point <= 0) start_point = 0;
             //get list
                 List<SanPham> listnew = ctr.timkiem("", "", this.front_timkiem_sanpham["front_ten"], front_timkiem_sanpham["front_mota"],  TextLibrary.ToInt(front_timkiem_sanpham["front_gia_from"]),
-                    TextLibrary.ToInt(front_timkiem_sanpham["front_gia_to"]), hangsx, nhomsp , "1", "id", true, start_point, max_item_per_page);
+                    TextLibrary.ToInt(front_timkiem_sanpham["front_gia_to"]), hangsx, nhomsp , "1", orderby,desc, start_point, max_item_per_page);
                 ViewBag.SanPham_List = listnew;
                 ViewBag.front_timkiem_sanpham = this.front_timkiem_sanpham;
             //pagination
@@ -87,8 +79,10 @@ namespace qdtest.Controllers
                 this.front_timkiem_sanpham["front_gia_from"] = TextLibrary.ToString(Request["front_sanpham_gia_from"]);
                 this.front_timkiem_sanpham["front_gia_to"] = TextLibrary.ToString(Request["front_sanpham_gia_to"]);
                 this.front_timkiem_sanpham["front_hangsx_ten"] = TextLibrary.ToString(Request["front_sanpham_hangsx_ten"]);
-                this.front_timkiem_sanpham["front_nhomsanpham_ten"] = TextLibrary.ToString(Request["front_sanpham_nhomsanpham_ten"]);
+                this.front_timkiem_sanpham["front_nhomsanpham_id"] = TextLibrary.ToString(Request["front_sanpham_nhomsanpham_id"]);
                 this.front_timkiem_sanpham["front_max_item_per_page"] = TextLibrary.ToString(Request["front_sanpham_max_item_per_page"]);
+                this.front_timkiem_sanpham["front_orderby"] = TextLibrary.ToString(Request["front_sanpham_orderby"]);
+                this.front_timkiem_sanpham["front_desc"] = TextLibrary.ToString(Request["front_sanpham_desc"]); ;
             }
             //Save respone cookies
             Response.Cookies.Add(CookieLibrary.Base64Encode(this.front_timkiem_sanpham));

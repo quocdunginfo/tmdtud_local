@@ -2,61 +2,39 @@
     Layout = "~/Views/Shared/_FrontLayout.cshtml";
     ViewBag.Title = "Trang chủ";
     var _Template_Path = "~/Content/front/";
-    var SanPham_List = (List<qdtest.Models.SanPham>)ViewBag.SanPham_List;
-    var loaisp = (List<qdtest.Models.NhomSanPham2>)ViewBag.loaisp;
-    var hangsx=(List<qdtest.Models.HangSX>)ViewBag.hangsx;
-    var front_timkiem_sanpham = (HttpCookie)ViewBag.front_timkiem_sanpham;
+    var loaisp = (qdtest.Models.NhomSanPham2)ViewBag.loaisp;
+    var SanPham_List = new List<qdtest.Models.SanPham>();
+    var front_sanpham = new HttpCookie("front_sanpham");
+    var loaisp_list = new List<qdtest.Models.NhomSanPham>();
+    if (loaisp == null || loaisp.level == 0) { loaisp_list = (List<qdtest.Models.NhomSanPham>)ViewBag.loaisp_list; }
+    else {
+        SanPham_List = (List<qdtest.Models.SanPham>)ViewBag.SanPham_List;
+        front_sanpham = (HttpCookie)ViewBag.front_sanpham;
+    }
+   
 }
 <div id="content" class="float_r">
-       <div class="timkiemnangcao" >
-            	<h1>Kết quả tìm kiếm (Có @ViewBag.Result_Count sản phẩm)</h1>
-        <form method="post" action="@Url.Action("Submit", "FrontTimKiem")"  class="form">
-               <label>Tên sản phẩm:</label>  <input type="text" name="front_sanpham_ten" value="@front_timkiem_sanpham["front_ten"]" >
-                 <label>Mô tả sản phẩm:</label> <input type="text" name="front_sanpham_mota" value="@front_timkiem_sanpham["front_mota"]">
-            <br />
-                <label>Loại sản phẩm:</label>  <select name="front_sanpham_nhomsanpham_id">
-                    @{
-                        <option value="" @if(front_timkiem_sanpham["front_nhomsanpham_id"].Equals("")){<text>selected</text>}>Tất cả các loại</option>
-                        foreach(var item in loaisp)
-                        {
-                            String pre = "";
-                            for (int j = 0; j < item.level; j++)
-                            {
-                                pre = "--" + pre;
-                            }
-                            <option value="@item.id" @if(item.id==qdtest._Library.TextLibrary.ToInt(front_timkiem_sanpham["front_nhomsanpham_id"])){<text>selected</text>}>@pre @item.ten</option>
-                        }
-                    }
-                              </select>
-                <label>Hãng sản xuất:</label><select name="front_sanpham_hangsx_ten" >
-                    @{
-                        <option value="" @if(front_timkiem_sanpham["front_hangsx_ten"].Equals("")){<text>selected</text>}>Tất cả các hãng</option>
-                        foreach(var item in hangsx)
-                        {
-                            <option value="@item.ten" @if(item.ten.Equals(front_timkiem_sanpham["front_hangsx_ten"])){<text>selected</text>}>@item.ten</option>
-                        }
-                    }
-                              </select>
-               <br />
-               <label >Giá từ:</label> <input type="text" name="front_sanpham_gia_from" value="@front_timkiem_sanpham["front_gia_from"]"> <label>đến</label> <input type="text" name="front_sanpham_gia_to" value="@front_timkiem_sanpham["front_gia_to"]">
-               
-            <div style="text-align:center"><input type="submit" value="Tìm kiếm"  /><input type="submit" name="front_submit_reset" value="Reset"/></div>
+    @{
+        if(loaisp!=null&&loaisp.level>0){
+       <div class="sapxep" >
+            	<h1>@loaisp.ten</h1>
+        <form method="post" action="@Url.Action("Submit", "FrontSanPham", new { id=loaisp.id,level=loaisp.level })"  class="form">
             <div><label>Sắp xếp theo </label><select name="front_sanpham_orderby" onchange="submit()">
-                            <option value="id" @if(front_timkiem_sanpham["front_orderby"].Equals("id")){<text>selected</text>}>Mới nhất</option>
-                            <option value="masp" @if(front_timkiem_sanpham["front_orderby"].Equals("masp")){<text>selected</text>}>Mã sản phẩm</option>
-                            <option value="ten" @if(front_timkiem_sanpham["front_orderby"].Equals("ten")){<text>selected</text>}>Tên sản phẩm</option>
-                            <option value="gia" @if(front_timkiem_sanpham["front_orderby"].Equals("gia")){<text>selected</text>}>Giá sản phẩm</option>
-                            <option value="nhomsanpham" @if(front_timkiem_sanpham["front_orderby"].Equals("nhomsanpham")){<text>selected</text>}>Loại sản phẩm</option>
-                            <option value="hangsx" @if(front_timkiem_sanpham["front_orderby"].Equals("hangsx")){<text>selected</text>}>Hãng sản xuất</option>
+                            <option value="id" @if(front_sanpham["front_orderby"].Equals("id")){<text>selected</text>}>Mới nhất</option>
+                            <option value="masp" @if(front_sanpham["front_orderby"].Equals("masp")){<text>selected</text>}>Mã sản phẩm</option>
+                            <option value="ten" @if(front_sanpham["front_orderby"].Equals("ten")){<text>selected</text>}>Tên sản phẩm</option>
+                            <option value="gia" @if(front_sanpham["front_orderby"].Equals("gia")){<text>selected</text>}>Giá sản phẩm</option>
+                            <option value="nhomsanpham" @if(front_sanpham["front_orderby"].Equals("nhomsanpham")){<text>selected</text>}>Loại sản phẩm</option>
+                            <option value="hangsx" @if(front_sanpham["front_orderby"].Equals("hangsx")){<text>selected</text>}>Hãng sản xuất</option>
                         </select>
           <select name="front_sanpham_desc" onchange="submit()" style="margin-right:10px">
-                             <option value="0" @if(front_timkiem_sanpham["front_desc"].Equals("0")){<text>selected</text>}>Tăng dần</option>
-                            <option value="1" @if(front_timkiem_sanpham["front_desc"].Equals("1")){<text>selected</text>}>Giảm dần</option>
+                             <option value="0" @if(front_sanpham["front_desc"].Equals("0")){<text>selected</text>}>Tăng dần</option>
+                            <option value="1" @if(front_sanpham["front_desc"].Equals("1")){<text>selected</text>}>Giảm dần</option>
                         </select></div>
                     <div><label>Hiển thị </label><select name="front_sanpham_max_item_per_page" onchange="submit()">
                             @{
                                 for (int j = 1; j <= 10; j++)
-                                {<option value="@j" @if(int.Parse(front_timkiem_sanpham["front_max_item_per_page"])==j) {<text>selected</text>}>@j</option>}
+                                {<option value="@j" @if(int.Parse(front_sanpham["front_max_item_per_page"])==j) {<text>selected</text>}>@j</option>}
                             }
                         </select> sản phẩm /trang
         <label style="padding-left:300px">Hiển thị trang  <select name="front_current_page" onchange="submit()" style="margin-right:10px">
@@ -161,7 +139,40 @@
                     }
                     }   
             </div>
-
-                   </div>
+        }
+        else{
+            foreach(var item1 in loaisp_list)
+            {
+                <h1>@item1.ten</h1>
+                var i = 1;
+           
+                foreach(var item in item1.ds_sanpham)
+                {
+                      if (i==3)
+                        {
+                      @:<div class="product_box no_margin_right">
+                       }
+                        else
+                        {
+                      @:<div class="product_box">
+                       }
+                       
+            	        <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })"><img src="@Url.Content("~/_Upload/HinhAnh/" + item._get_hinhanh_macdinh().duongdan_thumb)" style="max-width:200px; height:150px" alt="Shoes @i" /></a>
+                        
+                        <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })"><h3>@item.ten</h3></a>
+                        <p class="product_price">@item.gia đ</p>
+                        <a href="shoppingcart.html" class="addtocart"></a>
+                        <a href="productdetail.html" class="detail"></a>
+                        @: </div>   
+                        if (i == 3) {break;}
+                        i++;
+                }
+                <div class="cleaner"></div> 
+                <a href="#" style="padding-left:300px">Xem tất cả sản phẩm</a>
+                     
+            }
+        }
+        }
+</div>
 
 
