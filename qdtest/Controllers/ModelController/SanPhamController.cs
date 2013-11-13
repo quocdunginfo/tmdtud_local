@@ -90,11 +90,11 @@ namespace qdtest.Controllers.ModelController
             this._db.SaveChanges();
             return true;
         }
-        public int timkiem_count(String id = "", String masp = "", String ten = "", String mota = "", int gia_from = -1, int gia_to = -1, List<HangSX> hangsx_list = null, List<NhomSanPham> nhomsanpham_list = null, String active = "")
+        public int timkiem_count(String id = "", String masp = "", String ten = "", String mota = "", int gia_from = 0, int gia_to = 0, List<HangSX> hangsx_list = null, List<NhomSanPham> nhomsanpham_list = null, String active = "")
         {
             return timkiem(id, masp, ten, mota, gia_from, gia_to, hangsx_list, nhomsanpham_list,active).Count;
         }
-        public List<SanPham> timkiem(String id = "", String masp = "", String ten = "", String mota = "", int gia_from = -1, int gia_to = -1, List<HangSX> hangsx_list = null, List<NhomSanPham> nhomsanpham_list = null, String active = "", String order_by = "id", Boolean order_desc = true, int start_point = 0, int count = -1)
+        public List<SanPham> timkiem(String id = "", String masp = "", String ten = "", String mota = "", int gia_from = 0, int gia_to = 0, List<HangSX> hangsx_list = null, List<NhomSanPham> nhomsanpham_list = null, String active = "", String order_by = "id", Boolean order_desc = true, int start_point = 0, int count = -1)
         {
             List<SanPham> obj_list = new List<SanPham>();
             //find by LIKE element
@@ -111,7 +111,7 @@ namespace qdtest.Controllers.ModelController
                 obj_list = obj_list.Where(x => x.id == id_i).ToList();
             }
             //Filter by gia
-            if (gia_from>-1 && gia_to>-1)
+            if (gia_from>0 || gia_to>0)
             {
                 obj_list = obj_list.Where(x => x.gia >= gia_from && x.gia<=gia_to).ToList();
             }
@@ -234,6 +234,14 @@ namespace qdtest.Controllers.ModelController
             {
                 re.Add("masp_exist_fail");
             }
+            return re;
+        }
+        public List<SanPham> timkiem_dequy(NhomSanPham root = null, String active = "", int start_point = 0, int count = -1)
+        {
+            List<SanPham> re = new List<SanPham>();
+            NhomSanPhamController ctr=new NhomSanPhamController();
+            List<NhomSanPham> list = ctr.get_tree2(root);
+            re.AddRange(this.timkiem("","","","",0,0,null,list,active,"id",true,start_point,count));
             return re;
         }
     }

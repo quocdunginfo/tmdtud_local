@@ -145,7 +145,7 @@ namespace qdtest.Controllers.ModelController
             //chuyển tmo vào trong re
             foreach (NhomSanPham2 item in tmp)
             {
-                re.Add(item.Export_To());
+                re.Add(this.get_by_id(item.id));
             }
             return re;
         }
@@ -163,7 +163,7 @@ namespace qdtest.Controllers.ModelController
             List<NhomSanPham> re = new List<NhomSanPham>();
             foreach (NhomSanPham2 item in list)
             {
-                re.Add(item.Export_To());
+                re.Add(this.get_by_id(item.id));
             }
             return re;
         }
