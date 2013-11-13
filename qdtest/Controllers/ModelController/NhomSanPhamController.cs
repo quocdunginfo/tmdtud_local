@@ -126,7 +126,7 @@ namespace qdtest.Controllers.ModelController
             {
                 NhomSanPham2 root_ = new NhomSanPham2();
                 root_.Load_From(root);
-                root_.level = level--;
+                root_.level = level-1;
                 tmp.Insert(0,root_);
             }
             return tmp;
