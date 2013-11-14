@@ -17,6 +17,7 @@ namespace qdtest.Controllers
 
         public ActionResult Index(int id)
         {
+            ViewBag.id = 2;
             SanPhamController ctr = new SanPhamController();
             SanPham sp = new SanPham();
             sp=ctr.get_by_id(id);

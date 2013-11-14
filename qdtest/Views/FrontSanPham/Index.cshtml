@@ -1,12 +1,17 @@
 ﻿@{
     Layout = "~/Views/Shared/_FrontLayout.cshtml";
     ViewBag.Title = "Trang chủ";
+    ViewBag.id = 2;
     var _Template_Path = "~/Content/front/";
     var loaisp = (qdtest.Models.NhomSanPham2)ViewBag.loaisp;
     var SanPham_List = new List<qdtest.Models.SanPham>();
+    var splist=new List<List<qdtest.Models.SanPham>>();
     var front_sanpham = new HttpCookie("front_sanpham");
     var loaisp_list = new List<qdtest.Models.NhomSanPham>();
-    if (loaisp == null || loaisp.level == 0) { loaisp_list = (List<qdtest.Models.NhomSanPham>)ViewBag.loaisp_list; }
+    if (loaisp == null || loaisp.level == 0) { 
+        loaisp_list = (List<qdtest.Models.NhomSanPham>)ViewBag.loaisp_list;
+        splist = (List < List < qdtest.Models.SanPham >>)ViewBag.splist;
+    }
     else {
         SanPham_List = (List<qdtest.Models.SanPham>)ViewBag.SanPham_List;
         front_sanpham = (HttpCookie)ViewBag.front_sanpham;
@@ -140,13 +145,12 @@
                     }   
             </div>
         }
-        else{
+        else{var j=0;
             foreach(var item1 in loaisp_list)
             {
-                <h1>@item1.ten</h1>
-                var i = 1;
-           
-                foreach(var item in item1.ds_sanpham)
+              <h1 style="color:#fff;background-color:rgba(0, 0, 0, 0.80); border-bottom:1px dotted #000;padding:8px">@item1.ten</h1>
+                var i = 1;  
+                foreach(var item in splist[j++])
                 {
                       if (i==3)
                         {
@@ -164,12 +168,9 @@
                         <a href="shoppingcart.html" class="addtocart"></a>
                         <a href="productdetail.html" class="detail"></a>
                         @: </div>   
-                        if (i == 3) {break;}
                         i++;
                 }
-                <div class="cleaner"></div> 
-                <a href="#" style="padding-left:300px">Xem tất cả sản phẩm</a>
-                     
+                <div class="cleaner"><a href="#" style="padding-left:550px;">Xem tất cả sản phẩm</a></div>
             }
         }
         }

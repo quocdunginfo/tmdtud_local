@@ -44,6 +44,7 @@
 <link rel="stylesheet" href="@Url.Content(_Template_Path+"css/slimbox2.css")" type="text/css" media="screen" /> 
 <script type="text/JavaScript" src="@Url.Content(_Template_Path+"js/slimbox2.js")"></script> 
 
+
 </head>
 
 <body>
@@ -66,8 +67,8 @@
     <div id="templatemo_menubar">
     	<div id="top_nav" class="ddsmoothmenu">
             <ul>
-                <li><a href="index.html" class="selected">Trang chủ</a></li>
-                <li><a href="@Url.Action("Index", "FrontSanPham", new {id_loaisp=0, level_loaisp=0})">Sản phẩm</a>
+                <li><a href="@Url.Action("Index", "FrontHome")" @if(ViewBag.id==1) {<text>class="selected"</text>}>Trang chủ</a></li>
+                <li><a href="@Url.Action("Index", "FrontSanPham", new {id_loaisp=0, level_loaisp=0})" @if(ViewBag.id==2) {<text>class="selected"</text>}>Sản phẩm</a>
                     <ul>
                          @{
                         for(int i=0;i<NhomSanPham2_List_All.Count;i++)
@@ -83,30 +84,19 @@
                          
                         }
                     	
-                        @*<li><a href="http://www.templatemo.com/page/1">Nam</a></li>
-                        <li><a href="http://www.templatemo.com/page/2">--Giày thể thao</a></li>
-                        <li><a href="http://www.templatemo.com/page/3">--Giày sandals</a></li>
-                        <li><a href="http://www.templatemo.com/page/4">Nữ</a></li>
-                        <li><a href="http://www.templatemo.com/page/5">--Giày cao gót</a></li>
-                        <li><a href="http://www.templatemo.com/page/5">--Giày thể thao</a></li>*@
                   </ul>
                 </li>
-                <li><a href="about.html">Giới thiệu</a>
-               <!--     <ul>
-                        <li><a href="http://www.templatemo.com/page/1">Sub menu 1</a></li>
-                        <li><a href="http://www.templatemo.com/page/2">Sub menu 2</a></li>
-                        <li><a href="http://www.templatemo.com/page/3">Sub menu 3</a></li>
-                  </ul>-->
+                <li><a href="about.html" @if(ViewBag.id==3) {<text>class="selected"</text>}>Giới thiệu</a>
                 </li>
-                <li><a href="faqs.html">Tìm kiếm</a></li>
-                <li><a href="checkout.html">Phản hồi</a></li>
-                <li><a href="contact.html">Liên hệ</a></li>
+                <li><a href="faqs.html" @if(ViewBag.id==4) {<text>class="selected"</text>}>Tìm kiếm</a></li>
+                <li><a href="checkout.html" @if(ViewBag.id==5) {<text>class="selected"</text>}>Phản hồi</a></li>
+                <li><a href="contact.html" @if(ViewBag.id==6) {<text>class="selected"</text>}>Liên hệ</a></li>
             </ul>
             <br style="clear: left" />
         </div> <!-- end of ddsmoothmenu -->
         <div id="templatemo_search">
             <form action="@Url.Action("Submit","FrontTimKiem")" method="post">
-              <input type="text" value="@front_timkiem_sanpham["front_ten"]" name="front_sanpham_ten" id="keyword" title="keyword" onfocus="clearText(this)" onblur="clearText(this)" class="txt_field" />
+              <input type="text" value="Nhập từ khóa tìm kiếm" name="front_sanpham_ten" id="keyword" title="keyword" onfocus="clearText(this)" onclick="this.value = '';" onblur="this.value=!this.value?'Nhập từ khóa tìm kiếm':this.value;" class="txt_field" />
               <input type="hidden" value="@front_timkiem_sanpham["front_max_item_per_page"]" name="front_sanpham_max_item_per_page" />
               <input type="hidden" value="@front_timkiem_sanpham["front_gia_from"]" name="front_sanpham_gia_from" />
               <input type="hidden" value="@front_timkiem_sanpham["front_gia_to"]" name="front_sanpham_gia_to" />

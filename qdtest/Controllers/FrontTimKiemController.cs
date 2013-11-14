@@ -14,6 +14,7 @@ namespace qdtest.Controllers
         public SanPhamController ctr = new SanPhamController();
         public ActionResult Index(int page=1)
         {
+            ViewBag.id = 4;
             List<NhomSanPham> nhomsp = null;
             List<HangSX> hangsx = null;
             String orderby = TextLibrary.ToString(front_timkiem_sanpham["front_orderby"]);

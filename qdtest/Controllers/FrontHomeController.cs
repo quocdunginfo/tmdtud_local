@@ -16,6 +16,7 @@ namespace qdtest.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.id = 1;
             ViewBag.SanPhamNew_List = spnew();
             return View();
         }

@@ -4,6 +4,27 @@
     var listsplienquan = (List<qdtest.Models.SanPham>)ViewBag.SanPhamRelate;
 }
 <div id="content" class="float_r">
+    <script type="text/javascript">
+        function kim(s) {
+            var i = 0;
+            var k = "";
+            while (s.split(";")[i] != '') {
+               // alert(s.split(";")[i]);
+                k += s.split(";")[i]+" ";
+                i++;
+            }
+            //alert(k);
+            document.getElementById("kt").innerHTML = k;
+        }
+    </script>
+    <style type="text/css">
+        .kim_color canvas:hover
+        {
+             opacity:0.5;
+             filter:alpha(opacity=50);
+             border:0px;
+        }
+    </style>
         	<h1>@sanpham.ten</h1>
             <div class="content_half float_l">
         	<a id="qd_main_a_tag" rel="lightbox[portfolio]" href="@Url.Content("~/_Upload/HinhAnh/" + sanpham._get_hinhanh_macdinh().duongdan)"><img id="qd_main_img_tag"  src="@Url.Content("~/_Upload/HinhAnh/" + sanpham._get_hinhanh_macdinh().duongdan_thumb)" alt="image" style="max-width:250px;max-height:250px"/></a>
@@ -29,6 +50,42 @@
                     <tr>
                     	<td>Bảo hành:</td>
                         <td>1 năm</td>
+                    </tr>
+                    <tr>
+                    	<td>Màu sắc:</td>
+                        <td class="kim_color">
+                            @{
+                                List<qdtest.Models.ChiTietSP> list = sanpham.ds_chitietsp.OrderBy(x => x.mausac.id).ToList();
+                                String[] tmp=new String[list.GroupBy(x=>x.mausac.id).Count()];
+                                var dict = new Dictionary<string, string>();
+                                int ik=0;
+                                tmp[0] = list[0].mausac.mamau;
+                                var kt = "";
+                                foreach(var item in list)
+                                {   
+                                    if(!item.mausac.mamau.Equals(tmp[ik]))
+                                    {
+                                        dict[tmp[ik]] = kt;
+                                        ik++;
+                                        tmp[ik] = item.mausac.mamau;
+                                        kt = "";
+                                        
+                                    }else
+                                    {kt += item.kichthuoc.giatri + ";";}
+                                     
+                                }
+                                dict[tmp[ik]] = kt;
+                                foreach(var item in tmp)
+                                {     
+                                <canvas style="border:1px solid #000;height:16px;width:16px; background-color:@item" id="@dict[item]" onclick="kim('@dict[item]')"></canvas>
+                            }
+                            }
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Kích thước:</td>
+                        <td id="kt">L,M</td>
                     </tr>
                     <tr>
                     	<td>Số lượng đặt: </td>

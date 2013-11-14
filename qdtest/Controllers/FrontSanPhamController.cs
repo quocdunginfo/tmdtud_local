@@ -14,9 +14,11 @@ namespace qdtest.Controllers
         protected HttpCookie front_sanpham=null;
         public ActionResult Index(int page = 1,int id_loaisp=0,int level_loaisp=0)
         {
+            ViewBag.id = 2;
             NhomSanPhamController ctr2 = new NhomSanPhamController(ctr._db);
             List<NhomSanPham> loaisp_list = new List<NhomSanPham>();
             NhomSanPham2 loaisp = new NhomSanPham2();
+            List<List<SanPham>> splist = new List<List<SanPham>>();
             if (id_loaisp == 0 || level_loaisp == 0)
             {
                 NhomSanPham tmp;
@@ -25,18 +27,31 @@ namespace qdtest.Controllers
                     tmp = ctr2.get_by_id(id_loaisp);
                     loaisp.Load_From(tmp);
                     loaisp.level = level_loaisp;
-                }
-                else { tmp = null; loaisp = null; }
-                List<NhomSanPham2> loaisp_l = ctr2.get_tree(tmp, 0);
-                foreach (NhomSanPham2 item in loaisp_l)
-                {
-                    if ((loaisp!=null && loaisp.id!=item.id && item.level == 1)||(loaisp==null && item.level==0))
+                    foreach (NhomSanPham item in tmp.ds_nhomcon)
                     {
-                        NhomSanPham a = ctr2.get_by_id(item.id);
-                        loaisp_list.Add(a);
+                        loaisp_list.Add(item);
+                        splist.Add(ctr.timkiem_dequy(item, "1", 0, 3));
                     }
-              
                 }
+                else
+                {
+                    tmp = null; loaisp = null;
+                    List<NhomSanPham2> loaisp_l = ctr2.get_tree(tmp, 0);
+                    foreach (NhomSanPham2 item in loaisp_l)
+                    {
+                       // if ((loaisp != null && loaisp.id != item.id && item.level == 1) || (loaisp == null && item.level == 0))
+                        if(item.level==0)
+                        {
+                            NhomSanPham a = ctr2.get_by_id(item.id);
+                            loaisp_list.Add(a);
+                            splist.Add(ctr.timkiem_dequy(a, "1", 0, 3));
+                        }
+                        
+                    }
+
+                   
+                }
+                ViewBag.splist = splist;
                 ViewBag.loaisp = loaisp;
                 ViewBag.loaisp_list = loaisp_list;
             }
