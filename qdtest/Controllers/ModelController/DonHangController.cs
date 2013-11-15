@@ -58,7 +58,7 @@ namespace qdtest.Controllers.ModelController
             List<DonHang> obj_list = new List<DonHang>();
             //find by LIKE element
             obj_list = this._db.ds_donhang.Where(x =>
-                x.khachhang.tendaydu.Contains(khachhang_ten)
+                x.khachhang==null || x.khachhang.tendaydu.Contains(khachhang_ten)
                 ).ToList();
 
             //filter by id

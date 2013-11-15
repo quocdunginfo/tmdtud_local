@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace qdtest.Models
 {
@@ -23,6 +25,21 @@ namespace qdtest.Models
         public Boolean macdinh { get; set; }//Hình ảnh hiện trên trang danh mục
         //external
         public virtual SanPham sanpham { get; set; }
+        //method
+        public string _get_duongdan_url()
+        {
+            string path = "~/_Upload/HinhAnh/";
+            path += this.duongdan;
+            UrlHelper helper = new UrlHelper(HttpContext.Current.Request.RequestContext);
+            return helper.Content(path);
+        }
+        public string _get_duongdan_thumb_url()
+        {
+            string path = "~/_Upload/HinhAnh/";
+            path += this.duongdan_thumb;
+            UrlHelper helper = new UrlHelper(HttpContext.Current.Request.RequestContext);
+            return helper.Content(path);
+        }
     }
     public class SanPham
     {
@@ -286,9 +303,17 @@ namespace qdtest.Models
         public int phivanchuyen { get; set; }//dua vao tinhtp nguoi nhan
         //external
         public virtual List<ChiTiet_DonHang> ds_chitiet_donhang { get; set; }
-        public virtual NhanVien nhanvien { get; set; }
+
+        public virtual int? khachhang_id { get; set; }
         public virtual KhachHang khachhang { get; set; }
-        public TinhTP nguoinhan_diachi_tinhtp { get; set; }
+
+        public virtual int? khachhang_nhanvien_id { get; set; }
+        public virtual NhanVien khachhang_nhanvien { get; set; }
+
+        public virtual int? nhanvien_id { get; set; }
+        public virtual NhanVien nhanvien { get; set; }
+
+        public virtual TinhTP nguoinhan_diachi_tinhtp { get; set; }
         //method
         public String _get_trangthai()
         {
@@ -319,6 +344,102 @@ namespace qdtest.Models
             String format = "dd/MM/yyyy";
             return String.Format("{0:"+format+"}", this.ngay);
         }
+        public String _get_khachhang_tendaydu()
+        {
+            if (this.khachhang != null)
+            {
+                return khachhang.tendaydu;
+            }
+            if (this.khachhang_nhanvien != null)
+            {
+                return "[Nhân viên]: "+khachhang_nhanvien.tendaydu;
+            }
+            return "";
+        }
+        public string _get_phivanchuyen()
+        {
+            return TextLibrary.ToCommaStringNumber(this.phivanchuyen);
+        }
+        public String _get_khachhang_diachi()
+        {
+            if (this.khachhang != null)
+            {
+                return khachhang.diachi;
+            }
+            if (this.khachhang_nhanvien != null)
+            {
+                return "(Nhân viên mua hàng - không có địa chỉ)";
+            }
+            return "";
+        }
+        public String _get_khachhang_sdt()
+        {
+            if (this.khachhang != null)
+            {
+                return khachhang.sdt;
+            }
+            if (this.khachhang_nhanvien != null)
+            {
+                return "(Nhân viên mua hàng - không có số điện thoại)";
+            }
+            return "";
+        }
+        public String _get_khachhang_email()
+        {
+            if (this.khachhang != null)
+            {
+                return khachhang.sdt;
+            }
+            if (this.khachhang_nhanvien != null)
+            {
+                return khachhang_nhanvien.email;
+            }
+            return "";
+        }
+        public String _get_tongtien()
+        {
+            if (this.phivanchuyen + this.__get_tongtien_notinclude_phivanchuyen() != this.tongtien)
+            {
+                return TextLibrary.ToCommaStringNumber(this.phivanchuyen + this.__get_tongtien_notinclude_phivanchuyen());
+            }
+            return TextLibrary.ToCommaStringNumber(this.tongtien);
+        }
+        public Boolean _is_nhanvien_muahang()
+        {
+            return this.khachhang_nhanvien==null?false:true;
+        }
+        public String _get_url_to_khachhang_both()
+        {
+            UrlHelper helper = new UrlHelper(HttpContext.Current.Request.RequestContext);
+            if (this._is_nhanvien_muahang())
+            {
+                return helper.Action("Index", "AdminUser", new { id = this.khachhang_nhanvien.id });
+            }
+            else if (this.khachhang!=null)
+            {
+                return helper.Action("Index", "AdminKhachHang", new { id = this.khachhang.id });
+            }
+            return helper.Action("Index", "AdminDonHang", new { id = this.id });
+            
+        }
+        private int __get_tongtien_notinclude_phivanchuyen()
+        {
+            int sum = 0;
+            foreach (var item in this.ds_chitiet_donhang)
+            {
+                sum += item.dongia * item.soluong;
+            }
+            return sum;
+        }
+        public string _get_tongtien_notinclude_phivanchuyen()
+        {
+            int sum = 0;
+            foreach (var item in this.ds_chitiet_donhang)
+            {
+                sum += item.dongia * item.soluong;
+            }
+            return TextLibrary.ToCommaStringNumber(sum);
+        }
     }
     public class ChiTiet_DonHang
     {
@@ -329,6 +450,11 @@ namespace qdtest.Models
         //external
         public virtual DonHang donhang { get; set; }
         public virtual ChiTietSP chitietsp { get; set; }
+        //method
+        public string _get_total()
+        {
+            return TextLibrary.ToCommaStringNumber(this.soluong * this.dongia);
+        }
     }
     public class KhachHang
     {
@@ -381,6 +507,7 @@ namespace qdtest.Models
         //external
         //public virtual List<SanPham> ds_sanpham { get; set; }
         public virtual List<DonHang> ds_donhang { get; set; }
+        public virtual List<DonHang> ds_donhang_mua { get; set; }
         public virtual List<NhapHang> ds_nhaphang { get; set; }
         public virtual LoaiNhanVien loainhanvien { get; set; }
     }
@@ -441,6 +568,11 @@ namespace qdtest.Models
         public Boolean noithanh { get; set; }
         //external
         public virtual List<DonHang> ds_donhang { get; set; }
+        //method
+        public string _get_phivanchuyen()
+        {
+            return this.phivanchuyen.ToString("#,#", CultureInfo.InvariantCulture);
+        }
     }
     public class BanGiayDBContext : DbContext
     {
@@ -462,5 +594,26 @@ namespace qdtest.Models
         public DbSet<LoaiNhanVien> ds_loainhanvien { get; set; }
         public DbSet<Quyen> ds_quyen { get; set; }
         public DbSet<TinhTP> ds_tinhtp { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DonHang>()
+                        .HasOptional(m => m.nhanvien)
+                        .WithMany(t => t.ds_donhang)
+                        .HasForeignKey(m => m.nhanvien_id)
+                        .WillCascadeOnDelete(false);
+            
+            modelBuilder.Entity<DonHang>()
+                        .HasOptional(m => m.khachhang)
+                        .WithMany(t => t.ds_donhang)
+                        .HasForeignKey(m => m.khachhang_id)
+                        .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<DonHang>()
+                        .HasOptional(m => m.khachhang_nhanvien)
+                        .WithMany(t => t.ds_donhang_mua)
+                        .HasForeignKey(m => m.khachhang_nhanvien_id)
+                        .WillCascadeOnDelete(false);
+        }
     }
 }

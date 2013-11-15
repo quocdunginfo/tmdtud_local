@@ -34,6 +34,11 @@ namespace qdtest.Controllers
         [HttpGet]
         public ActionResult Index(int page=1)
         {
+            if (!this._permission.Contains("donhang_view"))
+            {
+                return _fail_permission("donhang_view");
+            }
+            
             DonHangController ctr=new DonHangController();
             //
             Boolean timkiem_ngay_from;

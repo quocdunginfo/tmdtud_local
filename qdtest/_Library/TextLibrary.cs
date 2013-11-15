@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -26,6 +27,8 @@ namespace qdtest._Library
         }
         public static int ToInt(String input)
         {
+            input = input.Trim();
+            input = input.Replace(",", "");
             int re=0;
             if (Int32.TryParse(input, out re))
             {
@@ -93,6 +96,10 @@ namespace qdtest._Library
                 convert_ok = false;
                 return new DateTime();
             }
+        }
+        public static string ToCommaStringNumber(int input)
+        {
+           return input.ToString("#,#", CultureInfo.InvariantCulture);
         }
     }
 }

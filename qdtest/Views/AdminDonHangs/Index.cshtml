@@ -273,7 +273,7 @@
                                         @item.id
                                     </td>
                                     <td class="pointer" onclick="document.location = '@Url.Action("Index","AdminDonHang", new {id=item.id})'">
-                                        @item.khachhang.tendaydu
+                                        @item._get_khachhang_tendaydu()
                                     </td>
                                     <td class="pointer right" onclick="document.location = '@Url.Action("Index","AdminDonHang", new {id=item.id})'">
                                         <b>
