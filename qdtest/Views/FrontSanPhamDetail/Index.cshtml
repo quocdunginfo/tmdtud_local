@@ -5,24 +5,160 @@
 }
 <div id="content" class="float_r">
     <script type="text/javascript">
-        function kim(s) {
-            var i = 0;
-            var k = "";
-            while (s.split(";")[i] != '') {
-               // alert(s.split(";")[i]);
-                k += s.split(";")[i]+" ";
-                i++;
-            }
-            //alert(k);
-            document.getElementById("kt").innerHTML = k;
-        }
-    </script>
-    <style type="text/css">
-        .kim_color canvas:hover
+        var ctsp_list = new Array();
+        @foreach(var item in sanpham.ds_chitietsp)
         {
-             opacity:0.5;
+            @: var ctsp = new Object();
+            @: ctsp.id_ctsp = "@item.id";
+            @: ctsp.id_mausac = "@item.mausac.id";
+            @: ctsp.id_kichthuoc = "@item.kichthuoc.id";
+            @: ctsp.soluong = "@item.soluong";
+            @: ctsp_list.push(ctsp);    
+        }
+        var kichthuoc_list = new Array();        var mausac_list = new Array();        var mausac = new Object();        var kichthuoc = new Object();        var current_id = "";        var limit = 0;        function kim(s) {
+            var id = "color" + s;
+            if (current_id != "") {
+                //alert(document.getElementById(id).className);
+                document.getElementsByClassName("colorselect")[0].className = "colordeselect";
+                document.getElementById(id).className = "colorselect";
+            }
+            for(var i=0;i<mausac_list.length;i++)
+            {
+                
+                if (mausac_list[i].id == s) {
+                    // alert(mausac_list[i].mamau);
+                    current_id = s;
+                    document.getElementById("kt").innerHTML = "";
+                    for (var j = 0; j < mausac_list[i].ds_kichthuoc.length; j++) {
+                       // alert(mausac_list[i].ds_kichthuoc[j].giatri);
+                        var kim = mausac_list[i].ds_kichthuoc[j];
+                        if(j==0)
+                            document.getElementById("kt").innerHTML += '<a class="sizeselect" id="size' + kim.id + '" onclick="kim2(\'' + kim.id + '\')"><span>' + kim.giatri + '</span></a>';
+                        else document.getElementById("kt").innerHTML += '<a class="sizedeselect" id="size' + kim.id + '" onclick="kim2(\'' + kim.id + '\')"><span>' + kim.giatri + '</span></a>';
+                    }
+                    kim2(mausac_list[i].ds_kichthuoc[0].id);
+                }
+            }
+           }
+           function kim2(s) {
+               var id = "size" + s;
+            //   alert(id);
+               document.getElementsByClassName("sizeselect")[0].className = "sizedeselect";
+               document.getElementById(id).className = "sizeselect";
+               for (var i = 0; i < ctsp_list.length; i++) {
+                   var k = ctsp_list[i];
+                   if (k.id_kichthuoc == s && k.id_mausac == current_id) {
+                      // alert(k.id_ctsp);
+                       //  alert(document.getElementById("ctsp_id").value);
+                       limit = k.soluong;
+                       if (k.soluong > 3) {
+                           document.getElementById("sl").disabled = false;
+                           document.getElementById("state").innerHTML = '<span style="color:green"><b>Còn hàng</b></span>';
+                           document.getElementById("ctsp_id").value = k.id_ctsp;
+                       }
+                       else if(k.soluong > 0 && k.soluong <=3)
+                       {
+                           document.getElementById("sl").disabled = false;
+                           document.getElementById("state").innerHTML = '<span style="color:orange"><b>Còn '+k.soluong+' sản phẩm</b></span>';
+                           document.getElementById("ctsp_id").value = k.id_ctsp;
+                       }
+                       else if (k.soluong == 0) {
+                           document.getElementById("state").innerHTML = '<span style="color:red"><b>Hết hàng</b></span>';
+                           document.getElementById("sl").disabled = true;
+                       }
+                       //alert(document.getElementById("ctsp_id").value);
+                       
+                   }
+               }
+           }
+           function kim3(s) {
+               //       alert(document.getElementById("soluong").value);
+               if (isNaN(s)) {
+                   alert("Số lượng nhập phải là một số");
+                   return false;
+               }else if (s <= 0 || s > 3) {
+                   alert("Số lượng đặt phải từ 1 đến 3 sản phẩm");
+                   document.getElementById("sl").value = 1;
+                   document.getElementById("sl").focus();
+                   return false;
+               } else if (s > limit) {
+                   alert("Số lượng đặt vượt quá số lượng tồn của sản phẩm");
+                   document.getElementById("sl").value = 1;
+                   document.getElementById("sl").focus();
+                   return false;
+               } else { document.getElementById("soluong").value = s; }
+               return true;
+          //     alert(document.getElementById("soluong").value);
+           }
+           
+    </script>
+    <style type="text/css">  
+        .kim_color canvas.colordeselect
+        {
+            opacity:0.5;
              filter:alpha(opacity=50);
-             border:0px;
+            border:1px solid #000;
+            height:18px;
+            width:18px;
+        }
+        .kim_color canvas.colordeselect:hover
+        {
+             opacity:1;
+             filter:alpha(opacity=100);
+             border:1px solid #000;
+             height:20px;
+            width:20px;
+        }
+        .kim_color canvas.colorselect
+        {
+             /*opacity:0.5;
+             //filter:alpha(opacity=50);*/
+             border:1px solid #000;
+             height:20px;
+            width:20px;
+        }
+        .size a.sizedeselect
+        {
+            border: 1px solid #d2d2d2;
+            color: #000000;
+            float: left;
+            height: 18px;      
+            font-size:13px;
+            text-align: center;
+            text-decoration: none;
+            width: 18px;
+            margin-right:4px;
+        }
+        .size a:hover
+        {
+            margin-right:4px;
+            border: 1px solid #5eb0ff ;
+            background: #fff;
+            color: #1e90ff;
+            float: left;
+            height: 18px;      
+            font-size:13px;
+            text-align: center;
+            text-decoration: none;
+            width: 18px;
+        }
+         .size a.sizeselect
+        {
+            margin-right:4px;
+            border: 1px solid #5eb0ff ;
+            background: #fff;
+            color: #1e90ff;
+            float: left;
+            height: 18px;      
+            font-size:13px;
+            text-align: center;
+            text-decoration: none;
+            width: 18px;
+        }
+        .detail tr td
+        {
+            color:#000000;
+            font-size:14px;
         }
     </style>
         	<h1>@sanpham.ten</h1>
@@ -30,10 +166,10 @@
         	<a id="qd_main_a_tag" rel="lightbox[portfolio]" href="@Url.Content("~/_Upload/HinhAnh/" + sanpham._get_hinhanh_macdinh().duongdan)"><img id="qd_main_img_tag"  src="@Url.Content("~/_Upload/HinhAnh/" + sanpham._get_hinhanh_macdinh().duongdan_thumb)" alt="image" style="max-width:250px;max-height:250px"/></a>
             </div>
             <div class="content_half float_r">
-                <table>
+                <table class="detail">
                     <tr>
                         <td style="width:160px">Mã sản phẩm:</td>
-                        <td>@sanpham.masp đ</td>
+                        <td>@sanpham.masp</td>
                     </tr>
                     <tr>
                         <td>Tình trạng:</td>
@@ -56,46 +192,88 @@
                         <td class="kim_color">
                             @{
                                 List<qdtest.Models.ChiTietSP> list = sanpham.ds_chitietsp.OrderBy(x => x.mausac.id).ToList();
-                                String[] tmp=new String[list.GroupBy(x=>x.mausac.id).Count()];
-                                var dict = new Dictionary<string, string>();
-                                int ik=0;
-                                tmp[0] = list[0].mausac.mamau;
-                                var kt = "";
+                                //String[] tmp=new String[list.GroupBy(x=>x.mausac.id).Count()];
+                                qdtest.Models.MauSac[] temp = new qdtest.Models.MauSac[list.GroupBy(x => x.mausac.id).Count()];
+                                temp[0] = list[0].mausac;
+                                //var dict = new Dictionary<string, string>();
+                                var d = new Dictionary<qdtest.Models.MauSac, List<qdtest.Models.KichThuoc>>();
+                                d[temp[0]] = new List<qdtest.Models.KichThuoc>();
+                                var k=0;
                                 foreach(var item in list)
-                                {   
-                                    if(!item.mausac.mamau.Equals(tmp[ik]))
+                                {
+                                    if(item.mausac.id!=temp[k].id)
                                     {
-                                        dict[tmp[ik]] = kt;
-                                        ik++;
-                                        tmp[ik] = item.mausac.mamau;
-                                        kt = "";
-                                        
-                                    }else
-                                    {kt += item.kichthuoc.giatri + ";";}
-                                     
+                                        k++;
+                                        temp[k] = item.mausac;
+                                        d[temp[k]] = new List<qdtest.Models.KichThuoc>();
+                                        d[temp[k]].Add(item.kichthuoc);
+                                    }
+                                    else { d[temp[k]].Add(item.kichthuoc); }
                                 }
-                                dict[tmp[ik]] = kt;
-                                foreach(var item in tmp)
-                                {     
-                                <canvas style="border:1px solid #000;height:16px;width:16px; background-color:@item" id="@dict[item]" onclick="kim('@dict[item]')"></canvas>
-                            }
+                                k=0;
+                                var pre="color";
+                                foreach(var item in temp)
+                                {
+                                    int h = d[item].Count;
+                                    
+                                    if(k==0)
+                                    {  
+                                        @:<canvas class="colorselect" style="background-color:@item.mamau" id="@pre@item.id"  onclick="kim('@item.id')"></canvas>
+                                            k++;
+                                    }
+                                    else
+                                    { 
+                                        @:<canvas class="colordeselect" style="background-color:@item.mamau" id="@pre@item.id"  onclick="kim('@item.id')"></canvas>
+                                    }
+                                    
+                                
+                                    <script type="text/javascript" hidden="hidden">
+                                        $(document).ready(function () {
+                                            mausac = new Object();
+                                            mausac.id = "@item.id";
+                                            mausac.mamau = "@item.mamau";
+                                            mausac.ten = "@item.giatri";
+                                            mausac.ds_kichthuoc = new Array();
+                                            @foreach(var itk in d[item]){    
+                                            @:kichthuoc=new Object();
+                                            @:kichthuoc.id="@itk.id";
+                                            @:kichthuoc.giatri="@itk.giatri";
+                                            @:mausac.ds_kichthuoc.push(kichthuoc);   
+                                            }
+                                            mausac_list.push(mausac);
+                                            if (current_id == "") kim('@temp[0].id');
+                                        })                                </script>
+                                }
                             }
                            
                         </td>
                     </tr>
                     <tr>
+                       
                         <td>Kích thước:</td>
-                        <td id="kt">L,M</td>
+                        <td id="kt" class="size">
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                       
+                        <td>Tình trạng:</td>
+                        <td id="state" >
+                          
+                        </td>
                     </tr>
                     <tr>
                     	<td>Số lượng đặt: </td>
-                        <td><input type="text" value="1" style="width: 20px; text-align: right" /></td>
+                        <td><input id="sl" type="text" value="1" style="width: 20px; text-align: right" onchange="return kim3(this.value);" /></td>
                     </tr>
                 </table>
                 <div class="cleaner h20"></div>
-
-                <a href="shoppingcart.html" class="addtocart"></a>
-
+                <form action="@Url.Action("Index","FrontHome")" method="get">
+                    <input  type="hidden" id="ctsp_id" name="front_order_ctsp" value="0" />
+                    <input type="hidden" id="sanpham_id"name="front_order_id" value="@sanpham.id" />
+                    <input  type="hidden" id="soluong" name="front_order_soluong" value="0" />
+                <a class="addtocart" onclick="submit()"></a>
+                    </form>
 			</div>
             <div class="cleaner h30"></div>
             <script type="text/javascript">
@@ -139,7 +317,7 @@
                    foreach (var hinh in sanpham.ds_hinhanh.ToList())
                    {
                         <!-- alt: hình gốc, src: hình thumb -->
-                       if (hinh.duongdan_thumb==sanpham._get_hinhanh_macdinh().duongdan_thumb)
+                       if (hinh.duongdan_thumb == sanpham._get_hinhanh_macdinh().duongdan_thumb)
                        {
                        @: <div id="@hinh.id" class="qd_image_div qd_main">
                        }
@@ -159,27 +337,28 @@
           <div class="cleaner h50"></div> 
             <h3>Sản phẩm liên quan</h3>
             @{
-                int i=1;
-                foreach(var item in listsplienquan)
+                int i = 1;
+                foreach (var item in listsplienquan)
                 {
-                    if(item.id != sanpham.id) {
-                    if(i%3==0)
-                       {
+                    if (item.id != sanpham.id)
+                    {
+                        if (i % 3 == 0)
+                        {
                       @:<div class="product_box no_margin_right">
                        }
-                       else 
-                       {
+                        else
+                        {
                       @:<div class="product_box">
                        }
                      
-            	<a href="@Url.Action("Index","FrontSanPhamDetail",new { id = item.id})"><img src="@Url.Content("~/_Upload/HinhAnh/"+item._get_hinhanh_macdinh().duongdan_thumb)" style="max-width:200px; max-height:150px" alt="Shoes @i" /></a>
+            	<a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })"><img src="@Url.Content("~/_Upload/HinhAnh/" + item._get_hinhanh_macdinh().duongdan_thumb)" style="max-width:200px; max-height:150px" alt="Shoes @i" /></a>
                 <h3>@item.ten</h3>
                 <p class="product_price">@item.gia đ</p>
                 <a href="shoppingcart.html" class="addtocart"></a>
                 <a href="productdetail.html" class="detail"></a>
                 @:</div> 
-               if(i%3==0)
-                       {               
+               if (i % 3 == 0)
+               {               
                      @: <div class="cleaner"></div>      	
                        }
                     i++;
