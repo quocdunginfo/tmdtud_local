@@ -34,7 +34,7 @@ namespace qdtest.Controllers
         [HttpGet]
         public ActionResult Index(int page=1)
         {
-            if (!this._permission.Contains("donhang_view"))
+            if (!this._nhanvien_permission.Contains("donhang_view"))
             {
                 return _fail_permission("donhang_view");
             }

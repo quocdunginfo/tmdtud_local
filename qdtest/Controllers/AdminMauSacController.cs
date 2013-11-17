@@ -13,7 +13,7 @@ namespace qdtest.Controllers
     {
         public ActionResult Index(int id = 0)
         {
-            if (!this._permission.Contains("mausac_view"))
+            if (!this._nhanvien_permission.Contains("mausac_view"))
             {
                 return _fail_permission("mausac_view");
             }
@@ -31,7 +31,7 @@ namespace qdtest.Controllers
         }
         public ActionResult Add()
         {
-            if (!this._permission.Contains("mausac_add"))
+            if (!this._nhanvien_permission.Contains("mausac_add"))
             {
                 return _fail_permission("mausac_add");
             }
@@ -53,7 +53,7 @@ namespace qdtest.Controllers
             if (obj_id == 0)
             {
                 //add mode
-                if (!this._permission.Contains("mausac_add"))
+                if (!this._nhanvien_permission.Contains("mausac_add"))
                 {
                     return _fail_permission("mausac_add");
                 }
@@ -64,7 +64,7 @@ namespace qdtest.Controllers
             else
             {
                 //edit mode
-                if (!this._permission.Contains("mausac_edit"))
+                if (!this._nhanvien_permission.Contains("mausac_edit"))
                 {
                     return _fail_permission("mausac_edit");
                 }

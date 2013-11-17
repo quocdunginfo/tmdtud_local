@@ -11,11 +11,13 @@ using qdtest.Models;
 
 namespace qdtest.Controllers
 {
-    public class FrontController : Controller
+    public class FrontController : WebController
     {
+        protected KhachHang _khachhang;
         public FrontController()
         {
             this._khoitao_cookie();
+            this._khachhang = null;
         }
         //
         // GET: /Layout/
@@ -57,6 +59,16 @@ namespace qdtest.Controllers
                 }
             }
             ViewBag.front_timkiem_sanpham = this.front_timkiem_sanpham;
+            //Load thong tin KhachHang
+            if (this._nhanvien == null)
+            {
+                //Chưa có NhanVien nào đăng nhập hệ thống
+                if (Session["khachhang"] != null)
+                {
+                    //nếu như KH đã đăng nhập rồi
+                    this._khachhang = (KhachHang)Session["khachhang"];
+                }
+            }
         }
         [NonAction]
         protected void _luu_cookie()

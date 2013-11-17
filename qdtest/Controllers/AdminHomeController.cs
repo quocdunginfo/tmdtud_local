@@ -14,7 +14,7 @@ namespace qdtest.Controllers
         public ActionResult Index()
         {
             Debug.WriteLine("Kiểm tra home_view");
-            if (!this._permission.Contains("home_view"))
+            if (!this._nhanvien_permission.Contains("home_view"))
             {
                 return this._fail_permission("home_view");
             }

@@ -1,4 +1,5 @@
-﻿using qdtest.Models;
+﻿using qdtest.Controllers.ModelController;
+using qdtest.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,25 +16,15 @@ namespace qdtest.Controllers
 
         public ActionResult Index()
         {
-            BanGiayDBContext db = new BanGiayDBContext();
-            var re = from ChiTiet_DonHang in db.ds_chitiet_donhang
-                     group new { ChiTiet_DonHang.chitietsp, ChiTiet_DonHang } by new
-                     {
-                         Sanpham_id = (int?)ChiTiet_DonHang.chitietsp.sanpham.id,
-                         So_Luong = (int?)ChiTiet_DonHang.chitietsp.soluong
-                     } into g
-                     orderby
-                       g.Key.So_Luong descending
-                     select new
-                     {
-                         Sanpham_id = (int?)g.Key.Sanpham_id,
-                         sl = (int?)g.Sum(p => p.ChiTiet_DonHang.soluong)
-                     };
-            foreach(var item in re)
+            List<NhomSanPham> list = new NhomSanPhamController().get_tree2(null);
+            foreach (NhomSanPham item in list)
             {
-                Debug.WriteLine(item.Sanpham_id);
-                Debug.WriteLine(item.sl);
-
+                Debug.WriteLine(item.id);
+                foreach (SanPham sp in item.ds_sanpham)
+                {
+                    Debug.Write(sp.id+""+ sp.ten+"-");
+                }
+                Debug.WriteLine("");
             }
             return View();
         }

@@ -35,7 +35,7 @@ namespace qdtest.Controllers
         public ActionResult Index(int page=1)
         {
             //check
-            if (!this._permission.Contains("khachhang_view"))
+            if (!this._nhanvien_permission.Contains("khachhang_view"))
             {
                 return this._fail_permission("khachhang_view");
             }
@@ -122,7 +122,7 @@ namespace qdtest.Controllers
         public ActionResult Add()
         {
             //check
-            if (!this._permission.Contains("khachhang_add"))
+            if (!this._nhanvien_permission.Contains("khachhang_add"))
             {
                 return this._fail_permission("khachhang_add");
             }
@@ -131,7 +131,7 @@ namespace qdtest.Controllers
         public ActionResult Edit(int id=0)
         {
             //check
-            if (!this._permission.Contains("khachhang_edit"))
+            if (!this._nhanvien_permission.Contains("khachhang_edit"))
             {
                 return this._fail_permission("khachhang_edit");
             }

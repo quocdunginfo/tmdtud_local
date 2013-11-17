@@ -17,7 +17,7 @@ namespace qdtest.Controllers
 
         public ActionResult Index(int id=0)
         {
-            if (!this._permission.Contains("user_view"))
+            if (!this._nhanvien_permission.Contains("user_view"))
             {
                 return _fail_permission("user_view");
             }
@@ -36,7 +36,7 @@ namespace qdtest.Controllers
         }
         public ActionResult Add()
         {
-            if (!this._permission.Contains("user_add"))
+            if (!this._nhanvien_permission.Contains("user_add"))
             {
                 return _fail_permission("user_add");
             }
@@ -60,7 +60,7 @@ namespace qdtest.Controllers
             if (obj_id == 0)
             {
                 //add mode
-                if (!this._permission.Contains("user_add"))
+                if (!this._nhanvien_permission.Contains("user_add"))
                 {
                     return _fail_permission("user_add");
                 }
@@ -71,7 +71,7 @@ namespace qdtest.Controllers
             else
             {
                 //edit mode
-                if (!this._permission.Contains("user_edit"))
+                if (!this._nhanvien_permission.Contains("user_edit"))
                 {
                     return _fail_permission("user_edit");
                 }
@@ -99,7 +99,7 @@ namespace qdtest.Controllers
             //xét ràng buộc
                 if (edit_mode)
                 {
-                    if (this._user.id != obj.id)
+                    if (this._nhanvien.id != obj.id)
                     {
                         //active
                         obj.active = TextLibrary.ToBoolean(Request["nhanvien_active"]);

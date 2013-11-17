@@ -13,7 +13,7 @@ namespace qdtest.Controllers
     {
         public ActionResult Index(int id = 0)
         {
-            if (!this._permission.Contains("kichthuoc_view"))
+            if (!this._nhanvien_permission.Contains("kichthuoc_view"))
             {
                 return _fail_permission("kichthuoc_view");
             }
@@ -31,7 +31,7 @@ namespace qdtest.Controllers
         }
         public ActionResult Add()
         {
-            if (!this._permission.Contains("kichthuoc_add"))
+            if (!this._nhanvien_permission.Contains("kichthuoc_add"))
             {
                 return _fail_permission("kichthuoc_add");
             }
@@ -53,7 +53,7 @@ namespace qdtest.Controllers
             if (obj_id == 0)
             {
                 //add mode
-                if (!this._permission.Contains("kichthuoc_add"))
+                if (!this._nhanvien_permission.Contains("kichthuoc_add"))
                 {
                     return _fail_permission("kichthuoc_add");
                 }
@@ -64,7 +64,7 @@ namespace qdtest.Controllers
             else
             {
                 //edit mode
-                if (!this._permission.Contains("kichthuoc_edit"))
+                if (!this._nhanvien_permission.Contains("kichthuoc_edit"))
                 {
                     return _fail_permission("kichthuoc_edit");
                 }

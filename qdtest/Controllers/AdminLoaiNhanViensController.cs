@@ -27,7 +27,7 @@ namespace qdtest.Controllers
         public ActionResult Index(int page=1)
         {
             //check
-            if (!this._permission.Contains("loainhanvien_view"))
+            if (!this._nhanvien_permission.Contains("loainhanvien_view"))
             {
                 return this._fail_permission("loainhanvien_view");
             }
@@ -94,7 +94,7 @@ namespace qdtest.Controllers
         public ActionResult Add()
         {
             //check
-            if (!this._permission.Contains("loainhanvien_add"))
+            if (!this._nhanvien_permission.Contains("loainhanvien_add"))
             {
                 return this._fail_permission("loainhanvien_add");
             }
@@ -103,7 +103,7 @@ namespace qdtest.Controllers
         public ActionResult Edit(int id = 0)
         {
             //check
-            if (!this._permission.Contains("loainhanvien_edit"))
+            if (!this._nhanvien_permission.Contains("loainhanvien_edit"))
             {
                 return this._fail_permission("loainhanvien_edit");
             }

@@ -34,7 +34,7 @@ namespace qdtest.Controllers
         public ActionResult Index()
         {
             //check
-            if (!this._permission.Contains("user_view"))
+            if (!this._nhanvien_permission.Contains("user_view"))
             {
                 return this._fail_permission("user_view");
             }
@@ -57,7 +57,7 @@ namespace qdtest.Controllers
         }
         public ActionResult Add()
         {
-            if (!this._permission.Contains("user_add"))
+            if (!this._nhanvien_permission.Contains("user_add"))
             {
                 return _fail_permission("user_add");
             }
@@ -66,7 +66,7 @@ namespace qdtest.Controllers
         }
         public ActionResult Edit(int id=0)
         {
-            if (!this._permission.Contains("user_edit"))
+            if (!this._nhanvien_permission.Contains("user_edit"))
             {
                 return _fail_permission("user_edit");
             }
@@ -74,13 +74,13 @@ namespace qdtest.Controllers
         }
         public ActionResult Delete(int id=0)
         {
-            if (!this._permission.Contains("user_delete"))
+            if (!this._nhanvien_permission.Contains("user_delete"))
             {
                 return _fail_permission("user_delete");
             }
             try
             {
-                if (this._user.id == id)
+                if (this._nhanvien.id == id)
                 {
                     //xóa chính mình
                     return _show_notification("Không thể tự xóa bản thân khỏi hệ thống!");

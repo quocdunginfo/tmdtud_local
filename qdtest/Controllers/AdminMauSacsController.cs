@@ -29,7 +29,7 @@ namespace qdtest.Controllers
         public ActionResult Index(int page=1)
         {
             //check
-            if (!this._permission.Contains("mausac_view"))
+            if (!this._nhanvien_permission.Contains("mausac_view"))
             {
                 return this._fail_permission("mausac_view");
             }
@@ -97,7 +97,7 @@ namespace qdtest.Controllers
         public ActionResult Add()
         {
             //check
-            if (!this._permission.Contains("mausac_add"))
+            if (!this._nhanvien_permission.Contains("mausac_add"))
             {
                 return this._fail_permission("mausac_add");
             }
@@ -106,7 +106,7 @@ namespace qdtest.Controllers
         public ActionResult Edit(int id = 0)
         {
             //check
-            if (!this._permission.Contains("mausac_edit"))
+            if (!this._nhanvien_permission.Contains("mausac_edit"))
             {
                 return this._fail_permission("mausac_edit");
             }

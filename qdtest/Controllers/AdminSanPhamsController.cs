@@ -37,7 +37,7 @@ namespace qdtest.Controllers
         public ActionResult Index(int page=1)
         {
             //check
-            if (!this._permission.Contains("sanpham_view"))
+            if (!this._nhanvien_permission.Contains("sanpham_view"))
             {
                 return this._fail_permission("sanpham_view");
             }
@@ -79,7 +79,7 @@ namespace qdtest.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            if (!this._permission.Contains("sanpham_delete"))
+            if (!this._nhanvien_permission.Contains("sanpham_delete"))
             {
                 return this._fail_permission("sanpham_delete");
             }
@@ -149,7 +149,7 @@ namespace qdtest.Controllers
         public ActionResult Add()
         {
             //check
-            if (!this._permission.Contains("sanpham_add"))
+            if (!this._nhanvien_permission.Contains("sanpham_add"))
             {
                 return this._fail_permission("sanpham_add");
             }
@@ -172,7 +172,7 @@ namespace qdtest.Controllers
         public ActionResult Edit(int id=0)
         {
             //check
-            if (!this._permission.Contains("sanpham_edit"))
+            if (!this._nhanvien_permission.Contains("sanpham_edit"))
             {
                 return this._fail_permission("sanpham_edit");
             }

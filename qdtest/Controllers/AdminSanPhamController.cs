@@ -18,7 +18,7 @@ namespace qdtest.Controllers
         //WORK OK
         public ActionResult Index(int id = 0, int chitietsp_id = 0)
         {
-            if (!this._permission.Contains("sanpham_view"))
+            if (!this._nhanvien_permission.Contains("sanpham_view"))
             {
                 return _fail_permission("sanpham_view");
             }
@@ -77,7 +77,7 @@ namespace qdtest.Controllers
         //WORK OK
         public ActionResult Add()
         {
-            if (!this._permission.Contains("sanpham_add"))
+            if (!this._nhanvien_permission.Contains("sanpham_add"))
             {
                 return _fail_permission("sanpham_add");
             }
@@ -103,7 +103,7 @@ namespace qdtest.Controllers
                 //un save mode
                 un_save = true;
                 //add mode
-                if (!this._permission.Contains("sanpham_add"))
+                if (!this._nhanvien_permission.Contains("sanpham_add"))
                 {
                     return _fail_permission("sanpham_add");
                 }
@@ -113,7 +113,7 @@ namespace qdtest.Controllers
                 //get obj from csdl
                 obj = ctr.get_by_id(obj_id);
                 //edit mode
-                if (!this._permission.Contains("sanpham_edit"))
+                if (!this._nhanvien_permission.Contains("sanpham_edit"))
                 {
                     return _fail_permission("sanpham_edit");
                 }
@@ -199,7 +199,7 @@ namespace qdtest.Controllers
         [HttpGet]
         public ActionResult ChiTietSP_Add(int for_sanpham_id = 0)
         {
-            if (!this._permission.Contains("chitietsp_add"))
+            if (!this._nhanvien_permission.Contains("chitietsp_add"))
             {
                 return _fail_permission("chitietsp_add");
             }
@@ -210,7 +210,7 @@ namespace qdtest.Controllers
         [HttpGet]
         public ActionResult ChiTietSP_Edit(int id)
         {
-            if (!this._permission.Contains("chitietsp_edit"))
+            if (!this._nhanvien_permission.Contains("chitietsp_edit"))
             {
                 return _fail_permission("chitietsp_edit");
             }
@@ -264,7 +264,7 @@ namespace qdtest.Controllers
                 edit_mode  = sanpham_obj.ds_chitietsp.Where(x=>x.id==chitietsp_id).FirstOrDefault()!=null?true:false;
                 if (edit_mode)
                 {
-                    if (!this._permission.Contains("chitietsp_edit"))
+                    if (!this._nhanvien_permission.Contains("chitietsp_edit"))
                     {
                         return _fail_permission("chitietsp_edit");
                     }
@@ -272,7 +272,7 @@ namespace qdtest.Controllers
                 }
                 else
                 {
-                    if (!this._permission.Contains("chitietsp_add"))
+                    if (!this._nhanvien_permission.Contains("chitietsp_add"))
                     {
                         return _fail_permission("chitietsp_add");
                     }
@@ -295,7 +295,7 @@ namespace qdtest.Controllers
                 edit_mode = ctr_chitietsp.get_by_id(chitietsp_id) != null;
                 if (edit_mode)
                 {
-                    if (!this._permission.Contains("chitietsp_edit"))
+                    if (!this._nhanvien_permission.Contains("chitietsp_edit"))
                     {
                         return _fail_permission("chitietsp_edit");
                     }
@@ -303,7 +303,7 @@ namespace qdtest.Controllers
                 }
                 else
                 {
-                    if (!this._permission.Contains("chitietsp_add"))
+                    if (!this._nhanvien_permission.Contains("chitietsp_add"))
                     {
                         return _fail_permission("chitietsp_add");
                     }
@@ -373,7 +373,7 @@ namespace qdtest.Controllers
         [HttpGet]
         public ActionResult HinhAnh_SetDefault(int for_sanpham_id, int hinhanh_id)
         {
-            if (!this._permission.Contains("hinhanh_edit"))
+            if (!this._nhanvien_permission.Contains("hinhanh_edit"))
             {
                 return _fail_permission("hinhanh_edit");
             }
@@ -384,7 +384,7 @@ namespace qdtest.Controllers
         [HttpGet]
         public ActionResult HinhAnh_Delete(int for_sanpham_id, int hinhanh_id)
         {
-            if (!this._permission.Contains("chitietsp_delete"))
+            if (!this._nhanvien_permission.Contains("chitietsp_delete"))
             {
                 return _fail_permission("chitietsp_delete");
             }
