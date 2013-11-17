@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Trang chủ - Giỏ hàng";
+    Layout = "~/Views/Shared/_FrontLayout.cshtml";
+}
+
+<div id="content" class="float_r">
+    <h1>Shopping Cart</h1>
+    <table width="680px" cellspacing="0" cellpadding="5">
+        <tbody>
+            <tr bgcolor="#ddd">
+                <th width="100" align="center">Hình ảnh</th>
+                <th width="150" align="center">Tên sản phẩm</th>
+                <th width="120" align="center">Thông tin</th>
+                <th width="80" align="center">Số lượng</th>
+                <th width="100" align="right">Đơn giá</th>
+                <th width="100" align="right">Tổng cộng</th>
+                <th width="40"></th>
+
+            </tr>
+
+
+            <tr>
+                <td>
+                    <img src="@Url.Content("~/Content/front/images/product/03.jpg")" alt="image 3" style="max-width:100px; max-height:100px;">
+                </td>
+                <td align="center">
+                </td>
+                
+                <td align="center">
+                    <br>
+                    <div style="float: left; margin-left: 30px;">
+                        Màu:
+                    </div>
+                    <div style="width: 45px; height: 15px; background: #EB3A3A; float: left; margin-left: 5px; margin-right: 0px;"></div>
+                    <br>
+                    <div style="float: left; margin-left: 30px;">
+                        Kích thước: L
+                    </div>
+                    <div style="clear:both"></div>
+                    <br>
+
+                </td>
+                <td align="center">
+                    <select style="width: 40px;">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                </td>
+                <td align="right">$60  </td>
+                <td align="right">$60 </td>
+                <td align="center"><a href="#">
+                    <img src="@Url.Content("~/Content/front/images/remove_x.gif")" alt="remove" style="width: 15px; height: 15px" title="Xóa khỏi giỏ hàng"></a>                </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="right" height="30px"></td>
+                <td align="right" style="background: #ddd; font-weight: bold">Tổng tiền</td>
+                <td align="right" style="background: #ddd; font-weight: bold">$240 </td>
+                <td style="background: #ddd; font-weight: bold"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="float: right; width: 215px; margin-top: 20px;">
+
+        <p><a href="checkout.html">Thanh toán</a></p>
+        <p><a href="javascript:history.back()">Tiếp tục mua hàng</a></p>
+
+    </div>
+</div>

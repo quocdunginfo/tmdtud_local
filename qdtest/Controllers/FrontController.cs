@@ -14,16 +14,19 @@ namespace qdtest.Controllers
     public class FrontController : WebController
     {
         protected KhachHang _khachhang;
-        public FrontController()
+        protected DonHang _giohang;
+        public FrontController():base()
         {
             this._khoitao_cookie();
             this._khachhang = null;
+            this._giohang = new DonHang();
         }
         //
         // GET: /Layout/
         protected HttpCookie front_timkiem_sanpham=null;
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            base.OnActionExecuting(filterContext);
             NhomSanPhamController ctr = new NhomSanPhamController();
             List<NhomSanPham2> list1 = ctr.timkiem("", "", "", "");
             SanPhamController ctr2 = new SanPhamController(ctr._db);
@@ -60,15 +63,33 @@ namespace qdtest.Controllers
             }
             ViewBag.front_timkiem_sanpham = this.front_timkiem_sanpham;
             //Load thong tin KhachHang
-            if (this._nhanvien == null)
+            if (!this._is_logged_in())
             {
-                //Chưa có NhanVien nào đăng nhập hệ thống
+                //Chưa có ai đăng nhập hệ thống
                 if (Session["khachhang"] != null)
                 {
                     //nếu như KH đã đăng nhập rồi
                     this._khachhang = (KhachHang)Session["khachhang"];
                 }
+                else
+                {
+                    //lấy từ cookies lên
+                    //lay thong tin tu cookies
+                    HttpCookie _tmp = Request.Cookies.Get("khachhang");
+                    if (_tmp != null)
+                    {
+                        int uid = TextLibrary.ToInt(_tmp["khachhang_id"].ToString());
+                        string password = TextLibrary.ToString(_tmp["khachhang_password"].ToString());
+                        //lay thong tin user theo yeu cau dang nhap
+                        KhachHangController ctr3456 = new KhachHangController();
+                        this._khachhang = ctr3456.get_by_id_hash_password(uid, password);
+                    }
+                }
             }
+            //
+            //
+            ViewBag.nhanvien = this._nhanvien;
+            ViewBag.khachhang = this._khachhang;
         }
         [NonAction]
         protected void _luu_cookie()
@@ -93,6 +114,21 @@ namespace qdtest.Controllers
             this.front_timkiem_sanpham["front_orderby"] = "id";
             this.front_timkiem_sanpham["front_desc"] = "1";
         }
-
+        protected string _who_logged_in()
+        {
+            if (this._nhanvien != null)
+            {
+                return "nhanvien";
+            }
+            else if (this._khachhang != null)
+            {
+                return "khachhang";
+            }
+            return "";
+        }
+        protected Boolean _is_logged_in()
+        {
+            return this._who_logged_in().Equals("") ? false : true ;
+        }
     }
 }

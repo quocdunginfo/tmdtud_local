@@ -12,7 +12,11 @@ namespace qdtest.Controllers
 {
     public class WebController : Controller
     {
-        protected NhanVien _nhanvien = null;
+        protected NhanVien _nhanvien;
+        public WebController()
+        {
+            this._nhanvien = null;
+        }
         public virtual ActionResult Index2()
         {
             return RedirectToAction("Index","FrontHome");
@@ -42,6 +46,5 @@ namespace qdtest.Controllers
             NhanVienController ctr = new NhanVienController();
             this._nhanvien = ctr.get_by_id_hash_password(uid, password);
         }
-
     }
 }

@@ -3,6 +3,8 @@
     var SanPham_BestSeller = (List<qdtest.Models.SanPham>)ViewBag.SanPham_BestSeller;
     var _Template_Path = "~/Content/front/";
     var front_timkiem_sanpham = (HttpCookie)ViewBag.front_timkiem_sanpham;
+    var khachhang = (qdtest.Models.KhachHang)ViewBag.khachhang;
+    var nhanvien = (qdtest.Models.NhanVien)ViewBag.nhanvien;
 }
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -56,7 +58,24 @@
     	<div id="site_title"><h1><a href="http://www.templatemo.com">Cửa hàng giày dép</a></h1></div>
         <div id="header_right">
         	<p>
-	        <a href="#">Tài khoản của tôi</a> | <a href="#">Đăng kí</a> | <a href="#">Đăng nhập</a> | <a href="#">Giỏ hàng của tôi</a> | <a href="#">Thanh toán</a></p>
+	        
+                @if(khachhang!=null)
+                {
+                     @:<a href="#">Chào, @khachhang.tendaydu </a> |
+                    @:<a href="@Url.Action("Logout","FrontLogin")">Đăng xuất</a> |
+                 }
+                else if(nhanvien!=null)
+                {
+                      @:<a href="#">Chào, @nhanvien.tendaydu </a> |
+                      @:<a href="@Url.Action("Logout","AdminLogin")">Đăng xuất</a> |  
+                }
+                else
+                {
+                    @:<a href="@Url.Action("DangKy","FrontLogin")">Đăng kí</a> |
+                    @:<a href="@Url.Action("Index","FrontLogin")">Đăng nhập</a> |
+                }
+                 <a href="@Url.Action("Index","FrontCart")">Giỏ hàng của tôi</a> |
+                 <a href="@Url.Action("CheckOut","FrontCart")">Thanh toán</a></p>
             <p>
             	Giỏ hàng: <strong>3 items</strong> ( <a href="shoppingcart.html">Xem giỏ hàng</a> )
 			</p>
