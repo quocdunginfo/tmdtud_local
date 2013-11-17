@@ -268,10 +268,10 @@
                     </tr>
                 </table>
                 <div class="cleaner h20"></div>
-                <form action="@Url.Action("Index","FrontHome")" method="get">
-                    <input  type="hidden" id="ctsp_id" name="front_order_ctsp" value="0" />
-                    <input type="hidden" id="sanpham_id"name="front_order_id" value="@sanpham.id" />
-                    <input  type="hidden" id="soluong" name="front_order_soluong" value="0" />
+                <form action="@Url.Action("Add_Or_Update","FrontCart")" method="post">
+                    <input  type="hidden" id="ctsp_id" name="giohang_chitietsp_id" value="0" />
+                    <input type="hidden" id="sanpham_id" name="giohang_sanpham_id" value="@sanpham.id" />
+                    <input  type="hidden" id="soluong" name="giohang_soluong" value="1" />
                 <a class="addtocart" onclick="submit()"></a>
                     </form>
 			</div>

@@ -90,6 +90,20 @@ namespace qdtest.Controllers
             //
             ViewBag.nhanvien = this._nhanvien;
             ViewBag.khachhang = this._khachhang;
+
+            //get cart
+            if (Session["giohang"] != null)
+            {
+                try
+                {
+                    this._giohang = (DonHang)Session["giohang"];
+                }
+                catch (Exception ex)
+                {
+                    this._giohang = new DonHang();
+                }
+            }
+            this._save_cart_to_session();
         }
         [NonAction]
         protected void _luu_cookie()
@@ -129,6 +143,11 @@ namespace qdtest.Controllers
         protected Boolean _is_logged_in()
         {
             return this._who_logged_in().Equals("") ? false : true ;
+        }
+        protected Boolean _save_cart_to_session()
+        {
+            Session["giohang"] = this._giohang;
+            return true;
         }
     }
 }
