@@ -24,27 +24,27 @@ namespace qdtest.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
-            int uid = 0;
-            String password = "";
-            if (Session["user_id"] != null)
+            
+            if (Session["nhanvien"] != null)
             {
-                //uu tien lay thong tin user tu session
-                uid = TextLibrary.ToInt(Session["user_id"].ToString());
-                password = TextLibrary.ToString(Session["user_password"].ToString());
+                this._nhanvien = (NhanVien)Session["nhanvien"];
             }
             else
             {
+                int uid = 0;
+                String password = "";
                 //lay thong tin tu cookies
-                HttpCookie _tmp = Request.Cookies.Get("admin");
+                HttpCookie _tmp = Request.Cookies.Get("nhanvien");
                 if (_tmp != null)
                 {
                     uid = TextLibrary.ToInt(_tmp["user_id"].ToString());
                     password = TextLibrary.ToString(_tmp["user_password"].ToString());
                 }
+                //lay thong tin user theo yeu cau dang nhap
+                NhanVienController ctr = new NhanVienController();
+                this._nhanvien = ctr.get_by_id_hash_password(uid, password);
             }
-            //lay thong tin user theo yeu cau dang nhap
-            NhanVienController ctr = new NhanVienController();
-            this._nhanvien = ctr.get_by_id_hash_password(uid, password);
+            
         }
     }
 }

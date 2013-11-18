@@ -5,6 +5,7 @@
     var front_timkiem_sanpham = (HttpCookie)ViewBag.front_timkiem_sanpham;
     var khachhang = (qdtest.Models.KhachHang)ViewBag.khachhang;
     var nhanvien = (qdtest.Models.NhanVien)ViewBag.nhanvien;
+    var giohang = (qdtest.Models.DonHang)ViewBag.giohang;
 }
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -55,29 +56,30 @@
 <div id="templatemo_wrapper">
 
 	<div id="templatemo_header">
-    	<div id="site_title"><h1><a href="http://www.templatemo.com">Cửa hàng giày dép</a></h1></div>
+    	<div id="site_title"><h1><a href="@Url.Action("Index","FrontHome")">Cửa hàng giày dép</a></h1></div>
         <div id="header_right">
         	<p>
 	        
                 @if(khachhang!=null)
                 {
                      @:<a href="#">Chào, @khachhang.tendaydu </a> |
-                    @:<a href="@Url.Action("Logout","FrontLogin")">Đăng xuất</a> |
+                     @:<a href="@Url.Action("Index", "FrontKhachHang")">Quản lý tài khoản cá nhân</a> |
+                    @:<a href="@Url.Action("Logout","FrontLogin")">Đăng xuất</a>
                  }
                 else if(nhanvien!=null)
                 {
                       @:<a href="#">Chào, @nhanvien.tendaydu </a> |
-                      @:<a href="@Url.Action("Logout","AdminLogin")">Đăng xuất</a> |  
+                      @:<a href="@Url.Action("Index", "AdminUser", new { id=nhanvien.id })">Quản lý tài khoản cá nhân</a> |
+                      @:<a href="@Url.Action("Logout","AdminLogin")">Đăng xuất</a>
                 }
                 else
-                {
-                    @:<a href="@Url.Action("DangKy","FrontLogin")">Đăng kí</a> |
-                    @:<a href="@Url.Action("Index","FrontLogin")">Đăng nhập</a> |
+                { 
+                    @:<a href="@Url.Action("Index","FrontRegister")">Đăng kí</a> |
+                    @:<a href="@Url.Action("Index","FrontLogin")">Đăng nhập</a>
                 }
-                 <a href="@Url.Action("Index","FrontCart")">Giỏ hàng của tôi</a> |
-                 <a href="@Url.Action("CheckOut","FrontCart")">Thanh toán</a></p>
+            </p>
             <p>
-            	Giỏ hàng: <strong>3 items</strong> ( <a href="shoppingcart.html">Xem giỏ hàng</a> )
+            	Giỏ hàng hiện có: <strong>@giohang.ds_chitiet_donhang.Count sản phẩm</strong> ( <a href="@Url.Action("Index","FrontCart")">Xem giỏ hàng</a> | <a href="@Url.Action("CheckOut","FrontCart")">Thanh toán</a> )
 			</p>
 		</div>
         <div class="cleaner"></div>

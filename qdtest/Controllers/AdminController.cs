@@ -35,7 +35,6 @@ namespace qdtest.Controllers
             //nếu chưa đăng nhập thì chuyển tới trang đăng nhập
             if (this._nhanvien == null)
             {
-                Debug.WriteLine("Kiểm tra User thất bại");
                 filterContext.Result = RedirectToAction("Index", "AdminLogin");
                 return;
             }

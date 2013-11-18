@@ -58,8 +58,6 @@ namespace qdtest.Controllers
         {
             //destroy session
             Session["khachhang"] = null;
-            Session.Clear();
-            Session.Abandon();
             //renew cookies for khachhang
             HttpCookie _tmp = new HttpCookie("khachhang");
             _tmp.Expires = DateTime.Now.AddDays(-1);

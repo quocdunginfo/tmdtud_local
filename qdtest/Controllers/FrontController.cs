@@ -90,20 +90,21 @@ namespace qdtest.Controllers
             //
             ViewBag.nhanvien = this._nhanvien;
             ViewBag.khachhang = this._khachhang;
-
+            
             //get cart
-            if (Session["giohang"] != null)
-            {
-                try
+                if (Session["giohang"] != null)
                 {
-                    this._giohang = (DonHang)Session["giohang"];
+                    try
+                    {
+                        this._giohang = (DonHang)Session["giohang"];
+                    }
+                    catch (Exception ex)
+                    {
+                        this._giohang = new DonHang();
+                    }
                 }
-                catch (Exception ex)
-                {
-                    this._giohang = new DonHang();
-                }
-            }
-            this._save_cart_to_session();
+                this._save_cart_to_session();
+                ViewBag.giohang = this._giohang;
         }
         [NonAction]
         protected void _luu_cookie()
