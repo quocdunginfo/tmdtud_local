@@ -52,19 +52,26 @@
                        //  alert(document.getElementById("ctsp_id").value);
                        limit = k.soluong;
                        if (k.soluong > 3) {
+                           document.getElementById("soluong").value = 1;
                            document.getElementById("sl").disabled = false;
+                           document.getElementById("sl").value = 1;
                            document.getElementById("state").innerHTML = '<span style="color:green"><b>Còn hàng</b></span>';
                            document.getElementById("ctsp_id").value = k.id_ctsp;
                        }
                        else if(k.soluong > 0 && k.soluong <=3)
                        {
+                           document.getElementById("soluong").value = 1;
                            document.getElementById("sl").disabled = false;
+                           document.getElementById("sl").value = 1;
                            document.getElementById("state").innerHTML = '<span style="color:orange"><b>Còn '+k.soluong+' sản phẩm</b></span>';
                            document.getElementById("ctsp_id").value = k.id_ctsp;
                        }
                        else if (k.soluong == 0) {
                            document.getElementById("state").innerHTML = '<span style="color:red"><b>Hết hàng</b></span>';
+                           document.getElementById("sl").value = 0;
                            document.getElementById("sl").disabled = true;
+                           document.getElementById("soluong").value = 0;
+                          
                        }
                        //alert(document.getElementById("ctsp_id").value);
                        
@@ -75,6 +82,8 @@
                //       alert(document.getElementById("soluong").value);
                if (isNaN(s)) {
                    alert("Số lượng nhập phải là một số");
+                   document.getElementById("sl").value = 1;
+                   document.getElementById("sl").focus();
                    return false;
                }else if (s <= 0 || s > 3) {
                    alert("Số lượng đặt phải từ 1 đến 3 sản phẩm");
@@ -90,7 +99,10 @@
                return true;
           //     alert(document.getElementById("soluong").value);
            }
-           
+           function kim4() {
+               if (document.getElementById("soluong").value != 0) order_frm.submit();
+               else alert("Rất tiếc, sản phẩm này đã hết hàng, xin vui lòng chọn sản phẩm khác!");
+           }
     </script>
     <style type="text/css">  
         .kim_color canvas.colordeselect
@@ -191,7 +203,10 @@
                     	<td>Màu sắc:</td>
                         <td class="kim_color">
                             @{
+                              
                                 List<qdtest.Models.ChiTietSP> list = sanpham.ds_chitietsp.OrderBy(x => x.mausac.id).ToList();
+                                if(list.Count>0)
+                                {
                                 //String[] tmp=new String[list.GroupBy(x=>x.mausac.id).Count()];
                                 qdtest.Models.MauSac[] temp = new qdtest.Models.MauSac[list.GroupBy(x => x.mausac.id).Count()];
                                 temp[0] = list[0].mausac;
@@ -244,6 +259,8 @@
                                             if (current_id == "") kim('@temp[0].id');
                                         })                                </script>
                                 }
+                                }
+                                else{<text>Chưa có</text>}
                             }
                            
                         </td>
@@ -252,7 +269,7 @@
                        
                         <td>Kích thước:</td>
                         <td id="kt" class="size">
-                           
+                           Chưa có
                         </td>
                     </tr>
                     <tr>
@@ -268,11 +285,11 @@
                     </tr>
                 </table>
                 <div class="cleaner h20"></div>
-                <form action="@Url.Action("Add_Or_Update","FrontCart")" method="post">
+                <form id="order_frm" action="@Url.Action("Add_Or_Update","FrontCart")" method="post">
                     <input  type="hidden" id="ctsp_id" name="giohang_chitietsp_id" value="0" />
                     <input type="hidden" id="sanpham_id" name="giohang_sanpham_id" value="@sanpham.id" />
                     <input  type="hidden" id="soluong" name="giohang_soluong" value="1" />
-                <a class="addtocart" onclick="submit()"></a>
+                <a class="addtocart"  id="btnsubmit" onclick="kim4()"></a>
                     </form>
 			</div>
             <div class="cleaner h30"></div>
@@ -354,8 +371,19 @@
             	<a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })"><img src="@Url.Content("~/_Upload/HinhAnh/" + item._get_hinhanh_macdinh().duongdan_thumb)" style="max-width:200px; max-height:150px" alt="Shoes @i" /></a>
                 <h3>@item.ten</h3>
                 <p class="product_price">@item.gia đ</p>
-                <a href="shoppingcart.html" class="addtocart"></a>
-                <a href="productdetail.html" class="detail"></a>
+                var ctspid = 0;
+                        foreach (var kt in item.ds_chitietsp)
+                        {
+                            if (kt.soluong > 0) { ctspid = kt.id; break; }
+                        }
+                    if(ctspid==0)
+                    {
+                        <a href="" onclick="alert('Rất tiếc, sản phẩm này đã hết hàng, xin vui lòng chọn sản phẩm khác!');" class="addtocart"></a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Add_Or_Update", "FrontCart", new { sanphamid = item.id, ctsp_id = ctspid, soluong = 1 })" class="addtocart"></a>}
+                         <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })" class="detail"></a>
                 @:</div> 
                if (i % 3 == 0)
                {               

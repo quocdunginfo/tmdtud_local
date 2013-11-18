@@ -28,7 +28,7 @@
                     var i=1;
                    foreach(var item in SanPhamNew_List)
                     {
-                        
+                       
                        if(i%3==0)
                        {
                       @:<div class="product_box no_margin_right">
@@ -42,8 +42,19 @@
                         
                         <a href="@Url.Action("Index","FrontSanPhamDetail",new { id = item.id})"><h3>@item.ten</h3></a>
                         <p class="product_price">@item.gia đ</p>
-                        <a href="shoppingcart.html" class="addtocart"></a>
-                        <a href="productdetail.html" class="detail"></a>
+                        var ctspid = 0;
+                        foreach (var k in item.ds_chitietsp)
+                        {
+                            if (k.soluong > 0) { ctspid = k.id; break; }
+                        }
+                    if(ctspid==0)
+                    {
+                        <a href="" onclick="alert('Rất tiếc, sản phẩm này đã hết hàng, xin vui lòng chọn sản phẩm khác!');" class="addtocart"></a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Add_Or_Update", "FrontCart", new { sanphamid = item.id, ctsp_id = ctspid, soluong = 1 })" class="addtocart"></a>}
+                         <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })" class="detail"></a>
                         @: </div>   
                         if(i%3==0)
                        {               

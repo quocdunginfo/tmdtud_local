@@ -75,7 +75,7 @@ namespace qdtest.Controllers
             {
                 //search button click
                 this.front_timkiem_sanpham["front_masp"] = TextLibrary.ToString(Request["front_sanpham_masp"]);
-                this.front_timkiem_sanpham["front_ten"] = TextLibrary.ToString(Request["front_sanpham_ten"]);
+                this.front_timkiem_sanpham["front_ten"] = ((TextLibrary.ToString(Request["front_sanpham_ten"])).Equals("Nhập từ khóa tìm kiếm"))==true ? "" : TextLibrary.ToString(Request["front_sanpham_ten"]);
                 this.front_timkiem_sanpham["front_mota"] = TextLibrary.ToString(Request["front_sanpham_mota"]);
                 this.front_timkiem_sanpham["front_gia_from"] = TextLibrary.ToString(Request["front_sanpham_gia_from"]);
                 this.front_timkiem_sanpham["front_gia_to"] = TextLibrary.ToString(Request["front_sanpham_gia_to"]);

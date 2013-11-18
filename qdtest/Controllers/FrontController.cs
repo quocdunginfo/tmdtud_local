@@ -120,8 +120,8 @@ namespace qdtest.Controllers
             this.front_timkiem_sanpham["front_ten"] = "";
             this.front_timkiem_sanpham["front_masp"] = "";
             this.front_timkiem_sanpham["front_mota"] = "";
-            this.front_timkiem_sanpham["front_gia_from"] = "-1";
-            this.front_timkiem_sanpham["front_gia_to"] = "-1";
+            this.front_timkiem_sanpham["front_gia_from"] = "0";
+            this.front_timkiem_sanpham["front_gia_to"] = "0";
             this.front_timkiem_sanpham["front_hangsx_ten"] = "";
             this.front_timkiem_sanpham["front_nhomsanpham_id"] = "";
             this.front_timkiem_sanpham["front_max_item_per_page"] = "6";
