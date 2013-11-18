@@ -45,8 +45,11 @@ namespace qdtest.Controllers.ModelController
          {
              if (i == limit) break;
                 Debug.WriteLine("Kim =" + item.sp.id + "//tên="+item.sp.ten+"//loai=" + item.sp.nhomsanpham.ten + "//sl=" + item.sl);
-                listbest.Add(item.sp);
-                i++;
+                if (item.sp.active == true)
+                {
+                    listbest.Add(item.sp);
+                    i++;
+                }
          }
             return listbest;
         }

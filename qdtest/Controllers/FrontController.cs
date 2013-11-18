@@ -28,7 +28,7 @@ namespace qdtest.Controllers
         {
             base.OnActionExecuting(filterContext);
             NhomSanPhamController ctr = new NhomSanPhamController();
-            List<NhomSanPham2> list1 = ctr.timkiem("", "", "", "");
+            List<NhomSanPham2> list1 = ctr.timkiem("", "", "", "1");
             SanPhamController ctr2 = new SanPhamController(ctr._db);
             List<SanPham>list2=ctr2.get_bestseller(4);
             if (list1 != null && list2 != null)

@@ -40,7 +40,7 @@ namespace qdtest.Controllers
                     foreach (NhomSanPham2 item in loaisp_l)
                     {
                        // if ((loaisp != null && loaisp.id != item.id && item.level == 1) || (loaisp == null && item.level == 0))
-                        if(item.level==0)
+                        if(item.level==0&&item.active==true)
                         {
                             NhomSanPham a = ctr2.get_by_id(item.id);
                             loaisp_list.Add(a);
@@ -62,7 +62,11 @@ namespace qdtest.Controllers
                 NhomSanPham tmp = ctr2.get_by_id(id_loaisp);
                 loaisp.Load_From(tmp);
                 loaisp.level = level_loaisp;
-                loaisp_list= ctr2.get_tree2(tmp);
+                foreach(var item in ctr2.get_tree2(tmp))
+                {
+                    if (item.active == true)
+                        loaisp_list.Add(item);
+                }
                 //calculate offset
                 if (TextLibrary.ToString(Request["front_current_page"]) != "") page = int.Parse(TextLibrary.ToString(Request["front_current_page"]));
                 int max_item_per_page = TextLibrary.ToInt(this.front_sanpham["front_max_item_per_page"]);
