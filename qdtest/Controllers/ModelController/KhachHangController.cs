@@ -78,6 +78,22 @@ namespace qdtest.Controllers.ModelController
                   select user).FirstOrDefault();
             return re;
         }
+        public Boolean can_use_email(int obj_id, String email)
+        {
+            KhachHang u = (from user in _db.ds_khachhang
+                          where user.email.ToUpper().Contains(email.ToUpper())
+                          && user.id != obj_id
+                          select user).FirstOrDefault();
+            return u == null ? true : false;
+        }
+        public Boolean can_use_tendangnhap(int obj_id, String tendangnhap)
+        {
+            KhachHang u = (from user in _db.ds_khachhang
+                          where user.tendangnhap.ToUpper().Contains(tendangnhap.ToUpper())
+                          && user.id != obj_id
+                          select user).FirstOrDefault();
+            return u == null ? true : false;
+        }
         public Boolean is_exist(int obj_id)
         {
             KhachHang obj = (from obj_tmp in _db.ds_khachhang
@@ -155,6 +171,48 @@ namespace qdtest.Controllers.ModelController
                 }
             //FINAL return
             return obj_list;
+        }
+        public List<string> validate(KhachHang obj, string matkhau2)
+        {
+            List<string> re = new List<string>();
+            string[] forbiden = { "admin", "mod", "moderator", "administrator", "root", "super", "user"};
+            if (!ValidateLibrary.is_valid_email(obj.email))
+            {
+                re.Add("email_fail");
+            }
+            if (obj.matkhau != matkhau2 || obj.matkhau.Equals(""))
+            {
+                re.Add("matkhau_fail");
+            }
+            if (obj.tendangnhap.Equals(""))
+            {
+                re.Add("tendangnhap_fail");
+            }
+            if (obj.tendaydu.Equals(""))
+            {
+                re.Add("tendaydu_fail");
+            }
+            if (obj.sdt.Equals(""))
+            {
+                re.Add("sdt_fail");
+            }
+            /*if (obj.diachi.Equals(""))
+            {
+                re.Add("diachi_fail");
+            }*/
+            if (!this.can_use_tendangnhap(obj.id,obj.tendangnhap))
+            {
+                re.Add("tendangnhap_exist_fail");
+            }
+            if (forbiden.Contains(obj.tendangnhap.ToLower()))
+            {
+                re.Add("tendangnhap_exist_fail");
+            }
+            if (!this.can_use_email(obj.id, obj.email))
+            {
+                re.Add("email_exist_fail");
+            }
+            return re;
         }
     }
 }

@@ -126,6 +126,7 @@
     <Compile Include="Controllers\FrontController.cs" />
     <Compile Include="Controllers\FrontKhachHangController.cs" />
     <Compile Include="Controllers\FrontLoginController.cs" />
+    <Compile Include="Controllers\FrontRegisterController.cs" />
     <Compile Include="Controllers\FrontSanPhamController.cs" />
     <Compile Include="Controllers\FrontSanPhamDetailController.cs" />
     <Compile Include="Controllers\FrontTimKiemController.cs" />
@@ -3506,6 +3507,7 @@
     <Content Include="Views\FrontLogin\Index.cshtml" />
     <Content Include="Views\FrontKhachHang\Index.cshtml" />
     <Content Include="Views\FrontCart\Index.cshtml" />
+    <Content Include="Views\FrontRegister\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
