@@ -112,6 +112,27 @@ namespace qdtest.Controllers
             }
             return RedirectToAction("Index", "AdminMauSac", new { id = id });
         }
-
+        public ActionResult Delete(int id = 0)
+        {
+            //check
+            if (!this._nhanvien_permission.Contains("mausac_delete"))
+            {
+                return this._fail_permission("mausac_delete");
+            }
+            MauSacController controller = new MauSacController();
+            if (!controller.is_exist(id))
+            {
+                return RedirectToAction("Index", "AdminMauSacs");
+            }
+            try
+            {
+                controller.delete(id);
+            }
+            catch (Exception)
+            {
+                return _show_notification("Màu sắc này có dính khóa ngoại với sản phẩm hiện có nên không xóa được");
+            }
+            return RedirectToAction("Index", "AdminMauSacs");
+        }
     }
 }

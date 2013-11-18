@@ -280,7 +280,7 @@
 							        <a href="@Url.Action("Edit", "AdminNhomSanPham", new { id = item.id })" class="edit" title="Edit">
 							        <img src="../img/admin/edit.gif" alt="Edit">
 							        </a>
-							        <a href="@Url.Action("Delete", "AdminNhomSanPham", new { id = item.id })" class="delete" title="Delete">
+                                    <a href="javascript:qd_confirm( '@Url.Action("Delete", "AdminNhomSanPham", new { id = item.id })' )" class="edit" title="Delete">
 							        <img src="../img/admin/delete.gif" alt="Delete">
 							        </a>
 						        </td>

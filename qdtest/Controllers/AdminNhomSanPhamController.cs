@@ -31,6 +31,11 @@ namespace qdtest.Controllers
         // GET: /AdminNhomSanPham/
         public ActionResult Index()
         {
+            //check
+            if (!this._nhanvien_permission.Contains("nhomsanpham_view"))
+            {
+                return this._fail_permission("nhomsanpham_view");
+            }
             NhomSanPhamController ctr = new NhomSanPhamController();
             ViewBag.NhomSanPham2_List = ctr.timkiem(
                 this.timkiem_nhomsanpham["id"],
@@ -67,6 +72,12 @@ namespace qdtest.Controllers
         [HttpPost]
         public ActionResult EditSubmit()
         {
+            //check
+            if (!this._nhanvien_permission.Contains("nhomsanpham_edit"))
+            {
+                return this._fail_permission("nhomsanpham_edit");
+            }
+
             NhomSanPhamController ctr = new NhomSanPhamController();
             //get data
             int id = TextLibrary.ToInt(Request["cat_id"]);
@@ -94,6 +105,11 @@ namespace qdtest.Controllers
         }
         public ActionResult Edit(int id=0)
         {
+            //check
+            if (!this._nhanvien_permission.Contains("nhomsanpham_edit"))
+            {
+                return this._fail_permission("nhomsanpham_edit");
+            }
             //get data
             NhomSanPhamController ctr = new NhomSanPhamController();
             if (!ctr.is_exist(id))
@@ -109,6 +125,11 @@ namespace qdtest.Controllers
         [HttpPost]
         public ActionResult Add()
         {
+            //check
+            if (!this._nhanvien_permission.Contains("nhomsanpham_add"))
+            {
+                return this._fail_permission("nhomsanpham_add");
+            }
             //get data
             int p_id = TextLibrary.ToInt(Request["cat_parent_id"]);
             //nên lấy instance của chính Controller đó để dùng sẽ không bị lỗi track changes
@@ -136,21 +157,24 @@ namespace qdtest.Controllers
         }
         public ActionResult Delete(int id=0)
         {
+            //check
+            if (!this._nhanvien_permission.Contains("nhomsanpham_delete"))
+            {
+                return this._fail_permission("nhomsanpham_delete");
+            }
             NhomSanPhamController controller = new NhomSanPhamController();
             if (!controller.is_exist(id))
             {
-                Debug.WriteLine("Delete Nhóm sản phẩm id không tồn tại");
                 return RedirectToAction("Index", "AdminNhomSanPham");
             }
             try
             {
                 controller.delete(id);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return _show_notification("Nhóm sản phẩm này có dính khóa ngoại với sản phẩm hiện có nên không xóa được");
+                return _show_notification("Nhóm sản phẩm này có dính khóa ngoại với sản phẩm hoặc nhóm con hiện có nên không xóa được");
             }
-            Debug.WriteLine("Delete Nhóm sản phẩm thành công (xóa luôn con)");
             return RedirectToAction("Index", "AdminNhomSanPham");
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

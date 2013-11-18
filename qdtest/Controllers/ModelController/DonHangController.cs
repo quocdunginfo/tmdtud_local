@@ -93,11 +93,49 @@ namespace qdtest.Controllers.ModelController
             //order
             if (order_desc)
             {
-                obj_list = obj_list.OrderByDescending(x => x.id).ToList();
+                if (order_by.ToLower().Equals("id"))
+                {
+                    obj_list = obj_list.OrderByDescending(x => x.id).ToList();
+                }
+                else if (order_by.ToLower().Equals("khachhang.tendaydu"))
+                {
+                    obj_list = obj_list.OrderByDescending(x => x.khachhang.tendaydu).ToList();
+                }
+                else if (order_by.ToLower().Equals("tongtien"))
+                {
+                    obj_list = obj_list.OrderByDescending(x => x.tongtien).ToList();
+                }
+                else if (order_by.ToLower().Equals("trangthai"))
+                {
+                    obj_list = obj_list.OrderByDescending(x => x.trangthai).ToList();
+                }
+                else if (order_by.ToLower().Equals("ngay"))
+                {
+                    obj_list = obj_list.OrderByDescending(x => x.ngay).ToList();
+                }
             }
             else
             {
-                obj_list = obj_list.OrderBy(x => x.id).ToList();
+                if (order_by.ToLower().Equals("id"))
+                {
+                    obj_list = obj_list.OrderBy(x => x.id).ToList();
+                }
+                else if (order_by.ToLower().Equals("khachhang.tendaydu"))
+                {
+                    obj_list = obj_list.OrderBy(x => x.khachhang.tendaydu).ToList();
+                }
+                else if (order_by.ToLower().Equals("tongtien"))
+                {
+                    obj_list = obj_list.OrderBy(x => x.tongtien).ToList();
+                }
+                else if (order_by.ToLower().Equals("trangthai"))
+                {
+                    obj_list = obj_list.OrderBy(x => x.trangthai).ToList();
+                }
+                else if (order_by.ToLower().Equals("ngay"))
+                {
+                    obj_list = obj_list.OrderBy(x => x.ngay).ToList();
+                }
             }
 
             //limit

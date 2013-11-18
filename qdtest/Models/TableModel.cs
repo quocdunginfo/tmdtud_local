@@ -1,4 +1,5 @@
 ﻿using qdtest._Library;
+using qdtest.Controllers.ModelController;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -58,12 +59,42 @@ namespace qdtest.Models
         public String ten { get; set; }
         public String mota { get; set; }
         public int gia { get; set; }
-        public Boolean active { get; set; }
+
+        private Boolean _active;
+        public Boolean active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+                //set all childs neu nhu OBJ nay da co trong he thong
+                try
+                {
+                    //xu ly childs
+                    if (this.active == false)
+                    {
+                        foreach (var item in this.ds_chitietsp)
+                        {
+                            item.active = false;
+                            //will be saved when OBJ called savechanges
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    //de phong truong hop OBJ moi, chua co trong csdl
+                }
+            }
+        }
         //external
         public virtual List<ChiTietSP> ds_chitietsp { get; set; }
         public virtual List<HinhAnh> ds_hinhanh { get; set; }
         public virtual HangSX hangsx { get; set; }
         public virtual NhomSanPham nhomsanpham { get; set; }
+        //method
         public HinhAnh _get_hinhanh_macdinh()
         {
             HinhAnh re= this.ds_hinhanh.Where(x => x.macdinh == true).FirstOrDefault();
@@ -141,6 +172,7 @@ namespace qdtest.Models
             this.ds_chitiet_nhaphang = new List<ChiTiet_NhapHang>();
             this.ds_tonkho = new List<TonKho>();
             this.soluong = 0;
+            this.active = true;
         }
         [Key]
         public int id { get; set; }
@@ -166,7 +198,36 @@ namespace qdtest.Models
         public int id { get; set; }
         public String giatri { get; set; }
         public String mota { get; set; }
-        public Boolean active { get; set; }
+        private Boolean _active;
+        public Boolean active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+                //set all childs neu nhu OBJ nay da co trong he thong
+                try
+                {
+                    //xu ly ds_sanpham
+                    if (this.active == false)
+                    {
+                        foreach (var item in this.ds_chitietsp)
+                        {
+                            item.active = false;
+                            //will be saved when OBJ called savechanges
+                        }
+                    }
+                    
+                }
+                catch (Exception)
+                {
+                    //de phong truong hop OBJ moi, chua co trong csdl
+                }
+            }
+        }
         //external
         public virtual List<ChiTietSP> ds_chitietsp { get; set; }
     }
@@ -184,7 +245,37 @@ namespace qdtest.Models
         public String giatri { get; set; }
         public String mamau { get; set; }
         public String mota { get; set; }
-        public Boolean active { get; set; }
+
+        private Boolean _active;
+        public Boolean active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+                //set all childs neu nhu OBJ nay da co trong he thong
+                try
+                {
+                    //xu ly ds_sanpham
+                    if (this.active == false)
+                    {
+                        foreach (var item in this.ds_chitietsp)
+                        {
+                            item.active = false;
+                            //will be saved when OBJ called savechanges
+                        }
+                    }
+
+                }
+                catch (Exception)
+                {
+                    //de phong truong hop OBJ moi, chua co trong csdl
+                }
+            }
+        }
         //external
         public virtual List<ChiTietSP> ds_chitietsp { get; set; }
     }
@@ -199,7 +290,36 @@ namespace qdtest.Models
         [Key]
         public int id { get; set; }
         public String ten { get; set; }
-        public Boolean active { get; set; }
+
+        private Boolean _active;
+        public Boolean active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+                //set all childs neu nhu OBJ nay da co trong he thong
+                try
+                {
+                    //xu ly ds_sanpham
+                    if (this.active == false)
+                    {
+                        foreach (var item in this.ds_sanpham)
+                        {
+                            item.active = false;
+                            //will be saved when OBJ called savechanges
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    //de phong truong hop OBJ moi, chua co trong csdl
+                }
+            }
+        }
         //external
         public virtual List<SanPham> ds_sanpham { get; set; }
     }
@@ -216,7 +336,50 @@ namespace qdtest.Models
         public int id { get; set; }
         public String ten { get; set; }
         public String mota { get; set; }
-        public Boolean active { get; set; }
+
+        private Boolean _active;
+        public Boolean active
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+                //set all childs neu nhu OBJ nay da co trong he thong
+                try
+                {
+                    //xu ly ds_sanpham
+                        if (this.active == false)
+                        {
+                            foreach (var item in this.ds_sanpham)
+                            {
+                                item.active = false;
+                                //will be saved when OBJ called savechanges
+                            }
+                        }
+                    //Neu nhom cha bi inactive thi phai inactive toan bo nhom con
+                        if (this.active == false)
+                        {
+                            foreach (var item in this.ds_nhomcon)
+                            {
+                                item.active = false;
+                                //will be saved when OBJ called savechanges
+                            }
+                        }
+                    //xu ly nhom cha, baajt active nhom con thi phai bat active nhom cha
+                        if (this.nhomcha.active == false && this.active == true)//xet dieu kien tranh loopback
+                        {
+                            this.nhomcha.active = true;
+                        }
+                }
+                catch (Exception)
+                {
+                    //de phong truong hop OBJ moi, chua co trong csdl
+                }
+            }
+        }
         //external
         public virtual NhomSanPham nhomcha { get; set; }
         public virtual List<NhomSanPham> ds_nhomcon { get; set; }
@@ -352,7 +515,7 @@ namespace qdtest.Models
             }
             if (this.khachhang_nhanvien != null)
             {
-                return "[Nhân viên]: "+khachhang_nhanvien.tendaydu;
+                return khachhang_nhanvien.tendaydu + " - [Nhân viên]";
             }
             return "";
         }

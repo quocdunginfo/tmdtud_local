@@ -184,47 +184,122 @@
                                         <span class="title_box">Mã
                                         </span>
                                         <br>
-                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=id_order&amp;orderOrderway=desc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
-                                            <img border="0" src="../img/admin/down_d.gif"></a>
-                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=id_order&amp;orderOrderway=asc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
-                                            <img border="0" src="../img/admin/up.gif"></a>
+                                        @{
+                                            string desc_suffix = "down_d.gif";
+                                            string asc_suffix = "up_d.gif";
+                                            if(timkiem_donhang["order_by"].ToLower().Equals("id"))
+                                            {
+                                                if(timkiem_donhang["order_desc"].ToLower().Equals("1"))
+                                                {
+                                                    desc_suffix = "down.gif";
+                                                }
+                                                else
+                                                {
+                                                    asc_suffix = "up.gif";
+                                                }
+                                            }
+                                        }
+                                        <a href="@Url.Action("OrderBy", "AdminDonHangs", new { order_by="id", order_desc="1" })">
+                                            <img border="0" src="../img/admin/@desc_suffix"></a>
+                                        <a href="@Url.Action("OrderBy", "AdminDonHangs", new { order_by="id", order_desc="0" })">
+                                            <img border="0" src="../img/admin/@asc_suffix"></a>
                                     </th>
                                     <th>
                                         <span class="title_box">Tên khách hàng
                                         </span>
                                         <br>
-                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=customer&amp;orderOrderway=desc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
-                                            <img border="0" src="../img/admin/down.gif"></a>
-                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=customer&amp;orderOrderway=asc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
-                                            <img border="0" src="../img/admin/up.gif"></a>
+                                        @{
+                                            desc_suffix = "down_d.gif";
+                                            asc_suffix = "up_d.gif";
+                                            if(timkiem_donhang["order_by"].ToLower().Equals("khachhang.tendaydu"))
+                                            {
+                                                if(timkiem_donhang["order_desc"].ToLower().Equals("1"))
+                                                {
+                                                    desc_suffix = "down.gif";
+                                                }
+                                                else
+                                                {
+                                                    asc_suffix = "up.gif";
+                                                }
+                                            }
+                                        }
+                                        <a href="@Url.Action("OrderBy", "AdminDonHangs", new { order_by="khachhang.tendaydu", order_desc="1" })">
+                                            <img border="0" src="../img/admin/@desc_suffix"></a>
+                                        <a href="@Url.Action("OrderBy", "AdminDonHangs", new { order_by="khachhang.tendaydu", order_desc="0" })">
+                                            <img border="0" src="../img/admin/@asc_suffix"></a>
                                     </th>
                                     <th class="right">
                                         <span class="title_box">Tổng tiền
                                         </span>
                                         <br>
-                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=total_paid_tax_incl&amp;orderOrderway=desc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
-                                            <img border="0" src="../img/admin/down.gif"></a>
-                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=total_paid_tax_incl&amp;orderOrderway=asc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
-                                            <img border="0" src="../img/admin/up.gif"></a>
+                                        @{
+                                            desc_suffix = "down_d.gif";
+                                            asc_suffix = "up_d.gif";
+                                            if(timkiem_donhang["order_by"].ToLower().Equals("tongtien"))
+                                            {
+                                                if(timkiem_donhang["order_desc"].ToLower().Equals("1"))
+                                                {
+                                                    desc_suffix = "down.gif";
+                                                }
+                                                else
+                                                {
+                                                    asc_suffix = "up.gif";
+                                                }
+                                            }
+                                        }
+                                        <a href="@Url.Action("OrderBy", "AdminDonHangs", new { order_by="tongtien", order_desc="1" })">
+                                            <img border="0" src="../img/admin/@desc_suffix"></a>
+                                        <a href="@Url.Action("OrderBy", "AdminDonHangs", new { order_by="tongtien", order_desc="0" })">
+                                            <img border="0" src="../img/admin/@asc_suffix"></a>
                                     </th>
                                     
                                     <th>
                                         <span class="title_box">Trạng thái
                                         </span>
                                         <br>
-                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=osname&amp;orderOrderway=desc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
-                                            <img border="0" src="../img/admin/down.gif"></a>
-                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=osname&amp;orderOrderway=asc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
-                                            <img border="0" src="../img/admin/up.gif"></a>
+                                        @{
+                                            desc_suffix = "down_d.gif";
+                                            asc_suffix = "up_d.gif";
+                                            if(timkiem_donhang["order_by"].ToLower().Equals("trangthai"))
+                                            {
+                                                if(timkiem_donhang["order_desc"].ToLower().Equals("1"))
+                                                {
+                                                    desc_suffix = "down.gif";
+                                                }
+                                                else
+                                                {
+                                                    asc_suffix = "up.gif";
+                                                }
+                                            }
+                                        }
+                                        <a href="@Url.Action("OrderBy", "AdminDonHangs", new { order_by="trangthai", order_desc="1" })">
+                                            <img border="0" src="../img/admin/@desc_suffix"></a>
+                                        <a href="@Url.Action("OrderBy", "AdminDonHangs", new { order_by="trangthai", order_desc="0" })">
+                                            <img border="0" src="../img/admin/@asc_suffix"></a>
                                     </th>
                                     <th class="right">
                                         <span class="title_box">Ngày đặt
                                         </span>
                                         <br>
-                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=date_add&amp;orderOrderway=desc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
-                                            <img border="0" src="../img/admin/down.gif"></a>
-                                        <a href="index.php?controller=AdminOrders&amp;orderOrderby=date_add&amp;orderOrderway=asc&amp;token=03b97c0470d2242e7ad0b01a281a087b">
-                                            <img border="0" src="../img/admin/up.gif"></a>
+                                        @{
+                                            desc_suffix = "down_d.gif";
+                                            asc_suffix = "up_d.gif";
+                                            if(timkiem_donhang["order_by"].ToLower().Equals("ngay"))
+                                            {
+                                                if(timkiem_donhang["order_desc"].ToLower().Equals("1"))
+                                                {
+                                                    desc_suffix = "down.gif";
+                                                }
+                                                else
+                                                {
+                                                    asc_suffix = "up.gif";
+                                                }
+                                            }
+                                        }
+                                        <a href="@Url.Action("OrderBy", "AdminDonHangs", new { order_by="ngay", order_desc="1" })">
+                                            <img border="0" src="../img/admin/@desc_suffix"></a>
+                                        <a href="@Url.Action("OrderBy", "AdminDonHangs", new { order_by="ngay", order_desc="0" })">
+                                            <img border="0" src="../img/admin/@asc_suffix"></a>
                                     </th>
                                     <th class="center">Tác vụ<br>
                                         &nbsp;

@@ -76,27 +76,7 @@ namespace qdtest.Controllers
             ViewBag.pagination = pg;
             return View();
         }
-        [HttpGet]
-        public ActionResult Delete(int id)
-        {
-            if (!this._nhanvien_permission.Contains("sanpham_delete"))
-            {
-                return this._fail_permission("sanpham_delete");
-            }
-            SanPhamController ctr = new SanPhamController();
-            try
-            {
-                if (ctr.delete(id))
-                {
-                    //notification
-                }
-                return RedirectToAction("Index", "AdminSanPhams");
-            }
-            catch (Exception ex)
-            {
-                return RedirectToAction("Index", "AdminSanPhams");
-            }
-        }
+        
         [HttpPost]
         public ActionResult Submit()
         {
@@ -177,6 +157,29 @@ namespace qdtest.Controllers
                 return this._fail_permission("sanpham_edit");
             }
             return RedirectToAction("Index", "AdminSanPham", new { id=id});
+        }
+        public ActionResult Delete(int id = 0)
+        {
+            //check
+            if (!this._nhanvien_permission.Contains("sanpham_delete"))
+            {
+                return this._fail_permission("sanpham_delete");
+            }
+
+            SanPhamController controller = new SanPhamController();
+            if (!controller.is_exist(id))
+            {
+                return RedirectToAction("Index", "AdminSanPhams");
+            }
+            try
+            {
+                controller.delete(id);
+            }
+            catch (Exception)
+            {
+                return _show_notification("Sản phẩm này có dính khóa ngoại với chi tiết sản phẩm hoặc đơn hàng hiện có nên không xóa được");
+            }
+            return RedirectToAction("Index", "AdminSanPhams");
         }
     }
 }

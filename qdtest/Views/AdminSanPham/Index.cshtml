@@ -250,7 +250,7 @@
                                     <img class="covered" src="../img/admin/@macdinh_img" alt="Đặt làm mặc định"></a>
 			                    </td>
 			                    <td class="center">
-				                    <a href="@Url.Action("HinhAnh_Delete", "AdminSanPham", new {for_sanpham_id=SanPham.id,hinhanh_id=hinhanh.id })" class="delete_product_image">
+				                    <a href="javascript:qd_confirm( '@Url.Action("HinhAnh_Delete", "AdminSanPham", new {for_sanpham_id=SanPham.id,hinhanh_id=hinhanh.id })' )" class="delete_product_image">
 					                    <img src="../img/admin/delete.gif" alt="Delete this image" title="Xóa hình này">
 				                    </a>
 			                    </td>
@@ -496,11 +496,11 @@
 
 				<label>Active: </label>
 				<div class="margin-form">
-					<input name="chitietsp_active" value="1" type="radio" checked="checked">
+					<input name="chitietsp_active" value="1" type="radio" @if(ChiTietSP.active==true) {<text>checked="checked"</text>}>
 					<label class="t" for="active_on">
 					<img src="../img/admin/enabled.gif" alt="Enabled" title="Enabled">
 					</label>
-					<input name="chitietsp_active" value="0"  type="radio">
+					<input name="chitietsp_active" value="0"  type="radio" @if(ChiTietSP.active==false) {<text>checked="checked"</text>}>
 					<label class="t" for="active_off">
 					<img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled">
 					</label>

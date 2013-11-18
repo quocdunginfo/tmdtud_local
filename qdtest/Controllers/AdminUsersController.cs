@@ -66,6 +66,10 @@ namespace qdtest.Controllers
         }
         public ActionResult Edit(int id=0)
         {
+            if (this._nhanvien.id == id)
+            {
+                //owner override
+            }else
             if (!this._nhanvien_permission.Contains("user_edit"))
             {
                 return _fail_permission("user_edit");
@@ -87,9 +91,9 @@ namespace qdtest.Controllers
                 }
                 new NhanVienController().delete(id);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return _show_notification("Nhân viên này có dính khóa ngoại, không thể xóa được");
+                return _show_notification("Nhân viên này có dính khóa ngoại với các đôi tượng khác, không thể xóa được");
             }
             return RedirectToAction("Index","AdminUsers");
         }

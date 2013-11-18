@@ -109,6 +109,28 @@ namespace qdtest.Controllers
             }
             return RedirectToAction("Index", "AdminLoaiNhanVien", new { id = id });
         }
+        public ActionResult Delete(int id = 0)
+        {
+            //check
+            if (!this._nhanvien_permission.Contains("loainhanvien_delete"))
+            {
+                return this._fail_permission("loainhanvien_delete");
+            }
+            LoaiNhanVienController controller = new LoaiNhanVienController();
+            if (!controller.is_exist(id))
+            {
+                return RedirectToAction("Index", "AdminLoaiNhanViens");
+            }
+            try
+            {
+                controller.delete(id);
+            }
+            catch (Exception)
+            {
+                return _show_notification("Loại nhân viên này có dính khóa ngoại với nhân viên hiện có nên không xóa được");
+            }
+            return RedirectToAction("Index", "AdminLoaiNhanViens");
+        }
 
     }
 }

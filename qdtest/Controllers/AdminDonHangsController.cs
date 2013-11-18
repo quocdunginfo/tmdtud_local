@@ -29,6 +29,8 @@ namespace qdtest.Controllers
             this.timkiem_donhang["tongtien_to"] = "0";
             this.timkiem_donhang["ngay_from"] = "";
             this.timkiem_donhang["ngay_to"] = "";
+            this.timkiem_donhang["order_by"] = "id";
+            this.timkiem_donhang["order_desc"] = "1";
             this.timkiem_donhang["max_item_per_page"] = "5";
         }
         [HttpGet]
@@ -77,7 +79,9 @@ namespace qdtest.Controllers
                 ngay_to,
                 timkiem_donhang["trangthai"],
                 timkiem_donhang["active"],
-                "id",true,pg.start_point,pg.max_item_per_page
+                "id",
+                TextLibrary.ToBoolean(timkiem_donhang["order_desc"])
+                ,pg.start_point,pg.max_item_per_page
                 );
             ViewBag.timkiem_donhang = timkiem_donhang;
             //pagination
@@ -139,6 +143,15 @@ namespace qdtest.Controllers
             this.timkiem_donhang["ngay_from"] = tmp.AddDays(songay).ToString("dd/MM/yyyy");
             this.timkiem_donhang["ngay_to"] = tmp.ToString("dd/MM/yyyy");
             Response.Cookies.Add(CookieLibrary.Base64Encode(this.timkiem_donhang));
+            return RedirectToAction("Index", "AdminDonHangs");
+        }
+        [HttpGet]
+        public ActionResult OrderBy(string order_by="id", string order_desc="1")
+        {
+            this.timkiem_donhang["order_by"] = order_by;
+            this.timkiem_donhang["order_desc"] = order_desc;
+            Response.Cookies.Add(CookieLibrary.Base64Encode(this.timkiem_donhang));
+
             return RedirectToAction("Index", "AdminDonHangs");
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

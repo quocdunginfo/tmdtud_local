@@ -17,6 +17,11 @@ namespace qdtest.Controllers
 
         public ActionResult Index(int id=0)
         {
+            if (this._nhanvien.id == id)
+            {
+                //owner override
+            }
+            else
             if (!this._nhanvien_permission.Contains("user_view"))
             {
                 return _fail_permission("user_view");
@@ -70,6 +75,11 @@ namespace qdtest.Controllers
             }
             else
             {
+                if (this._nhanvien.id == obj_id)
+                {
+                    //owner override
+                }
+                else
                 //edit mode
                 if (!this._nhanvien_permission.Contains("user_edit"))
                 {

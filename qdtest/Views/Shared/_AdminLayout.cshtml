@@ -59,7 +59,31 @@
             $('#qdDatePickerFrom').datepick();
             $('#qdDatePickerTo').datepick();
         });
-    </script>    <!-- qd color picker -->    <script type="text/javascript" src="@qRootAdminTemplatePath../qd_color_picker/jscolor.js"></script>
+    </script>    <!-- qd color picker -->    <script type="text/javascript" src="@qRootAdminTemplatePath../qd_color_picker/jscolor.js"></script>    <!-- qd confirm when click delete -->
+    <script type="text/javascript">
+        function qd_confirm(link)
+        {
+            if (confirm("Bạn có chắc muốn thực hiện tác vụ!"))
+            {
+                document.location = link;
+            }
+            else
+            {
+                //nothing
+            }
+        }
+        function qd_confirm_boolean()
+            {
+                if(confirm("Bạn có chắc muốn thực hiện tác vụ!"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+    </script>
 </head>
 <body style="">
     <div id="ajax_running">

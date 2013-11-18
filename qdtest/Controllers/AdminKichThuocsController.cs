@@ -114,6 +114,29 @@ namespace qdtest.Controllers
             }
             return RedirectToAction("Index", "AdminKichThuoc", new { id = id });
         }
+        public ActionResult Delete(int id = 0)
+        {
+            //check
+            if (!this._nhanvien_permission.Contains("kichthuoc_delete"))
+            {
+                return this._fail_permission("kichthuoc_delete");
+            }
+
+            KichThuocController controller = new KichThuocController();
+            if (!controller.is_exist(id))
+            {
+                return RedirectToAction("Index", "AdminKichThuocs");
+            }
+            try
+            {
+                controller.delete(id);
+            }
+            catch (Exception)
+            {
+                return _show_notification("Kích thước này có dính khóa ngoại với sản phẩm hiện có nên không xóa được");
+            }
+            return RedirectToAction("Index", "AdminKichThuocs");
+        }
 
     }
 }
