@@ -10,18 +10,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>@ViewBag.Title</title>
-<meta name="keywords" content="shoes store, free template, ecommerce, online shop, website templates, CSS, HTML" />
-<meta name="description" content="Shoes Store is a free ecommerce template provided by templatemo.com" />
-<link href="@Url.Content(_Template_Path+"css/templatemo_style.css")" rel="stylesheet" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="keywords" content="shoes store, free template, ecommerce, online shop, website templates, CSS, HTML" />
+    <meta name="description" content="Shoes Store is a free ecommerce template provided by templatemo.com" />
+    <link href="@Url.Content(_Template_Path + "css/templatemo_style.css")" rel="stylesheet" type="text/css" />
 
-<link rel="stylesheet" href="@Url.Content(_Template_Path+"css/nivo-slider.css")" type="text/css" media="screen" />
+    <link rel="stylesheet" href="@Url.Content(_Template_Path + "css/nivo-slider.css")" type="text/css" media="screen" />
 
-<link rel="stylesheet" type="text/css" href="@Url.Content(_Template_Path+"css/ddsmoothmenu.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content(_Template_Path + "css/ddsmoothmenu.css")" />
 
-<script type="text/javascript" src="@Url.Content(_Template_Path+"js/jquery.min.js")"></script>
-<script type="text/javascript" src="@Url.Content(_Template_Path+"js/ddsmoothmenu.js")">
+    <script type="text/javascript" src="@Url.Content(_Template_Path + "js/jquery.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content(_Template_Path + "js/ddsmoothmenu.js")">
 
 /***********************************************
 * Smooth Navigational Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
@@ -29,180 +29,220 @@
 * Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
 ***********************************************/
             
-</script>
+    </script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    ddsmoothmenu.init({
-        mainmenuid: "top_nav", //menu DIV id
-        orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
-        classname: 'ddsmoothmenu', //class added to menu's outer DIV
-        //customtheme: ["#1c5a80", "#18374a"],
-        contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
-    })
-    var current_id = "1";
-</script>
-    
-<script type="text/javascript" src="@Url.Content(_Template_Path+"/jquery-1-4-2.min.js")"></script> 
-<link rel="stylesheet" href="@Url.Content(_Template_Path+"css/slimbox2.css")" type="text/css" media="screen" /> 
-<script type="text/JavaScript" src="@Url.Content(_Template_Path+"js/slimbox2.js")"></script> 
+        ddsmoothmenu.init({
+            mainmenuid: "top_nav", //menu DIV id
+            orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+            classname: 'ddsmoothmenu', //class added to menu's outer DIV
+            //customtheme: ["#1c5a80", "#18374a"],
+            contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+        })
+        var current_id = "1";
+    </script>
 
+    <script type="text/javascript" src="@Url.Content(_Template_Path + "/jquery-1-4-2.min.js")"></script>
+    <link rel="stylesheet" href="@Url.Content(_Template_Path + "css/slimbox2.css")" type="text/css" media="screen" />
+    <script type="text/JavaScript" src="@Url.Content(_Template_Path + "js/slimbox2.js")"></script>
+    <!-- qd confirm when click delete -->
+    <script type="text/javascript">
+        function qd_confirm(link) {
+            if (confirm("Bạn có chắc muốn thực hiện tác vụ!")) {
+                document.location = link;
+            }
+            else {
+                //nothing
+            }
+        }
+        function qd_confirm_boolean() {
+            if (confirm("Bạn có chắc muốn thực hiện tác vụ!")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
 
 </head>
 
 <body>
 
-<div id="templatemo_body_wrapper">
-<div id="templatemo_wrapper">
+    <div id="templatemo_body_wrapper">
+        <div id="templatemo_wrapper">
 
-	<div id="templatemo_header">
-    	<div id="site_title"><h1><a href="@Url.Action("Index","FrontHome")">Cửa hàng giày dép</a></h1></div>
-        <div id="header_right">
-        	<p>
-	        
-                @if(khachhang!=null)
-                {
-                     @:<a href="#">Chào, @khachhang.tendaydu </a> |
-                     @:<a href="@Url.Action("Index", "FrontKhachHang")">Quản lý tài khoản cá nhân</a> |
-                    @:<a href="@Url.Action("Logout","FrontLogin")">Đăng xuất</a>
+            <div id="templatemo_header">
+                <div id="site_title">
+                    <h1><a href="@Url.Action("Index", "FrontHome")">Cửa hàng giày dép</a></h1>
+                </div>
+                <div id="header_right">
+                    <p>
+
+                        @if (khachhang != null)
+                        {
+                            @:<a href="#">Chào, @khachhang.tendaydu </a> |
+                            @:<a href="@Url.Action("Index", "FrontKhachHang")">Quản lý tài khoản cá nhân</a> |
+                            @:<a href="@Url.Action("Logout", "FrontLogin")">Đăng xuất</a>
                  }
-                else if(nhanvien!=null)
-                {
-                      @:<a href="#">Chào, @nhanvien.tendaydu </a> |
-                      @:<a href="@Url.Action("Index", "AdminUser", new { id=nhanvien.id })">Quản lý tài khoản cá nhân</a> |
-                      @:<a href="@Url.Action("Logout","AdminLogin")">Đăng xuất</a>
+                        else if (nhanvien != null)
+                        {
+                            @:<a href="#">Chào, @nhanvien.tendaydu </a> |
+                            @:<a href="@Url.Action("Index", "AdminUser", new { id = nhanvien.id })">Quản lý tài khoản cá nhân</a> |
+                            @:<a href="@Url.Action("Logout", "AdminLogin")">Đăng xuất</a>
                 }
-                else
-                { 
-                    @:<a href="@Url.Action("Index","FrontRegister")">Đăng kí</a> |
-                    @:<a href="@Url.Action("Index","FrontLogin")">Đăng nhập</a>
+                        else
+                        { 
+                            @:<a href="@Url.Action("Index", "FrontRegister")">Đăng kí</a> |
+                            @:<a href="@Url.Action("Index", "FrontLogin")">Đăng nhập</a>
                 }
-            </p>
-            <p>
-            	Giỏ hàng hiện có: <strong>@giohang.ds_chitiet_donhang.Count sản phẩm</strong> ( <a href="@Url.Action("Index","FrontCart")">Xem giỏ hàng</a> | <a href="@Url.Action("CheckOut","FrontCart")">Thanh toán</a> )
-			</p>
-		</div>
-        <div class="cleaner"></div>
-    </div> <!-- END of templatemo_header -->
-    
-    <div id="templatemo_menubar">
-    	<div id="top_nav" class="ddsmoothmenu">
-            <ul>
-                <li><a href="@Url.Action("Index", "FrontHome")" @if(ViewBag.id==1) {<text>class="selected"</text>}>Trang chủ</a></li>
-                <li><a href="@Url.Action("Index", "FrontSanPham", new {id_loaisp=0, level_loaisp=0})" @if(ViewBag.id==2) {<text>class="selected"</text>}>Sản phẩm</a>
-                    <ul>
-                         @{
-                        for(int i=0;i<NhomSanPham2_List_All.Count;i++)
-                        {
-                            var item = NhomSanPham2_List_All[i];
-                            String pre="";
-                            for(int j=0;j<item.level;j++)
-                            {
-                                pre = "--" + pre;
-                            }
-                             <li><a href="@Url.Action("Index", "FrontSanPham", new {id_loaisp=item.id, level_loaisp=item.level})">@pre @item.ten</a></li>
-                        }
-                         
-                        }
-                    	
-                  </ul>
-                </li>
-                <li><a href="about.html" @if(ViewBag.id==3) {<text>class="selected"</text>}>Giới thiệu</a>
-                </li>
-                <li><a href="faqs.html" @if(ViewBag.id==4) {<text>class="selected"</text>}>Tìm kiếm</a></li>
-                <li><a href="checkout.html" @if(ViewBag.id==5) {<text>class="selected"</text>}>Phản hồi</a></li>
-                <li><a href="contact.html" @if(ViewBag.id==6) {<text>class="selected"</text>}>Liên hệ</a></li>
-            </ul>
-            <br style="clear: left" />
-        </div> <!-- end of ddsmoothmenu -->
-        <div id="templatemo_search">
-            <form action="@Url.Action("Submit","FrontTimKiem")" method="post">
-              <input type="text" value="Nhập từ khóa tìm kiếm" name="front_sanpham_ten" id="keyword" title="keyword" onfocus="clearText(this)" onclick="this.value = '';" onblur="this.value=!this.value?'Nhập từ khóa tìm kiếm':this.value;" class="txt_field" />
-              <input type="hidden" value="@front_timkiem_sanpham["front_max_item_per_page"]" name="front_sanpham_max_item_per_page" />
-              <input type="hidden" value="@front_timkiem_sanpham["front_gia_from"]" name="front_sanpham_gia_from" />
-              <input type="hidden" value="@front_timkiem_sanpham["front_gia_to"]" name="front_sanpham_gia_to" />
-              <input type="hidden" value="@front_timkiem_sanpham["front_nhomsanpham_id"]" name="front_sanpham_nhomsanpham_id" />
-              <input type="hidden" value="@front_timkiem_sanpham["front_hangsx_ten"]" name="front_sanpham_hangsx_ten" />
-              <input type="hidden" value="@front_timkiem_sanpham["front_orderby"]" name="front_sanpham_orderby" />
-              <input type="hidden" value="@front_timkiem_sanpham["front_desc"]" name="front_sanpham_desc" />
-              <input type="submit" name="Search" value="" alt="Search" id="searchbutton" title="Search" class="sub_btn"  />
-            </form>
-        </div>
-    </div> <!-- END of templatemo_menubar -->
-    
-    <div id="templatemo_main">
-    	<div id="sidebar" class="float_l">
-        	<div class="sidebar_box"><span class="bottom"></span>
-            	<h3>Danh mục sản phẩm</h3>   
-                <div class="content"> 
-                	<ul class="sidebar_list">
-                        @{
-                        for(int i=0;i<NhomSanPham2_List_All.Count;i++)
-                        {
-                            var item = NhomSanPham2_List_All[i];
-                            String pre=">";
-                            if (item.level == 0) { pre = ""; }
-                            else if (item.level==1) {pre="->";}
-                            else{
-                            for(int j=0;j<item.level;j++)
-                            {
-                                pre = "--" + pre;
-                            }}
-                            if(i==0)
-                            {
-                           <li class="first"><a href="@Url.Action("Index", "FrontSanPham", new {id_loaisp=item.id, level_loaisp=item.level})">@pre @item.ten</a></li>
-                        }
-                        else if(i==NhomSanPham2_List_All.Count-1)
-                        {
-                             <li class="last"><a href="@Url.Action("Index", "FrontSanPham", new {id_loaisp=item.id, level_loaisp=item.level})">@pre @item.ten</a></li>
-                        }
-                        else{
-                             <li><a href="@Url.Action("Index", "FrontSanPham", new {id_loaisp=item.id, level_loaisp=item.level})">@pre @item.ten</a></li>
-                        }
-                        }
-                         
-                        }
-                    	
-                    </ul>
+                    </p>
+                    <p>
+                        Giỏ hàng hiện có: <strong>@giohang.ds_chitiet_donhang.Count sản phẩm</strong> ( <a href="@Url.Action("Index", "FrontCart")">Xem giỏ hàng</a> | <a href="@Url.Action("CheckOut", "FrontCart")">Thanh toán</a> )
+                    </p>
                 </div>
-            </div>
-            <div class="sidebar_box"><span class="bottom"></span>
-            	<h3><a class="sidebar_box_icon" href="http://fr.onlyimage.com" title="Cliquez ici"  ><img src="@Url.Content(_Template_Path+"images/templatemo_sidebar_header.png")" alt="Cliquez ici from fr.onlyimage.com" title="Cliquez ici" /></a>Sản phẩm bán chạy </h3>   
-                <div class="content">
-                    @{ 
-                        foreach(var item in SanPham_BestSeller)
-                        {
-                	        <div class="bs_box">
-                    	    <a href="@Url.Action("Index","FrontSanPhamDetail",new { id = item.id})"><img src="@Url.Content("~/_Upload/HinhAnh/"+item._get_hinhanh_macdinh().duongdan_thumb)" alt="image" style="max-width:60px; max-height:60px" /></a>
-                            <h4><a href="@Url.Action("Index","FrontSanPhamDetail",new { id = item.id})">@item.ten</a></h4>
-                            <p class="price">@item.gia đ</p>
-                            <div class="cleaner"></div>
-                            </div>
-                        }
-                    }
-                    
-                </div>
-            </div>
-        </div>
-        @RenderBody()
                 <div class="cleaner"></div>
-</div>
-      <!-- END of templatemo_main -->
-    
-    <div id="templatemo_footer">
-    	<p><a href="#">Trang chủ</a> | <a href="#">Sản phẩm</a> | <a href="#">Giới thiệu</a> | <a href="#">Tìm kiếm</a> | <a href="#">Phản hồi</a> | <a href="#">Liên hệ</a>
-		</p>
+            </div>
+            <!-- END of templatemo_header -->
 
-    	Copyright © 2013 <a href="#">kienkimkhung Corp.</a> | <a href="http://www.templatemo.com/preview/templatemo_367_shoes">Special thanks</a> to <a href="http://www.templatemo.com" target="_parent" title="free css templates">templatemo</a>
-    </div> <!-- END of templatemo_footer -->
-    
-</div> <!-- END of templatemo_wrapper -->
-</div> <!-- END of templatemo_body_wrapper -->
+            <div id="templatemo_menubar">
+                <div id="top_nav" class="ddsmoothmenu">
+                    <ul>
+                        <li><a href="@Url.Action("Index", "FrontHome")" @if (ViewBag.id == 1)
+                                                                        {<text>class="selected"</text>}>Trang chủ</a></li>
+                        <li><a href="@Url.Action("Index", "FrontSanPham", new { id_loaisp = 0, level_loaisp = 0 })" @if (ViewBag.id == 2)
+                                                                                                              {<text>class="selected"</text>}>Sản phẩm</a>
+                            <ul>
+                                @{
+                                    for (int i = 0; i < NhomSanPham2_List_All.Count; i++)
+                                    {
+                                        var item = NhomSanPham2_List_All[i];
+                                        String pre = "";
+                                        for (int j = 0; j < item.level; j++)
+                                        {
+                                            pre = "--" + pre;
+                                        }
+                                    <li><a href="@Url.Action("Index", "FrontSanPham", new { id_loaisp = item.id, level_loaisp = item.level })">@pre @item.ten</a></li>
+                                    }
+                         
+                                }
+
+                            </ul>
+                        </li>
+                        <li><a href="about.html" @if (ViewBag.id == 3)
+                                                 {<text>class="selected"</text>}>Giới thiệu</a>
+                        </li>
+                        <li><a href="faqs.html" @if (ViewBag.id == 4)
+                                                {<text>class="selected"</text>}>Tìm kiếm</a></li>
+                        <li><a href="checkout.html" @if (ViewBag.id == 5)
+                                                    {<text>class="selected"</text>}>Phản hồi</a></li>
+                        <li><a href="contact.html" @if (ViewBag.id == 6)
+                                                   {<text>class="selected"</text>}>Liên hệ</a></li>
+                    </ul>
+                    <br style="clear: left" />
+                </div>
+                <!-- end of ddsmoothmenu -->
+                <div id="templatemo_search">
+                    <form action="@Url.Action("Submit", "FrontTimKiem")" method="post">
+                        <input type="text" value="Nhập từ khóa tìm kiếm" name="front_sanpham_ten" id="keyword" title="keyword" onfocus="clearText(this)" onclick="this.value = '';" onblur="this.value=!this.value?'Nhập từ khóa tìm kiếm':this.value;" class="txt_field" />
+                        <input type="hidden" value="@front_timkiem_sanpham["front_max_item_per_page"]" name="front_sanpham_max_item_per_page" />
+                        <input type="hidden" value="@front_timkiem_sanpham["front_gia_from"]" name="front_sanpham_gia_from" />
+                        <input type="hidden" value="@front_timkiem_sanpham["front_gia_to"]" name="front_sanpham_gia_to" />
+                        <input type="hidden" value="@front_timkiem_sanpham["front_nhomsanpham_id"]" name="front_sanpham_nhomsanpham_id" />
+                        <input type="hidden" value="@front_timkiem_sanpham["front_hangsx_ten"]" name="front_sanpham_hangsx_ten" />
+                        <input type="hidden" value="@front_timkiem_sanpham["front_orderby"]" name="front_sanpham_orderby" />
+                        <input type="hidden" value="@front_timkiem_sanpham["front_desc"]" name="front_sanpham_desc" />
+                        <input type="submit" name="Search" value="" alt="Search" id="searchbutton" title="Search" class="sub_btn" />
+                    </form>
+                </div>
+            </div>
+            <!-- END of templatemo_menubar -->
+
+            <div id="templatemo_main">
+                <div id="sidebar" class="float_l">
+                    <div class="sidebar_box">
+                        <span class="bottom"></span>
+                        <h3>Danh mục sản phẩm</h3>
+                        <div class="content">
+                            <ul class="sidebar_list">
+                                @{
+                                    for (int i = 0; i < NhomSanPham2_List_All.Count; i++)
+                                    {
+                                        var item = NhomSanPham2_List_All[i];
+                                        String pre = ">";
+                                        if (item.level == 0) { pre = ""; }
+                                        else if (item.level == 1) { pre = "->"; }
+                                        else
+                                        {
+                                            for (int j = 0; j < item.level; j++)
+                                            {
+                                                pre = "--" + pre;
+                                            }
+                                        }
+                                        if (i == 0)
+                                        {
+                                    <li class="first"><a href="@Url.Action("Index", "FrontSanPham", new { id_loaisp = item.id, level_loaisp = item.level })">@pre @item.ten</a></li>
+                                        }
+                                        else if (i == NhomSanPham2_List_All.Count - 1)
+                                        {
+                                    <li class="last"><a href="@Url.Action("Index", "FrontSanPham", new { id_loaisp = item.id, level_loaisp = item.level })">@pre @item.ten</a></li>
+                                        }
+                                        else
+                                        {
+                                    <li><a href="@Url.Action("Index", "FrontSanPham", new { id_loaisp = item.id, level_loaisp = item.level })">@pre @item.ten</a></li>
+                                        }
+                                    }
+                         
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sidebar_box">
+                        <span class="bottom"></span>
+                        <h3><a class="sidebar_box_icon" href="http://fr.onlyimage.com" title="Cliquez ici">
+                            <img src="@Url.Content(_Template_Path + "images/templatemo_sidebar_header.png")" alt="Cliquez ici from fr.onlyimage.com" title="Cliquez ici" /></a>Sản phẩm bán chạy </h3>
+                        <div class="content">
+                            @{ 
+                                foreach (var item in SanPham_BestSeller)
+                                {
+                                <div class="bs_box">
+                                    <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })">
+                                        <img src="@Url.Content("~/_Upload/HinhAnh/" + item._get_hinhanh_macdinh().duongdan_thumb)" alt="image" style="max-width:60px; max-height:60px" /></a>
+                                    <h4><a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })">@item.ten</a></h4>
+                                    <p class="price">@item.gia đ</p>
+                                    <div class="cleaner"></div>
+                                </div>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                @RenderBody()
+                <div class="cleaner"></div>
+            </div>
+            <!-- END of templatemo_main -->
+
+            <div id="templatemo_footer">
+                <p>
+                    <a href="#">Trang chủ</a> | <a href="#">Sản phẩm</a> | <a href="#">Giới thiệu</a> | <a href="#">Tìm kiếm</a> | <a href="#">Phản hồi</a> | <a href="#">Liên hệ</a>
+                </p>
+
+                Copyright © 2013 <a href="#">kienkimkhung Corp.</a> | <a href="http://www.templatemo.com/preview/templatemo_367_shoes">Special thanks</a> to <a href="http://www.templatemo.com" target="_parent" title="free css templates">templatemo</a>
+            </div>
+            <!-- END of templatemo_footer -->
+
+        </div>
+        <!-- END of templatemo_wrapper -->
+    </div>
+    <!-- END of templatemo_body_wrapper -->
 
 
-<script type='text/javascript' src='@Url.Content(_Template_Path+"js/logging.js")'>
-</script>
-    
+    <script type='text/javascript' src='@Url.Content(_Template_Path + "js/logging.js")'>
+    </script>
+
 </body>
 
 </html>

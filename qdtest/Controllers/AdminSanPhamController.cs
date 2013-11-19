@@ -1,5 +1,4 @@
-﻿using CuaHangBanGiay.Controllers;
-using qdtest._Library;
+﻿using qdtest._Library;
 using qdtest.Controllers.ModelController;
 using qdtest.Models;
 using System;

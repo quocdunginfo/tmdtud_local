@@ -130,6 +130,7 @@
     <Compile Include="Controllers\FrontSanPhamController.cs" />
     <Compile Include="Controllers\FrontSanPhamDetailController.cs" />
     <Compile Include="Controllers\FrontTimKiemController.cs" />
+    <Compile Include="Controllers\ModelController\TinhTPController.cs" />
     <Compile Include="Controllers\ModelController\DonHangController.cs" />
     <Compile Include="Controllers\ModelController\QuyenController.cs" />
     <Compile Include="Controllers\ModelController\HangSXController.cs" />
@@ -3191,6 +3192,7 @@
     <Content Include="Content\front\images\bullets.png" />
     <Content Include="Content\front\images\closelabel.gif" />
     <Content Include="Content\front\images\loading.gif" />
+    <Content Include="Content\front\images\login.png" />
     <Content Include="Content\front\images\menu-outline.gif" />
     <Content Include="Content\front\images\nextlabel.gif" />
     <Content Include="Content\front\images\paypal.gif" />
@@ -3211,6 +3213,8 @@
     <Content Include="Content\front\images\product\Hình ảnh0259.jpg" />
     <Content Include="Content\front\images\product\ss %2816%29.JPG" />
     <Content Include="Content\front\images\product\Ảnh-0A.jpg" />
+    <Content Include="Content\front\images\refresh.png" />
+    <Content Include="Content\front\images\register.png" />
     <Content Include="Content\front\images\remove_x.gif" />
     <Content Include="Content\front\images\slider\01.jpg" />
     <Content Include="Content\front\images\slider\02.jpg" />
@@ -3504,6 +3508,9 @@
     <Content Include="Views\FrontKhachHang\Index.cshtml" />
     <Content Include="Views\FrontCart\Index.cshtml" />
     <Content Include="Views\FrontRegister\Index.cshtml" />
+    <Content Include="Views\FrontCart\CheckOut.cshtml" />
+    <Content Include="Views\FrontCart\Confirm.cshtml" />
+    <Content Include="Views\FrontCart\Login_Or_Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

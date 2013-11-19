@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace qdtest.Controllers.ModelController
 {
-    public class NhomSanPhamController : Controller
+    public class NhomSanPhamController
     {
         public BanGiayDBContext _db = new BanGiayDBContext();
         public NhomSanPhamController()

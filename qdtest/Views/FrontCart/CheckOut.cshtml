@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Trang chủ - CheckOut - Thông tin người nhận";
+    Layout = "~/Views/Shared/_FrontLayout.cshtml";
+    var State = (List<String>)ViewBag.State;
+    var giohang = (qdtest.Models.DonHang)ViewBag.giohang;
+    var tinhtp_list = (List<qdtest.Models.TinhTP>)ViewBag.tinhtp_list;
+}
+<div id="content" class="float_r">
+    <h1>Thông tin người nhận hàng</h1>
+    <div class="content_half float_l" style="width:auto">
+        <p></p>
+        <div id="contact_form" style="width:auto">
+            <form method="post" name="contact" action="@Url.Action("CheckOut_Submit","FrontCart")">
+
+                <label style="width:auto">Họ và tên:</label>
+                <input type="text" name="nguoinhan_ten" class="required input_field" value="@giohang.nguoinhan_ten" style="float:left">
+                <sup style="color:red; float:left" >*</sup>
+                <span style="color:red; float:left">
+                    @if (State.Contains("ten_fail"))
+                    {
+                        @:Họ và tên không hợp lệ
+                    }
+                </span>
+                <div class="cleaner h10"></div>
+
+                <label style="width:auto">Số điện thoại:</label>
+                <input type="text" name="nguoinhan_sdt" class="input_field" value="@giohang.nguoinhan_sdt" style="float:left">
+                <sup style="color:red; float:left" >*</sup>
+                <span style="color:red; float:left">
+                    @if (State.Contains("sdt_fail"))
+                    {
+                        @:Số điện thoại không hợp lệ
+                    }
+                </span>
+                <div class="cleaner h10"></div>
+
+                <label style="width:auto">Địa chỉ:</label>
+                <input type="text" name="nguoinhan_diachi" class="input_field" value="@giohang.nguoinhan_diachi" style="float:left">
+                <sup style="color:red; float:left" >*</sup>
+                <span style="color:red; float:left">
+                    @if (State.Contains("diachi_fail"))
+                    {
+                        @:Địa chỉ không hợp lệ
+                    }
+                </span>
+                <div class="cleaner h10"></div>
+                <label style="width:auto">Tỉnh/Thành Phố (tính phí vận chuyển):</label>
+                <select name="nguoinhan_tinhtp_id">
+                    @foreach(var item in tinhtp_list)
+                    {
+                    <option @if(item.id==giohang.nguoinhan_diachi_tinhtp.id) {<text>selected="selected"</text>} value="@item.id">@item.ten (@qdtest._Library.TextLibrary.ToCommaStringNumber( item.phivanchuyen) VNĐ)</option>
+                    }
+                </select>
+                <div class="cleaner h10"></div>
+                <label style="width:auto">Hình thức thanh toán</label>
+                <select name="thanhtoan_tructuyen">
+                   <option @if(giohang.thanhtoan_tructuyen) {<text>selected="selected"</text>} value="1">Thanh toán trực tuyến qua OnePay</option>
+                    <option @if(!giohang.thanhtoan_tructuyen) {<text>selected="selected"</text>} value="0">Thanh toán tại nhà</option>
+                </select>
+
+                <div class="cleaner h10"></div>
+                <input type="submit" class="submit_btn" name="submit" id="submit" value="Đăng ký">
+            </form>
+        </div>
+    </div>
+
+    <div class="cleaner h40"></div>
+
+
+
+</div>

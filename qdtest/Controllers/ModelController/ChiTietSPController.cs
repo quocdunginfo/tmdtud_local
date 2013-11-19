@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using qdtest._Library;
 using qdtest.Models;
 
-namespace CuaHangBanGiay.Controllers
+namespace qdtest.Controllers.ModelController
 {
-    public class ChiTietSPController : Controller
+    public class ChiTietSPController
     {
         //
         // GET: /SanPham_Tag/
@@ -116,6 +116,7 @@ namespace CuaHangBanGiay.Controllers
             //FINAL return
             return list;
         
-    }
+        }
+        
     }
 }

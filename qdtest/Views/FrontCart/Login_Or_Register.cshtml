@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Trang chủ - giỏ hàng - lựa chọn";
+    Layout = "~/Views/Shared/_FrontLayout.cshtml";
+}
+<div id="content" class="float_r">
+    <h2>Yêu cầu thanh toán</h2>
+    <div class="content_half float_l" style="width:auto">
+        <h3 style="line-height:normal">Chức năng thanh toán giỏ hàng chỉ cung cấp cho khách hàng đã đăng nhập hệ thống</h3>
+        <br />
+        <h3>
+        <a href="@Url.Action("Index","FrontLogin")">
+            <img src="@Url.Content("~/Content/front/images/login.png")" />
+                Đăng nhập bằng tài khoản có sẵn
+                
+            </a>
+        </h3>
+        <h3>
+            <a href="@Url.Action("Index","FrontRegister")">
+            <img src="@Url.Content("~/Content/front/images/register.png")" />
+                hoặc đăng ký mới ngay bây giờ
+            </a>
+        </h3>
+       
+        
+    </div>
+
+    <div class="cleaner h40"></div>
+</div>

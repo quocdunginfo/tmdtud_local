@@ -47,6 +47,13 @@ namespace qdtest.Controllers
                     //set session
                     Session["khachhang"] = obj;
                 }
+                //nếu được dẫn link từ FrontCart.CheckOut thì quay lại checkOut
+                if (Session["link_after_login"] != null)
+                {
+                    string url_to = (string)Session["link_after_login"];
+                    Session["link_after_login"] = null;
+                    return Redirect(url_to);
+                }
                 //redirect
                 return RedirectToAction("Index", "FrontHome");
             }
@@ -58,6 +65,7 @@ namespace qdtest.Controllers
         {
             //destroy session
             Session["khachhang"] = null;
+            Session["link_after_login"] = null;
             //renew cookies for khachhang
             HttpCookie _tmp = new HttpCookie("khachhang");
             _tmp.Expires = DateTime.Now.AddDays(-1);

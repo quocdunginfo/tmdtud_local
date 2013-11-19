@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using CuaHangBanGiay.Controllers;
+using qdtest.Controllers.ModelController;
 using qdtest.Models;
 using qdtest._Library;
 using System.Drawing;
 using System.IO;
 using System.Diagnostics;
-using qdtest.Controllers.ModelController;
 
-namespace CuaHangBanGiay.Controllers
+namespace qdtest.Controllers.ModelController
 {
-    public class HinhAnhController : Controller
+    public class HinhAnhController
     {
         //
         // GET: /HinhAnh/

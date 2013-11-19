@@ -146,9 +146,63 @@ namespace qdtest.Controllers.ModelController
             //FINAL return
             return obj_list;
         }
-        public List<String> validate(DonHang obj)
+        public List<string> validate_checkout(DonHang giohang, out DonHang giohang_return)
         {
-            List<String> re = new List<string>();
+            List<string> re = new List<string>();
+            if (giohang.nguoinhan_ten.Equals(""))
+            {
+                re.Add("ten_fail");
+            }
+            if (giohang.nguoinhan_sdt.Equals(""))
+            {
+                re.Add("sdt_fail");
+            }
+            if (giohang.nguoinhan_diachi.Equals(""))
+            {
+                re.Add("diachi_fail");
+            }
+            if (giohang.nguoinhan_diachi_tinhtp == null)
+            {
+                re.Add("tinhtp_fail");
+                giohang.nguoinhan_diachi_tinhtp = this._db.ds_tinhtp.FirstOrDefault();
+            }
+            giohang_return = giohang;
+            return re;
+        }
+        public List<string> validate(DonHang giohang, out DonHang giohang_return)
+        {
+            //
+            ChiTietSPController ctr = new ChiTietSPController(this._db);
+            //
+            List<string> re = new List<string>();
+            if (giohang.ds_chitiet_donhang.Count <= 0)
+            {
+                re.Add("rong_fail");
+            }
+            //xet soluong vuot qua ton kho hoac dat qua 3...
+            ChiTietSP tmp;
+            foreach (var item in giohang.ds_chitiet_donhang)
+            {
+                tmp = ctr.get_by_id(item.chitietsp.id);
+                if (item.soluong > 3)
+                {
+                    re.Add(item.chitietsp.id + "_vuot3_fail");
+                    item.soluong = 3;
+                }
+                if (item.soluong <= 0)
+                {
+                    re.Add(item.chitietsp.id + "_fail");
+                    item.soluong = 1;
+                }
+                //xet ton kho cuoi cung
+                if (tmp.soluong < item.soluong)
+                {
+                    re.Add(item.chitietsp.id + "_vuottonkho_fail");
+                    item.soluong = tmp.soluong;
+                }
+            }
+
+            giohang_return = giohang;
             return re;
         }
     }

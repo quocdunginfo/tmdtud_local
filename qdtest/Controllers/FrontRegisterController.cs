@@ -125,6 +125,14 @@ namespace qdtest.Controllers
                     obj.id = max_id;
                     //save to session
                     Session["khachhang"] = ctr.get_by_id(max_id);
+                    //đăng ký thành công
+                        //nếu được dẫn link từ FrontCart.CheckOut thì quay lại checkOut
+                        if (Session["link_after_login"] != null)
+                        {
+                            string url_to = (string)Session["link_after_login"];
+                            Session["link_after_login"] = null;
+                            return Redirect(url_to);
+                        }
                     return RedirectToAction("Index","FrontHome");
                 }
             //add and redirect or return error

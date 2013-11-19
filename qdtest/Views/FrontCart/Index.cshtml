@@ -2,10 +2,16 @@
     ViewBag.Title = "Trang chủ - Giỏ hàng";
     Layout = "~/Views/Shared/_FrontLayout.cshtml";
     var giohang = (qdtest.Models.DonHang)ViewBag.giohang;
+    var State = (List<String>)ViewBag.State;
 }
-
 <div id="content" class="float_r">
-    <h1>Shopping Cart</h1>
+    <h2>Giỏ hàng</h2>
+    @if(giohang.ds_chitiet_donhang.Count<=0)
+    {
+    <div style="color:red; font-size:14px; margin-bottom:10px;">
+        Chưa có sản phẩm nào trong giỏ hàng
+    </div>
+    }
     <table width="680px" cellspacing="0" cellpadding="5">
         <tbody>
             <tr bgcolor="#ddd">
@@ -18,10 +24,15 @@
                 <th width="40"></th>
 
             </tr>
-
+            <tr>
+                <td colspan="7">
+                    
+                </td>
+            </tr>
             @foreach(var item in giohang.ds_chitiet_donhang)
             {
-            <tr>
+            
+                <tr>
                 <td>
                     <img src="@item.chitietsp.sanpham._get_hinhanh_macdinh()._get_duongdan_thumb_url()" alt="image 3" style="max-width:100px; max-height:100px;">
                 </td>
@@ -44,16 +55,39 @@
 
                 </td>
                 <td align="center">
-                    <select style="width: 40px;">
-                        <option @if(item.soluong==1) {<text> selected="selected" </text>}>1</option>
-                        <option @if(item.soluong==2) {<text> selected="selected" </text>}>2</option>
-                        <option @if(item.soluong==3) {<text> selected="selected" </text>}>3</option>
-                    </select>
+                    <form id="qd_form_@{@item.id}" action="@Url.Action("Add_Or_Update")" method="post">
+                        <input type="hidden" value="@item.chitietsp.id" name="giohang_chitietsp_id" />
+                        <select name="giohang_soluong" style="width: 40px;" onchange="submit()">
+                            <option @if(item.soluong==1) {<text> selected="selected" </text>} value="1">1</option>
+                            <option @if(item.soluong==2) {<text> selected="selected" </text>} value="2">2</option>
+                            <option @if(item.soluong==3) {<text> selected="selected" </text>} value="3">3</option>
+                        </select>
+                        
+                    </form>
                 </td>
-                <td align="right">@item.dongia  </td>
+                <td align="right">@qdtest._Library.TextLibrary.ToCommaStringNumber( item.dongia )  </td>
                 <td align="right">@item._get_total() </td>
-                <td align="center"><a href="#">
-                    <img src="@Url.Content("~/Content/front/images/remove_x.gif")" alt="remove" style="width: 15px; height: 15px" title="Xóa khỏi giỏ hàng"></a>                </td>
+                <td align="center">
+                    <a href="javascript:qd_confirm( '@Url.Action("Remove", "FrontCart", new { chitietsp_id = item.chitietsp.id })' )">
+                    <img src="@Url.Content("~/Content/front/images/remove_x.gif")" alt="remove" style="width: 15px; height: 15px" title="Xóa khỏi giỏ hàng"></a>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7" style="color:red;">
+                    @if (State.Contains(item.chitietsp.id + "_vuottonkho_fail"))
+                    {
+                        @:Số lượng chọn vượt tồn kho hoặc sản phẩm đã hết hàng
+                    }
+                    else if (State.Contains(item.chitietsp.id + "_vuot3_fail"))
+                    {
+                        @:Số lượng tối đa được phép đặt trên 1 sản phẩm là 3
+                    }
+                    else if (State.Contains(item.chitietsp.id + "_fail"))
+                    {
+                        @:Số lượng không hợp lệ
+                    }
+                </td>
             </tr>
             }
             <tr>
@@ -66,8 +100,8 @@
     </table>
     <div style="float: right; width: 215px; margin-top: 20px;">
 
-        <p><a href="checkout.html">Thanh toán</a></p>
-        <p><a href="javascript:history.back()">Tiếp tục mua hàng</a></p>
+        <p><a href="@Url.Action("CheckOut","FrontCart")">Thanh toán</a></p>
+        <p><a href="@Url.Action("Index","FrontHome")">Tiếp tục mua hàng</a></p>
 
     </div>
 </div>
