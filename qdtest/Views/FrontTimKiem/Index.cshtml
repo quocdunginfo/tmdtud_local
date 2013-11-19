@@ -88,7 +88,7 @@
                         <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })"><h3>@item.ten</h3></a>
                         <p class="product_price">@item.gia đ</p>
                         var ctspid = 0;
-                        foreach (var k in item.ds_chitietsp)
+                        foreach (var k in item.ds_chitietsp.Where(x => x.active == true).ToList())
                         {
                             if (k.soluong > 0) { ctspid = k.id; break; }
                         }

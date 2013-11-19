@@ -5,17 +5,20 @@
 }
 <div id="content" class="float_r">
     <script type="text/javascript">
-        var ctsp_list = new Array();
-        @foreach(var item in sanpham.ds_chitietsp)
+        @if(sanpham.ds_chitietsp.Count>0){
+        @:var ctsp_list = new Array();
+        foreach(var item in sanpham.ds_chitietsp)
         {
+            if(item.active==true){
             @: var ctsp = new Object();
             @: ctsp.id_ctsp = "@item.id";
             @: ctsp.id_mausac = "@item.mausac.id";
             @: ctsp.id_kichthuoc = "@item.kichthuoc.id";
             @: ctsp.soluong = "@item.soluong";
             @: ctsp_list.push(ctsp);    
+            }
         }
-        var kichthuoc_list = new Array();        var mausac_list = new Array();        var mausac = new Object();        var kichthuoc = new Object();        var current_id = "";        var limit = 0;        function kim(s) {
+        @:var kichthuoc_list = new Array();        @:var mausac_list = new Array();        @:var mausac = new Object();        @:var kichthuoc = new Object();        @:var current_id = "";        @:var limit = 0;        }        function kim(s) {
             var id = "color" + s;
             if (current_id != "") {
                 //alert(document.getElementById(id).className);
@@ -204,7 +207,7 @@
                         <td class="kim_color">
                             @{
                               
-                                List<qdtest.Models.ChiTietSP> list = sanpham.ds_chitietsp.OrderBy(x => x.mausac.id).ToList();
+                                List<qdtest.Models.ChiTietSP> list = sanpham.ds_chitietsp.Where(x=>x.active==true).OrderBy(x => x.mausac.id).ToList();
                                 if(list.Count>0)
                                 {
                                 //String[] tmp=new String[list.GroupBy(x=>x.mausac.id).Count()];
@@ -372,7 +375,7 @@
                 <h3>@item.ten</h3>
                 <p class="product_price">@item.gia đ</p>
                 var ctspid = 0;
-                        foreach (var kt in item.ds_chitietsp)
+                        foreach (var kt in item.ds_chitietsp.Where(x=>x.active==true).ToList())
                         {
                             if (kt.soluong > 0) { ctspid = kt.id; break; }
                         }

@@ -82,6 +82,15 @@ namespace qdtest.Models
                             //will be saved when OBJ called savechanges
                         }
                     }
+                    if (this.active == true)
+                    {
+                        this.nhomsanpham.active = true;
+                        this.hangsx.active = true;
+                        foreach (var item in this.ds_chitietsp)
+                        {
+                            item.active = true;
+                        }
+                    }
                 }
                 catch (Exception)
                 {
@@ -177,7 +186,30 @@ namespace qdtest.Models
         [Key]
         public int id { get; set; }
         public int soluong { get; set; }
-        public Boolean active { get; set; }
+        private Boolean _active;
+        public Boolean active 
+        {
+            get
+            {
+                return this._active;
+            }
+            set
+            {
+                this._active = value;
+                try
+                {
+                    if (this.active == true)
+                    {
+                        this.mausac.active = true;
+                        this.kichthuoc.active = true;
+                        if(this.sanpham.active==false) this.sanpham.active = true;
+                    }
+                }
+                catch(Exception)
+                {
+                }
+            }
+        }
         //external
         public virtual List<ChiTiet_DonHang> ds_chitiet_donhang { get; set; }
         public virtual List<ChiTiet_NhapHang> ds_chitiet_nhaphang { get; set; }

@@ -21,7 +21,7 @@ namespace qdtest.Controllers
             SanPhamController ctr = new SanPhamController();
             SanPham sp = new SanPham();
             sp=ctr.get_by_id(id);
-            if (sp != null)
+            if (sp != null&&sp.active==true)
             {
                 ViewBag.Title = sp.ten;
                 ViewBag.SanPhamDetail = sp;
@@ -32,7 +32,7 @@ namespace qdtest.Controllers
                 else ViewBag.SanPhamRelate = new List<SanPham>();
                 return View();
             }
-            else return View("404");
+            else return View("Error");
         }
 
     }
