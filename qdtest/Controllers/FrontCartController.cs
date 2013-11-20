@@ -134,8 +134,9 @@ namespace qdtest.Controllers
             int ctsp_id = TextLibrary.ToInt(Request["giohang_chitietsp_id"]);
             //get soluong
             int soluong = TextLibrary.ToInt(Request["giohang_soluong"]);
-            
-            if (this._Add_Or_Update(ctsp_id, soluong, true))
+            //update from cart
+            Boolean update_from_cart = TextLibrary.ToBoolean(Request["update_from_cart"]);
+            if (this._Add_Or_Update(ctsp_id, soluong, update_from_cart))
             {
                 return RedirectToAction("Index", "FrontCart");
             }
