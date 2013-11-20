@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Liên hệ";
+    Layout = "~/Views/Shared/_FrontLayout.cshtml";
+    var State = (List<string>)ViewBag.State;
+    if (State == null) {State = new List<string>();}
+    var kh_info = (qdtest.Models.KhachHang)ViewBag.kh_info;
+    ViewBag.id = 6;
+}
+ <div id="content" class="float_r">
+        	<h1>Liên hệ</h1>
+            <div class="content_half float_l">
+                @{if(State.Contains("success"))
+                {
+                  <p ><strong>Phản hồi của bạn đã được gửi đến chúng tôi. Chúng tôi sẽ trả lời bạn trong thời gian sớm nhất! Xin cảm ơn đã quan tâm đến sản phẩm của <a href="../FrontHome/Index">BigFoot</a>.</strong></p>    
+                }else{
+                <p>Chúng tôi luôn quan tâm đến những góp ý, phản hồi từ Quý khách hàng để đem đến cho Quý khách hàng những sản phẩm và dịch vụ tốt nhất.</p>
+                <p>Xin quý khách vui lòng nhập thông tin vào các ô bên dưới và nhấn nút gửi. Chúng tôi sẽ trả lời trong thời gian sớm nhất!</p>
+                <div id="contact_form">
+                   <form method="post" name="contact" action="@Url.Action("Submit","FrontContact")">   
+                        <label for="author">Họ tên:</label> <input type="text" id="author" name="front_contact_author" class="required input_field" @if(kh_info!=null) {<text>value="@kh_info.tendaydu"</text>} /><sup style="color:red; float:right" >*</sup>
+                       <span style="color:red; float:left">
+                    @if (State.Contains("author_fail"))
+                    {
+                        @:Họ tên không được bỏ trống!
+                    }
+                </span>
+                        <div class="cleaner h10"></div>
+                        <label for="email">Email:</label> <input type="text" id="email" name="front_contact_email" class="validate-email required input_field" @if(kh_info!=null) {<text>value="@kh_info.email"</text>} /><sup style="color:red; float:right" >*</sup>
+                       <span style="color:red; float:left">
+                    @if (State.Contains("email_fail"))
+                    {
+                        @:Email không hợp lệ!
+                    }
+                </span>
+                        <div class="cleaner h10"></div>                        
+                        <label for="phone">Số điện thoại:</label> <input type="text" name="front_contact_phone" id="phone" class="input_field" @if(kh_info!=null) {<text>value="@kh_info.sdt"</text>} />
+                       <span style="color:red; float:left">
+                    @if (State.Contains("phone_fail"))
+                    {
+                        @:Số điện thoại không hợp lệ!
+                    }
+                </span>
+                        <div class="cleaner h10"></div>
+                        <label for="text">Nội dung thông điệp:</label> <textarea id="text" name="front_contact_text" rows="0" cols="0" class="required">@ViewBag.text</textarea><sup style="color:red; float:right" >*</sup>
+                        <span style="color:red; float:left">
+                    @if (State.Contains("text_fail"))
+                    {
+                        @:Nội dung không được bỏ trống!
+                    }
+                </span>
+                         <label for="khachhang_captcha">Câu hỏi bảo vệ:</label>
+                <img src="@Url.Action("CaptchaImage","FrontContact")" />
+                <br />
+                <input type="text" name="front_contact_captcha" class="input_field" style="width:110px; float:left" value="" > <sup style="color:red; float:left" >*</sup>
+                <br /><br /><span style="color:red; float:left">
+                    @if (State.Contains("captcha_fail"))
+                    {
+                        @:Câu trả lời không đúng!
+                    }
+                </span>
+                        <div class="cleaner h10"></div>
+                        
+                        <input type="submit" class="submit_btn" name="submit" id="submit" value="Gửi phản hồi" />
+                        
+                    </form>
+                </div>}
+}
+            </div>
+        <div class="content_half float_r">
+        	<h5>Địa chỉ cửa hàng BigFoot</h5>
+			273 An Dương Vương, phường 3 quận 5 <br />
+			Thành phố Hồ Chí Minh<br /><br />
+						
+			Phone: 0909090999<br />
+			Email: <a href="mailto:cuahangbantranh@gmail.com">cuahangbantranh@gmail.com</a><br/>		
+            <div class="cleaner h40"></div>     
+        </div>
+      <iframe width="680" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=vi&amp;geocode=&amp;q=273+an+d%C6%B0%C6%A1ng+v%C6%B0%C6%A1ng+ph%C6%B0%E1%BB%9Dng+3+qu%E1%BA%ADn+5&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=33.764224,75.673828&amp;ie=UTF8&amp;hq=&amp;hnear=273+An+D%C6%B0%C6%A1ng+V%C6%B0%C6%A1ng,+3,+H%E1%BB%93+Ch%C3%AD+Minh,+Vi%E1%BB%87t+Nam&amp;t=m&amp;ll=10.764846,106.680851&amp;spn=0.014756,0.029182&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=vi&amp;geocode=&amp;q=273+an+d%C6%B0%C6%A1ng+v%C6%B0%C6%A1ng+ph%C6%B0%E1%BB%9Dng+3+qu%E1%BA%ADn+5&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=33.764224,75.673828&amp;ie=UTF8&amp;hq=&amp;hnear=273+An+D%C6%B0%C6%A1ng+V%C6%B0%C6%A1ng,+3,+H%E1%BB%93+Ch%C3%AD+Minh,+Vi%E1%BB%87t+Nam&amp;t=m&amp;ll=10.764846,106.680851&amp;spn=0.014756,0.029182&amp;z=15&amp;iwloc=A" style="color:#0000FF;text-align:left">Xem Bản đồ cỡ lớn hơn</a></small>
+            
+        </div> 

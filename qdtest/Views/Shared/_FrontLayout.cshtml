@@ -94,7 +94,7 @@
                 }
                         else
                         { 
-                            @:<a href="@Url.Action("Index", "FrontRegister")">Đăng kí</a> |
+                            @:<a href="@Url.Action("Index", "FrontRegister")">Chưa có tài khoản? Hãy đăng kí ngay</a> |
                             @:<a href="@Url.Action("Index", "FrontLogin")">Đăng nhập</a>
                 }
                     </p>
@@ -133,11 +133,11 @@
                         <li><a href="about.html" @if (ViewBag.id == 3)
                                                  {<text>class="selected"</text>}>Giới thiệu</a>
                         </li>
-                        <li><a href="faqs.html" @if (ViewBag.id == 4)
+                        <li><a href="@Url.Action("Index", "FrontTimKiem")" @if (ViewBag.id == 4)
                                                 {<text>class="selected"</text>}>Tìm kiếm</a></li>
                         <li><a href="checkout.html" @if (ViewBag.id == 5)
                                                     {<text>class="selected"</text>}>Phản hồi</a></li>
-                        <li><a href="contact.html" @if (ViewBag.id == 6)
+                        <li><a href="@Url.Action("Index","FrontContact")" @if (ViewBag.id == 6)
                                                    {<text>class="selected"</text>}>Liên hệ</a></li>
                     </ul>
                     <br style="clear: left" />

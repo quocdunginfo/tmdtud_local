@@ -122,6 +122,7 @@
     <Compile Include="Controllers\AdminHangSXController.cs" />
     <Compile Include="Controllers\AdminHangSXsController.cs" />
     <Compile Include="Controllers\FrontCartController.cs" />
+    <Compile Include="Controllers\FrontContactController.cs" />
     <Compile Include="Controllers\FrontHomeController.cs" />
     <Compile Include="Controllers\FrontController.cs" />
     <Compile Include="Controllers\FrontKhachHangController.cs" />
@@ -3511,6 +3512,7 @@
     <Content Include="Views\FrontCart\CheckOut.cshtml" />
     <Content Include="Views\FrontCart\Confirm.cshtml" />
     <Content Include="Views\FrontCart\Login_Or_Register.cshtml" />
+    <Content Include="Views\FrontContact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

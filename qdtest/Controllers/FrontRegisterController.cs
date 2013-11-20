@@ -100,47 +100,48 @@ namespace qdtest.Controllers
             string email = TextLibrary.ToString(Request["khachhang_email"]);
             string captcha = TextLibrary.ToString(Request["khachhang_captcha"]);
             //pass to obj
-                KhachHang obj = new KhachHang();
-                obj.diachi = diachi;
-                obj.email = email;
-                obj.matkhau = matkhau;
-                obj.sdt = sdt;
-                obj.tendangnhap = tendangnhap;
-                obj.tendaydu = tendaydu;
-            
+            KhachHang obj = new KhachHang();
+            obj.diachi = diachi;
+            obj.email = email;
+            obj.matkhau = matkhau;
+            obj.sdt = sdt;
+            obj.tendangnhap = tendangnhap;
+            obj.tendaydu = tendaydu;
+
             //validate
             List<string> validate = new List<string>();
-                //xét captcha trước
-                if (!this.get_captcha_string().ToLower().Equals(captcha.ToLower()))
-                {
-                    validate.Add("captcha_fail");
-                }
-                //validate obj
-                validate.AddRange(ctr.validate(obj,matkhau2));
+            //xét captcha trước
+            if (!this.get_captcha_string().ToLower().Equals(captcha.ToLower()))
+            {
+                validate.Add("captcha_fail");
+            }
+            //validate obj
+            validate.AddRange(ctr.validate(obj, matkhau2));
             //check
-                if (validate.Count == 0)
+            if (validate.Count == 0)
+            {
+                //tiến hành thêm và gán session auto đăng nhập
+                int max_id = ctr.add(obj);
+                obj.id = max_id;
+                //save to session
+                Session["khachhang"] = ctr.get_by_id(max_id);
+                //đăng ký thành công
+                //nếu được dẫn link từ FrontCart.CheckOut thì quay lại checkOut
+                if (Session["link_after_login"] != null)
                 {
-                    //tiến hành thêm và gán session auto đăng nhập
-                    int max_id = ctr.add(obj);
-                    obj.id = max_id;
-                    //save to session
-                    Session["khachhang"] = ctr.get_by_id(max_id);
-                    //đăng ký thành công
-                        //nếu được dẫn link từ FrontCart.CheckOut thì quay lại checkOut
-                        if (Session["link_after_login"] != null)
-                        {
-                            string url_to = (string)Session["link_after_login"];
-                            Session["link_after_login"] = null;
-                            return Redirect(url_to);
-                        }
-                    return RedirectToAction("Index","FrontHome");
+                    string url_to = (string)Session["link_after_login"];
+                    Session["link_after_login"] = null;
+                    return Redirect(url_to);
                 }
+                return RedirectToAction("Index", "FrontHome");
+            }
             //add and redirect or return error
             
-            //set tmp validate
+           //set tmp validate
             ViewBag.State = validate;
             ViewBag.khachhang_register = obj;
-            return View("Index");
+           return View("Index");
+
         }
         [NonAction]
         protected string get_captcha_string()
