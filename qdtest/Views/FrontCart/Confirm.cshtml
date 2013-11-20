@@ -1,6 +1,124 @@
 ﻿@{
-    ViewBag.Title = "Confirm";
+    ViewBag.Title = "Trang chủ - Giỏ hàng - Xác nhận";
     Layout = "~/Views/Shared/_FrontLayout.cshtml";
+    var giohang = (qdtest.Models.DonHang)ViewBag.giohang;
+    var State = (List<string>)ViewBag.State;
 }
+<div id="content" class="float_r">
+    <h2>Xác nhận thông tin đơn hàng</h2>
+    <table width="680px" cellspacing="0" cellpadding="5">
+        <tbody>
+            <tr bgcolor="#ddd">
+                <th width="100" align="center">Hình ảnh</th>
+                <th width="150" align="center">Tên sản phẩm</th>
+                <th width="120" align="center">Thông tin</th>
+                <th width="80" align="center">Số lượng</th>
+                <th width="100" align="right">Đơn giá</th>
+                <th width="100" align="right">Tổng cộng</th>
+                <th width="40"></th>
 
-<h2>Confirm</h2>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    
+                </td>
+            </tr>
+            @foreach(var item in giohang.ds_chitiet_donhang)
+            {
+            
+                <tr>
+                <td>
+                    <img src="@item.chitietsp.sanpham._get_hinhanh_macdinh()._get_duongdan_thumb_url()" alt="image 3" style="max-width:100px; max-height:100px;">
+                </td>
+                <td align="center">
+                    @item.chitietsp.sanpham.ten
+                </td>
+                
+                <td align="center">
+                    <br>
+                    <div style="float: left; margin-left: 30px;">
+                        Màu:
+                    </div>
+                    <div style="width: 45px; height: 15px; background: @item.chitietsp.mausac.mamau ; float: left; margin-left: 5px; margin-right: 0px;"></div>
+                    <br>
+                    <div style="float: left; margin-left: 30px;">
+                        Kích thước: @item.chitietsp.kichthuoc.giatri
+                    </div>
+                    <div style="clear:both"></div>
+                    <br>
+
+                </td>
+                <td align="center">
+                    @item.soluong
+                </td>
+                <td align="right">@qdtest._Library.TextLibrary.ToCommaStringNumber( item.dongia )  </td>
+                <td align="right">@item._get_total() </td>
+                <td align="center">
+                    
+                    
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7" style="color:red;">
+                    @if (State.Contains(item.chitietsp.id + "_vuottonkho_fail"))
+                    {
+                        @:Số lượng chọn vượt tồn kho hoặc sản phẩm đã hết hàng
+                    }
+                    else if (State.Contains(item.chitietsp.id + "_vuot3_fail"))
+                    {
+                        @:Số lượng tối đa được phép đặt trên 1 sản phẩm là 3
+                    }
+                    else if (State.Contains(item.chitietsp.id + "_fail"))
+                    {
+                        @:Số lượng không hợp lệ
+                    }
+                </td>
+            </tr>
+            }
+            <tr>
+                <td colspan="3" align="right" height="30px"></td>
+                <td colspan="2" align="right" style="background: #ddd; font-weight: bold">Phí vận chuyển</td>
+                <td align="right" style="background: #ddd; font-weight: bold">@giohang._get_phivanchuyen() </td>
+                <td style="background: #ddd; font-weight: bold"></td>
+            </tr>
+            <tr>
+                <td colspan="3" align="right" height="30px"></td>
+                <td colspan="2" align="right" style="background: #ddd; font-weight: bold">Tổng tiền</td>
+                <td align="right" style="background: #ddd; font-weight: bold">@giohang._get_tongtien_include_phivanchuyen() </td>
+                <td style="background: #ddd; font-weight: bold"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="cleaner h40"></div>
+    <!-- thông tin người nhận -->
+    <div id="contact_form" style="width:auto">
+        <h4>Thông tin người nhận</h4>    
+        <form method="post" name="contact" action="#">
+
+                <label style="width:auto">Họ và tên:</label>
+                <input type="text" class="required input_field" value="@giohang.nguoinhan_ten" style="float:left; border:none;" readonly="readonly">
+                
+                <div class="cleaner h10"></div>
+
+                <label style="width:auto">Số điện thoại:</label>
+                <input type="text" class="input_field" value="@giohang.nguoinhan_sdt" style="float:left; border:none;" readonly="readonly">
+                
+                <div class="cleaner h10"></div>
+
+                <label style="width:auto">Địa chỉ:</label>
+                <input type="text" class="input_field" value="@giohang.nguoinhan_diachi" style="float:left; border:none;" readonly="readonly">
+                
+                <div class="cleaner h10"></div>
+                <label style="width:auto">Tỉnh/Thành Phố:</label>
+                 <input type="text" class="input_field" value="@giohang.nguoinhan_diachi_tinhtp.ten" style="float:left; border:none;" readonly="readonly">
+                <div class="cleaner h10"></div>
+                <label style="width:auto">Hình thức thanh toán</label>
+                <input type="text" class="input_field" value="@if(giohang.thanhtoan_tructuyen) {<text>Thanh toán trực tuyến qua OnePay</text>} else {<text>Thanh toán tại nhà</text>}" style="float:left; border:none;" readonly="readonly">
+                
+                <div class="cleaner h10"></div>
+               <input class="submit_btn" type="button" value="Hoàn tất đơn hàng" >
+            </form>
+        </div>
+    <button class="submit_btn"  value="Hoàn tất đơn hàng">Hoàn tất đơn hàng</button>
+    <div class="cleaner h40"></div>
+</div>

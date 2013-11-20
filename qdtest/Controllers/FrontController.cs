@@ -55,7 +55,7 @@ namespace qdtest.Controllers
                 {
                     this.front_timkiem_sanpham = CookieLibrary.Base64Decode(Request.Cookies.Get("front_timkiem_sanpham"));
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     this._khoitao_cookie();
                     this._luu_cookie();
@@ -90,7 +90,6 @@ namespace qdtest.Controllers
             //
             ViewBag.nhanvien = this._nhanvien;
             ViewBag.khachhang = this._khachhang;
-            
             //get cart
                 if (Session["giohang"] != null)
                 {
@@ -98,13 +97,21 @@ namespace qdtest.Controllers
                     {
                         this._giohang = (DonHang)Session["giohang"];
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         this._giohang = new DonHang();
                     }
                 }
+                else
+                {
+                    this._giohang = new DonHang();
+                }
+                //gán khach hang va nhan vien
+                this._giohang.khachhang = this._khachhang;
+                this._giohang.khachhang_nhanvien = this._nhanvien;
+                //save cart
                 this._save_cart_to_session();
-                ViewBag.giohang = this._giohang;
+            ViewBag.giohang = this._giohang;
         }
         [NonAction]
         protected void _luu_cookie()

@@ -135,43 +135,27 @@ namespace qdtest.Models
             }
         }
     }
-    public class Topic
-    {
-        public Topic()
-        {
-            this.ds_phanhoi = new List<PhanHoi>();
-            this.ten = "";
-            this.noidung = "";
-            this.ngay = DateTime.Now;
-        }
-        [Key]
-        public int id { get; set; }
-        public String ten { get; set; }
-        public String noidung { get; set; }
-        public DateTime ngay { get; set; }
-        public Boolean active { get; set; }
-        //external
-        public virtual KhachHang nguoitao { get; set; }
-        public virtual List<PhanHoi> ds_phanhoi { get; set; }
-    }
     public class PhanHoi
     {
         public PhanHoi()
         {
-            this.ten = "";
+            this.tieude = "";
             this.noidung = "";
             this.ngay = DateTime.Now;
+            this.active = true;
         }
         [Key]
         public int id { get; set; }
-        public String ten { get; set; }
+        public String tieude { get; set; }
         public String noidung { get; set; }
         public DateTime ngay { get; set; }
         public Boolean active { get; set; }
+        public string nguoigui_ten { get; set; }//dành cho người gửi chưa là KH
+        public string nguoigui_email { get; set; }//dành cho người gửi chưa là KH
+        public string nguoigui_sdt { get; set; }//dành cho người gửi chưa là KH
         //external
-        public virtual NhanVien nhanvien { get; set; }//Nhân viên gửi
-        public virtual KhachHang khachhang { get; set; }//Khách Hàng gửi
-        public virtual Topic topic { get; set; }//thuộc Topic nào
+        public virtual NhanVien nhanvien { get; set; }//Nhân viên duyệt phản hồi
+        public virtual KhachHang khachhang { get; set; }//Nếu là khách hàng gui
     }
     public class ChiTietSP
     {
@@ -470,6 +454,21 @@ namespace qdtest.Models
         public virtual NhapHang nhaphang { get; set; }
         public virtual ChiTietSP chitietsp { get; set; }
     }
+    public class ChiTiet_DonHang
+    {
+        [Key]
+        public int id { get; set; }
+        public int soluong { get; set; }
+        public int dongia { get; set; }
+        //external
+        public virtual DonHang donhang { get; set; }
+        public virtual ChiTietSP chitietsp { get; set; }
+        //method
+        public string _get_total()
+        {
+            return TextLibrary.ToCommaStringNumber(this.soluong * this.dongia);
+        }
+    }
     public class DonHang
     {
         public DonHang()
@@ -617,7 +616,7 @@ namespace qdtest.Models
             return helper.Action("Index", "AdminDonHang", new { id = this.id });
             
         }
-        private int __get_tongtien_notinclude_phivanchuyen()
+        public int __get_tongtien_notinclude_phivanchuyen()
         {
             int sum = 0;
             foreach (var item in this.ds_chitiet_donhang)
@@ -635,27 +634,74 @@ namespace qdtest.Models
             }
             return TextLibrary.ToCommaStringNumber(sum);
         }
+        public string _get_tongtien_include_phivanchuyen()
+        {
+            return TextLibrary.ToCommaStringNumber(this.__get_tongtien_notinclude_phivanchuyen()+this.phivanchuyen);
+        }
     }
-    public class ChiTiet_DonHang
+    
+    public class LoaiUuDai
     {
+        public LoaiUuDai()
+        {
+            this.id = 0;
+            this.ten = "";
+            this.active = true;
+            this.ds_uudai = new List<UuDai>();
+        }
         [Key]
         public int id { get; set; }
-        public int soluong { get; set; }
-        public int dongia { get; set; }
+        public Boolean active { get; set; }
+        public String ten { get; set; }
         //external
-        public virtual DonHang donhang { get; set; }
-        public virtual ChiTietSP chitietsp { get; set; }
-        //method
-        public string _get_total()
+        public virtual List<UuDai> ds_uudai { get; set; }
+    }
+    public class UuDai
+    {
+        public UuDai()
         {
-            return TextLibrary.ToCommaStringNumber(this.soluong * this.dongia);
+            this.id = 0;
+            this.ten = "";
+            this.noidung = "";
+            this.giatri = "";
+            this.active = true;
         }
+        [Key]
+        public int id { get; set; }
+        public string noidung { get; set; }
+        public string giatri { get; set; }
+        public Boolean active { get; set; }
+        public string ten { get; set; }
+        //external
+        public virtual LoaiUuDai loaiuudai { get; set; }
+        public virtual LoaiKhachHang loaikhachhang { get; set; }
+    }
+    public class LoaiKhachHang
+    {
+        public LoaiKhachHang()
+        {
+            this.id = 0;
+            this.ten = "";
+            this.mucdiem = 0;
+            this.active = true;
+            this.ds_uudai = new List<UuDai>();
+            this.ds_khachhang = new List<KhachHang>();
+        }
+        [Key]
+        public int id { get; set; }
+        public int mucdiem { get; set; }
+        public Boolean active { get; set; }
+        public String ten { get; set; }
+        //external
+        public virtual List<UuDai> ds_uudai { get; set; }
+        public virtual List<KhachHang> ds_khachhang { get; set; }
     }
     public class KhachHang
     {
         public KhachHang()
         {
             this.ds_donhang = new List<DonHang>();
+            this.ds_phanhoi = new List<PhanHoi>();
             this.tendangnhap = "";
             this.tendaydu = "";
             this.matkhau = "";
@@ -663,9 +709,11 @@ namespace qdtest.Models
             this.email = "";
             this.sdt = "";
             this.active = true;
+            this.diem = 0;
         }
         [Key]
         public int id { get; set; }
+        public int diem { get; set; }
         public String tendangnhap { get; set; }
         public String tendaydu { get; set; }
         public String matkhau { get; set; }
@@ -674,7 +722,14 @@ namespace qdtest.Models
         public String sdt { get; set; }
         public Boolean active { get; set; }
         //external
+        public virtual LoaiKhachHang loaikhachhang { get; set; }
         public virtual List<DonHang> ds_donhang { get; set; }
+        public virtual List<PhanHoi> ds_phanhoi { get; set; }
+
+        public Boolean _Update_LoaiKhachHang()
+        {
+            return true;
+        }
     }
     public class NhanVien
     {
@@ -704,6 +759,7 @@ namespace qdtest.Models
         public virtual List<DonHang> ds_donhang { get; set; }
         public virtual List<DonHang> ds_donhang_mua { get; set; }
         public virtual List<NhapHang> ds_nhaphang { get; set; }
+        public virtual List<PhanHoi> ds_phanhoi { get; set; }
         public virtual LoaiNhanVien loainhanvien { get; set; }
     }
     public class LoaiNhanVien
@@ -789,6 +845,10 @@ namespace qdtest.Models
         public DbSet<LoaiNhanVien> ds_loainhanvien { get; set; }
         public DbSet<Quyen> ds_quyen { get; set; }
         public DbSet<TinhTP> ds_tinhtp { get; set; }
+        public DbSet<PhanHoi> ds_phanhoi { get; set; }
+        public DbSet<LoaiKhachHang> ds_loaikhachhang { get; set; }
+        public DbSet<UuDai> ds_uudai { get; set; }
+        public DbSet<LoaiUuDai> ds_loaiuudai { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

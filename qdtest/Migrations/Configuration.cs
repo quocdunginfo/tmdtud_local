@@ -106,6 +106,18 @@
                         );
                 }
                 context.SaveChanges();
+            //Thêm loại khach hang
+            /*    
+            string[] loaikh = { "" };
+                foreach (string item in loaikh)
+                {
+                    LoaiKhachHang tmp = new LoaiKhachHang();
+                    context.ds_loaikh.AddOrUpdate(
+                                    q => q.ten,
+                                    tmp
+                                    );
+                }
+            */
         }
     }
 }

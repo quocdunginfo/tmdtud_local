@@ -116,7 +116,7 @@ namespace qdtest.Controllers
                 validate.Add("captcha_fail");
             }
             //validate obj
-            validate.AddRange(ctr.validate(obj, matkhau2));
+            validate.AddRange(ctr.validate(obj, matkhau, matkhau2));
             //check
             if (validate.Count == 0)
             {

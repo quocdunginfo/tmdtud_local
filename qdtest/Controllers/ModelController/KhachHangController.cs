@@ -172,7 +172,7 @@ namespace qdtest.Controllers.ModelController
             //FINAL return
             return obj_list;
         }
-        public List<string> validate(KhachHang obj, string matkhau2)
+        public List<string> validate(KhachHang obj, string matkhau, string matkhau2)
         {
             List<string> re = new List<string>();
             string[] forbiden = { "admin", "mod", "moderator", "administrator", "root", "super", "user"};
@@ -180,7 +180,7 @@ namespace qdtest.Controllers.ModelController
             {
                 re.Add("email_fail");
             }
-            if (obj.matkhau != matkhau2 || obj.matkhau.Equals(""))
+            if (matkhau != matkhau2 || matkhau.Equals(""))
             {
                 re.Add("matkhau_fail");
             }

@@ -3513,6 +3513,8 @@
     <Content Include="Views\FrontCart\Confirm.cshtml" />
     <Content Include="Views\FrontCart\Login_Or_Register.cshtml" />
     <Content Include="Views\FrontContact\Index.cshtml" />
+    <Content Include="Views\FrontCart\Online_Payment.cshtml" />
+    <Content Include="Views\FrontCart\Finish.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

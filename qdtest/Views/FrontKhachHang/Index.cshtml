@@ -1,6 +1,96 @@
 ﻿@{
-    ViewBag.Title = "Trang chủ - Khách Hàng";
+    ViewBag.Title = "Trang chủ - Tài khoản khách Hàng";
     Layout = "~/Views/Shared/_FrontLayout.cshtml";
+    var khachhang = (qdtest.Models.KhachHang)ViewBag.khachhang;
+    var State = (List<String>)ViewBag.State;
 }
+<div id="content" class="float_r">
+    <h2>Thông tin khách hàng</h2>
+    <h4 style="color:red">
+        @if (State.Contains("edit_ok"))
+        {
+            @:Thông tin đã được thay đổi thành công!
+        }
 
-<h2>Index</h2>
+    </h4>
+    <div class="content_half float_l" style="width:auto">        
+        <div id="contact_form" style="width:auto">
+            <form method="post" name="contact" action="@Url.Action("Submit","FrontKhachHang")">
+                <input type="hidden" value="@khachhang.id" name="khachhang_id">
+                <label for="author">Tên đăng nhập:</label>
+                <input type="text" class="required input_field" value="@khachhang.tendangnhap" style="float:left; border:none" readonly="readonly">
+                
+                <div class="cleaner h10"></div>
+
+                <label for="author">Mật khẩu:</label>
+                <input type="password" name="khachhang_matkhau" class="required input_field" value="@khachhang.matkhau" style="float:left">
+                <sup style="color:red; float:left" >*</sup>
+                <span style="color:red; float:left">
+                    @if (State.Contains("matkhau_fail"))
+                    {
+                        @:Mật khẩu không hợp lệ hoặc không khớp
+                    }
+                </span>
+                <div class="cleaner h10"></div>
+
+                <label for="author">Nhập lại mật khẩu:</label>
+                <input type="password" name="khachhang_matkhau2" class="required input_field" value="@khachhang.matkhau" style="float:left">
+                <sup style="color:red; float:left" >*</sup>
+                <span style="color:red; float:left">
+                    @if (State.Contains("matkhau_fail"))
+                    {
+                        @:Mật khẩu không hợp lệ hoặc không khớp
+                    }
+                </span>
+                <div class="cleaner h10"></div>
+
+                <label for="author">Tên đầy đủ:</label>
+                <input type="text" name="khachhang_tendaydu" class="required input_field" value="@khachhang.tendaydu" style="float:left">
+                <sup style="color:red; float:left" >*</sup>
+                <span style="color:red; float:left">
+                    @if (State.Contains("tendaydu_fail"))
+                    {
+                        @:Tên đầy đủ không hợp lệ
+                    }
+                </span>
+                <div class="cleaner h10"></div>
+                
+                <label for="email">Email:</label>
+                <input type="text"name="khachhang_email" class="validate-email required input_field" value="@khachhang.email" style="float:left">
+                <sup style="color:red; float:left" >*</sup>
+                <span style="color:red; float:left">
+                    @if (State.Contains("email_fail"))
+                    {
+                        @:Email không hợp lệ
+                    }
+                    else if(State.Contains("email_exist_fail"))
+                    {
+                        @:Email đã có khách hàng khác sử dụng
+                    }
+                </span>
+                <div class="cleaner h10"></div>
+
+                <label for="phone">Số điện thoại:</label>
+                <input type="text" name="khachhang_sdt" class="input_field" value="@khachhang.sdt" style="float:left">
+                <sup style="color:red; float:left" >*</sup>
+                <span style="color:red; float:left">
+                    @if (State.Contains("sdt_fail"))
+                    {
+                        @:Số điện thoại không hợp lệ
+                    }
+                </span>
+                <div class="cleaner h10"></div>
+
+                <label for="phone">Địa chỉ:</label>
+                <input type="text" name="khachhang_diachi" class="input_field" value="@khachhang.diachi" style="float:left">
+                <div class="cleaner h10"></div>
+                <input type="submit" class="submit_btn" name="submit" id="submit" value="Lưu">
+            </form>
+        </div>
+    </div>
+
+    <div class="cleaner h40"></div>
+
+
+
+</div>

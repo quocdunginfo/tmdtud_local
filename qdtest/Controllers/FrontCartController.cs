@@ -24,11 +24,103 @@ namespace qdtest.Controllers
             return View();
         }
         [HttpGet]
+        public ActionResult Finish()
+        {
+            DonHangController ctr = new DonHangController();
+            List<string> validate = new List<string>();
+            //kiểm tra đơn hàng lần nữa xem có bị lỗi hết hàng
+            validate.AddRange(ctr.validate(this._giohang, out this._giohang));
+            //giỏ hàng chưa sẵn sàng để qua bước này
+            if (validate.Count > 0)
+            {
+                return RedirectToAction("Index", "FrontCart");
+            }
+            //kiểm tra thông tin người nhận lần nữa để đảm bảo
+            validate.AddRange(ctr.validate_checkout(this._giohang, out this._giohang));
+            if (validate.Count > 0)
+            {
+                return RedirectToAction("CheckOut", "FrontCart");
+            }
+            //lưu đơn hàng
+            int max_id = ctr.add(this._giohang);
+            //xóa đơn hàng khỏi hệ thống ngay và luôn
+            this._giohang = new DonHang();
+            this._save_cart_to_session();
+
+            //hiện thông báo hoàn tất, kết thúc quá trình phức tạp
+            return View();
+        }
+        [HttpGet]
+        public ActionResult Payment()
+        {
+            DonHangController ctr = new DonHangController();
+            List<string> validate = new List<string>();
+            //kiểm tra đơn hàng lần nữa xem có bị lỗi hết hàng
+            validate.AddRange(ctr.validate(this._giohang, out this._giohang));
+            //giỏ hàng chưa sẵn sàng để qua bước này
+            if (validate.Count > 0)
+            {
+                return RedirectToAction("Index", "FrontCart");
+            }
+            //kiểm tra thông tin người nhận lần nữa để đảm bảo
+            validate.AddRange(ctr.validate_checkout(this._giohang, out this._giohang));
+            if (validate.Count > 0)
+            {
+                return RedirectToAction("CheckOut", "FrontCart");
+            }
+            //xét hình thức thanh toán
+            if (this._giohang.thanhtoan_tructuyen)
+            {
+                return RedirectToAction("Online_Payment", "FrontCart", new { provider="OnePay"});
+            }
+            return RedirectToAction("Finish","FrontCart");
+        }
+        [HttpGet]
+        public ActionResult Online_Payment(string provider="OnePay")
+        {
+            DonHangController ctr = new DonHangController();
+            List<string> validate = new List<string>();
+            //kiểm tra đơn hàng lần nữa xem có bị lỗi hết hàng
+            validate.AddRange(ctr.validate(this._giohang, out this._giohang));
+            //giỏ hàng chưa sẵn sàng để qua bước này
+            if (validate.Count > 0)
+            {
+                return RedirectToAction("Index", "FrontCart");
+            }
+            //kiểm tra thông tin người nhận lần nữa để đảm bảo
+            validate.AddRange(ctr.validate_checkout(this._giohang, out this._giohang));
+            if (validate.Count > 0)
+            {
+                return RedirectToAction("CheckOut", "FrontCart");
+            }
+            //Hiện giao diện thanh toán online ảo
+            if (!this._giohang.thanhtoan_tructuyen)
+            {
+                return RedirectToAction("Finish","FrontCart");
+            }
+            return View();
+        }
+        [HttpGet]
         public ActionResult Confirm()
         {
+            DonHangController ctr = new DonHangController();
+            List<string> validate = new List<string>();
             //kiểm tra đơn hàng lần nữa xem có bị lỗi hết hàng
+            validate.AddRange(ctr.validate(this._giohang,out this._giohang));
+                //giỏ hàng chưa sẵn sàng để qua bước này
+                if (validate.Count > 0)
+                {
+                    return RedirectToAction("Index", "FrontCart");
+                }
+            
             //kiểm tra thông tin người nhận lần nữa để đảm bảo
+                validate.AddRange(ctr.validate_checkout(this._giohang,out this._giohang));
+                if (validate.Count > 0)
+                {
+                    return RedirectToAction("CheckOut","FrontCart");
+                }
             //hiện thông tin đơn hàng chuẩn bị lưu vào hệ thống
+                ViewBag.State = new List<string>();
             //kết thúc chu trình
             return View();
         }
@@ -56,16 +148,11 @@ namespace qdtest.Controllers
             this._giohang.nguoinhan_sdt = nguoinhan_sdt;
             this._giohang.thanhtoan_tructuyen = thanhtoan_tructuyen;
             this._giohang.nguoinhan_diachi_tinhtp = ctr_tinhtp.get_by_id(tinhtp_id);
+            this._giohang.phivanchuyen = this._giohang.nguoinhan_diachi_tinhtp.phivanchuyen;
             //validate
             validate.AddRange(ctr.validate_checkout(this._giohang, out this._giohang));
             if (validate.Count <= 0)
             {
-                //OK
-                //nếu thanh toán trực tuyến
-                if (this._giohang.thanhtoan_tructuyen)
-                {
-                    return RedirectToAction("Online_Payment", "FrontCart");
-                }
                 //chuyển đến trang xác nhận đơn hàng lần cuối
                 return RedirectToAction("Confirm", "FrontCart");
             }

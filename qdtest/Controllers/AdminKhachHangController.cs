@@ -81,37 +81,32 @@ namespace qdtest.Controllers
                 }
             }
             //assign data
-            Boolean validate_ok = true;
+            List<string> validate = new List<string>();
+            string matkhau = TextLibrary.ToString(Request["khachhang_matkhau"]);
+            string matkhau2 = TextLibrary.ToString(Request["khachhang_matkhau2"]);
             obj.email = TextLibrary.ToString(Request["khachhang_email"]);
-                if (obj.email.Equals("")) { this._state.Add("email_fail"); validate_ok = false; }
-
             obj.sdt = TextLibrary.ToString(Request["khachhang_sdt"]);
-                if (obj.sdt.Equals("")) { this._state.Add("sdt_fail"); validate_ok = false; }
-
             obj.diachi = TextLibrary.ToString(Request["khachhang_diachi"]);
-                if (obj.diachi.Equals("")) { this._state.Add("diachi_fail"); validate_ok = false; }
-            
             obj.tendangnhap =  TextLibrary.ToString(Request["khachhang_tendangnhap"]);
-                if (obj.tendangnhap.Equals("")) { this._state.Add("tendangnhap_fail"); validate_ok = false; }
-            
             obj.tendaydu =  TextLibrary.ToString(Request["khachhang_tendaydu"]);
-                if (obj.tendaydu.Equals("")) { this._state.Add("tendaydu_fail"); validate_ok = false; }
             obj.active = TextLibrary.ToBoolean(Request["khachhang_active"]);
+            //validate
+            validate.AddRange(ctr.validate(obj,matkhau,matkhau2));
             //action
-            if (validate_ok)
+            if (validate.Count==0)
             {
                 if (edit_mode)
                 {
                     //call update for properties
                     ctr._db.SaveChanges();
                     //call set password
-                    ctr.set_password(obj.id, TextLibrary.ToString(Request["khachhang_matkhau"]));
+                    ctr.set_password(obj.id,matkhau2);
                     ViewBag.State = "edit_ok";
                 }
                 else
                 {
                     //set raw password
-                    obj.matkhau = TextLibrary.ToString(Request["khachhang_matkhau"]);
+                    obj.matkhau = matkhau2;
                     //call add
                     int maxid = ctr.add(obj);
                     //re assign id

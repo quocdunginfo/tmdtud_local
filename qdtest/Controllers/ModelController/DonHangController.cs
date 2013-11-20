@@ -28,8 +28,78 @@ namespace qdtest.Controllers.ModelController
             DonHang obj = this.get_by_id(obj_id);
             return obj == null ? false : true;
         }
-        public int add(DonHang obj)
+        /* Sử dụng khi lưu đon hàng, do có quá nhiều DBContext tracking nên bắt buộc phải Clone ra obj mới theo
+         * this._db thì mới lưu được không sẽ bị báo lỗi
+         * 
+         */
+        private DonHang _Clone(DonHang obj)
         {
+            DonHang tmp = new DonHang();
+            tmp.active = obj.active;
+            tmp.ds_chitiet_donhang = new List<ChiTiet_DonHang>();
+            foreach (var item in obj.ds_chitiet_donhang)
+            {
+                ChiTiet_DonHang ct = new ChiTiet_DonHang();
+                ct.chitietsp = this._db.ds_chitietsp.Where(x => x.id == item.chitietsp.id).FirstOrDefault();
+                ct.dongia = item.dongia;
+                ct.soluong = item.soluong;
+                tmp.ds_chitiet_donhang.Add(ct);
+            }
+            if (obj.khachhang != null)
+            {
+                tmp.khachhang = this._db.ds_khachhang.Where(x => x.id == obj.khachhang.id).FirstOrDefault();
+            }
+            if (obj.khachhang_nhanvien != null)
+            {
+                tmp.khachhang_nhanvien = this._db.ds_nhanvien.Where(x => x.id == obj.khachhang_nhanvien.id).FirstOrDefault();
+            }
+            tmp.ngay = obj.ngay;
+            tmp.nguoinhan_diachi = obj.nguoinhan_diachi;
+            tmp.nguoinhan_diachi_tinhtp = this._db.ds_tinhtp.Where(x => x.id == obj.nguoinhan_diachi_tinhtp.id).FirstOrDefault();
+            tmp.nguoinhan_sdt = obj.nguoinhan_sdt;
+            tmp.nguoinhan_ten = obj.nguoinhan_ten;
+            if (obj.nhanvien != null)
+            {
+                tmp.nhanvien = this._db.ds_nhanvien.Where(x => x.id == obj.nhanvien.id).FirstOrDefault();
+            }
+            tmp.phivanchuyen = obj.phivanchuyen;
+            tmp.thanhtoan_tructuyen = obj.thanhtoan_tructuyen;
+            tmp.tongtien = obj.tongtien;
+            tmp.trangthai = obj.trangthai;
+            return tmp;
+        }
+        public int add(DonHang obj_)
+        {
+            DonHang obj = this._Clone(obj_);//rất quan trọng thưa các bạn,
+            //tính toán các dữ liệu cần thiết
+                //cập nhật trạng thái đơn hàng
+                if (obj.thanhtoan_tructuyen)
+                {
+                    obj.trangthai = "chuagiao";
+                }
+                else
+                {
+                    obj.trangthai = "chualienlac";
+                }
+                //tính phí
+                obj.phivanchuyen = obj.nguoinhan_diachi_tinhtp.phivanchuyen;
+                obj.tongtien = obj.__get_tongtien_notinclude_phivanchuyen() + obj.phivanchuyen;
+                //tính điểm cho KH nếu là kh mua
+                if (obj.khachhang != null)
+                {
+                    obj.khachhang.diem += obj.tongtien / 10000;//10000 = 1 điểm
+                    //cập nhật lại loại KH
+                    obj.khachhang._Update_LoaiKhachHang();
+                }
+                //trừ tồn kho ngay lập tức
+                foreach (var item in obj.ds_chitiet_donhang)
+                {
+                    item.chitietsp.soluong -= item.soluong;
+                    if (item.chitietsp.soluong < 0)
+                    {
+                        item.chitietsp.soluong = 0;
+                    }
+                }
             //call add
             this._db.ds_donhang.Add(obj);
             //commit
@@ -81,6 +151,8 @@ namespace qdtest.Controllers.ModelController
             //Filter by ngay
             if(timkiem_ngay==true)
             {
+                ngay_from = new DateTime(ngay_from.Year,ngay_from.Month,ngay_from.Day);//thủ thuật nhỏ để tránh bị lỗi
+                ngay_to = new DateTime(ngay_to.Year, ngay_to.Month, ngay_to.Day, 23, 59, 59);//thủ thuật nhỏ để tránh bị lỗi
                 obj_list = obj_list.Where(x => x.ngay.CompareTo(ngay_from) >=0 && x.ngay.CompareTo(ngay_to)<=0).ToList();
             }
             //Filter again by by active
