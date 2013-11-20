@@ -41,7 +41,7 @@ namespace qdtest.Controllers
              var captcha = string.Format("{0} + {1} = ?", a, b);
 
              //store answer 
-             Session["frontregister_captcha"] = a + b;//string
+             Session["frontcontact_captcha"] = a + b;//string
 
              //image stream 
              FileContentResult img = null;
@@ -141,9 +141,9 @@ namespace qdtest.Controllers
          [NonAction]
          protected string get_captcha_string()
          {
-             if (Session["frontregister_captcha"] != null)
+             if (Session["frontcontact_captcha"] != null)
              {
-                 return Session["frontregister_captcha"].ToString();
+                 return Session["frontcontact_captcha"].ToString();
              }
              return "QWERDF32423434GHYUSDVBXYUI12389gsdf7723jbcxv09892gvvzvxgt23";
          }
