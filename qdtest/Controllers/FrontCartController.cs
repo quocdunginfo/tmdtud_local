@@ -98,6 +98,7 @@ namespace qdtest.Controllers
             {
                 return RedirectToAction("Finish","FrontCart");
             }
+
             return View();
         }
         [HttpGet]

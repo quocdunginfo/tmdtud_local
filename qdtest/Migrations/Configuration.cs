@@ -106,18 +106,82 @@
                         );
                 }
                 context.SaveChanges();
+                //thêm loại ưu đãi
+                LoaiUuDai loaiuudai = new LoaiUuDai();
+                loaiuudai.active = true;
+                loaiuudai.ten = "Giảm giá";
+                context.ds_loaiuudai.AddOrUpdate(
+                    q => q.ten,
+                    loaiuudai
+                    );
+                context.SaveChanges();
+                //ƯU đãi
+                UuDai uudai = new UuDai();
+                uudai.active = true;
+                uudai.giatri = "5";
+                uudai.noidung = "Giảm giá 5% cho mỗi hóa đơn dành cho khách hàng thân thiết";
+                uudai.ten = "giam5phantram";
+                uudai.loaiuudai = context.ds_loaiuudai.Where(x => x.ten.Equals("Giảm giá")).FirstOrDefault();
+                context.ds_uudai.AddOrUpdate(
+                    q => q.ten,
+                    uudai
+                    ); 
+
+                uudai = new UuDai();
+                uudai.active = true;
+                uudai.giatri = "10";
+                uudai.noidung = "Giảm giá 10% cho mỗi hóa đơn dành cho khách hàng VIP";
+                uudai.ten = "giam10phantram";
+                uudai.loaiuudai = context.ds_loaiuudai.Where(x => x.ten.Equals("Giảm giá")).FirstOrDefault();
+                context.ds_uudai.AddOrUpdate(
+                    q => q.ten,
+                    uudai
+                    ); 
+
+                uudai = new UuDai();
+                uudai.active = true;
+                uudai.giatri = "0";
+                uudai.noidung = "Giảm giá 0% cho mỗi hóa đơn dành cho khách hàng thông thường";
+                uudai.ten = "giam0phantram";
+                uudai.loaiuudai = context.ds_loaiuudai.Where(x => x.ten.Equals("Giảm giá")).FirstOrDefault();
+                context.ds_uudai.AddOrUpdate(
+                    q => q.ten,
+                    uudai
+                    ); 
+                context.SaveChanges();
             //Thêm loại khach hang
-            /*    
-            string[] loaikh = { "" };
-                foreach (string item in loaikh)
-                {
-                    LoaiKhachHang tmp = new LoaiKhachHang();
-                    context.ds_loaikh.AddOrUpdate(
-                                    q => q.ten,
-                                    tmp
-                                    );
-                }
-            */
+                LoaiKhachHang loaikh = new LoaiKhachHang();
+                loaikh.ten = "Khách hàng thường";
+                loaikh.mucdiem = 0;
+                loaikh.active = true;
+                loaikh.ds_uudai.Add(context.ds_uudai.Where(x => x.ten.Equals("giam0phantram")).FirstOrDefault());
+                context.ds_loaikhachhang.AddOrUpdate(
+                    q => q.ten,
+                    loaikh
+                    );
+                
+
+                loaikh = new LoaiKhachHang();
+                loaikh.ten = "Khách hàng thân thiết";
+                loaikh.mucdiem = 300;
+                loaikh.active = true;
+                loaikh.ds_uudai.Add(context.ds_uudai.Where(x => x.ten.Equals("giam5phantram")).FirstOrDefault());
+                context.ds_loaikhachhang.AddOrUpdate(
+                    q => q.ten,
+                    loaikh
+                    );
+
+                loaikh = new LoaiKhachHang();
+                loaikh.ten = "Khách hàng VIP";
+                loaikh.mucdiem = 500;
+                loaikh.active = true;
+                loaikh.ds_uudai.Add(context.ds_uudai.Where(x => x.ten.Equals("giam10phantram")).FirstOrDefault());
+                context.ds_loaikhachhang.AddOrUpdate(
+                    q => q.ten,
+                    loaikh
+                    );
+
+                context.SaveChanges();
         }
     }
 }

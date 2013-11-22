@@ -93,9 +93,9 @@
 				<div class="pageTitle">
 					<h3>
 					<span id="current_obj" style="font-weight: normal;">
-					<span class="breadcrumb item-0 ">Administration <img alt="&gt;" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"/>
+					<span class="breadcrumb item-0 ">Nhân viên <img alt="&gt;" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"/>
 					</span>
-					<span class="breadcrumb item-1 ">Users </span>
+					<span class="breadcrumb item-1 ">Danh sách </span>
 					</span>
 					</h3>
 				</div>
@@ -109,14 +109,7 @@
 			<tr>
 				<td style="vertical-align: bottom;">
 					<span style="float: left;">
-					Page <b>1</b> / 1 | Display
-					<select name="employee_pagination" onchange="submit()">
-						<option value="20" selected="selected">20</option>
-						<option value="50">50</option>
-						<option value="100">100</option>
-						<option value="300">300</option>
-					</select>
-					 / 1 result(s) </span>
+					</span>
 					<span style="float: right;">
 					<input type="submit" id="submitFilterButtonemployee" name="submit_search" value="Tìm kiếm" class="button"/>
 					<input type="submit" name="submit_reset" value="Reset" class="button"/>
@@ -138,49 +131,49 @@
 					<thead>
 					<tr class="nodrag nodrop" style="height: 40px">
 						<th class="center">
-							<input type="checkbox" name="checkme" class="noborder" onclick="checkDelBoxes(this.form, 'employeeBox[]', this.checked)"/>
+							
 						</th>
 						<th class="center">
 							<span class="title_box">
 							ID </span>
 							<br/>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=id_employee&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<a href="javascript:void(0)">
 							<img border="0" src="../img/admin/down.gif"/></a>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=id_employee&employeeOrderway=asc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<a href="javascript:void(0)">
 							<img border="0" src="../img/admin/up_d.gif"/></a>
 						</th>
 						<th>
 							<span class="title_box">
 							Tên đăng nhập </span>
 							<br/>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=lastname&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<a href="javascript:void(0)">
 							<img border="0" src="../img/admin/down.gif"/></a>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=lastname&employeeOrderway=asc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<a href="javascript:void(0)">
 							<img border="0" src="../img/admin/up.gif"/></a>
 						</th>
 						<th>
 							<span class="title_box">
 							Tên đầy đủ </span>
 							<br/>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=firstname&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<a href="javascript:void(0)">
 							<img border="0" src="../img/admin/down.gif"/></a>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=firstname&employeeOrderway=asc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<a href="javascript:void(0)">
 							<img border="0" src="../img/admin/up.gif"/></a>
 						</th>
 						<th>
 							<span class="title_box">
 							Email </span>
 							<br/>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=email&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<a href="javascript:void(0)">
 							<img border="0" src="../img/admin/down.gif"/></a>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=email&employeeOrderway=asc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<a href="javascript:void(0)">
 							<img border="0" src="../img/admin/up.gif"/></a>
 						</th>
 						<th>
 							<span class="title_box">
 							Loại </span>
 							<br/>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=profile&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<a href="javascript:void(0)">
 							<img border="0" src="../img/admin/down.gif"/></a>
 							<a href="index.php?controller=AdminEmployees&employeeOrderby=profile&employeeOrderway=asc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
 							<img border="0" src="../img/admin/up.gif"/></a>
@@ -189,9 +182,9 @@
 							<span class="title_box">
 							Active </span>
 							<br/>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=active&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<a href="javascript:void(0)">
 							<img border="0" src="../img/admin/down.gif"/></a>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=active&employeeOrderway=asc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
+							<a href="javascript:void(0)">
 							<img border="0" src="../img/admin/up.gif"/></a>
 						</th>
 						<th class="center">
@@ -200,7 +193,7 @@
 					</tr>
 					<tr class="nodrag nodrop filter row_hover" style="height: 35px;">
 						<td class="center">
-							 --
+							 
 						</td>
 						<td class="center">
 							<input type="text" class="filter" name="nhanvien_id" value="@User_Search["id"]" style="width:25px"/>

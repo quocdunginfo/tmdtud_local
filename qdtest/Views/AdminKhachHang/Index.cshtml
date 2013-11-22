@@ -104,6 +104,10 @@
 					<sup>*</sup>
                     <span style="color: red;">
                         @if(State.Contains("tendangnhap_fail")) { <text> Không hợp lệ</text> }
+                        else if (State.Contains("tendangnhap_exist_fail"))
+                        {
+                            @:Tên đăng nhập bị trùng với khách hàng khách
+                        }
                     </span>
 				</div>
 				<div class="clear">
@@ -122,6 +126,9 @@
 				<div class="margin-form">
 					<input name="khachhang_matkhau" size="33" class="" value="@KhachHang.matkhau" type="password">
 					<sup>*</sup>
+                    <span style="color: red;">
+                        @if(State.Contains("matkhau_fail")) { <text> Không hợp lệ hoặc không khớp</text> }
+                    </span>
 				</div>
 				<div class="clear">
 				</div>
@@ -129,6 +136,9 @@
 				<div class="margin-form">
 					<input name="khachhang_matkhau2" size="33" class="" value="@KhachHang.matkhau" type="password">
 					<sup>*</sup>
+                    <span style="color: red;">
+                        @if(State.Contains("matkhau_fail")) { <text> Không hợp lệ hoặc không khớp</text> }
+                    </span>
 				</div>
 				<div class="clear">
 				</div>
@@ -138,6 +148,10 @@
 					<sup>*</sup>
                     <span style="color: red;">
                         @if(State.Contains("email_fail")) { <text> Không hợp lệ</text> }
+                        else if (State.Contains("email_exist_fail"))
+                        {
+                            @:Email bị trùng với khách hàng khác
+                        }
                     </span>
 				</div>
 				<div class="clear">
@@ -155,10 +169,25 @@
                 <label>Địa chỉ: </label>
 				<div class="margin-form">
 					<input name="khachhang_diachi" id="diachi" value="@KhachHang.diachi" class="" size="33" type="text">
-					<sup>*</sup>
                     <span style="color: red;">
                         @if(State.Contains("diachi_fail")) { <text> Không hợp lệ</text> }
                     </span>
+				</div>
+				<div class="clear">
+				</div>
+                <label>Khách hàng xấu: </label>
+				<div class="margin-form">
+					<input name="khachhang_bad" value="1" @if(@KhachHang.bad==true) {<text>checked="checked"</text>} type="radio">
+					<label class="t" for="active_on">
+					<img src="../img/admin/enabled.gif" alt="Enabled" title="Enabled">
+					</label>
+					<input name="khachhang_bad"  value="0" @if(@KhachHang.bad==false) {<text>checked="checked"</text>} type="radio">
+					<label class="t" for="active_off">
+					<img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled">
+					</label>
+					<p class="preference_description">
+						 Ghi chú khách hàng xấu
+					</p>
 				</div>
 				<div class="clear">
 				</div>
@@ -179,7 +208,8 @@
 				<div class="clear">
 				</div>
 				<div class="margin-form">
-					<input style="display: none;" id="employee_form_submit_btn" value="Save" name="submitAddemployee" class="button" type="submit">
+					<input style="display: block;" id="employee_form_submit_btn" value="Lưu" name="submitAddemployee" class="button" type="submit">
+                    <input style="display: block;" id="employee_form_submit_btn2" value="Lưu" name="submitAddemployee" class="button" type="submit">
 				</div>
 				<div class="small">
 					<sup>*</sup> Trường bắt buộc

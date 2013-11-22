@@ -124,7 +124,7 @@ namespace qdtest.Controllers
             }
             
             //set active tab
-            this._set_activetab(new String[] { "SanPham" });
+            this._set_activetab(new String[] { "Catalog","SanPham" });
         }
         public ActionResult Add()
         {
@@ -177,9 +177,27 @@ namespace qdtest.Controllers
             }
             catch (Exception)
             {
-                return _show_notification("Sản phẩm này có dính khóa ngoại với chi tiết sản phẩm hoặc đơn hàng hiện có nên không xóa được");
+                return _show_notification("Sản phẩm này có dính khóa ngoại với chi tiết sản phẩm, hình ảnh hoặc đơn hàng hiện có nên không xóa được");
             }
             return RedirectToAction("Index", "AdminSanPhams");
+        }
+        public ActionResult Active(int id=0)
+        {
+            //controller
+            SanPhamController ctr= new SanPhamController();
+            //get obj
+            SanPham obj = ctr.get_by_id(id);
+            //check
+            if (obj == null)
+            {
+                return RedirectToAction("Index", "AdminSanPhams");
+            }
+            //đảo ngược active
+            obj.active = !obj.active;
+            //lưu
+            ctr._db.SaveChanges();
+            //redirect
+            return RedirectToAction("Index","AdminSanPhams");
         }
     }
 }

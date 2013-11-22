@@ -273,7 +273,8 @@ label:after {
 
 input, textarea, option {
 	color: #000;
-	font-size: 12px;
+	/*font-size: 12px; quocdunginfo */
+	font-size: 14px;
 	margin: 0;
 	padding: 0;
 }
@@ -1224,7 +1225,7 @@ html[xmlns] .clearfix {
 
 
 #first_block a, #second_block a, #third_block a, #fourth_block a,
-#fifth_block a, #sixth_block a, #seventh_block a, #eighth_block a{ background: #F8F8F8 none no-repeat scroll center 25px;}
+#fifth_block a, #sixth_block a, #seventh_block a, #eighth_block a{ background: #ffffff none no-repeat scroll center 25px;}
 
 #first_block a{
 	background-image: url('../img/admin/package_go.png');

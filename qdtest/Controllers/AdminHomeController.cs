@@ -13,18 +13,12 @@ namespace qdtest.Controllers
         // GET: /AdminHome/
         public ActionResult Index()
         {
-            Debug.WriteLine("Kiểm tra home_view");
             if (!this._nhanvien_permission.Contains("home_view"))
             {
                 return this._fail_permission("home_view");
             }
-            return View();
-        }
-        //
-        // GET: /AdminHome/
-
-        public ActionResult Test_Login()
-        {
+            ViewBag.Title += " - Bảng điều khiển chính";
+            this._set_activetab(new string[] {"Home"});
             return View();
         }
     }

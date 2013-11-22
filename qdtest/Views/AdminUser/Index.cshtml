@@ -85,8 +85,8 @@
 				<div class="pageTitle">
 					<h3>
 					<span id="current_obj" style="font-weight: normal;">
-					<span class="breadcrumb item-0 ">Quản trị hệ thống <img alt=">" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"> </span>
-					<span class="breadcrumb item-1 ">Nhân viên </span>
+					<span class="breadcrumb item-0 ">Nhân viên <img alt=">" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"> </span>
+					<span class="breadcrumb item-1 ">Chi tiết </span>
 					</span>
 					</h3>
 				</div>
@@ -98,7 +98,7 @@
 			<input name="nhanvien_id" id="id_employee" value="@NhanVien.id" type="hidden">
 			<fieldset id="fieldset_0">
 				<legend>
-				<img src="../img/admin/nav-user.gif" alt="Employees"> User </legend>
+				<img src="../img/admin/nav-user.gif" alt="Employees"> Thông tin nhân viên </legend>
 				<label>Tên đăng nhập:</label>
 				<div class="margin-form">
 					<input name="nhanvien_tendangnhap" id="firstname" value="@NhanVien.tendangnhap" class="" size="33" type="text">
@@ -153,6 +153,24 @@
 				</div>
 				<div class="clear">
 				</div>
+
+                <label>Nhân viên xấu: </label>
+				<div class="margin-form">
+					<input name="nhanvien_bad"  value="1" @if(@NhanVien.bad==true) {<text>checked="checked"</text>} type="radio">
+					<label class="t" for="active_on">
+					<img src="../img/admin/enabled.gif" alt="Enabled" title="Enabled">
+					</label>
+					<input name="nhanvien_bad" value="0" @if(@NhanVien.bad==false) {<text>checked="checked"</text>} type="radio">
+					<label class="t" for="active_off">
+					<img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled">
+					</label>
+					<p class="preference_description">
+						 Ghi chú nhân viên xấu
+					</p>
+				</div>
+				<div class="clear">
+				</div>
+
 				<label>Active: </label>
 				<div class="margin-form">
 					<input name="nhanvien_active" id="active_on" value="1" @if(@NhanVien.active==true) {<text>checked="checked"</text>} type="radio">

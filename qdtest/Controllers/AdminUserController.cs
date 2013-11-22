@@ -101,6 +101,7 @@ namespace qdtest.Controllers
             //assign value
             obj.email = TextLibrary.ToString(Request["nhanvien_email"]);
             obj.tendangnhap = TextLibrary.ToString(Request["nhanvien_tendangnhap"]);
+            obj.bad = TextLibrary.ToBoolean(Request["nhanvien_bad"]);
             obj.tendaydu = TextLibrary.ToString(Request["nhanvien_tendaydu"]);
             //validate properties
             List<String> validate = ctr.validate(obj,

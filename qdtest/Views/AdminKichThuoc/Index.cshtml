@@ -27,7 +27,15 @@
 			<div class="toolbarBox toolbarHead">
 				<ul class="cc_button">
 					<li>
-					<a id="desc-employee-back" class="toolbar_btn" href="@Url.Action("Index","AdminKichThuocs")" title="Back to list">
+                    <a id="desc-category-save" class="toolbar_btn" href="#" title="Save">
+					<span class="process-icon-save"></span>
+					<div>
+						Lưu
+					</div>
+					</a>
+					</li>
+                    <li>
+					<a id="desc-category-back" class="toolbar_btn" href="@Url.Action("Index","AdminKichThuocs")" title="Back to list">
 					<span class="process-icon-back "></span>
 					<div>
 						 Quay lại
@@ -133,10 +141,7 @@
 			</div>
 		</div>
 		<div class="leadin">
-			<div class="cat_bar2">
-				 &nbsp;<img src="../img/admin/home.gif" alt="">
-				Home
-			</div>
+			
 		</div>
 		
         <form id="category_form" name="category_form" action="@Url.Action("Submit","AdminKichThuoc")" method="post">
@@ -177,7 +182,8 @@
 	            <div class="clear">
 	            </div>
 	            <div class="margin-form">
-		            <input id="employee_form_submit_btn" value="Lưu" name="Submit" class="button" type="submit">
+		            <input id="category_form_submit_btn" value="Lưu" name="Submit" class="button" type="submit">
+                    <input id="category_form_submit_btn2" value="Lưu" name="Submit" class="button" type="submit">
 	            </div>
             </fieldset>                        
         </form>

@@ -237,6 +237,18 @@ namespace qdtest.Controllers.ModelController
             {
                 re.Add("masp_exist_fail");
             }
+            if (obj.masp.Equals(""))
+            {
+                re.Add("masp_fail");
+            }
+            if (obj.ten.Equals(""))
+            {
+                re.Add("ten_fail");
+            }
+            if (obj.gia<0 || obj.gia>999999999)
+            {
+                re.Add("gia_fail");
+            }
             return re;
         }
         public List<SanPham> timkiem_dequy(NhomSanPham root = null, String active = "", int start_point = 0, int count = -1)

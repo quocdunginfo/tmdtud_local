@@ -23,6 +23,11 @@
     <link href="@qRootAdminTemplatePath../admin2109/../js/jquery/plugins/cluetip/jquery.cluetip.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="@qRootAdminTemplatePath../admin2109/../js/jquery/plugins/alerts/jquery.alerts.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="@qRootAdminTemplatePath../admin2109/../js/jquery/plugins/chosen/jquery.chosen.css" rel="stylesheet" type="text/css" media="all"/>
+    <!-- qd page load time -->
+    <script type="text/javascript">
+        var qd_timerstart = Date.now();
+    </script>
+    <!-- end qd page load time -->
     <script type="text/javascript" src="@qRootAdminTemplatePath../admin2109/../js/jquery/jquery-1.7.2.min.js"></script>
     <!-- <script type="text/javascript" src="@qRootAdminTemplatePath../modules/gamification/views/js/gamification.js"></script> -->
     <script type="text/javascript" src="@qRootAdminTemplatePath../admin2109/../js/jquery/plugins/fancybox/jquery.fancybox.js"></script>
@@ -94,58 +99,8 @@
         <div id="container">
             <div id="header">
                 <div id="header_infos">
-                    <a id="header_shopname" href="index.php?controller=AdminHome&amp;token=a049b0978f5ae98944aaecf9e2ed39a7"><span>ps</span></a>
-                    <div id="notifs_icon_wrapper">
-                        <div id="orders_notif" class="notifs">
-                            <span id="orders_notif_number_wrapper" class="number_wrapper">
-                                <span id="orders_notif_value">0</span>
-                            </span>
-                            <div id="orders_notif_wrapper" class="notifs_wrapper">
-                                <h3>Last orders</h3>
-                                <p class="no_notifs">
-                                    No new orders has been placed on your shop
-                                </p>
-                                <ul id="list_orders_notif">
-                                </ul>
-                                <p>
-                                    <a href="index.php?controller=AdminOrders&amp;token=03b97c0470d2242e7ad0b01a281a087b">Show all orders</a>
-                                </p>
-                            </div>
-                        </div>
-                        <div id="customers_notif" class="notifs notifs_alternate">
-                            <span id="customers_notif_number_wrapper" class="number_wrapper">
-                                <span id="customers_notif_value">0</span>
-                            </span>
-                            <div id="customers_notif_wrapper" class="notifs_wrapper">
-                                <h3>Last customers</h3>
-                                <p class="no_notifs">
-                                    No new customers registered on your shop
-                                </p>
-                                <ul id="list_customers_notif">
-                                </ul>
-                                <p>
-                                    <a href="index.php?controller=AdminCustomers&amp;token=a63897f6b09f19ea042c44d7f543b6b6">Show all customers</a>
-                                </p>
-                            </div>
-                        </div>
-                        <div id="customer_messages_notif" class="notifs">
-                            <span id="customer_messages_notif_number_wrapper" class="number_wrapper">
-                                <span id="customer_messages_notif_value">0</span>
-                            </span>
-                            <div id="customer_messages_notif_wrapper" class="notifs_wrapper">
-                                <h3>Last messages</h3>
-                                <p class="no_notifs">
-                                    No new messages posted on your shop
-                                </p>
-                                <ul id="list_customer_messages_notif">
-                                </ul>
-                                <p>
-                                    <a href="index.php?tab=AdminCustomerThreads&amp;token=2ca6e722bbb83b079663baeb78896005">Show all messages</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="employee_box">
+                    <a target="_blank" id="header_shopname" href="@Url.Action("Index","FrontHome")"><span>Cửa hàng bán giày</span></a>
+                    <div id="employee_box" style="float:left">
                         <div id="employee_infos">
                             <div class="employee_name">
                                 <a href="@Url.Action("Index", "AdminUser", new { id = Current_User.id })">Xin chào, <strong>@Current_User.tendaydu</strong>
@@ -157,45 +112,21 @@
                                 <li><a href="@Url.Action("Index", "AdminUser", new { id = Current_User.id })">Cài đặt tài khoản</a></li>
                                 <li class="separator">&nbsp;</li>
                                 <li><a id="header_logout" href="@Url.Action("Logout", "AdminLogin")">logout</a></li>
-                                <li class="separator">&nbsp;</li>
-                                <a href="@Url.Action("Index","FrontHome")" id="header_foaccess" target="_blank" title="View my shop">Trang chủ website</a>
                             </ul>
                         </div>
                     </div>
-                    <div id="header_search">
-                        <form method="post" action="index.php?controller=AdminSearch&amp;token=cc07a9f3c930480dcd5c9b686ae295da">
-                            <input type="text" name="bo_query" id="bo_query" value="" />
-                            <select name="bo_search_type" id="bo_search_type" class="chosen no-search">
-                                <option value="0">everywhere</option>
-                                <option value="1">catalog</option>
-                                <optgroup label="customers:">
-                                    <option value="2">by name</option>
-                                    <option value="6">by ip address</option>
-                                </optgroup>
-                                <option value="3">orders</option>
-                                <option value="4">invoices</option>
-                                <option value="5">carts</option>
-                                <option value="7">modules</option>
-                            </select>
-                            <input type="submit" id="bo_search_submit" class="button" value="Search" />
-                        </form>
-                    </div>
-                    <div id="header_quick">
-                        <select onchange="quickSelect(this);" id="quick_select" class="chosen no-search">
-                            <option value="0">Quick Access</option>
-                            <option value="index.php">&raquo; Home</option>
-                            <option value="http://localhost/ps/_blank">&raquo; My Shop</option>
-                            <option value="index.php?controller=AdminCategories&amp;addcategory&amp;token=9ef14dab525282a252161bbae087bd5b">&raquo; New category</option>
-                            <option value="index.php?controller=AdminProducts&amp;addproduct&amp;token=c4ecb5500c32302d072130315b268033">&raquo; New product</option>
-                            <option value="index.php?controller=AdminCartRules&amp;addcart_rule&amp;token=f6a0e29f52582cbe259d36183cf3e097">&raquo; New voucher</option>
-                        </select>
-                    </div>
+                    
                 </div>
                 <ul id="menu">
+                    <li class="submenu_size maintab @if (ActiveTab.Contains("Home"))
+                                                    {<text>active</text>}" id="maintab1">
+                        <a href="@Url.Action("Index", "AdminHome")" class="title">
+                            <img src="../img/t/0.gif" alt="" />Trang chủ </a>
+                    </li>
                     <li class="submenu_size maintab @if (ActiveTab.Contains("Catalog"))
-                                                    {<text>active</text>}" id="maintab9">
+                                                    {<text>active</text>}" id="maintab2">
                         <a href="@Url.Action("Index", "AdminSanPhams")" class="title">
-                            <img src="../img/t/AdminCatalog.gif" alt="" />Catalog </a>
+                            <img src="../img/t/AdminCatalog.gif" alt="" />Danh mục</a>
                         <ul class="submenu">
                             <li class="@if (ActiveTab.Contains("SanPham"))
                                        {<text>active</text>}"><a href="@Url.Action("Index", "AdminSanPhams")">Sản phẩm</a></li>
@@ -238,16 +169,14 @@
                             <li class="@if (ActiveTab.Contains("KhachHang"))
                                        {<text>active</text>}"><a href="@Url.Action("Index", "AdminKhachHangs")">Danh sách khách hàng</a></li>
                             <li><a href="@Url.Action("Add", "AdminKhachHangs")">Thêm khách hàng mới</a></li>
-                            <li><a href="index.php?controller=AdminCustomers&amp;token=a63897f6b09f19ea042c44d7f543b6b6">Thắc mắc của khách hàng</a></li>
+                            <li><a href="@Url.Action("Add", "AdminPhanHois")">Phản hồi từ khách hàng</a></li>
                         </ul>
                     </li>
                     <li class="submenu_size maintab @if (ActiveTab.Contains("QuanTriHeThong"))
                                                     {<text>active</text>}" id="maintab18">
                         <a href="#" class="title">
-                            <img src="../img/t/AdminAdmin.gif" alt="" />Quản trị hệ thống </a>
+                            <img src="../img/t/AdminEmployees.gif" alt="" />Nhân viên </a>
                         <ul class="submenu">
-                            <li class="@if (ActiveTab.Contains("CaiDat"))
-                                       {<text>active</text>}"><a href="@Url.Action("Index", "AdminSetting")">Cài đặt</a></li>
                             <li class="@if (ActiveTab.Contains("NhanVien"))
                                        {<text>active</text>}" ><a href="@Url.Action("Index", "AdminUsers")">Nhân viên</a></li>
                             <li class="@if (ActiveTab.Contains("LoaiNhanVien"))
@@ -262,20 +191,32 @@
 
             <div id="footer">
                 <div class="footerLeft">
-                    <a href="http://www.prestashop.com/" target="_blank">PrestaShop&trade; 1.5.5.0</a><br />
-                    <span>Load time:1.251s</span>
+                    <a href="javascript:void(0)" target="_blank">Template provided PrestaShop &trade; 1.5.5.0</a><br />
+                    <script type="text/javascript">
+                        $(window).load(function () {
+                            document.getElementById("qd_timeload").innerHTML = "Load time: " + (Date.now() - qd_timerstart) + "ms";
+                        });
+                    </script>
+                    <span id="qd_timeload"> 
+                        
+                    </span>
                 </div>
-                <div class="footerRight">
-                    |&nbsp;<a href="http://www.prestashop.com/en/contact-us?utm_source=backoffice_footer" target="_blank" class="footer_link">Contact</a>
-                    |&nbsp;<a href="http://forge.prestashop.com/?utm_source=backoffice_footer" target="_blank" class="footer_link">Bug Tracker</a>
-                    |&nbsp;<a href="http://www.prestashop.com/forums/?utm_source=backoffice_footer" target="_blank" class="footer_link">Forum</a>
-                    |&nbsp;<a href="http://addons.prestashop.com/?utm_source=backoffice_footer" target="_blank" class="footer_link">Addons</a>
+                <div class="footerRight" style="display:none">
+                    |&nbsp;<a href="#" target="_blank" class="footer_link"></a>
                 </div>
             </div>
         </div>
     </div>
     <div id="ajax_confirmation" style="display: none"></div>
     <div id="ajaxBox" style="display: none"></div>
-    <div id="scrollTop"><a href="#top"></a></div>
+    <div id="scrollTop">
+        <script type="text/javascript">
+            function qd_go_to_top() {
+                $('html, body').animate({ scrollTop: 0 }, 'slow');
+            }
+		</script>
+        <a href="javascript:void(0)" onclick="qd_go_to_top();"></a>
+
+    </div>
 </body>
 </html>

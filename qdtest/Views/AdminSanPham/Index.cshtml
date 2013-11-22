@@ -114,6 +114,8 @@
                     <span style="color: red;">
                         @if (State.Contains("masp_exist_fail"))
                         { <text> Không hợp lệ, bị trùng mã với sản phẩm có sẵn</text> }
+                        else if (State.Contains("masp_fail"))
+                             { <text> Không hợp lệ </text> }
                     </span>
 				</div>
 				<div class="clear">
@@ -123,7 +125,8 @@
 					<input name="sanpham_ten" Value="@SanPham.ten" class="" size="33" type="text">
 					<sup>*</sup>
                     <span style="color: red;">
-                        @if(State.Contains("ten_fail")) { <text> Không hợp lệ</text> }
+                        @if (State.Contains("ten_fail"))
+                        { <text> Không hợp lệ</text> }
                     </span>
 				</div>
 				<div class="clear">
@@ -131,6 +134,11 @@
 				<label>Giá: </label>
 				<div class="margin-form">
 					<input name="sanpham_gia" class="" value="@SanPham.gia" type="text">
+                    <sup>*</sup>
+                    <span style="color: red;">
+                        @if (State.Contains("gia_fail"))
+                        { <text> Không hợp lệ (Giá phải nằm trong khoảng từ 0 -> 999999999)</text> }
+                    </span>
 				</div>
 				<div class="clear">
 				</div>
@@ -163,14 +171,16 @@
                 <label>Nhóm sản phẩm:</label>
                 <div class="margin-form">
                     <select name="sanpham_nhomsanpham_id" style="width:400px">
-					    @foreach(var cat in NhomSanPham2_ListAll) {
-                            String pre_fix = "";
-                            for (int i = 0; i < cat.level; i++)
-                            {
-                                pre_fix += "--";
-                            }
-                            <option value="@cat.id" @if(SanPham.nhomsanpham!=null && cat.id==SanPham.nhomsanpham.id) { <text>selected="selected"</text> }>@pre_fix @cat.ten</option>
-                        }
+					    @foreach (var cat in NhomSanPham2_ListAll)
+         {
+             String pre_fix = "";
+             for (int i = 0; i < cat.level; i++)
+             {
+                 pre_fix += "--";
+             }
+                            <option value="@cat.id" @if (SanPham.nhomsanpham != null && cat.id == SanPham.nhomsanpham.id)
+                                                    { <text>selected="selected"</text> }>@pre_fix @cat.ten</option>
+         }
 				    </select>
                     <sup>*</sup>
                 </div>
@@ -180,9 +190,10 @@
                 <div class="margin-form">
                     <select name="sanpham_hangsx_id" style="width:400px">
 					    @foreach (var hangsx in HangSX_ListAll)
-                        {
-                            <option value="@hangsx.id" @if(SanPham.hangsx!=null && hangsx.id==SanPham.hangsx.id) { <text>selected="selected"</text> }>@hangsx.ten</option>
-                        }
+         {
+                            <option value="@hangsx.id" @if (SanPham.hangsx != null && hangsx.id == SanPham.hangsx.id)
+                                                       { <text>selected="selected"</text> }>@hangsx.ten</option>
+         }
 				    </select>
                     <sup>*</sup>
                 </div>
@@ -191,11 +202,13 @@
 
 				<label>Active: </label>
 				<div class="margin-form">
-					<input name="sanpham_active" id="active_on" value="1" @if(@SanPham.active==true) {<text>checked="checked"</text>} type="radio">
+					<input name="sanpham_active" id="active_on" value="1" @if (@SanPham.active == true)
+                                                           {<text>checked="checked"</text>} type="radio">
 					<label class="t" for="active_on">
 					<img src="../img/admin/enabled.gif" alt="Enabled" title="Enabled">
 					</label>
-					<input name="sanpham_active" id="active_off" value="0" @if(@SanPham.active==false) {<text>checked="checked"</text>} type="radio">
+					<input name="sanpham_active" id="active_off" value="0" @if (@SanPham.active == false)
+                                                            {<text>checked="checked"</text>} type="radio">
 					<label class="t" for="active_off">
 					<img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled">
 					</label>
@@ -230,32 +243,32 @@
 						</tr>
 						</thead>
 						<tbody id="imageList">
-		                    @foreach(var hinhanh in SanPham.ds_hinhanh.OrderByDescending(x=>x.id).ToList())
-                            {
+		                    @foreach (var hinhanh in SanPham.ds_hinhanh.OrderByDescending(x => x.id).ToList())
+                      {
                             <tr>
 			                    <td style="padding: 4px;">
-				                    <a href="@Url.Content("~/_Upload/HinhAnh/"+hinhanh.duongdan)" class="fancybox">
-					                    <img src="@Url.Content("~/_Upload/HinhAnh/"+hinhanh.duongdan_thumb)" style="max-width:70px;">
+				                    <a href="@Url.Content("~/_Upload/HinhAnh/" + hinhanh.duongdan)" class="fancybox">
+					                    <img src="@Url.Content("~/_Upload/HinhAnh/" + hinhanh.duongdan_thumb)" style="max-width:70px;">
 				                    </a>
 			                    </td>
 			                    
-						        <td class="center cover"><a href="@Url.Action("HinhAnh_SetDefault", "AdminSanPham", new {for_sanpham_id=SanPham.id,hinhanh_id=hinhanh.id })">
+						        <td class="center cover"><a href="@Url.Action("HinhAnh_SetDefault", "AdminSanPham", new { for_sanpham_id = SanPham.id, hinhanh_id = hinhanh.id })">
 				                    @{
-                                        String macdinh_img = "disabled.gif";
-                                        if (hinhanh.macdinh)
-                                        {
-                                            macdinh_img = "enabled.gif";
-                                        }
+                          String macdinh_img = "disabled.gif";
+                          if (hinhanh.macdinh)
+                          {
+                              macdinh_img = "enabled.gif";
+                          }
                                     }
                                     <img class="covered" src="../img/admin/@macdinh_img" alt="Đặt làm mặc định"></a>
 			                    </td>
 			                    <td class="center">
-				                    <a href="javascript:qd_confirm( '@Url.Action("HinhAnh_Delete", "AdminSanPham", new {for_sanpham_id=SanPham.id,hinhanh_id=hinhanh.id })' )" class="delete_product_image">
+				                    <a href="javascript:qd_confirm( '@Url.Action("HinhAnh_Delete", "AdminSanPham", new { for_sanpham_id = SanPham.id, hinhanh_id = hinhanh.id })' )" class="delete_product_image">
 					                    <img src="../img/admin/delete.gif" alt="Delete this image" title="Xóa hình này">
 				                    </a>
 			                    </td>
 		                    </tr>
-                            }
+                      }
 	                    </tbody>
 				    </table>
 		        </div>
@@ -342,10 +355,11 @@
 			<tbody>
             <tr>
 				<td style="vertical-align: bottom;">
-					<strong style="float:left">Danh sách chi tiết sản phẩm</strong>
-                    <a href="@Url.Action("ChiTietSP_Add", "AdminSanPham", new { for_sanpham_id=SanPham.id })" style="float:right" class ="button bt-icon" id="show_specific_price"><img src="../img/admin/add.gif" alt=""><span>Thêm chi tiết sản phẩm mới</span></a>
+					<strong style="float:left; font-size:16px;">Danh sách chi tiết sản phẩm</strong>
+                    <a href="@Url.Action("ChiTietSP_Add", "AdminSanPham", new { for_sanpham_id = SanPham.id })" style="float:right" class ="button bt-icon" id="show_specific_price"><img src="../img/admin/add.gif" alt=""><span>Thêm chi tiết sản phẩm mới</span></a>
                     <div style="clear:both;height:0;line-height:0">
 			             &nbsp;
+                        <a id="qd_ds_chitietsp"></a>
 		            </div>
 				</td>
 			</tr>
@@ -395,8 +409,8 @@
 					</thead>
 					<tbody>
                     
-					@foreach(var item in SanPham.ds_chitietsp.OrderByDescending(x=>x.id))
-                    {
+					@foreach (var item in SanPham.ds_chitietsp.OrderByDescending(x => x.id))
+     {
                     <tr class=" row_hover">
 						<td class="center">
 						</td>
@@ -414,18 +428,18 @@
 						</td>
 						<td class="pointer center" onclick="document.location = '@Url.Action("ChiTietSP_Edit", "AdminSanPham", new { id = item.id })'">
 							<a href="@Url.Action("ChiTietSP_Edit", "AdminSanPham", new { id = item.id })" title="Enabled">
-							    @if(item.active==true)
-                                {
+							    @if (item.active == true)
+           {
                                     <text>
                                         <img src="../img/admin/enabled.gif" alt="Enabled"/>
                                     </text>
-                                }
-                                else
-                                {
+           }
+           else
+           {
                                     <text>
                                         <img src="../img/admin/disabled.gif" alt="Disabled"/>
                                     </text>
-                                }
+           }
 							</a>
 						</td>
 						<td class="center" style="white-space: nowrap;">
@@ -433,12 +447,12 @@
 							<img src="../img/admin/edit.gif" alt="Edit"/>
 							</a>
                             &nbsp;&nbsp;
-                            <a href="@Url.Action("Delete", "AdminChiTietSP", new { id = item.id })" class="edit" title="Delete">
+                            <a href="javascript:qd_confirm( '@Url.Action("ChiTietSP_Delete", "AdminSanPham", new { id = item.id })' )" class="edit" title="Delete">
 							<img src="../img/admin/delete.gif" alt="Delete"/>
 							</a>
 						</td>
 					</tr>
-                    }
+     }
 					</tbody>
 					</table>
 				</td>
@@ -450,24 +464,24 @@
         <!-- END DS chi tiet sp -->
 
         <!-- Them chi tiet SP moi -->
-        <form class="defaultForm AdminEmployees" action="@Url.Action("ChiTietSP_Submit","AdminSanPham")" method="post" enctype="multipart/form-data">
+        <form class="defaultForm AdminEmployees" action="@Url.Action("ChiTietSP_Submit", "AdminSanPham")" method="post" enctype="multipart/form-data">
 			<input name="sanpham_id" value="@SanPham.id" type="hidden">
             <input name="chitietsp_id" value="@ChiTietSP.id" type="hidden">
             @{
-                Boolean chitietsp_edit_mode = ChiTietSP.id>0?true:false;
+                Boolean chitietsp_edit_mode = ChiTietSP.id > 0 ? true : false;
             }
 			<fieldset>
 				<legend>
 				<img src="../img/admin/nav-user.gif" alt="Employees"> Thông tin chi tiết sản phẩm </legend>
-				
+				<a id="qd_chitietsp" ></a>
                 <label>Kích thước:</label>
                 <div class="margin-form">
                     <select name="chitietsp_kichthuoc_id" style="width:400px">
 					    @foreach (var item in KichThuoc_ListAll)
-                        {
+         {
                             <option value="@item.id" @if (chitietsp_edit_mode && ChiTietSP.kichthuoc.id == item.id)
                                                      {<text>selected="selected"</text>}>@item.giatri</option>
-                        }
+         }
 				    </select>
                     <sup>*</sup>
                 </div>
@@ -477,10 +491,10 @@
                 <div class="margin-form">
                     <select name="chitietsp_mausac_id" style="width:400px">
 					    @foreach (var item in MauSac_ListAll)
-                        {
+         {
                             <option value="@item.id" @if (chitietsp_edit_mode && ChiTietSP.mausac.id == item.id)
                                                      {<text>selected="selected"</text>}>@item.giatri</option>
-                        }
+         }
 				    </select>
                     <sup>*</sup>
                 </div>
@@ -496,11 +510,13 @@
 
 				<label>Active: </label>
 				<div class="margin-form">
-					<input name="chitietsp_active" value="1" type="radio" @if(ChiTietSP.active==true) {<text>checked="checked"</text>}>
+					<input name="chitietsp_active" value="1" type="radio" @if (ChiTietSP.active == true)
+                                                           {<text>checked="checked"</text>}>
 					<label class="t" for="active_on">
 					<img src="../img/admin/enabled.gif" alt="Enabled" title="Enabled">
 					</label>
-					<input name="chitietsp_active" value="0"  type="radio" @if(ChiTietSP.active==false) {<text>checked="checked"</text>}>
+					<input name="chitietsp_active" value="0"  type="radio" @if (ChiTietSP.active == false)
+                                                            {<text>checked="checked"</text>}>
 					<label class="t" for="active_off">
 					<img src="../img/admin/disabled.gif" alt="Disabled" title="Disabled">
 					</label>
@@ -511,7 +527,8 @@
 				<div class="clear">
 				</div>
                 <div class="margin-form">
-					<input value="@if(chitietsp_edit_mode) {<text>Lưu</text>}
+					<input value="@if (chitietsp_edit_mode)
+                   {<text>Lưu</text>}
                    else
                    {<text>Thêm</text>}" name="submitAddemployee" class="button" type="submit">
 				</div>

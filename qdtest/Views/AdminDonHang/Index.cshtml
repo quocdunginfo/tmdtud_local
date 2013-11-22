@@ -80,10 +80,10 @@
                 <div class="pageTitle">
                     <h3>
                         <span id="current_obj" style="font-weight: normal;">
-                            <span class="breadcrumb item-0 ">Đơn hàng
-                                
-                            </span>
-                        </span>
+                            <span class="breadcrumb item-0 ">Đơn hàng <img alt="&gt;" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"/>
+					</span>
+					<span class="breadcrumb item-1 ">Chi tiết </span>
+					</span>
                     </h3>
                 </div>
             </div>
@@ -185,7 +185,7 @@
                         <select name="donhang_trangthai">
                         
                             <option value="chualienlac" @if(donhang.trangthai.Equals("chualienlac")) {<text>selected="selected"</text>}>Chưa liên lạc - đơn hàng mới</option>
-                            <option value="chuagiao" @if(donhang.trangthai.Equals("chuagiao")) {<text>selected="selected"</text>}>Đã thanh toán - chưa giao</option>
+                            <option value="chuagiao" @if(donhang.trangthai.Equals("chuagiao")) {<text>selected="selected"</text>}>Chưa giao</option>
                             <option value="dagiao" @if(donhang.trangthai.Equals("dagiao")) {<text>selected="selected"</text>}>Đã giao - hoàn tất</option>
                             <option value="dabihuy" @if(donhang.trangthai.Equals("dabihuy")) {<text>selected="selected"</text>}>Đã bị hủy</option>
 					    </select>
@@ -239,7 +239,7 @@
             <div class="clear" style="margin-bottom: 10px;">
             </div>
         </div>
-        <form style="width: 98%" class="container-command-top-spacing" action="index.php?controller=AdminOrders&amp;vieworder&amp;token=03b97c0470d2242e7ad0b01a281a087b&amp;id_order=1" method="post" onsubmit="return orderDeleteProduct('This product cannot be returned.', 'Quantity to cancel is greater than quantity available.');">
+        <form style="width: 98%" class="container-command-top-spacing" action="#" method="post">
             <fieldset style="width: 100%;">
                 <div style="display: none">
                     
@@ -261,6 +261,10 @@
                                 </th>
                                 <th>Tên sản phẩm
                                 </th>
+                                <th style="width: 10%;">Màu
+                                </th>
+                                <th style="width: 10%;">Kích thước
+                                </th>
                                 <th style="width: 15%; text-align: center">Đơn giá
                                 </th>
                                 <th style="width: 1%; text-align: center">
@@ -271,16 +275,6 @@
                                 </th>
                                 <th style="width: 15%; text-align: center">Tổng cộng
                                 </th>
-                                <th colspan="2" style="display: none;" class="add_product_fields">&nbsp;
-                                </th>
-                                <th colspan="2" style="display: none;" class="edit_product_fields">&nbsp;
-                                </th>
-                                <th colspan="2" style="display: none;" class="standard_refund_fields">
-                                    <img src="../img/admin/delete.gif" alt="Products:">
-                                    Cancel
-                                </th>
-                                <th style="width: 12%; text-align: right; display: none" class="partial_refund_fields">Partial refund
-                                </th>
 
                             </tr>
                             @foreach(var item in donhang.ds_chitiet_donhang)
@@ -290,12 +284,19 @@
                                     <img src="@item.chitietsp.sanpham._get_hinhanh_macdinh()._get_duongdan_thumb_url()" alt="" class="imgm" style="max-width:70px; max-height:70px">
                                 </td>
                                 <td>
-                                    <a href="index.php?controller=adminproducts&amp;id_product=5&amp;updateproduct&amp;token=c4ecb5500c32302d072130315b268033">
+                                    <a href="@Url.Action("Index", "AdminSanPham", new { id=item.chitietsp.sanpham.id })">
                                         <span class="productName">@item.chitietsp.sanpham.ten</span><br>
                                     </a>
                                 </td>
+                                <td>
+                                    <span class="productName" style="color:@item.chitietsp.mausac.mamau ;">@item.chitietsp.mausac.giatri</span><br>
+                                    
+                                </td>
+                                <td>
+                                    <span class="productName">@item.chitietsp.kichthuoc.giatri</span><br>
+                                </td>
                                 <td align="center">
-                                    <span class="product_price_show">@item.dongia</span>
+                                    <span class="product_price_show">@qdtest._Library.TextLibrary.ToCommaStringNumber(item.dongia) VNĐ</span>
                                 </td>
                                 <td align="center">
                                     <span class="product_price_show">X</span>
@@ -305,7 +306,7 @@
                                 <td align="center">
                                     <span class="product_price_show">=</span>
                                 </td>
-                                <td align="center" class="total_product">@item._get_total()
+                                <td align="center" class="total_product">@item._get_total() VNĐ
                                 </td>
                                 
                             </tr>
@@ -317,10 +318,10 @@
                         <table class="table" width="450px;" style="border-radius: 0px;" cellspacing="0" cellpadding="0">
                             <tbody>
                                 <tr id="total_products">
-                                    <td width="150px;">
+                                    <td width="180px;">
                                         <b>Phí mua sản phẩm (1):</b>
                                     </td>
-                                    <td class="amount" align="right">@donhang._get_tongtien_notinclude_phivanchuyen()
+                                    <td class="amount" align="right"> @donhang._get_tongtien_notinclude_phivanchuyen() VNĐ
                                     </td>
                                     <td class="partial_refund_fields current-edit" style="display: none;">&nbsp;
                                     </td>
@@ -330,7 +331,7 @@
                                     <td>
                                         <b>Phí vận chuyển (2):</b>
                                     </td>
-                                    <td class="amount" align="right">@donhang._get_phivanchuyen()
+                                    <td class="amount" align="right">@donhang._get_phivanchuyen() VNĐ
                                     </td>
                                     
                                 </tr>
@@ -340,7 +341,7 @@
                                     </td>
                                     <td class="amount" style="font-size: 16px" align="right">
                                         <strong>
-                                        @donhang._get_tongtien()
+                                        @donhang._get_tongtien() VNĐ
                                             </strong>
                                     </td>
                                     <td class="partial_refund_fields current-edit" style="display: none;">&nbsp;
@@ -374,10 +375,7 @@
             &nbsp;
         </div>
         <br>
-        <br>
-        <a href="index.php?controller=AdminOrders&amp;token=03b97c0470d2242e7ad0b01a281a087b">
-            <img src="../img/admin/arrow2.gif">
-            Back to list</a><br>
+        
         <div style="clear: both; height: 0; line-height: 0">
             &nbsp;
         </div>

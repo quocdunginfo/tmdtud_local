@@ -24,6 +24,7 @@ namespace qdtest.Controllers
             this.timkiem_donhang["id"] = "";
             this.timkiem_donhang["khachhang_ten"] = "";
             this.timkiem_donhang["active"] = "1";
+            this.timkiem_donhang["thanhtoan_tructuyen"] = "";
             this.timkiem_donhang["trangthai"] = "chualienlac";
             this.timkiem_donhang["tongtien_from"] = "0";
             this.timkiem_donhang["tongtien_to"] = "0";
@@ -62,6 +63,7 @@ namespace qdtest.Controllers
                         timkiem_ngay,
                         ngay_from,
                         ngay_to,
+                        timkiem_donhang["thanhtoan_tructuyen"],
                         timkiem_donhang["trangthai"],
                         timkiem_donhang["active"]
                         )
@@ -77,6 +79,7 @@ namespace qdtest.Controllers
                 timkiem_ngay,
                 ngay_from,
                 ngay_to,
+                timkiem_donhang["thanhtoan_tructuyen"],
                 timkiem_donhang["trangthai"],
                 timkiem_donhang["active"],
                 "id",
@@ -104,6 +107,7 @@ namespace qdtest.Controllers
                 this.timkiem_donhang["id"] = TextLibrary.ToString(Request["donhang_id"]);
                 this.timkiem_donhang["khachhang_ten"] = TextLibrary.ToString(Request["donhang_khachhang_ten"]);
                 this.timkiem_donhang["active"] = TextLibrary.ToString(Request["donhang_active"]);
+                this.timkiem_donhang["thanhtoan_tructuyen"] = TextLibrary.ToString(Request["donhang_thanhtoan_tructuyen"]);
                 this.timkiem_donhang["trangthai"] = TextLibrary.ToString(Request["donhang_trangthai"]);
                 this.timkiem_donhang["tongtien_from"] = TextLibrary.ToInt(Request["donhang_tongtien_from"]).ToString();
                 this.timkiem_donhang["tongtien_to"] = TextLibrary.ToInt(Request["donhang_tongtien_to"]).ToString();

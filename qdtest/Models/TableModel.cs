@@ -525,7 +525,7 @@ namespace qdtest.Models
             }
             if (this.trangthai.Equals("chuagiao"))
             {
-                return "Đã thanh toán - chưa giao hàng";
+                return "Chưa giao hàng";
             }
             if (this.trangthai.Equals("dagiao"))
             {
@@ -708,6 +708,7 @@ namespace qdtest.Models
             this.diachi = "";
             this.email = "";
             this.sdt = "";
+            this.bad = false;
             this.active = true;
             this.diem = 0;
         }
@@ -720,15 +721,24 @@ namespace qdtest.Models
         public String diachi { get; set; }
         public String email { get; set; }
         public String sdt { get; set; }
+        public Boolean bad { get; set; }
         public Boolean active { get; set; }
         //external
         public virtual LoaiKhachHang loaikhachhang { get; set; }
         public virtual List<DonHang> ds_donhang { get; set; }
         public virtual List<PhanHoi> ds_phanhoi { get; set; }
 
-        public Boolean _Update_LoaiKhachHang()
+        public Boolean _Update_LoaiKhachHang(BanGiayDBContext context)
         {
-            return true;
+            foreach (var item in context.ds_loaikhachhang.OrderByDescending(x => x.mucdiem))
+            {
+                if (this.diem >= item.mucdiem)
+                {
+                    this.loaikhachhang = item;
+                    return true;
+                }
+            }
+            return false;
         }
     }
     public class NhanVien
@@ -737,6 +747,7 @@ namespace qdtest.Models
         {
             this.id = 0;
             this.active = true;
+            this.bad = false;
             // this.ds_sanpham = new List<SanPham>();
             this.ds_donhang = new List<DonHang>();
             this.ds_nhaphang = new List<NhapHang>();
@@ -752,6 +763,7 @@ namespace qdtest.Models
         public String tendaydu { get; set; }
         public String email { get; set; }
         public String matkhau { get; set; }
+        public Boolean bad { get; set; }
         public Boolean active { get; set; }
         public String forgot_password_session { get; set; }
         //external

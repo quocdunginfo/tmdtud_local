@@ -94,9 +94,10 @@
                 <h3>
                     <span id="current_obj" style="font-weight: normal;">
 
-                        <span class="breadcrumb item-0 ">Đơn hàng
-                        </span>
-                    </span>
+                       <span class="breadcrumb item-0 ">Đơn hàng <img alt="&gt;" style="margin-right:5px" src="../img/admin/separator_breadcrumb.png"/>
+					</span>
+					<span class="breadcrumb item-1 ">Danh sách </span>
+					</span>
 
                 </h3>
             </div>
@@ -173,8 +174,9 @@
                                 <col width="25px">
                                 <col>
                                 <col width="200px">
-                                <col width="280px">
-                                <col width="130px">
+                                <col width="200px">
+                                <col width="250px">
+                                <col width="150px">
                                 <col width="52px">
                             </colgroup>
                             <thead>
@@ -204,7 +206,7 @@
                                         <a href="@Url.Action("OrderBy", "AdminDonHangs", new { order_by="id", order_desc="0" })">
                                             <img border="0" src="../img/admin/@asc_suffix"></a>
                                     </th>
-                                    <th>
+                                    <th class="center">
                                         <span class="title_box">Tên khách hàng
                                         </span>
                                         <br>
@@ -228,7 +230,7 @@
                                         <a href="@Url.Action("OrderBy", "AdminDonHangs", new { order_by="khachhang.tendaydu", order_desc="0" })">
                                             <img border="0" src="../img/admin/@asc_suffix"></a>
                                     </th>
-                                    <th class="right">
+                                    <th class="center">
                                         <span class="title_box">Tổng tiền
                                         </span>
                                         <br>
@@ -252,8 +254,32 @@
                                         <a href="@Url.Action("OrderBy", "AdminDonHangs", new { order_by="tongtien", order_desc="0" })">
                                             <img border="0" src="../img/admin/@asc_suffix"></a>
                                     </th>
+                                    <th class="center">
+                                        <span class="title_box">Hình thức thanh toán
+                                        </span>
+                                        <br>
+                                        @{
+                                            desc_suffix = "down_d.gif";
+                                            asc_suffix = "up_d.gif";
+                                            if(timkiem_donhang["order_by"].ToLower().Equals("thanhtoan_tructuyen"))
+                                            {
+                                                if(timkiem_donhang["order_desc"].ToLower().Equals("1"))
+                                                {
+                                                    desc_suffix = "down.gif";
+                                                }
+                                                else
+                                                {
+                                                    asc_suffix = "up.gif";
+                                                }
+                                            }
+                                        }
+                                        <a href="@Url.Action("OrderBy", "AdminDonHangs", new { order_by="thanhtoan_tructuyen", order_desc="1" })">
+                                            <img border="0" src="../img/admin/@desc_suffix"></a>
+                                        <a href="@Url.Action("OrderBy", "AdminDonHangs", new { order_by="thanhtoan_tructuyen", order_desc="0" })">
+                                            <img border="0" src="../img/admin/@asc_suffix"></a>
+                                    </th>
                                     
-                                    <th>
+                                    <th class="center">
                                         <span class="title_box">Trạng thái
                                         </span>
                                         <br>
@@ -277,7 +303,7 @@
                                         <a href="@Url.Action("OrderBy", "AdminDonHangs", new { order_by="trangthai", order_desc="0" })">
                                             <img border="0" src="../img/admin/@asc_suffix"></a>
                                     </th>
-                                    <th class="right">
+                                    <th class="center">
                                         <span class="title_box">Ngày đặt
                                         </span>
                                         <br>
@@ -320,18 +346,26 @@
                                         <input type="text" class="filter" name="donhang_tongtien_to" value="@timkiem_donhang["tongtien_to"]" style="width: 75%">
                                     </td>
                                     <td>
+                                        <select onchange="$('#submitFilterButtonorder').focus();$('#submitFilterButtonorder').click();" name="donhang_thanhtoan_tructuyen" style="width: 98%">
+                                            <option value="" @if (timkiem_donhang["thanhtoan_tructuyen"].Equals("")) {<text>selected="selected"</text>}>(Tất cả)</option>
+                                             <option value="1" @if (timkiem_donhang["thanhtoan_tructuyen"].Equals("1")) {<text>selected="selected"</text>}>Thanh toán trực tuyến</option>
+                                            <option value="0" @if (timkiem_donhang["thanhtoan_tructuyen"].Equals("0"))
+                                                                        {<text>selected="selected"</text>}>Thanh toán tại nhà</option>
+                                        </select>
+                                    </td>
+                                    <td>
                                         <select onchange="$('#submitFilterButtonorder').focus();$('#submitFilterButtonorder').click();" name="donhang_trangthai" style="width: 280px">
                                             <option value="" @if (timkiem_donhang["trangthai"].Equals("")) {<text>selected="selected"</text>}>(Tất cả)</option>
                                             <option value="chualienlac" @if (timkiem_donhang["trangthai"].Equals("chualienlac")) {<text>selected="selected"</text>}>Chưa liên lạc - đơn hàng mới</option>
-                                            <option value="chuagiao" @if (timkiem_donhang["trangthai"].Equals("chuagiao")) {<text>selected="selected"</text>}>Đã thanh toán - chưa giao</option>
+                                            <option value="chuagiao" @if (timkiem_donhang["trangthai"].Equals("chuagiao")) {<text>selected="selected"</text>}>Chưa giao hàng</option>
                                             <option value="dagiao" @if (timkiem_donhang["trangthai"].Equals("dagiao")) {<text>selected="selected"</text>}>Đã giao - hoàn tất</option>
                                             <option value="dabihuy" @if (timkiem_donhang["trangthai"].Equals("dabihuy")) {<text>selected="selected"</text>}>Đã bị hủy</option>
                                         </select>
                                     </td>
                                     <td class="right">từ
-                                        <input name="donhang_ngay_from" type="text" class="filter datepicker hasDatepicker" id="qdDatePickerFrom" value="@timkiem_donhang["ngay_from"]" style="width: 70px"><br>
+                                        <input name="donhang_ngay_from" type="text" class="filter datepicker hasDatepicker" id="qdDatePickerFrom" value="@timkiem_donhang["ngay_from"]" style="width: 90px"><br>
                                         đến
-                                        <input name="donhang_ngay_to" type="text" class="filter datepicker hasDatepicker" id="qdDatePickerTo" value="@timkiem_donhang["ngay_to"]" style="width: 70px">
+                                        <input name="donhang_ngay_to" type="text" class="filter datepicker hasDatepicker" id="qdDatePickerTo" value="@timkiem_donhang["ngay_to"]" style="width: 90px">
                                     </td>                                   
 
                                     <td class="center">--</td>
@@ -354,6 +388,18 @@
                                         <b>
                                             @item.tongtien
                                         </b>
+                                    </td>
+                                    <td class="pointer" onclick="document.location = '@Url.Action("Index","AdminDonHang", new {id=item.id})'">
+                                        <span class="color_field" style="background-color:#575757; color: white">
+                                            @if (item.thanhtoan_tructuyen)
+                                            {
+                                                @:Thanh toán trực tuyến
+                                            }
+                                            else
+                                            {
+                                                @:Thanh toán tại nhà   
+                                            }
+                                        </span>
                                     </td>
                                     <td class="pointer" onclick="document.location = '@Url.Action("Index","AdminDonHang", new {id=item.id})'">
                                         <span class="color_field" style="background-color:#575757; color: white">

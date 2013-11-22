@@ -15,7 +15,7 @@ namespace qdtest.Controllers
         //
         // GET: /FrontSanPhamDetail/
 
-        public ActionResult Index(int id)
+        public ActionResult Index(int id=0)
         {
             ViewBag.id = 2;
             SanPhamController ctr = new SanPhamController();

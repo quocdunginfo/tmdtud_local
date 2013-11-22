@@ -22,31 +22,28 @@ namespace qdtest.Controllers
             {
                 return RedirectToAction("Index", "AdminHome");
             }
-            else
+            int uid = 0;
+            String password = "";
+            //lay thong tin tu cookies
+            HttpCookie _tmp = Request.Cookies.Get("nhanvien");
+            if (_tmp != null)
             {
-                int uid = 0;
-                String password = "";
-                //lay thong tin tu cookies
-                HttpCookie _tmp = Request.Cookies.Get("nhanvien");
-                if (_tmp != null)
-                {
-                    uid = TextLibrary.ToInt(_tmp["user_id"].ToString());
-                    password = TextLibrary.ToString(_tmp["user_password"].ToString());
-                }
-
-                //lay thong tin user theo yeu cau dang nhap
-                NhanVienController ctr = new NhanVienController();
-                this._user = ctr.get_by_id_hash_password(uid, password);
-                //nếu đăng nhập roi thì chuyển tới trang đăng nhập
-                if (this._user != null)
-                {
-                    return RedirectToAction("Index", "AdminHome");
-                }
-
-                //hien thi form login
-                return View();
+                uid = TextLibrary.ToInt(_tmp["user_id"].ToString());
+                password = TextLibrary.ToString(_tmp["user_password"].ToString());
             }
-            
+
+            //lay thong tin user theo yeu cau dang nhap
+            NhanVienController ctr = new NhanVienController();
+            this._user = ctr.get_by_id_hash_password(uid, password);
+            //nếu đăng nhập roi thì chuyển tới trang đăng nhập
+            if (this._user != null)
+            {
+                return RedirectToAction("Index", "AdminHome");
+            }
+
+            //hien thi form login
+            ViewBag.State = new List<string>();
+            return View();
         }
         [HttpPost]
         public ActionResult Test_Login()
@@ -79,6 +76,9 @@ namespace qdtest.Controllers
                 return RedirectToAction("Index","AdminHome");
             }
             //load view
+            List<String> validate= new List<String>();
+            validate.Add("fail");
+            ViewBag.State = validate;
             return View("Index");
         }
         public ActionResult Logout()

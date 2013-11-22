@@ -89,6 +89,7 @@ namespace qdtest.Controllers
             obj.diachi = TextLibrary.ToString(Request["khachhang_diachi"]);
             obj.tendangnhap =  TextLibrary.ToString(Request["khachhang_tendangnhap"]);
             obj.tendaydu =  TextLibrary.ToString(Request["khachhang_tendaydu"]);
+            obj.bad = TextLibrary.ToBoolean(Request["khachhang_bad"]);
             obj.active = TextLibrary.ToBoolean(Request["khachhang_active"]);
             //validate
             validate.AddRange(ctr.validate(obj,matkhau,matkhau2));
@@ -101,7 +102,7 @@ namespace qdtest.Controllers
                     ctr._db.SaveChanges();
                     //call set password
                     ctr.set_password(obj.id,matkhau2);
-                    ViewBag.State = "edit_ok";
+                    validate.Add("edit_ok");
                 }
                 else
                 {
@@ -111,12 +112,12 @@ namespace qdtest.Controllers
                     int maxid = ctr.add(obj);
                     //re assign id
                     obj.id = maxid;
-                    ViewBag.State = "add_ok";
+                    validate.Add("add_ok");
                 }
             }
             ViewBag.KhachHang = obj;
             ViewBag.Title += " - Submit";
-            ViewBag.State = this._state;
+            ViewBag.State = validate;
             return View("Index");
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

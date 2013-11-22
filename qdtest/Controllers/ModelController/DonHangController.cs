@@ -73,14 +73,7 @@ namespace qdtest.Controllers.ModelController
             DonHang obj = this._Clone(obj_);//rất quan trọng thưa các bạn,
             //tính toán các dữ liệu cần thiết
                 //cập nhật trạng thái đơn hàng
-                if (obj.thanhtoan_tructuyen)
-                {
-                    obj.trangthai = "chuagiao";
-                }
-                else
-                {
-                    obj.trangthai = "chualienlac";
-                }
+                obj.trangthai = "chualienlac";
                 //tính phí
                 obj.phivanchuyen = obj.nguoinhan_diachi_tinhtp.phivanchuyen;
                 obj.tongtien = obj.__get_tongtien_notinclude_phivanchuyen() + obj.phivanchuyen;
@@ -89,7 +82,7 @@ namespace qdtest.Controllers.ModelController
                 {
                     obj.khachhang.diem += obj.tongtien / 10000;//10000 = 1 điểm
                     //cập nhật lại loại KH
-                    obj.khachhang._Update_LoaiKhachHang();
+                    obj.khachhang._Update_LoaiKhachHang(this._db);
                 }
                 //trừ tồn kho ngay lập tức
                 foreach (var item in obj.ds_chitiet_donhang)
@@ -119,11 +112,11 @@ namespace qdtest.Controllers.ModelController
             this._db.SaveChanges();
             return true;
         }
-        public int timkiem_count(String id = "", String khachhang_ten = "", int tongtien_from = 0, int tongtien_to = 0, Boolean timkiem_ngay = false, DateTime ngay_from = new DateTime(), DateTime ngay_to = new DateTime(), String trangthai = "", String active = "")
+        public int timkiem_count(String id = "", String khachhang_ten = "", int tongtien_from = 0, int tongtien_to = 0, Boolean timkiem_ngay = false, DateTime ngay_from = new DateTime(), DateTime ngay_to = new DateTime(), String thanhtoan_tructuyen="", String trangthai = "", String active = "")
         {
-            return timkiem(id, khachhang_ten, tongtien_from, tongtien_to, timkiem_ngay, ngay_from, ngay_to, trangthai, active).Count;
+            return timkiem(id, khachhang_ten, tongtien_from, tongtien_to, timkiem_ngay, ngay_from, ngay_to, thanhtoan_tructuyen, trangthai, active).Count;
         }
-        public List<DonHang> timkiem(String id = "", String khachhang_ten = "", int tongtien_from = 0, int tongtien_to = 0, Boolean timkiem_ngay = false, DateTime ngay_from = new DateTime(), DateTime ngay_to = new DateTime(), String trangthai = "", String active = "", String order_by = "id", Boolean order_desc = true, int start_point = 0, int count = -1)
+        public List<DonHang> timkiem(String id = "", String khachhang_ten = "", int tongtien_from = 0, int tongtien_to = 0, Boolean timkiem_ngay = false, DateTime ngay_from = new DateTime(), DateTime ngay_to = new DateTime(), String thanhtoan_tructuyen="", String trangthai = "", String active = "", String order_by = "id", Boolean order_desc = true, int start_point = 0, int count = -1)
         {
             List<DonHang> obj_list = new List<DonHang>();
             //find by LIKE element
@@ -137,6 +130,13 @@ namespace qdtest.Controllers.ModelController
                 int id_i = TextLibrary.ToInt(id);
                 obj_list = obj_list.Where(x => x.id == id_i).ToList();
             }
+            //filter by thanhtoan_tructuyen
+            if (!thanhtoan_tructuyen.Equals(""))
+            {
+                Boolean tttt = TextLibrary.ToBoolean(thanhtoan_tructuyen);
+                obj_list = obj_list.Where(x => x.thanhtoan_tructuyen == tttt).ToList();
+            }
+
             //filter by trangthai
             if (!trangthai.Equals(""))
             {

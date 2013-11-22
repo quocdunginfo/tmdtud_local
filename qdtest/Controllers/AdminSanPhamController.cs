@@ -40,7 +40,7 @@ namespace qdtest.Controllers
             }
             else
             {
-                //một khi đã hiển thi sản phẩm đã được save thì xóa ngay và luôn session
+                //một khi đã hiển thị sản phẩm đã được save thì xóa ngay và luôn session
                 if (Session != null && Session["sanpham_new_tmp"] != null)
                 {
                     Session["sanpham_new_tmp"] = null;
@@ -168,6 +168,8 @@ namespace qdtest.Controllers
                         HinhAnhController ctr_hinhanh = new HinhAnhController(ctr._db);
                         List<HinhAnh> hinhanh_list = ctr_hinhanh.upload(Server, Request.Files);
                         obj.ds_hinhanh.AddRange(hinhanh_list);
+                        //re assign to session
+                        Session["sanpham_new_tmp"] = obj;
                         //successfull redirect
                         return RedirectToAction("Index", "AdminSanPham", new { id = 0 });
                     }
@@ -182,7 +184,23 @@ namespace qdtest.Controllers
                         //successfull redirect
                         return RedirectToAction("Index", "AdminSanPham", new { id = obj.id });
                     }
-                    
+
+                }
+            }
+            else
+            {
+                //người dùng bấm nút upload hình ảnh chứ không phải nút lưu
+                if (!TextLibrary.ToString(Request["sanpham_upload_hinhanh"]).Equals(""))
+                {
+                    //khoan hãy lưu vào csdl
+                    HinhAnhController ctr_hinhanh = new HinhAnhController(ctr._db);
+                    List<HinhAnh> hinhanh_list = ctr_hinhanh.upload(Server, Request.Files);
+                    obj.ds_hinhanh.AddRange(hinhanh_list);
+                    //re assign to session
+                    Session["sanpham_new_tmp"] = obj;
+                    //successfull redirect
+                    this._add_state_tempdata(validate);
+                    return RedirectToAction("Index", "AdminSanPham", new { id = 0 });
                 }
             }
             
@@ -203,7 +221,49 @@ namespace qdtest.Controllers
                 return _fail_permission("chitietsp_add");
             }
             //redirect
-            return RedirectToAction("Index", "AdminSanPham", new { id = for_sanpham_id });
+            return Redirect(Url.Action("Index","AdminSanPham", new { id = for_sanpham_id })+ "#qd_chitietsp");//RedirectToAction("Index", "AdminSanPham", new { id = for_sanpham_id });
+        }
+        [HttpGet]
+        public ActionResult ChiTietSP_Delete(int id)
+        {
+            if (!this._nhanvien_permission.Contains("chitietsp_delete"))
+            {
+                return _fail_permission("chitietsp_delete");
+            }
+            SanPhamController ctr = new SanPhamController();
+            ChiTietSPController ctr_chitietsp = new ChiTietSPController(ctr._db);
+            ChiTietSP ctsp = new ChiTietSP();
+            SanPham sanpham = (SanPham)Session["sanpham_new_tmp"];
+            if (sanpham != null)
+            {
+                //vẫn còn đang ở un_save mode thì xóa từ session
+                ctsp = sanpham.ds_chitietsp.Where(x => x.id == id).FirstOrDefault();
+                sanpham.ds_chitietsp.Remove(ctsp);
+
+                return Redirect(Url.Action("Index", "AdminSanPham", new { id = 0, chitietsp_id = ctsp.id }) + "#qd_chitietsp");//return RedirectToAction("Index", "AdminSanPham", new { id = 0, chitietsp_id = ctsp.id });
+            }
+            //đã save rồi
+            else
+            {
+                ctsp = ctr_chitietsp.get_by_id(id);
+                sanpham = ctr.get_by_id(ctsp.sanpham.id);
+                if (ctsp == null)
+                {
+                    return RedirectToAction("Index", "AdminSanPhams");
+                }
+                //call xóa ctsp
+                try
+                {
+                    ctr_chitietsp.delete(ctsp.id);
+                }
+                catch (Exception)
+                {
+                    return _show_notification("Chi tiết sản phẩm này có dính khóa ngoại với đơn hàng hiện có nên không xóa được");
+                }
+
+                return Redirect(Url.Action("Index", "AdminSanPham", new { id = sanpham.id, chitietsp_id = id }) + "#qd_chitietsp");//return RedirectToAction("Index", "AdminSanPham", new { id = ctsp.sanpham.id, chitietsp_id = ctsp.id });
+            }
+
         }
         //WORK OK
         [HttpGet]
@@ -221,7 +281,7 @@ namespace qdtest.Controllers
             {
                 //vẫn còn đang ở un_save mode thì lấy từ session ra
                 ctsp = sanpham.ds_chitietsp.Where(x => x.id == id).FirstOrDefault();
-                return RedirectToAction("Index", "AdminSanPham", new { id = 0, chitietsp_id = ctsp.id });
+                return Redirect(Url.Action("Index", "AdminSanPham", new { id = 0, chitietsp_id = ctsp.id }) + "#qd_chitietsp");//return RedirectToAction("Index", "AdminSanPham", new { id = 0, chitietsp_id = ctsp.id });
             }
             //đã save rồi
             else
@@ -232,7 +292,7 @@ namespace qdtest.Controllers
                 {
                     return RedirectToAction("Index", "AdminSanPhams");
                 }
-                return RedirectToAction("Index", "AdminSanPham", new { id = ctsp.sanpham.id, chitietsp_id = ctsp.id });
+                return Redirect(Url.Action("Index", "AdminSanPham", new { id = ctsp.sanpham.id, chitietsp_id = ctsp.id }) + "#qd_chitietsp");//return RedirectToAction("Index", "AdminSanPham", new { id = ctsp.sanpham.id, chitietsp_id = ctsp.id });
             }
         }
         //WORK OK
@@ -367,7 +427,7 @@ namespace qdtest.Controllers
                 //finally call update
                 ctr._db.SaveChanges();
             }
-            return RedirectToAction("Index", "AdminSanPham", new { id = sanpham_id});
+            return Redirect(Url.Action("Index", "AdminSanPham", new { id = sanpham_id }) + "#qd_ds_chitietsp"); //return RedirectToAction("Index", "AdminSanPham", new { id = sanpham_id });
         }
         [HttpGet]
         public ActionResult HinhAnh_SetDefault(int for_sanpham_id, int hinhanh_id)

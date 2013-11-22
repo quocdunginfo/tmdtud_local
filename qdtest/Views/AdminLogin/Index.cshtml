@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Admin Login Form";
+    var State = (List<String>)ViewBag.State;
     var qRootAdminTemplatePath = @Url.Content("~/Content/admin_login/");
 }
 <!DOCTYPE html>
@@ -17,24 +18,35 @@
 </head>
 <body>
   <form method="post" action="@Url.Action("Test_Login", "AdminLogin")" class="login">
-    <p>
+        
+      <p>
       <label for="login" style="width:150px">Tên đăng nhập:</label>
       <input name="user_username" id="login" value="" type="text">
     </p>
 
     <p>
-      <label for="password" style="width:150px; padding-left:">Mật khẩu:</label>
+      <label for="password" style="width:150px;">Mật khẩu:</label>
       <input name="user_password" id="password" value="" type="password">
     </p>
-
+    
     <p class="login-submit">
       <button type="submit" class="login-button">Đăng nhập</button>
     </p>
+      @if(State.Contains("fail"))
+        {
+     <p>
+        <label style="width:150px; height:30px">&nbsp;</label>
+        <span style="color:red;">Tài khoản hoặc mật khẩu không đúng!</span>
+        <span style="clear:both"></span>
+    </p>
+        }
+
     <p>
         <input type="checkbox" value="1" name="user_remember" style="margin-left:150px;"/>
         <span class="forgot-password" style="padding-left:5px; color:#00a1d2">Ghi nhớ mật khẩu</span>
     </p>
     <p class="forgot-password"><a href="@Url.Action("Index","AdminForgotPassword")">Quên mật khẩu?</a></p>
+      <p class="forgot-password"><a href="@Url.Action("Index","FrontHome")">Trang chủ Cửa hàng bán giày</a></p>
   </form>
 </body>
 
