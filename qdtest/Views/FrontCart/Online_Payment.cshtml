@@ -1,6 +1,14 @@
 ﻿@{
-    ViewBag.Title = "Online_Payment";
-    Layout = "~/Views/Shared/_FrontLayout.cshtml";
+    ViewBag.Title = "OnePay online payment gate";
+    Layout = null;
 }
-
-<h2>Online_Payment</h2>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ViewBag.Title</title>
+        <meta http-equiv="refresh" content="5; URL=@Url.Action("Finish","FrontCart")">
+    </head>
+<body>
+<img src="@Url.Content("~/Content/online_payment/online_payment.png")" />
+</body>
+</html>

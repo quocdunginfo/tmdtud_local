@@ -15,13 +15,13 @@
     <table width="680px" cellspacing="0" cellpadding="5">
         <tbody>
             <tr bgcolor="#ddd">
-                <th width="100" align="center">Hình ảnh</th>
-                <th width="150" align="center">Tên sản phẩm</th>
-                <th width="120" align="center">Thông tin</th>
-                <th width="80" align="center">Số lượng</th>
-                <th width="100" align="right">Đơn giá</th>
-                <th width="100" align="right">Tổng cộng</th>
-                <th width="40"></th>
+                <th width="70" align="center">Hình ảnh</th>
+                <th align="center">Tên sản phẩm</th>
+                <th width="100" align="center">Thông tin</th>
+                <th width="60" align="center">Số lượng</th>
+                <th width="90" align="right">Đơn giá</th>
+                <th width="110" align="right">Tổng cộng</th>
+                <th width="20"></th>
 
             </tr>
             <tr>
@@ -34,20 +34,24 @@
             
                 <tr>
                 <td>
-                    <img src="@item.chitietsp.sanpham._get_hinhanh_macdinh()._get_duongdan_thumb_url()" alt="image 3" style="max-width:100px; max-height:100px;" onclick="document.location='@Url.Action("Index", "FrontSanPhamDetail", new { id=item.chitietsp.sanpham.id })'">
+                    <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id=item.chitietsp.sanpham.id })">
+                    <img src="@item.chitietsp.sanpham._get_hinhanh_macdinh()._get_duongdan_thumb_url()" alt="image 3" style="max-width:70px; max-height:70px;" >
+                    </a>
                 </td>
                 <td align="center">
+                    <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id=item.chitietsp.sanpham.id })">
                     @item.chitietsp.sanpham.ten
+                        </a>
                 </td>
                 
                 <td align="center">
                     <br>
-                    <div style="float: left; margin-left: 30px;">
+                    <div style="float: left; margin-left: 10px;">
                         Màu:
                     </div>
                     <div style="width: 45px; height: 15px; background: @item.chitietsp.mausac.mamau ; float: left; margin-left: 5px; margin-right: 0px;"></div>
                     <br>
-                    <div style="float: left; margin-left: 30px;">
+                    <div style="float: left; margin-left: 10px;">
                         Kích thước: @item.chitietsp.kichthuoc.giatri
                     </div>
                     <div style="clear:both"></div>
@@ -67,7 +71,7 @@
                     </form>
                 </td>
                 <td align="right">@qdtest._Library.TextLibrary.ToCommaStringNumber( item.dongia )  </td>
-                <td align="right">@item._get_total() </td>
+                <td align="right">@item._get_total() VNĐ</td>
                 <td align="center">
                     <a href="javascript:qd_confirm( '@Url.Action("Remove", "FrontCart", new { chitietsp_id = item.chitietsp.id })' )">
                     <img src="@Url.Content("~/Content/front/images/remove_x.gif")" alt="remove" style="width: 15px; height: 15px" title="Xóa khỏi giỏ hàng"></a>
@@ -93,9 +97,9 @@
             }
             <tr>
                 <td colspan="4" align="right" height="30px"></td>
-                <td align="right" style="background: #ddd; font-weight: bold">Tổng tiền</td>
-                <td align="right" style="background: #ddd; font-weight: bold">@giohang._get_tongtien_notinclude_phivanchuyen() </td>
-                <td style="background: #ddd; font-weight: bold"></td>
+                <td align="right" style="font-weight: bold">Tổng tiền:</td>
+                <td align="right" style="font-weight: bold; font-size:12px">@giohang._get_tongtien_notinclude_phivanchuyen() VNĐ</td>
+                <td style=""></td>
             </tr>
         </tbody>
     </table>

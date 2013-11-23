@@ -36,10 +36,6 @@ namespace qdtest.Controllers
         [HttpPost]
         public ActionResult Submit()
         {
-            if (!this._nhanvien_permission.Contains("donhang_edit"))
-            {
-                return _fail_permission("donhang_edit");
-            }
             int id = TextLibrary.ToInt(Request["donhang_id"]);
             DonHangController ctr=new DonHangController();
             DonHang obj= ctr.get_by_id(id);
@@ -47,7 +43,29 @@ namespace qdtest.Controllers
             {
                 return RedirectToAction("Index","AdminDonHangs");
             }
-            obj.trangthai = TextLibrary.ToString(Request["donhang_trangthai"]);
+            //check permision
+            if (obj.nhanvien!=null && this._nhanvien.id == obj.nhanvien.id)
+            {
+                //owner permission override
+            }
+            else if (!this._nhanvien_permission.Contains("donhang_edit"))
+            {
+                return _fail_permission("donhang_edit");
+            }
+            string trangthai = TextLibrary.ToString(Request["donhang_trangthai"]);
+            if (trangthai.Equals("dabihuy"))
+            {
+                obj._huy_don_hang();
+            }
+            else
+            {
+                obj.trangthai = trangthai;
+            }
+            //xét nhân viên xử lý đơn hàng
+            if (obj.nhanvien == null)
+            {
+                obj.nhanvien = ctr._db.ds_nhanvien.Where(x => x.id == this._nhanvien.id).FirstOrDefault();
+            }
             //luu
             ctr._db.SaveChanges();
             TempData["state"] = new string[] { "edit_ok" };

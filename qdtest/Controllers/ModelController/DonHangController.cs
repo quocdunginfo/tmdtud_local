@@ -83,6 +83,12 @@ namespace qdtest.Controllers.ModelController
                     obj.khachhang.diem += obj.tongtien / 10000;//10000 = 1 điểm
                     //cập nhật lại loại KH
                     obj.khachhang._Update_LoaiKhachHang(this._db);
+                    //giảm giá trực tiếp trên tổng tiền nếu KH có uu đãi
+                    UuDai udtmp = obj.khachhang.loaikhachhang._get_uudai();
+                    if (udtmp != null)
+                    {
+                        obj.tongtien -= udtmp.giatri * obj.tongtien / 100;
+                    }
                 }
                 //trừ tồn kho ngay lập tức
                 foreach (var item in obj.ds_chitiet_donhang)
@@ -181,6 +187,10 @@ namespace qdtest.Controllers.ModelController
                 {
                     obj_list = obj_list.OrderByDescending(x => x.trangthai).ToList();
                 }
+                else if (order_by.ToLower().Equals("thanhtoan_tructuyen"))
+                {
+                    obj_list = obj_list.OrderByDescending(x => x.thanhtoan_tructuyen).ToList();
+                }
                 else if (order_by.ToLower().Equals("ngay"))
                 {
                     obj_list = obj_list.OrderByDescending(x => x.ngay).ToList();
@@ -203,6 +213,10 @@ namespace qdtest.Controllers.ModelController
                 else if (order_by.ToLower().Equals("trangthai"))
                 {
                     obj_list = obj_list.OrderBy(x => x.trangthai).ToList();
+                }
+                else if (order_by.ToLower().Equals("thanhtoan_tructuyen"))
+                {
+                    obj_list = obj_list.OrderBy(x => x.thanhtoan_tructuyen).ToList();
                 }
                 else if (order_by.ToLower().Equals("ngay"))
                 {

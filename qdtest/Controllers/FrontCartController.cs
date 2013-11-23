@@ -43,10 +43,24 @@ namespace qdtest.Controllers
             }
             //lưu đơn hàng
             int max_id = ctr.add(this._giohang);
+            //reload
+            this._giohang = ctr.get_by_id(max_id);
+            //gửi mail cho kh
+                GMailLibrary gmail = new GMailLibrary();
+                gmail.receive_email = this._giohang._get_khachhang_email();
+                gmail.Generate_DonHang_Html(this._giohang);
+                try
+                {
+                    gmail.Send();
+                }catch(Exception)
+                {
+                    //nothing
+                }
             //xóa đơn hàng khỏi hệ thống ngay và luôn
             this._giohang = new DonHang();
             this._save_cart_to_session();
-
+            //cập nhật ngay cho giao diện trả về
+            ViewBag.giohang = this._giohang;
             //hiện thông báo hoàn tất, kết thúc quá trình phức tạp
             return View();
         }

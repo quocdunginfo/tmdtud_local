@@ -582,7 +582,7 @@ namespace qdtest.Models
         {
             if (this.khachhang != null)
             {
-                return khachhang.sdt;
+                return khachhang.email;
             }
             if (this.khachhang_nhanvien != null)
             {
@@ -592,10 +592,6 @@ namespace qdtest.Models
         }
         public String _get_tongtien()
         {
-            if (this.phivanchuyen + this.__get_tongtien_notinclude_phivanchuyen() != this.tongtien)
-            {
-                return TextLibrary.ToCommaStringNumber(this.phivanchuyen + this.__get_tongtien_notinclude_phivanchuyen());
-            }
             return TextLibrary.ToCommaStringNumber(this.tongtien);
         }
         public Boolean _is_nhanvien_muahang()
@@ -634,9 +630,56 @@ namespace qdtest.Models
             }
             return TextLibrary.ToCommaStringNumber(sum);
         }
+        public int __get_tongtien_include_phivanchuyen()
+        {
+            return this.__get_tongtien_notinclude_phivanchuyen() + this.phivanchuyen;
+        }
+        public int __get_tongtien_include_phivanchuyen_giamgia_tuloaikh()
+        {
+            return this.__get_tongtien_notinclude_phivanchuyen() + this.phivanchuyen - this.__get_giamgia_tuloaikh();
+        }
+        public string _get_tongtien_include_phivanchuyen_giamgia_tuloaikh()
+        {
+            return TextLibrary.ToCommaStringNumber( this.__get_tongtien_notinclude_phivanchuyen() + this.phivanchuyen - this.__get_giamgia_tuloaikh() );
+        }
         public string _get_tongtien_include_phivanchuyen()
         {
-            return TextLibrary.ToCommaStringNumber(this.__get_tongtien_notinclude_phivanchuyen()+this.phivanchuyen);
+            return TextLibrary.ToCommaStringNumber(this.__get_tongtien_include_phivanchuyen());
+        }
+        public Boolean _huy_don_hang()
+        {
+            if (this.trangthai.Equals("dabihuy"))
+            {
+                return false;
+            }
+            this.trangthai = "dabihuy";
+            //cộng ngược sl lại vào sp
+            
+            foreach (var item in this.ds_chitiet_donhang)
+            {
+                item.chitietsp.soluong += item.soluong;
+            }
+            return true;
+        }
+        public int __get_giamgia()
+        {
+            return this.__get_tongtien_include_phivanchuyen() - this.tongtien;
+        }
+        public int __get_giamgia_tuloaikh()
+        {
+            if (this.khachhang == null || this.khachhang.loaikhachhang == null || this.khachhang.loaikhachhang._get_uudai() == null)
+            {
+                return 0;
+            }
+            return this.khachhang.loaikhachhang._get_uudai().giatri * this.__get_tongtien_include_phivanchuyen() / 100;
+        }
+        public string _get_giamgia_tuloaikh()
+        {
+            return TextLibrary.ToCommaStringNumber(this.__get_giamgia_tuloaikh());
+        }
+        public string _get_giamgia()
+        {
+            return TextLibrary.ToCommaStringNumber( this.__get_giamgia());
         }
     }
     
@@ -663,15 +706,19 @@ namespace qdtest.Models
             this.id = 0;
             this.ten = "";
             this.noidung = "";
-            this.giatri = "";
+            this.giatri = 0;
             this.active = true;
+            this.ngaybatdau = DateTime.Now;
+            this.ngayketthuc = this.ngaybatdau.AddMonths(1);
         }
         [Key]
         public int id { get; set; }
         public string noidung { get; set; }
-        public string giatri { get; set; }
+        public int giatri { get; set; }
         public Boolean active { get; set; }
         public string ten { get; set; }
+        public DateTime ngaybatdau { get; set; }
+        public DateTime ngayketthuc { get; set; }
         //external
         public virtual LoaiUuDai loaiuudai { get; set; }
         public virtual LoaiKhachHang loaikhachhang { get; set; }
@@ -695,6 +742,14 @@ namespace qdtest.Models
         //external
         public virtual List<UuDai> ds_uudai { get; set; }
         public virtual List<KhachHang> ds_khachhang { get; set; }
+        //method
+        public UuDai _get_uudai()
+        {
+            //tự động lấy ưu đãi có giá trị lớn nhất
+            DateTime now = DateTime.Now;
+            now = new DateTime(now.Year,now.Month,now.Day,0,0,1);
+            return this.ds_uudai.Where(x => x.ngaybatdau.CompareTo(now)<=0 && x.ngayketthuc.CompareTo(now)>=0).OrderByDescending(x => x.giatri).FirstOrDefault();
+        }
     }
     public class KhachHang
     {

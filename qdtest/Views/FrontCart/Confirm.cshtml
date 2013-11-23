@@ -9,13 +9,12 @@
     <table width="680px" cellspacing="0" cellpadding="5">
         <tbody>
             <tr bgcolor="#ddd">
-                <th width="100" align="center">Hình ảnh</th>
-                <th width="150" align="center">Tên sản phẩm</th>
-                <th width="120" align="center">Thông tin</th>
-                <th width="80" align="center">Số lượng</th>
-                <th width="100" align="right">Đơn giá</th>
-                <th width="100" align="right">Tổng cộng</th>
-                <th width="40"></th>
+                <th width="70" align="center">Hình ảnh</th>
+                <th align="center">Tên sản phẩm</th>
+                <th width="100" align="center">Thông tin</th>
+                <th width="60" align="center">Số lượng</th>
+                <th width="90" align="right">Đơn giá</th>
+                <th width="110" align="right">Tổng cộng</th>
 
             </tr>
             <tr>
@@ -28,7 +27,7 @@
             
                 <tr>
                 <td>
-                    <img src="@item.chitietsp.sanpham._get_hinhanh_macdinh()._get_duongdan_thumb_url()" alt="image 3" style="max-width:100px; max-height:100px;">
+                    <img src="@item.chitietsp.sanpham._get_hinhanh_macdinh()._get_duongdan_thumb_url()" alt="image 3" style="max-width:70px; max-height:70px;">
                 </td>
                 <td align="center">
                     @item.chitietsp.sanpham.ten
@@ -36,12 +35,12 @@
                 
                 <td align="center">
                     <br>
-                    <div style="float: left; margin-left: 30px;">
+                    <div style="float: left; margin-left: 10px;">
                         Màu:
                     </div>
-                    <div style="width: 45px; height: 15px; background: @item.chitietsp.mausac.mamau ; float: left; margin-left: 5px; margin-right: 0px;"></div>
+                    <div style="border:solid 1px #808080; width: 45px; height: 15px; background:@item.chitietsp.mausac.mamau  ; float: left; margin-left: 5px; margin-right: 0px;"></div>
                     <br>
-                    <div style="float: left; margin-left: 30px;">
+                    <div style="float: left; margin-left: 10px;">
                         Kích thước: @item.chitietsp.kichthuoc.giatri
                     </div>
                     <div style="clear:both"></div>
@@ -51,12 +50,9 @@
                 <td align="center">
                     @item.soluong
                 </td>
-                <td align="right">@qdtest._Library.TextLibrary.ToCommaStringNumber( item.dongia )  </td>
-                <td align="right">@item._get_total() </td>
-                <td align="center">
-                    
-                    
-                </td>
+                <td align="right">@qdtest._Library.TextLibrary.ToCommaStringNumber( item.dongia )   VNĐ</td>
+                <td align="right">@item._get_total()  VNĐ</td>
+                
             </tr>
             <tr>
                 <td colspan="7" style="color:red;">
@@ -76,16 +72,26 @@
             </tr>
             }
             <tr>
-                <td colspan="3" align="right" height="30px"></td>
-                <td colspan="2" align="right" style="background: #ddd; font-weight: bold">Phí vận chuyển</td>
-                <td align="right" style="background: #ddd; font-weight: bold">@giohang._get_phivanchuyen() </td>
-                <td style="background: #ddd; font-weight: bold"></td>
+                
+                <td colspan="5" align="right" style="font-weight: bold">Tổng tiền trên sản phẩm (1):</td>
+                <td align="right" style="font-weight: bold;font-size:12px;">@giohang._get_tongtien_include_phivanchuyen() VNĐ</td>
             </tr>
             <tr>
-                <td colspan="3" align="right" height="30px"></td>
-                <td colspan="2" align="right" style="background: #ddd; font-weight: bold">Tổng tiền</td>
-                <td align="right" style="background: #ddd; font-weight: bold">@giohang._get_tongtien_include_phivanchuyen() </td>
-                <td style="background: #ddd; font-weight: bold"></td>
+                
+                <td colspan="5" align="right" style="font-weight: bold">Phí vận chuyển (2):</td>
+                <td align="right" style="font-weight: bold; font-size:12px;">@giohang._get_phivanchuyen()  VNĐ</td>
+            </tr>
+            @if(giohang.khachhang!=null && giohang.khachhang.loaikhachhang._get_uudai()!=null)
+            {
+            <tr>
+                <td colspan="5" align="right" style="font-weight: bold">Giảm giá (@giohang.khachhang.loaikhachhang._get_uudai().noidung) (3):</td>
+                <td align="right" style="font-weight: bold;font-size:12px;">@giohang._get_giamgia_tuloaikh() VNĐ </td>
+            </tr>
+            }
+            <tr>
+                
+                <td colspan="5" align="right" style="font-weight: bold">Tổng tiền cần thanh toán = (1) + (2) - (3)</td>
+                <td align="right" style="font-weight: bold;font-size:12px;">@giohang._get_tongtien_include_phivanchuyen_giamgia_tuloaikh()  VNĐ</td>
             </tr>
         </tbody>
     </table>
@@ -93,7 +99,7 @@
     <!-- thông tin người nhận -->
     <div id="contact_form" style="width:auto">
         <h4>Thông tin người nhận</h4>    
-        <form method="post" name="contact" action="#">
+        <form method="post" name="contact" action="@Url.Action("Payment","FrontCart")" onsubmit="document.location='@Url.Action("Payment","FrontCart")'">
 
                 <label style="width:auto">Họ và tên:</label>
                 <input type="text" class="required input_field" value="@giohang.nguoinhan_ten" style="float:left; border:none;" readonly="readonly">
@@ -116,9 +122,8 @@
                 <input type="text" class="input_field" value="@if(giohang.thanhtoan_tructuyen) {<text>Thanh toán trực tuyến qua OnePay</text>} else {<text>Thanh toán tại nhà</text>}" style="float:left; border:none;" readonly="readonly">
                 
                 <div class="cleaner h10"></div>
-               <input class="submit_btn" type="button" value="Hoàn tất đơn hàng" >
+               <input class="submit_btn" type="button" value="Hoàn tất đơn hàng" onclick="document.location='@Url.Action("Payment","FrontCart")'">
             </form>
         </div>
-    <button class="submit_btn"  value="Hoàn tất đơn hàng">Hoàn tất đơn hàng</button>
     <div class="cleaner h40"></div>
 </div>

@@ -108,6 +108,21 @@
                 <dl>
                     <dt>Tổng tiền: </dt>
                     <dd class="total_paid">@donhang._get_tongtien()</dd>
+                    |
+                </dl>
+                <dl>
+                    <dt>Nhân viên tiếp nhận đơn hàng: </dt>
+                    <dd class="total_paid">
+                        @if(donhang.nhanvien==null)
+                        {
+                            @:(Chưa có nhân viên xử lý)
+                        }
+                        else
+                        {
+                            @donhang.nhanvien.tendaydu   
+                        }
+                    </dd>
+                    |
                 </dl>
                 <div class="clear">
                 </div>
@@ -116,10 +131,6 @@
         <div class="container-command">
             <!-- Left column -->
             <div style="width: 49%; float: left;">
-                <!-- Change status form -->
-                <form action="" method="post">
-                    <input type="hidden" name="id_order" value="1">
-                </form>
                 <br>
                 <!-- History of status -->
                 <!-- Customer informations -->
@@ -180,10 +191,15 @@
                     }
                     <br />
                     -Trạng thái:
+                    @if (donhang.trangthai.Equals("dabihuy"))
+                    {
+                        @: <strong>Đã bị hủy</strong>
+                    }
+                    else
+                    {
                     <form action="@Url.Action("Submit","AdminDonHang")" method="post">
                         <input type="hidden" name="donhang_id" value="@donhang.id" />
                         <select name="donhang_trangthai">
-                        
                             <option value="chualienlac" @if(donhang.trangthai.Equals("chualienlac")) {<text>selected="selected"</text>}>Chưa liên lạc - đơn hàng mới</option>
                             <option value="chuagiao" @if(donhang.trangthai.Equals("chuagiao")) {<text>selected="selected"</text>}>Chưa giao</option>
                             <option value="dagiao" @if(donhang.trangthai.Equals("dagiao")) {<text>selected="selected"</text>}>Đã giao - hoàn tất</option>
@@ -193,6 +209,7 @@
                         <br />
                         <input type="submit" name="submit" class="button" value="Lưu"/>
                     </form>
+                    }
                 </fieldset>
                 <br>
                 <!-- Shipping block -->
@@ -327,7 +344,7 @@
                                     </td>
                                 </tr>
                                
-                                <tr id="total_shipping">
+                                <tr>
                                     <td>
                                         <b>Phí vận chuyển (2):</b>
                                     </td>
@@ -335,6 +352,17 @@
                                     </td>
                                     
                                 </tr>
+                                @if(@donhang.__get_giamgia()>0)
+                                {
+                                <tr>
+                                    <td>
+                                        <b>Giảm giá:</b>
+                                    </td>
+                                    <td class="amount" align="right">@donhang._get_giamgia() VNĐ
+                                    </td>
+                                    
+                                </tr>
+                                }
                                 <tr style="font-size: 16px" id="total_order">
                                     <td style="font-size: 16px">
                                         <strong>Tổng tiền = (1) + (2):</strong>

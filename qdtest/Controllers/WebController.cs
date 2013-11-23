@@ -24,10 +24,10 @@ namespace qdtest.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
-            
+            NhanVienController ctr = new NhanVienController();
             if (Session["nhanvien"] != null)
             {
-                this._nhanvien = (NhanVien)Session["nhanvien"];
+                this._nhanvien = ctr.get_by_id(((NhanVien)Session["nhanvien"]).id);
             }
             else
             {
@@ -41,7 +41,6 @@ namespace qdtest.Controllers
                     password = TextLibrary.ToString(_tmp["user_password"].ToString());
                 }
                 //lay thong tin user theo yeu cau dang nhap
-                NhanVienController ctr = new NhanVienController();
                 this._nhanvien = ctr.get_by_id_hash_password(uid, password);
             }
             

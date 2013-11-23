@@ -5,13 +5,13 @@ namespace qdtest.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    public sealed partial class nothing : IMigrationMetadata
+    public sealed partial class nothing2 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(nothing));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(nothing2));
         
         string IMigrationMetadata.Id
         {
-            get { return "201311221633130_nothing"; }
+            get { return "201311231638420_nothing2"; }
         }
         
         string IMigrationMetadata.Source

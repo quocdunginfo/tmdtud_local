@@ -149,9 +149,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201311221633130_nothing.cs" />
-    <Compile Include="Migrations\201311221633130_nothing.Designer.cs">
-      <DependentUpon>201311221633130_nothing.cs</DependentUpon>
+    <Compile Include="Migrations\201311231600592_nothing.cs" />
+    <Compile Include="Migrations\201311231600592_nothing.Designer.cs">
+      <DependentUpon>201311231600592_nothing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201311231638420_nothing2.cs" />
+    <Compile Include="Migrations\201311231638420_nothing2.Designer.cs">
+      <DependentUpon>201311231638420_nothing2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Models.cs" />
@@ -3244,6 +3248,7 @@
     <Content Include="Content\front\js\jquery.nivo.slider.pack.js" />
     <Content Include="Content\front\js\logging.js" />
     <Content Include="Content\front\js\slimbox2.js" />
+    <Content Include="Content\online_payment\online_payment.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -3693,8 +3698,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201311221633130_nothing.resx">
-      <DependentUpon>201311221633130_nothing.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201311231600592_nothing.resx">
+      <DependentUpon>201311231600592_nothing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311231638420_nothing2.resx">
+      <DependentUpon>201311231638420_nothing2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

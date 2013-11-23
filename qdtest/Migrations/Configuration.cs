@@ -118,7 +118,7 @@
                 //ƯU đãi
                 UuDai uudai = new UuDai();
                 uudai.active = true;
-                uudai.giatri = "5";
+                uudai.giatri = 5;
                 uudai.noidung = "Giảm giá 5% cho mỗi hóa đơn dành cho khách hàng thân thiết";
                 uudai.ten = "giam5phantram";
                 uudai.loaiuudai = context.ds_loaiuudai.Where(x => x.ten.Equals("Giảm giá")).FirstOrDefault();
@@ -129,7 +129,7 @@
 
                 uudai = new UuDai();
                 uudai.active = true;
-                uudai.giatri = "10";
+                uudai.giatri = 10;
                 uudai.noidung = "Giảm giá 10% cho mỗi hóa đơn dành cho khách hàng VIP";
                 uudai.ten = "giam10phantram";
                 uudai.loaiuudai = context.ds_loaiuudai.Where(x => x.ten.Equals("Giảm giá")).FirstOrDefault();
@@ -138,23 +138,25 @@
                     uudai
                     ); 
 
+                /*
                 uudai = new UuDai();
                 uudai.active = true;
-                uudai.giatri = "0";
+                uudai.giatri = 0;
                 uudai.noidung = "Giảm giá 0% cho mỗi hóa đơn dành cho khách hàng thông thường";
                 uudai.ten = "giam0phantram";
                 uudai.loaiuudai = context.ds_loaiuudai.Where(x => x.ten.Equals("Giảm giá")).FirstOrDefault();
                 context.ds_uudai.AddOrUpdate(
                     q => q.ten,
                     uudai
-                    ); 
+                    );
+                 * */
                 context.SaveChanges();
             //Thêm loại khach hang
                 LoaiKhachHang loaikh = new LoaiKhachHang();
                 loaikh.ten = "Khách hàng thường";
                 loaikh.mucdiem = 0;
                 loaikh.active = true;
-                loaikh.ds_uudai.Add(context.ds_uudai.Where(x => x.ten.Equals("giam0phantram")).FirstOrDefault());
+                //loaikh.ds_uudai.Add(context.ds_uudai.Where(x => x.ten.Equals("giam0phantram")).FirstOrDefault());
                 context.ds_loaikhachhang.AddOrUpdate(
                     q => q.ten,
                     loaikh

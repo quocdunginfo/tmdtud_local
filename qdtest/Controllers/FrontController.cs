@@ -27,6 +27,7 @@ namespace qdtest.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
+            KhachHangController ctr_kh = new KhachHangController();
             NhomSanPhamController ctr = new NhomSanPhamController();
             List<NhomSanPham2> list1 = ctr.timkiem("", "", "", "1");
             SanPhamController ctr2 = new SanPhamController(ctr._db);
@@ -69,7 +70,7 @@ namespace qdtest.Controllers
                 if (Session["khachhang"] != null)
                 {
                     //nếu như KH đã đăng nhập rồi
-                    this._khachhang = (KhachHang)Session["khachhang"];
+                    this._khachhang = ctr_kh.get_by_id(((KhachHang)Session["khachhang"]).id);
                 }
                 else
                 {
@@ -81,8 +82,7 @@ namespace qdtest.Controllers
                         int uid = TextLibrary.ToInt(_tmp["khachhang_id"].ToString());
                         string password = TextLibrary.ToString(_tmp["khachhang_password"].ToString());
                         //lay thong tin user theo yeu cau dang nhap
-                        KhachHangController ctr3456 = new KhachHangController();
-                        this._khachhang = ctr3456.get_by_id_hash_password(uid, password);
+                        this._khachhang = ctr_kh.get_by_id_hash_password(uid, password);
                     }
                 }
             }

@@ -15,10 +15,27 @@
     </h4>
     <div class="content_half float_l" style="width:auto">        
         <div id="contact_form" style="width:auto">
+            <div>
+                Nhóm khách hàng:<strong> @khachhang.loaikhachhang.ten </strong> | Điểm tích lũy:  <strong>@khachhang.diem</strong>
+                <br />
+                Hãy đặt hàng ngay hôm nay để tích lũy điểm và nhận ngay nhiều ưu đãi
+            </div>
+            <style>
+                hr.style-two {
+                    border: 0;
+                    height: 1px;
+                    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+                    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+                    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+                    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+                }
+            </style>
+            <hr class="style-two">
             <form method="post" name="contact" action="@Url.Action("Submit","FrontKhachHang")">
                 <input type="hidden" value="@khachhang.id" name="khachhang_id">
                 <label for="author">Tên đăng nhập:</label>
                 <input type="text" class="required input_field" value="@khachhang.tendangnhap" style="float:left; border:none" readonly="readonly">
+                
                 
                 <div class="cleaner h10"></div>
 
