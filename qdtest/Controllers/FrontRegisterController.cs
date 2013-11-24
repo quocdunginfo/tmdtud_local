@@ -120,6 +120,8 @@ namespace qdtest.Controllers
             //check
             if (validate.Count == 0)
             {
+                //call update loaikh first
+                obj._Update_LoaiKhachHang(ctr._db);
                 //tiến hành thêm và gán session auto đăng nhập
                 int max_id = ctr.add(obj);
                 obj.id = max_id;

@@ -58,7 +58,7 @@ namespace qdtest.Controllers
                 ctr.set_password(obj.id, matkhau2);
                 obj = ctr.get_by_id(obj.id);
                 this._khachhang = obj;
-                Session["khachhang"] = this._khachhang;
+                //Session["khachhang"] = this._khachhang;//Không cần thiết vì sẽ refresh lại theo id lúc gọi action mới
                 validate.Add("edit_ok");
             }
 

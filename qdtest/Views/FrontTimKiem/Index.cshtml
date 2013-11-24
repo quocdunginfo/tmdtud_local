@@ -4,173 +4,222 @@
     var _Template_Path = "~/Content/front/";
     var SanPham_List = (List<qdtest.Models.SanPham>)ViewBag.SanPham_List;
     var loaisp = (List<qdtest.Models.NhomSanPham2>)ViewBag.loaisp;
-    var hangsx=(List<qdtest.Models.HangSX>)ViewBag.hangsx;
+    var hangsx = (List<qdtest.Models.HangSX>)ViewBag.hangsx;
     var front_timkiem_sanpham = (HttpCookie)ViewBag.front_timkiem_sanpham;
 }
 <div id="content" class="float_r">
-       <div class="timkiemnangcao" >
-            	<h1>Kết quả tìm kiếm (Có @ViewBag.Result_Count sản phẩm)</h1>
+    <div class="timkiemnangcao" style="width:550px">
+        <h1>Kết quả tìm kiếm (Có @ViewBag.Result_Count sản phẩm)</h1>
         <form method="post" action="@Url.Action("Submit", "FrontTimKiem")"  class="form">
-               <label>Tên sản phẩm:</label>  <input type="text" name="front_sanpham_ten" value="@front_timkiem_sanpham["front_ten"]" >
-                 <label>Mô tả sản phẩm:</label> <input type="text" name="front_sanpham_mota" value="@front_timkiem_sanpham["front_mota"]">
-            <br />
-                <label>Loại sản phẩm:</label>  <select name="front_sanpham_nhomsanpham_id">
+            <label style="width:100px; display:inline-block">Tên sản phẩm:</label>
+            <input type="text" name="front_sanpham_ten" value="@front_timkiem_sanpham["front_ten"]" style="width:150px">
+            <label style="width:100px; display:inline-block; margin-left:20px">Mô tả sản phẩm:</label>
+            <input type="text" name="front_sanpham_mota" value="@front_timkiem_sanpham["front_mota"]" style="width:150px">
+            <div style="height:10px"></div>
+            <label style="width:100px; display:inline-block;">Loại sản phẩm:</label>
+            <label class="mylabel">
+                <select name="front_sanpham_nhomsanpham_id" style="width:155px">
                     @{
-                        <option value="" @if(front_timkiem_sanpham["front_nhomsanpham_id"].Equals("")){<text>selected</text>}>Tất cả các loại</option>
-                        foreach(var item in loaisp)
+                        <option value="" @if (front_timkiem_sanpham["front_nhomsanpham_id"].Equals(""))
+                                         {<text>selected</text>}>Tất cả các loại</option>
+                        foreach (var item in loaisp)
                         {
                             String pre = "";
                             for (int j = 0; j < item.level; j++)
                             {
                                 pre = "--" + pre;
                             }
-                            <option value="@item.id" @if(item.id==qdtest._Library.TextLibrary.ToInt(front_timkiem_sanpham["front_nhomsanpham_id"])){<text>selected</text>}>@pre @item.ten</option>
+                        <option value="@item.id" @if (item.id == qdtest._Library.TextLibrary.ToInt(front_timkiem_sanpham["front_nhomsanpham_id"]))
+                                                 {<text>selected</text>}>@pre @item.ten</option>
                         }
                     }
-                              </select>
-                <label>Hãng sản xuất:</label><select name="front_sanpham_hangsx_ten" >
+                </select>
+            </label>
+
+            <label style="width:100px; display:inline-block; margin-left:20px">Hãng sản xuất:</label>
+            <label class="mylabel">
+                <select name="front_sanpham_hangsx_ten" style="width:155px">
                     @{
-                        <option value="" @if(front_timkiem_sanpham["front_hangsx_ten"].Equals("")){<text>selected</text>}>Tất cả các hãng</option>
-                        foreach(var item in hangsx)
+                        <option value="" @if (front_timkiem_sanpham["front_hangsx_ten"].Equals(""))
+                                         {<text>selected</text>}>Tất cả các hãng</option>
+                        foreach (var item in hangsx)
                         {
-                            <option value="@item.ten" @if(item.ten.Equals(front_timkiem_sanpham["front_hangsx_ten"])){<text>selected</text>}>@item.ten</option>
+                        <option value="@item.ten" @if (item.ten.Equals(front_timkiem_sanpham["front_hangsx_ten"]))
+                                                  {<text>selected</text>}>@item.ten</option>
                         }
                     }
-                              </select>
-               <br />
-               <label >Giá từ:</label> <input type="text" name="front_sanpham_gia_from" value="@front_timkiem_sanpham["front_gia_from"]"> <label>đến</label> <input type="text" name="front_sanpham_gia_to" value="@front_timkiem_sanpham["front_gia_to"]">
-               
-            <div style="text-align:center"><input type="submit" value="Tìm kiếm"  /><input type="submit" name="front_submit_reset" value="Reset"/></div>
-            <div><label>Sắp xếp theo </label><select name="front_sanpham_orderby" onchange="submit()">
-                            <option value="id" @if(front_timkiem_sanpham["front_orderby"].Equals("id")){<text>selected</text>}>Mới nhất</option>
-                            <option value="masp" @if(front_timkiem_sanpham["front_orderby"].Equals("masp")){<text>selected</text>}>Mã sản phẩm</option>
-                            <option value="ten" @if(front_timkiem_sanpham["front_orderby"].Equals("ten")){<text>selected</text>}>Tên sản phẩm</option>
-                            <option value="gia" @if(front_timkiem_sanpham["front_orderby"].Equals("gia")){<text>selected</text>}>Giá sản phẩm</option>
-                            <option value="nhomsanpham" @if(front_timkiem_sanpham["front_orderby"].Equals("nhomsanpham")){<text>selected</text>}>Loại sản phẩm</option>
-                            <option value="hangsx" @if(front_timkiem_sanpham["front_orderby"].Equals("hangsx")){<text>selected</text>}>Hãng sản xuất</option>
-                        </select>
-          <select name="front_sanpham_desc" onchange="submit()" style="margin-right:10px">
-                             <option value="0" @if(front_timkiem_sanpham["front_desc"].Equals("0")){<text>selected</text>}>Tăng dần</option>
-                            <option value="1" @if(front_timkiem_sanpham["front_desc"].Equals("1")){<text>selected</text>}>Giảm dần</option>
-                        </select></div>
-                    <div><label>Hiển thị </label><select name="front_sanpham_max_item_per_page" onchange="submit()">
-                            @{
-                                for (int j = 1; j <= 10; j++)
-                                {<option value="@j" @if(int.Parse(front_timkiem_sanpham["front_max_item_per_page"])==j) {<text>selected</text>}>@j</option>}
-                            }
-                        </select> sản phẩm /trang
-        <label style="padding-left:300px">Hiển thị trang  <select name="front_current_page" onchange="submit()" style="margin-right:10px">
-                            @{
-                                for (int j = 1; j <= ViewBag.Total_Page; j++)
-                                {<option value="@j" @if(ViewBag.Current_Page==j) {<text>selected="selected"</text>}>@j</option>}
-                            }
-                        </select>/ @ViewBag.Total_Page trang</label></div>
-               </form>
+                </select>
+            </label>
+            <div style="height:10px"></div>
+            <label>Giá từ:</label>
+            <input type="text" name="front_sanpham_gia_from" value="@front_timkiem_sanpham["front_gia_from"]">
+            <label>đến</label>
+            <input type="text" name="front_sanpham_gia_to" value="@front_timkiem_sanpham["front_gia_to"]">
+            <div style="height:10px"></div>
+            <div style="float:right;">
+                <input type="submit" class="mybutton" value="Tìm kiếm" style="margin-right:10px"/>
+                <input class="mybutton" type="submit" name="front_submit_reset" value="Reset" />
+            </div>
+            <div style="height:10px; clear:both"></div>
+            <div>
+                <label>Sắp xếp theo </label>
+                <label class="mylabel">
+                    <select name="front_sanpham_orderby" onchange="submit()">
+                        <option value="id" @if (front_timkiem_sanpham["front_orderby"].Equals("id"))
+                                           {<text>selected</text>}>Mới nhất</option>
+                        <option value="masp" @if (front_timkiem_sanpham["front_orderby"].Equals("masp"))
+                                             {<text>selected</text>}>Mã sản phẩm</option>
+                        <option value="ten" @if (front_timkiem_sanpham["front_orderby"].Equals("ten"))
+                                            {<text>selected</text>}>Tên sản phẩm</option>
+                        <option value="gia" @if (front_timkiem_sanpham["front_orderby"].Equals("gia"))
+                                            {<text>selected</text>}>Giá sản phẩm</option>
+                        <option value="nhomsanpham" @if (front_timkiem_sanpham["front_orderby"].Equals("nhomsanpham"))
+                                                    {<text>selected</text>}>Loại sản phẩm</option>
+                        <option value="hangsx" @if (front_timkiem_sanpham["front_orderby"].Equals("hangsx"))
+                                               {<text>selected</text>}>Hãng sản xuất</option>
+                    </select>
+                </label>
+                <label class="mylabel">
+                    <select name="front_sanpham_desc" onchange="submit()" style="margin-right: 5px">
+                        <option value="0" @if (front_timkiem_sanpham["front_desc"].Equals("0"))
+                                          {<text>selected</text>}>Tăng dần</option>
+                        <option value="1" @if (front_timkiem_sanpham["front_desc"].Equals("1"))
+                                          {<text>selected</text>}>Giảm dần</option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <label>Hiển thị </label>
+                <label class="mylabel">
+                    <select name="front_sanpham_max_item_per_page" onchange="submit()">
+                        @{
+                            for (int j = 1; j <= 10; j++)
+                            {<option value="@j" @if (int.Parse(front_timkiem_sanpham["front_max_item_per_page"]) == j)
+                                            {<text>selected</text>}>@j</option>}
+                        }
+                    </select>
+                </label>
+                sản phẩm /trang
+        <label style="float:right">
+            Hiển thị trang 
+            <label class="mylabel">
+                <select name="front_current_page" onchange="submit()">
+                    @{
+                        for (int j = 1; j <= ViewBag.Total_Page; j++)
+                        {<option value="@j" @if (ViewBag.Current_Page == j)
+                                        {<text>selected="selected"</text>}>@j</option>}
+                    }
+                </select>
+            </label>
+            / @ViewBag.Total_Page trang</label>
+            <div style="clear:both"></div>
+            </div>
+        </form>
     </div>
     <br />
-       <div class="ketquatimkiem">
-                @{
-                    var i = 1;
-                    foreach (var item in SanPham_List)
-                    {
+    <div class="ketquatimkiem">
+        @{
+            var i = 1;
+            foreach (var item in SanPham_List)
+            {
 
-                        if (i % 3 == 0)
-                        {
-                      @:<div class="product_box no_margin_right">
+                if (i % 3 == 0)
+                {
+            @:<div class="product_box no_margin_right">
                        }
-                        else
-                        {
-                      @:<div class="product_box">
+                else
+                {
+            @:<div class="product_box">
                        }
                        
-            	        <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })"><img src="@Url.Content("~/_Upload/HinhAnh/" + item._get_hinhanh_macdinh().duongdan_thumb)" style="max-width:200px; height:150px" alt="Shoes @i" /></a>
+<a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })"><img src="@Url.Content("~/_Upload/HinhAnh/" + item._get_hinhanh_macdinh().duongdan_thumb)" style="max-width:200px; height:150px" alt="Shoes @i" /></a>
                         
-                        <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })"><h3>@item.ten</h3></a>
-                        <p class="product_price">@item.gia đ</p>
-                        var ctspid = 0;
-                        foreach (var k in item.ds_chitietsp.Where(x => x.active == true).ToList())
-                        {
-                            if (k.soluong > 0) { ctspid = k.id; break; }
-                        }
-                    if(ctspid==0)
-                    {
-                        <a  href="" onclick="alert('Rất tiếc, sản phẩm này đã hết hàng, xin vui lòng chọn sản phẩm khác!');" class="addtocart"></a>
-                    }else{
-                        <a href="@Url.Action("Add_Or_Update", "FrontCart", new { sanphamid=item.id,ctsp_id=ctspid,soluong=1})" class="addtocart"></a>}
-                         <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })" class="detail"></a>
-                        @: </div>   
+<a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })"><h3>@item.ten</h3></a>
+<p class="product_price">@item.gia đ</p>
+                var ctspid = 0;
+                foreach (var k in item.ds_chitietsp.Where(x => x.active == true).ToList())
+                {
+                    if (k.soluong > 0) { ctspid = k.id; break; }
+                }
+                if (ctspid == 0)
+                {
+<a  href="" onclick="alert('Rất tiếc, sản phẩm này đã hết hàng, xin vui lòng chọn sản phẩm khác!');" class="addtocart"></a>
+                }
+                else
+                {
+<a href="@Url.Action("Add_Or_Update", "FrontCart", new { sanphamid = item.id, ctsp_id = ctspid, soluong = 1 })" class="addtocart"></a>}
+<a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })" class="detail"></a>
+            @: </div>   
                         if (i % 3 == 0)
                         {               
-                     @: <div class="cleaner"></div>      	
+            @: <div class="cleaner"></div>      	
                        }
                         i++;
+            }
+        }
+        </div>
+          <div class="cleaner"></div>
+        <div class="qd_pagination" style="text-align: center; font-size: 14px">
+            @{
+                int start = 0, end = 0;
+                if (ViewBag.Current_Page - 2 > 0 && ViewBag.Current_Page + 2 <= ViewBag.Total_page)
+                {
+                    start = ViewBag.Current_Page - 2;
+                    end = ViewBag.Current_Page + 1;
+                }
+                else if (ViewBag.Current_Page - 2 <= 0 && ViewBag.Current_Page + 2 > ViewBag.Total_Page)
+                {
+                    start = 1;
+                    end = ViewBag.Total_page;
+                }
+                else if (ViewBag.Current_Page - 2 <= 0)
+                {
+                    start = 1; end = ViewBag.Current_Page + 2;
+                }
+                else if (ViewBag.Current_Page + 2 > ViewBag.Total_Page)
+                {
+                    start = ViewBag.Current_Page - 2;
+                    end = ViewBag.Total_Page;
+                }
+                if (ViewBag.Current_Page - 2 > 1)
+                {
+                <a href="@Url.Action("Index", "FrontTimKiem", new { page = 1 })" style="text-align:center">[Trang đầu]</a>
+                }
+                if (ViewBag.CanPrevPage == true)
+                {
+                <a href="@Url.Action("Index", "FrontTimKiem", new { page = ViewBag.Current_Page - 1 })" style="text-align:center">[Trước]</a>
+                }
+                if (ViewBag.Current_Page - 2 > 1)
+                {
+                <a href="#">...</a>
+                }
+
+                for (int tmp = start; tmp <= end; tmp++)
+                {
+                    if (ViewBag.Current_Page == tmp)
+                    {
+                <a href="@Url.Action("Index", "FrontTimKiem", new { page = tmp })" style="text-align:center"><b><u>@tmp</u></b></a>
+                    }
+                    else
+                    {
+                <a href="@Url.Action("Index", "FrontTimKiem", new { page = tmp })" style="text-align:center">@tmp</a>
                     }
                 }
-</div>
-          <div class="cleaner"></div>      	
-                <div class="qd_pagination" style="text-align:center;font-size:14px">
-                @{
-                    int start = 0, end = 0;
-                    if (ViewBag.Current_Page - 2 > 0 && ViewBag.Current_Page + 2 <= ViewBag.Total_page)
-                    {
-                        start = ViewBag.Current_Page - 2;
-                        end = ViewBag.Current_Page + 1;
-                    }
-                    else if (ViewBag.Current_Page - 2 <= 0 && ViewBag.Current_Page + 2 > ViewBag.Total_Page)
-                    {
-                        start = 1;
-                        end = ViewBag.Total_page;
-                    }
-                    else if (ViewBag.Current_Page - 2 <= 0)
-                    {
-                        start = 1; end = ViewBag.Current_Page + 2;
-                    }
-                    else if (ViewBag.Current_Page + 2 > ViewBag.Total_Page)
-                    {
-                        start = ViewBag.Current_Page - 2;
-                        end = ViewBag.Total_Page;
-                    }
-                    if (ViewBag.Current_Page - 2 > 1)
-                    {
-                            <a href="@Url.Action("Index", "FrontTimKiem", new { page = 1 })" style="text-align:center">[Trang đầu]</a>
-                    }
-                    if (ViewBag.CanPrevPage == true)
-                    {
-                            <a href="@Url.Action("Index", "FrontTimKiem", new { page = ViewBag.Current_Page - 1 })" style="text-align:center">[Trước]</a>
-                    }
-                    if (ViewBag.Current_Page - 2 > 1)
-                    {
-                            <a href="#">...</a>
-                    }
-
-                    for (int tmp = start; tmp <= end; tmp++)
-                    {
-                        if (ViewBag.Current_Page == tmp)
-                        {
-                                <a href="@Url.Action("Index", "FrontTimKiem", new { page = tmp })" style="text-align:center"><b><u>@tmp</u></b></a>
-                        }
-                        else
-                        {
-                                <a href="@Url.Action("Index", "FrontTimKiem", new { page = tmp })" style="text-align:center">@tmp</a>
-                        }
-                    }
 
 
-                    if (ViewBag.Current_Page + 1 < ViewBag.Total_page)
-                    {
-                            <a href="#">...</a>
-                    }
-                    if (ViewBag.CanNextPage == true)
-                    {
-                            <a href="@Url.Action("Index", "FrontTimKiem", new { page = ViewBag.Current_Page + 1 })" style="text-align:center">[Tiếp]</a>
-                    }
-                    if (ViewBag.Current_Page + 1 < ViewBag.Total_page)
-                    {
-                            <a href="@Url.Action("Index", "FrontTimKiem", new { page = ViewBag.Total_Page })" style="text-align:center">[Trang cuối]</a>
-                    }
-                    }   
-            </div>
+                if (ViewBag.Current_Page + 1 < ViewBag.Total_page)
+                {
+                <a href="#">...</a>
+                }
+                if (ViewBag.CanNextPage == true)
+                {
+                <a href="@Url.Action("Index", "FrontTimKiem", new { page = ViewBag.Current_Page + 1 })" style="text-align:center">[Tiếp]</a>
+                }
+                if (ViewBag.Current_Page + 1 < ViewBag.Total_page)
+                {
+                <a href="@Url.Action("Index", "FrontTimKiem", new { page = ViewBag.Total_Page })" style="text-align:center">[Trang cuối]</a>
+                }
+            }
+        </div>
 
-                   </div>
-
-
+    </div>

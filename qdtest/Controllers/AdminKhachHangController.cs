@@ -106,6 +106,8 @@ namespace qdtest.Controllers
                 }
                 else
                 {
+                    //call update loaikh first
+                    obj._Update_LoaiKhachHang(ctr._db);
                     //set raw password
                     obj.matkhau = matkhau2;
                     //call add
