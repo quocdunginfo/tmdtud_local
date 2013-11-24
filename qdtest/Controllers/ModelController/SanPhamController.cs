@@ -25,6 +25,7 @@ namespace qdtest.Controllers.ModelController
             var list = (from p in _db.ds_sanpham
                         join c in
                             ((from ChiTiet_DonHang in _db.ds_chitiet_donhang
+                              where !ChiTiet_DonHang.donhang.trangthai.Equals("dabihuy")
                               group new { ChiTiet_DonHang.chitietsp, ChiTiet_DonHang } by new
                               {
                                   Sanpham_id = (int?)ChiTiet_DonHang.chitietsp.sanpham.id,

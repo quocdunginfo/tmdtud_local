@@ -24,30 +24,30 @@
        <div class="sapxep" >
             	<h1>@loaisp.ten</h1>
         <form method="post" action="@Url.Action("Submit", "FrontSanPham", new { id=loaisp.id,level=loaisp.level })"  class="form">
-            <div><label>Sắp xếp theo </label><select name="front_sanpham_orderby" onchange="submit()">
+            <div><label>Sắp xếp theo </label><label class="mylabel"><select name="front_sanpham_orderby" onchange="submit()">
                             <option value="id" @if(front_sanpham["front_orderby"].Equals("id")){<text>selected</text>}>Mới nhất</option>
                             <option value="masp" @if(front_sanpham["front_orderby"].Equals("masp")){<text>selected</text>}>Mã sản phẩm</option>
                             <option value="ten" @if(front_sanpham["front_orderby"].Equals("ten")){<text>selected</text>}>Tên sản phẩm</option>
                             <option value="gia" @if(front_sanpham["front_orderby"].Equals("gia")){<text>selected</text>}>Giá sản phẩm</option>
                             <option value="nhomsanpham" @if(front_sanpham["front_orderby"].Equals("nhomsanpham")){<text>selected</text>}>Loại sản phẩm</option>
                             <option value="hangsx" @if(front_sanpham["front_orderby"].Equals("hangsx")){<text>selected</text>}>Hãng sản xuất</option>
-                        </select>
-          <select name="front_sanpham_desc" onchange="submit()" style="margin-right:10px">
+                        </select></label>
+        <label class="mylabel">  <select name="front_sanpham_desc" onchange="submit()" style="width:100px">
                              <option value="0" @if(front_sanpham["front_desc"].Equals("0")){<text>selected</text>}>Tăng dần</option>
                             <option value="1" @if(front_sanpham["front_desc"].Equals("1")){<text>selected</text>}>Giảm dần</option>
-                        </select></div>
-                    <div><label>Hiển thị </label><select name="front_sanpham_max_item_per_page" onchange="submit()">
+                        </select></label></div>
+                    <div style="margin-top:10px"><label>Hiển thị </label><label class="mylabel"><select name="front_sanpham_max_item_per_page" onchange="submit()" style="margin-left:10px;margin-right:5px">
                             @{
                                 for (int j = 1; j <= 10; j++)
                                 {<option value="@j" @if(int.Parse(front_sanpham["front_max_item_per_page"])==j) {<text>selected</text>}>@j</option>}
                             }
-                        </select> sản phẩm /trang
-        <label style="padding-left:300px">Hiển thị trang  <select name="front_current_page" onchange="submit()" style="margin-right:10px">
+                        </select></label>sản phẩm /trang
+        <label style="padding-left:250px">Hiển thị trang</label><label class="mylabel" ><select name="front_current_page" onchange="submit()" style="margin-right:5px;margin-left: 10px;width:50px">
                             @{
                                 for (int j = 1; j <= ViewBag.Total_Page; j++)
                                 {<option value="@j" @if(ViewBag.Current_Page==j) {<text>selected="selected"</text>}>@j</option>}
                             }
-                        </select>/ @ViewBag.Total_Page trang</label></div>
+                        </select></label>/ @ViewBag.Total_Page trang</div>
                </form>
     </div>
     <br />

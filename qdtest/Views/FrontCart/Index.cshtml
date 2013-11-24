@@ -62,11 +62,11 @@
                     <form id="qd_form_@{@item.id}" action="@Url.Action("Add_Or_Update")" method="post">
                         <input type="hidden" value="@item.chitietsp.id" name="giohang_chitietsp_id" />
                         <input type="hidden" value="1" name="update_from_cart" />
-                        <select name="giohang_soluong" style="width: 40px;" onchange="submit()">
+                      <label  class="mylabel">  <select name="giohang_soluong" style="width: 40px;" onchange="submit()">
                             <option @if(item.soluong==1) {<text> selected="selected" </text>} value="1">1</option>
                             <option @if(item.soluong==2) {<text> selected="selected" </text>} value="2">2</option>
                             <option @if(item.soluong==3) {<text> selected="selected" </text>} value="3">3</option>
-                        </select>
+                        </select></label>
                         
                     </form>
                 </td>

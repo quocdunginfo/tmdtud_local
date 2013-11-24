@@ -149,14 +149,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201311231600592_nothing.cs" />
-    <Compile Include="Migrations\201311231600592_nothing.Designer.cs">
-      <DependentUpon>201311231600592_nothing.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201311231638420_nothing2.cs" />
-    <Compile Include="Migrations\201311231638420_nothing2.Designer.cs">
-      <DependentUpon>201311231638420_nothing2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Models.cs" />
     <Compile Include="Models\TableModel.cs" />
@@ -3696,14 +3688,6 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201311231600592_nothing.resx">
-      <DependentUpon>201311231600592_nothing.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201311231638420_nothing2.resx">
-      <DependentUpon>201311231638420_nothing2.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

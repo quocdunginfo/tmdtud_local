@@ -10,15 +10,15 @@
 <div id="content" class="float_r">
     <div class="timkiemnangcao" style="width:550px">
         <h1>Kết quả tìm kiếm (Có @ViewBag.Result_Count sản phẩm)</h1>
-        <form method="post" action="@Url.Action("Submit", "FrontTimKiem")"  class="form">
+        <form method="post" action="@Url.Action("Submit", "FrontTimKiem")"  class="form" style="width:650px">
             <label style="width:100px; display:inline-block">Tên sản phẩm:</label>
-            <input type="text" name="front_sanpham_ten" value="@front_timkiem_sanpham["front_ten"]" style="width:150px">
+            <input type="text" name="front_sanpham_ten" value="@front_timkiem_sanpham["front_ten"]" style="width:200px">
             <label style="width:100px; display:inline-block; margin-left:20px">Mô tả sản phẩm:</label>
-            <input type="text" name="front_sanpham_mota" value="@front_timkiem_sanpham["front_mota"]" style="width:150px">
+            <input type="text" name="front_sanpham_mota" value="@front_timkiem_sanpham["front_mota"]" style="width:200px">
             <div style="height:10px"></div>
             <label style="width:100px; display:inline-block;">Loại sản phẩm:</label>
             <label class="mylabel">
-                <select name="front_sanpham_nhomsanpham_id" style="width:155px">
+                <select name="front_sanpham_nhomsanpham_id" style="width:205px">
                     @{
                         <option value="" @if (front_timkiem_sanpham["front_nhomsanpham_id"].Equals(""))
                                          {<text>selected</text>}>Tất cả các loại</option>
@@ -38,7 +38,7 @@
 
             <label style="width:100px; display:inline-block; margin-left:20px">Hãng sản xuất:</label>
             <label class="mylabel">
-                <select name="front_sanpham_hangsx_ten" style="width:155px">
+                <select name="front_sanpham_hangsx_ten" style="width:205px">
                     @{
                         <option value="" @if (front_timkiem_sanpham["front_hangsx_ten"].Equals(""))
                                          {<text>selected</text>}>Tất cả các hãng</option>
@@ -52,16 +52,16 @@
             </label>
             <div style="height:10px"></div>
             <label>Giá từ:</label>
-            <input type="text" name="front_sanpham_gia_from" value="@front_timkiem_sanpham["front_gia_from"]">
-            <label>đến</label>
-            <input type="text" name="front_sanpham_gia_to" value="@front_timkiem_sanpham["front_gia_to"]">
+            <input type="text" name="front_sanpham_gia_from" value="@front_timkiem_sanpham["front_gia_from"]" style="margin-left:65px;width:200px">
+            <label style="margin-left:20px">đến</label>
+            <input type="text" name="front_sanpham_gia_to" value="@front_timkiem_sanpham["front_gia_to"]" style="margin-left: 80px;width: 200px;">
             <div style="height:10px"></div>
-            <div style="float:right;">
+            <div style="text-align:center;">
                 <input type="submit" class="mybutton" value="Tìm kiếm" style="margin-right:10px"/>
                 <input class="mybutton" type="submit" name="front_submit_reset" value="Reset" />
             </div>
             <div style="height:10px; clear:both"></div>
-            <div>
+            <div style="margin-bottom:10px">
                 <label>Sắp xếp theo </label>
                 <label class="mylabel">
                     <select name="front_sanpham_orderby" onchange="submit()">
