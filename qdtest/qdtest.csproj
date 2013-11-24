@@ -113,6 +113,7 @@
     <Compile Include="Controllers\AdminLoaiNhanViensController.cs" />
     <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\AdminNhomSanPhamController.cs" />
+    <Compile Include="Controllers\AdminPhanHoisController.cs" />
     <Compile Include="Controllers\AdminSanPhamsController.cs" />
     <Compile Include="Controllers\AdminUserController.cs" />
     <Compile Include="Controllers\AdminUsersController.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Controllers\FrontSanPhamController.cs" />
     <Compile Include="Controllers\FrontSanPhamDetailController.cs" />
     <Compile Include="Controllers\FrontTimKiemController.cs" />
+    <Compile Include="Controllers\ModelController\PhanHoiController.cs" />
     <Compile Include="Controllers\ModelController\TinhTPController.cs" />
     <Compile Include="Controllers\ModelController\DonHangController.cs" />
     <Compile Include="Controllers\ModelController\QuyenController.cs" />
@@ -3520,6 +3522,7 @@
     <Content Include="Views\FrontContact\Index.cshtml" />
     <Content Include="Views\FrontCart\Online_Payment.cshtml" />
     <Content Include="Views\FrontCart\Finish.cshtml" />
+    <Content Include="Views\AdminPhanHois\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\admin\img\cms\" />

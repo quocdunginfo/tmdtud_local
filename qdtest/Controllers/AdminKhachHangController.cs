@@ -131,7 +131,7 @@ namespace qdtest.Controllers
         }
         private void _current_activetab()
         {
-            this._set_activetab(new String[] { "KhachHang" });
+            this._set_activetab(new String[] { "QuanLyKhachHang" });
         }
 
     }

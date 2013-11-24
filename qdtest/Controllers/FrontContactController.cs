@@ -16,17 +16,21 @@ namespace qdtest.Controllers
 {
     public class FrontContactController : FrontController
     {
-        //
-        // GET: /FrontContact/
-     //   List<string> valid;
         public ActionResult Index()
         {
-            if (this._is_logged_in())
+            PhanHoi obj = new PhanHoi();
+            if(this._nhanvien!=null)
             {
-                ViewBag.kh_info = this._khachhang;
+                obj.nguoigui_ten = _nhanvien.tendaydu;
+                obj.nguoigui_email = _nhanvien.email;
+                obj.nguoigui_sdt = "";
             }
-            else ViewBag.kh_info = new KhachHang();
-         //   ViewBag.State = this.valid;
+            else if(this._khachhang != null)
+            {
+                obj.khachhang = this._khachhang;
+            }
+            ViewBag.State = TempData["state"] == null ? new List<string>() : (List<string>)TempData["state"];
+            ViewBag.phanhoi = obj;
             return View();
         }
          [HttpGet]
@@ -90,52 +94,44 @@ namespace qdtest.Controllers
          }
          public ActionResult Submit()
          {
-                 PhanHoi obj = new PhanHoi();
-                 KhachHang kh_info=new KhachHang();
+             PhanHoiController ctr = new PhanHoiController();
+             PhanHoi obj = new PhanHoi();
             //get post value     
                 string tendaydu = TextLibrary.ToString(Request["front_contact_author"]);
                 string sdt = TextLibrary.ToString(Request["front_contact_phone"]);
                 string email = TextLibrary.ToString(Request["front_contact_email"]);
+                string tieude = TextLibrary.ToString(Request["front_contact_tieude"]);
                 string noidung = TextLibrary.ToString(Request["front_contact_text"]);
                 string captcha = TextLibrary.ToString(Request["front_contact_captcha"]);
             //pass to obj
-            //note: chưa pass to obj đc do trong obj đòi hỏi khachhang login mà p.hồi chưa chắc có login
-            //validate
-            List<string> validate = new List<string>();
-                //xét captcha trước
+                if (this._khachhang != null)
+                {
+                    obj.khachhang = ctr._db.ds_khachhang.Where(x => x.id == this._khachhang.id).FirstOrDefault();
+                }
+                else
+                {
+                    obj.nguoigui_email = email;
+                    obj.nguoigui_sdt = sdt;
+                    obj.nguoigui_ten = tendaydu;
+                }
+                obj.tieude = tieude;
+                obj.noidung = noidung;
+             //validate
+                List<string> validate = ctr.validate(obj);
+                //xét captcha
                 if (!this.get_captcha_string().ToLower().Equals(captcha.ToLower()))
                 {
                     validate.Add("captcha_fail");
                 }
-                if (!ValidateLibrary.is_valid_email(email)||email.Equals(""))
-                {
-                    validate.Add("email_fail");
-                }
-                if (tendaydu.Equals(""))
-                {
-                    validate.Add("author_fail");
-                }
-                if (noidung.Equals(""))
-                {
-                    validate.Add("text_fail");
-                }
-                sdt=sdt.Trim();
-                double num;
-                if (!double.TryParse(sdt,out num))
-                {
-                    validate.Add("phone_fail");
-                }
+            //Check ok
                 if (validate.Count == 0)
                 {
+                    ctr.add(obj);
                     validate.Add("success");
                 }
-            //    valid = validate;
+
                 ViewBag.State = validate;
-                kh_info.tendaydu = tendaydu;
-                kh_info.sdt = sdt;
-                kh_info.email = email;
-                ViewBag.kh_info = kh_info;
-                ViewBag.text = noidung;
+                ViewBag.phanhoi = obj;
                 return View("Index");
          }
          [NonAction]
