@@ -143,6 +143,9 @@ namespace qdtest.Models
             this.noidung = "";
             this.ngay = DateTime.Now;
             this.active = true;
+            this.nguoigui_ten = "";
+            this.nguoigui_sdt = "";
+            this.nguoigui_email = "";
         }
         [Key]
         public int id { get; set; }
@@ -156,6 +159,50 @@ namespace qdtest.Models
         //external
         public virtual NhanVien nhanvien { get; set; }//Nhân viên duyệt phản hồi
         public virtual KhachHang khachhang { get; set; }//Nếu là khách hàng gui
+        //method
+        public string _get_nguoigui_ten()
+        {
+            if (this.khachhang != null)
+            {
+                return khachhang.tendaydu;
+            }
+            return this.nguoigui_ten;
+        }
+        public string _get_nguoigui_email()
+        {
+            if (this.khachhang != null)
+            {
+                return khachhang.email;
+            }
+            return this.nguoigui_email;
+        }
+        public string _get_nguoigui_sdt()
+        {
+            if (this.khachhang != null)
+            {
+                return khachhang.sdt;
+            }
+            return this.nguoigui_sdt;
+        }
+        //method
+        public string _get_noidung_lite(int max_length = 200)
+        {
+            if (this.noidung.Equals(""))
+            {
+                return "(Không có nội dung)";
+            }
+            try
+            {
+                string tmp = this.noidung;
+                tmp = TextLibrary.HTML_Strip(tmp);
+                tmp = TextLibrary.Unicode_Substring(tmp, max_length);
+                return tmp + "...";
+            }
+            catch (Exception)
+            {
+                return this.noidung + "...";
+            }
+        }
     }
     public class ChiTietSP
     {

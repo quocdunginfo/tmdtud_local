@@ -161,7 +161,7 @@
                             <li class=""><a href="@Url.Action("Index_NgayTruoc", "AdminDonHangs", new { songay = -30})">Đơn hàng 30 ngày trước</a></li>
                         </ul>
                     </li>
-                    <li class="submenu_size maintab @if (ActiveTab.Contains("KhachHang"))
+                    <li class="submenu_size maintab @if (ActiveTab.Contains("QuanLyKhachHang"))
                                                     {<text>active</text>}" id="maintab11">
                         <a href="@Url.Action("Index", "AdminKhachHangs")" class="title">
                             <img src="../img/t/AdminParentCustomer.gif" alt="" />Khách hàng </a>
@@ -169,7 +169,8 @@
                             <li class="@if (ActiveTab.Contains("KhachHang"))
                                        {<text>active</text>}"><a href="@Url.Action("Index", "AdminKhachHangs")">Danh sách khách hàng</a></li>
                             <li><a href="@Url.Action("Add", "AdminKhachHangs")">Thêm khách hàng mới</a></li>
-                            <li><a href="@Url.Action("Add", "AdminPhanHois")">Phản hồi từ khách hàng</a></li>
+                            <li class="@if (ActiveTab.Contains("PhanHoi"))
+                                       {<text>active</text>}"><a href="@Url.Action("Index", "AdminPhanHois")">Phản hồi từ khách hàng</a></li>
                         </ul>
                     </li>
                     <li class="submenu_size maintab @if (ActiveTab.Contains("QuanTriHeThong"))

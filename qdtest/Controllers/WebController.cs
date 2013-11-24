@@ -43,7 +43,6 @@ namespace qdtest.Controllers
                 //lay thong tin user theo yeu cau dang nhap
                 this._nhanvien = ctr.get_by_id_hash_password(uid, password);
             }
-            
         }
     }
 }
