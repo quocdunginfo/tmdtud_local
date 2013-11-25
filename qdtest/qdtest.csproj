@@ -122,6 +122,7 @@
     <Compile Include="Controllers\AdminSanPhamController.cs" />
     <Compile Include="Controllers\AdminHangSXController.cs" />
     <Compile Include="Controllers\AdminHangSXsController.cs" />
+    <Compile Include="Controllers\FrontForgotPasswordController.cs" />
     <Compile Include="Controllers\FrontCartController.cs" />
     <Compile Include="Controllers\FrontContactController.cs" />
     <Compile Include="Controllers\FrontHomeController.cs" />
@@ -3515,6 +3516,10 @@
     <Content Include="Views\FrontCart\Online_Payment.cshtml" />
     <Content Include="Views\FrontCart\Finish.cshtml" />
     <Content Include="Views\AdminPhanHois\Index.cshtml" />
+    <Content Include="Views\FrontForgotPassword\_ViewStart.cshtml" />
+    <Content Include="Views\FrontForgotPassword\Index.cshtml" />
+    <Content Include="Views\FrontForgotPassword\Request_Password_Change.cshtml" />
+    <Content Include="Views\FrontForgotPassword\Request_Password_Change_Submit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\admin\img\cms\" />

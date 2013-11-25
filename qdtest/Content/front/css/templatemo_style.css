@@ -526,9 +526,9 @@ h6
         #contact_form form label
         {
             display: block;
-            width: 100px;
+            width: 270px;
             margin-right: 12px;
-            font-size: 11px;
+            font-size: 13px;
         }
 
         #contact_form form textarea
@@ -552,7 +552,7 @@ h6
             background-color: #000;
             border: 1px solid #fff;
             color: #fff;
-            font-size: 11px;
+            font-size: 13px;
             cursor: pointer;
         }
 

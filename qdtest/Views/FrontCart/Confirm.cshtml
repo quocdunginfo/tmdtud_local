@@ -81,16 +81,20 @@
                 <td colspan="5" align="right" style="font-weight: bold">Phí vận chuyển (2):</td>
                 <td align="right" style="font-weight: bold; font-size:12px;">@giohang._get_phivanchuyen()  VNĐ</td>
             </tr>
+            @{
+                var giamgia_post_fix="";   
+            }
             @if(giohang.khachhang!=null && giohang.khachhang.loaikhachhang!=null && giohang.khachhang.loaikhachhang._get_uudai()!=null)
             {
             <tr>
                 <td colspan="5" align="right" style="font-weight: bold">Giảm giá (@giohang.khachhang.loaikhachhang._get_uudai().noidung) (3):</td>
                 <td align="right" style="font-weight: bold;font-size:12px;">@giohang._get_giamgia_tuloaikh() VNĐ </td>
             </tr>
+            giamgia_post_fix= " - (3)";
             }
             <tr>
                 
-                <td colspan="5" align="right" style="font-weight: bold">Tổng tiền cần thanh toán = (1) + (2) - (3)</td>
+                <td colspan="5" align="right" style="font-weight: bold">Tổng tiền cần thanh toán = (1) + (2)@giamgia_post_fix :</td>
                 <td align="right" style="font-weight: bold;font-size:12px;">@giohang._get_tongtien_include_phivanchuyen_giamgia_tuloaikh()  VNĐ</td>
             </tr>
         </tbody>

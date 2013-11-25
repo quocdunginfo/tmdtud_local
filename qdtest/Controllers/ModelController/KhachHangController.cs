@@ -124,11 +124,11 @@ namespace qdtest.Controllers.ModelController
             this._db.SaveChanges();
             return true;
         }
-        public int timkiem_count(String id = "", String tendangnhap = "", String tendaydu = "", String email = "", String sdt = "", String diachi = "", String active = "")
+        public int timkiem_count(String id = "", String tendangnhap = "", String tendaydu = "", String email = "", String sdt = "", String diachi = "", String forgot_password_session="", String active = "")
         {
-            return timkiem(id, tendangnhap, tendaydu, email, sdt, diachi, active).Count;
+            return timkiem(id, tendangnhap, tendaydu, email, sdt, diachi, forgot_password_session ,active).Count;
         }
-        public List<KhachHang> timkiem(String id = "", String tendangnhap = "", String tendaydu = "", String email = "", String sdt = "", String diachi = "", String active = "", String order_by="id", Boolean order_desc=true, int start_point=0, int count=-1)
+        public List<KhachHang> timkiem(String id = "", String tendangnhap = "", String tendaydu = "", String email = "", String sdt = "", String diachi = "", String forgot_password_session="" ,String active = "", String order_by="id", Boolean order_desc=true, int start_point=0, int count=-1)
         {
             List<KhachHang> obj_list = new List<KhachHang>();
             //find by LIKE element
@@ -146,7 +146,11 @@ namespace qdtest.Controllers.ModelController
                 int id_i = TextLibrary.ToInt(id);
                 obj_list = obj_list.Where(x => x.id == id_i).ToList();
             }
-            
+            //filter by session
+            if (!forgot_password_session.Equals(""))
+            {
+                obj_list = obj_list.Where(x => x.forgot_password_session.ToUpper().Equals(forgot_password_session.ToUpper())).ToList();
+            }
             //Filter again by by active
                 if (!active.Equals(""))
                 {
@@ -213,6 +217,35 @@ namespace qdtest.Controllers.ModelController
                 re.Add("email_exist_fail");
             }
             return re;
+        }
+        public Boolean generate_forgot_password_session(String email, out String session_output)
+        {
+            KhachHang obj = this.timkiem("", "", "", email).FirstOrDefault();
+            String random = DateTime.Now.ToString() + DateTime.Now.Millisecond;
+            String session = TextLibrary.GetSHA1HashData(random);
+            session_output = session;
+            if (obj != null)
+            {
+
+                obj.forgot_password_session = session;
+                Debug.WriteLine("Generate new Session " + session + " for email " + email + " (" + random + ")");
+                this._db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        public Boolean set_password_by_session(int obj_id, String session, String new_pass)
+        {
+            KhachHang obj = this.timkiem(obj_id.ToString(), "", "", "", "", "", session).FirstOrDefault();
+            if (obj != null)
+            {
+                this.set_password(obj.id, new_pass);
+                //destroy last session
+                String tmp;
+                this.generate_forgot_password_session(obj.email, out tmp);
+                return true;
+            }
+            return false;
         }
     }
 }

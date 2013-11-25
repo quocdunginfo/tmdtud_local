@@ -65,6 +65,7 @@ namespace qdtest.Controllers
                 timkiem_khachhang["email"],
                 timkiem_khachhang["sdt"],
                 timkiem_khachhang["diachi"],
+                "",
                 timkiem_khachhang["active"], "id", true, pg.start_point, pg.max_item_per_page
                 );
             //set search cookies
