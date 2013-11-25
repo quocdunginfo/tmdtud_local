@@ -138,7 +138,7 @@ namespace qdtest.Controllers.ModelController
             //filter by session
             if (!forgot_password_session.Equals(""))
             {
-                obj_list = obj_list.Where(x => x.forgot_password_session.ToUpper().Contains(forgot_password_session.ToUpper())).ToList();
+                obj_list = obj_list.Where(x => x.forgot_password_session.ToUpper().Equals(forgot_password_session.ToUpper())).ToList();
             }
             
             //Filter again by by active

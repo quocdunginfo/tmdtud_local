@@ -31,7 +31,7 @@
             // Update-Database
             
             //them quyen
-            String[] quyens = { "home", "sanpham", "user", "khachhang", "nhomsanpham", "kichthuoc", "mausac", "hinhanh", "hangsx","nhacc","nhaphang","donhang","chitietsp","loainhanvien" };
+            String[] quyens = { "home", "sanpham", "user", "khachhang", "nhomsanpham", "kichthuoc", "mausac", "hinhanh", "hangsx","nhacc","nhaphang","donhang","chitietsp","loainhanvien", "phanhoi" };
                 List<Quyen> ds = new List<Quyen>();
                 foreach (String item in quyens)
                 {

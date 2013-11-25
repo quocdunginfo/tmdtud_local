@@ -813,6 +813,7 @@ namespace qdtest.Models
             this.bad = false;
             this.active = true;
             this.diem = 0;
+            this.forgot_password_session = "";
         }
         [Key]
         public int id { get; set; }
@@ -825,6 +826,7 @@ namespace qdtest.Models
         public String sdt { get; set; }
         public Boolean bad { get; set; }
         public Boolean active { get; set; }
+        public String forgot_password_session { get; set; }
         //external
         public virtual LoaiKhachHang loaikhachhang { get; set; }
         public virtual List<DonHang> ds_donhang { get; set; }

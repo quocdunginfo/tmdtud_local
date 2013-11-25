@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Trang chủ - Khách hàng - Quên mật khẩu";
+}
+<div id="content" class="float_r">
+    <h2>Quên mật khẩu</h2>
+    <div class="content_half float_l">
+        <div id="contact_form" style="width:auto; ">
+            <form method="post" name="contact" action="@Url.Action("Submit", "FrontForgotPassword")">
+                <label style="width:300px; ">Nhập email tài khoản khách hàng:</label>
+                <br />
+                <input type="text" name="khachhang_email" class="input_field" value="" style="width:300px;"/>
+                <br />
+                <br />
+                <input type="submit" class="submit_btn" value="Gửi yêu cầu" />
+            </form>
+        </div>
+    </div>
+</div>

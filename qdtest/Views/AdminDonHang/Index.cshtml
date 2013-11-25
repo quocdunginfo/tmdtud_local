@@ -332,10 +332,10 @@
                     </table>
 
                     <div style="float: right; margin-top: 20px;">
-                        <table class="table" width="450px;" style="border-radius: 0px;" cellspacing="0" cellpadding="0">
+                        <table class="table" width="500px;" style="border-radius: 0px;" cellspacing="0" cellpadding="0">
                             <tbody>
                                 <tr id="total_products">
-                                    <td width="180px;">
+                                    <td width="200px;">
                                         <b>Phí mua sản phẩm (1):</b>
                                     </td>
                                     <td class="amount" align="right"> @donhang._get_tongtien_notinclude_phivanchuyen() VNĐ
@@ -352,20 +352,25 @@
                                     </td>
                                     
                                 </tr>
+                                @{
+                                    var giamgia_post_fix = "";
+                                    
+                                }
                                 @if(@donhang.__get_giamgia()>0)
                                 {
                                 <tr>
                                     <td>
-                                        <b>Giảm giá:</b>
+                                        <b>Giảm giá (3):</b>
                                     </td>
                                     <td class="amount" align="right">@donhang._get_giamgia() VNĐ
                                     </td>
                                     
                                 </tr>
+                                    giamgia_post_fix = " - (3)";
                                 }
                                 <tr style="font-size: 16px" id="total_order">
                                     <td style="font-size: 16px">
-                                        <strong>Tổng tiền = (1) + (2):</strong>
+                                        <strong>Tổng tiền = (1) + (2)@giamgia_post_fix:</strong>
                                     </td>
                                     <td class="amount" style="font-size: 16px" align="right">
                                         <strong>
