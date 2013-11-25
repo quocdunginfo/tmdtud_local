@@ -81,7 +81,7 @@
                 <td colspan="5" align="right" style="font-weight: bold">Phí vận chuyển (2):</td>
                 <td align="right" style="font-weight: bold; font-size:12px;">@giohang._get_phivanchuyen()  VNĐ</td>
             </tr>
-            @if(giohang.khachhang!=null && giohang.khachhang.loaikhachhang._get_uudai()!=null)
+            @if(giohang.khachhang!=null && giohang.khachhang.loaikhachhang!=null && giohang.khachhang.loaikhachhang._get_uudai()!=null)
             {
             <tr>
                 <td colspan="5" align="right" style="font-weight: bold">Giảm giá (@giohang.khachhang.loaikhachhang._get_uudai().noidung) (3):</td>
