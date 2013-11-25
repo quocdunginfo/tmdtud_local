@@ -18,7 +18,7 @@ namespace qdtest.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.id = 6;
+            ViewBag.id = 5;
             PhanHoi obj = new PhanHoi();
             if(this._nhanvien!=null)
             {

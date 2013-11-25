@@ -53,7 +53,7 @@
                    if (k.id_kichthuoc == s && k.id_mausac == current_id) {
                       // alert(k.id_ctsp);
                        //  alert(document.getElementById("ctsp_id").value);
-                       limit = k.soluong;
+                       limit = Number(k.soluong);
                        if (k.soluong > 3) {
                            document.getElementById("soluong").value = 1;
                            document.getElementById("sl").disabled = false;
@@ -83,6 +83,8 @@
            }
            function kim3(s) {
                //       alert(document.getElementById("soluong").value);
+               s = Number(s);
+               limit = Number(limit);              
                if (isNaN(s)) {
                    alert("Số lượng nhập phải là một số");
                    document.getElementById("sl").value = 1;
@@ -93,7 +95,7 @@
                    document.getElementById("sl").value = 1;
                    document.getElementById("sl").focus();
                    return false;
-               } else if (s > limit) {
+               } else if (s > limit) {                  
                    alert("Số lượng đặt vượt quá số lượng tồn của sản phẩm");
                    document.getElementById("sl").value = 1;
                    document.getElementById("sl").focus();
