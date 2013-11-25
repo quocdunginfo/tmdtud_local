@@ -37,9 +37,8 @@
                        {
                       @:<div class="product_box">
                        }
-                       
-            	        <a href="@Url.Action("Index","FrontSanPhamDetail",new { id = item.id})"><img src="@Url.Content("~/_Upload/HinhAnh/"+item._get_hinhanh_macdinh().duongdan_thumb)" style="max-width:200px; height:150px" alt="Shoes @i" /></a>
-                        
+                       <p style="background:url(@Url.Content(_Template_Path+"/images/icon_new.gif"));width: 44px;height: 44px;"></p>
+            	        <a href="@Url.Action("Index","FrontSanPhamDetail",new { id = item.id})"><img src="@Url.Content("~/_Upload/HinhAnh/"+item._get_hinhanh_macdinh().duongdan_thumb)" style="max-width:200px; height:150px;z-index:-1" alt="Shoes @i" /></a>
                         <a href="@Url.Action("Index","FrontSanPhamDetail",new { id = item.id})"><h3>@item.ten</h3></a>
                         <p class="product_price">@item.gia đ</p>
                         var ctspid = 0;
@@ -49,12 +48,12 @@
                         }
                     if(ctspid==0)
                     {
-                        <a href="" onclick="alert('Rất tiếc, sản phẩm này đã hết hàng, xin vui lòng chọn sản phẩm khác!');" class="addtocart"></a>
+                        <a href="" onclick="alert('Rất tiếc, sản phẩm này đã hết hàng, xin vui lòng chọn sản phẩm khác!');" class="addtocart">Thêm vào giỏ</a>
                     }
                     else
                     {
-                        <a href="@Url.Action("Add_Or_Update", "FrontCart", new { sanphamid = item.id, ctsp_id = ctspid, soluong = 1 })" class="addtocart"></a>}
-                         <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })" class="detail"></a>
+                        <a href="@Url.Action("Add_Or_Update", "FrontCart", new { sanphamid = item.id, ctsp_id = ctspid, soluong = 1 })" class="addtocart">Thêm vào giỏ</a>}
+                         <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })" class="detail">Xem chi tiết</a>
                         @: </div>   
                         if(i%3==0)
                        {               

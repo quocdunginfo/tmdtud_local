@@ -143,12 +143,12 @@
                 }
                 if (ctspid == 0)
                 {
-<a  href="" onclick="alert('Rất tiếc, sản phẩm này đã hết hàng, xin vui lòng chọn sản phẩm khác!');" class="addtocart"></a>
+<a  href="" onclick="alert('Rất tiếc, sản phẩm này đã hết hàng, xin vui lòng chọn sản phẩm khác!');" class="addtocart">Thêm vào giỏ</a>
                 }
                 else
                 {
-<a href="@Url.Action("Add_Or_Update", "FrontCart", new { sanphamid = item.id, ctsp_id = ctspid, soluong = 1 })" class="addtocart"></a>}
-<a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })" class="detail"></a>
+<a href="@Url.Action("Add_Or_Update", "FrontCart", new { sanphamid = item.id, ctsp_id = ctspid, soluong = 1 })" class="addtocart">Thêm vào giỏ</a>}
+<a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })" class="detail">Xem chi tiết</a>
             @: </div>   
                         if (i % 3 == 0)
                         {               

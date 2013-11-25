@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Trang chủ - Giỏ hàng - Xác nhận";
+    ViewBag.Title = "Xác nhận thanh toán";
     Layout = "~/Views/Shared/_FrontLayout.cshtml";
     var giohang = (qdtest.Models.DonHang)ViewBag.giohang;
     var State = (List<string>)ViewBag.State;
@@ -123,6 +123,7 @@
                 
                 <div class="cleaner h10"></div>
                <input class="submit_btn" type="button" value="Hoàn tất đơn hàng" onclick="document.location='@Url.Action("Payment","FrontCart")'">
+                            <input type="button"  class="submit_btn" value="Trở về" onclick="window.location.href='@Url.Action("Checkout","FrontCart")    '">
             </form>
         </div>
     <div class="cleaner h40"></div>

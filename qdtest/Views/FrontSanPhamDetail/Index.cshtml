@@ -183,27 +183,23 @@
             <div class="content_half float_r">
                 <table class="detail">
                     <tr>
-                        <td style="width:160px">Mã sản phẩm:</td>
+                        <td style="width:160px"><b>Mã sản phẩm:</b></td>
                         <td>@sanpham.masp</td>
                     </tr>
                     <tr>
-                        <td>Tình trạng:</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td>Giá:</td>
+                        <td><b>Giá bán:</b></td>
                         <td>@sanpham.gia đ</td>
                     </tr>
                     <tr>
-                        <td>Hãng sản xuất:</td>
+                        <td><b>Hãng sản xuất:</b></td>
                         <td>@sanpham.hangsx.ten</td>
                     </tr>
                     <tr>
-                    	<td>Bảo hành:</td>
+                    	<td><b>Bảo hành:</b></td>
                         <td>1 năm</td>
                     </tr>
                     <tr>
-                    	<td>Màu sắc:</td>
+                    	<td><b>Màu sắc:</b></td>
                         <td class="kim_color">
                             @{
                               
@@ -270,20 +266,20 @@
                     </tr>
                     <tr>
                        
-                        <td>Kích thước:</td>
+                        <td><b>Kích thước:</b></td>
                         <td id="kt" class="size">
                            Chưa có
                         </td>
                     </tr>
                     <tr>
                        
-                        <td>Tình trạng:</td>
+                        <td><b>Tình trạng:</b></td>
                         <td id="state" >
                           
                         </td>
                     </tr>
                     <tr>
-                    	<td>Số lượng đặt: </td>
+                    	<td><b>Số lượng đặt:</b> </td>
                         <td><input id="sl" type="text" value="1" style="width: 20px; text-align: right" onchange="return kim3(this.value);" /></td>
                     </tr>
                 </table>
@@ -292,7 +288,7 @@
                     <input  type="hidden" id="ctsp_id" name="giohang_chitietsp_id" value="0" />
                     <input type="hidden" id="sanpham_id" name="giohang_sanpham_id" value="@sanpham.id" />
                     <input  type="hidden" id="soluong" name="giohang_soluong" value="1" />
-                <a class="addtocart"  id="btnsubmit" onclick="kim4()"></a>
+                <a class="addtocart"  id="btnsubmit" onclick="kim4()">Thêm vào giỏ</a>
                     </form>
 			</div>
             <div class="cleaner h30"></div>
@@ -352,10 +348,10 @@
                 <div style="clear:both;"></div>
         </div>
             <br />
-            <h5 style="font-size:20px">Mô tả sản phẩm</h5>
-            <p>@Html.Raw(sanpham.mota)</p>	
+            <h5 style="font-size:20px;border-bottom:double 1px #2f2f2f;padding:5px;width:640px">Mô tả sản phẩm</h5>
+            <div style="width:640px;text-align:justify"><p>@Html.Raw(sanpham.mota)</p>	</div>
           <div class="cleaner h50"></div> 
-            <h3>Sản phẩm liên quan</h3>
+            <h3 style="border-bottom:double 1px #2f2f2f;padding:5px;width:640px">Sản phẩm liên quan</h3>
             @{
                 int i = 1;
                 foreach (var item in listsplienquan)
@@ -381,12 +377,12 @@
                         }
                     if(ctspid==0)
                     {
-                        <a href="" onclick="alert('Rất tiếc, sản phẩm này đã hết hàng, xin vui lòng chọn sản phẩm khác!');" class="addtocart"></a>
+                        <a href="" onclick="alert('Rất tiếc, sản phẩm này đã hết hàng, xin vui lòng chọn sản phẩm khác!');" class="addtocart">Thêm vào giỏ</a>
                     }
                     else
                     {
-                        <a href="@Url.Action("Add_Or_Update", "FrontCart", new { sanphamid = item.id, ctsp_id = ctspid, soluong = 1 })" class="addtocart"></a>}
-                         <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })" class="detail"></a>
+                        <a href="@Url.Action("Add_Or_Update", "FrontCart", new { sanphamid = item.id, ctsp_id = ctspid, soluong = 1 })" class="addtocart">Thêm vào giỏ</a>}
+                         <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })" class="detail">Xem chi tiết</a>
                 @:</div> 
                if (i % 3 == 0)
                {               

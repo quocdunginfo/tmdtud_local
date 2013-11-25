@@ -1,10 +1,14 @@
 ﻿@{
-    ViewBag.Title = "Trang chủ - Đơn hàng - Hoàn tất đặt hàng";
+    ViewBag.Title = "Đặt hàng thành công";
     Layout = "~/Views/Shared/_FrontLayout.cshtml";
 }
 <div id="content" class="float_r">
     <h2>Hoàn tất đặt hàng</h2>
     <div class="content_half float_l" style="width:auto">
-        Đặt hàng thành công, thông tin chi tiết đơn hàng đã được gửi vào email của bạn.
+        Đơn hàng của quý khách đang được xử lý. Các thông tin đặt hàng đã được chúng tôi gửi mail đến cho quý khách.<br />
+        Xin quý khách kiểm tra các thông tin, nếu có sai sót xin liên hệ với chúng tôi.<br />
+        Xem <a  href="@Url.Action("Index", "FrontKhachHang")">thông tin tài khoản cá nhân</a> để biết về các chế độ khuyến mãi của cửa hàng dành cho quý khách.<br />
+        Mọi thắc mắc xin gửi <a href="@Url.Action("Index","FrontContact")">phản hồi</a> trực tiếp đến chúng tôi.<br />
+        XIN CẢM ƠN QUÝ KHÁCH ĐÃ MUA SẮM VỚI CỬA HÀNG BIGFOOT!
     </div>
 </div>

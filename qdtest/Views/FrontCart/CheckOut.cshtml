@@ -45,7 +45,7 @@
                 </span>
                 <div class="cleaner h10"></div>
                 <label style="width:auto">Tỉnh/Thành Phố (tính phí vận chuyển):</label>
-                <select name="nguoinhan_tinhtp_id">
+               <select name="nguoinhan_tinhtp_id" style="width:280px">
                     @foreach(var item in tinhtp_list)
                     {
                     <option @if(item.id==giohang.nguoinhan_diachi_tinhtp.id) {<text>selected="selected"</text>} value="@item.id">@item.ten (@qdtest._Library.TextLibrary.ToCommaStringNumber( item.phivanchuyen) VNĐ)</option>
@@ -53,13 +53,15 @@
                 </select>
                 <div class="cleaner h10"></div>
                 <label style="width:auto">Hình thức thanh toán</label>
-                <select name="thanhtoan_tructuyen">
+           <select name="thanhtoan_tructuyen" style="width:280px">
                    <option @if(giohang.thanhtoan_tructuyen) {<text>selected="selected"</text>} value="1">Thanh toán trực tuyến qua OnePay</option>
                     <option @if(!giohang.thanhtoan_tructuyen) {<text>selected="selected"</text>} value="0">Thanh toán tại nhà</option>
                 </select>
-
+             
                 <div class="cleaner h10"></div>
+                
                 <input type="submit" class="submit_btn" name="submit" id="submit" value="Tiếp tục">
+                <input type="button"  class="submit_btn" value="Trở về" onclick="window.location.href='@Url.Action("Index","FrontCart")'">
             </form>
         </div>
     </div>

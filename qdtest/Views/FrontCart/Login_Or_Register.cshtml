@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Trang chủ - giỏ hàng - lựa chọn";
+    ViewBag.Title = "Thanh toán";
     Layout = "~/Views/Shared/_FrontLayout.cshtml";
 }
 <div id="content" class="float_r">
@@ -9,18 +9,18 @@
         <br />
         <h3>
         <a href="@Url.Action("Index","FrontLogin")">
-            <img src="@Url.Content("~/Content/front/images/login.png")" />
+            <img src="@Url.Content("~/Content/front/images/login.png")" style="max-height:50px;max-width:50px;" />
                 Đăng nhập bằng tài khoản có sẵn
                 
             </a>
         </h3>
         <h3>
             <a href="@Url.Action("Index","FrontRegister")">
-            <img src="@Url.Content("~/Content/front/images/register.png")" />
+            <img src="@Url.Content("~/Content/front/images/register.png")" style="max-height:50px;max-width:50px;"/>
                 hoặc đăng ký mới ngay bây giờ
             </a>
         </h3>
-       
+       <input type="button"  class="mybutton" value="Trở về" onclick="window.location.href='@Url.Action("Index","FrontCart")'">
         
     </div>
 
