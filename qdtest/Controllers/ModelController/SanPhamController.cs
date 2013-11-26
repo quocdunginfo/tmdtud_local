@@ -122,7 +122,6 @@ namespace qdtest.Controllers.ModelController
             //filter by HangSX List
             if (hangsx_list != null && hangsx_list.Count>0)
             {
-                Debug.WriteLine("co tim theo hang");
                 //build list id
                 List<int> hangsx_id_list = new List<int>();
                 hangsx_id_list= hangsx_list.Select(x => x.id).ToList();
@@ -132,7 +131,6 @@ namespace qdtest.Controllers.ModelController
             //filter by NhomSanPham List
             if (nhomsanpham_list != null && nhomsanpham_list.Count > 0)
             {
-                Debug.WriteLine("co tim theo nhom");
                 //build list id
                 List<int> nhomsanpham_id_list = new List<int>();
                 nhomsanpham_id_list = nhomsanpham_list.Select(x => x.id).ToList();

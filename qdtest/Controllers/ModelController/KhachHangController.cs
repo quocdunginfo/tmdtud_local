@@ -81,7 +81,7 @@ namespace qdtest.Controllers.ModelController
         public Boolean can_use_email(int obj_id, String email)
         {
             KhachHang u = (from user in _db.ds_khachhang
-                          where user.email.ToUpper().Contains(email.ToUpper())
+                          where user.email.ToUpper().Equals(email.ToUpper())
                           && user.id != obj_id
                           select user).FirstOrDefault();
             return u == null ? true : false;
@@ -89,7 +89,7 @@ namespace qdtest.Controllers.ModelController
         public Boolean can_use_tendangnhap(int obj_id, String tendangnhap)
         {
             KhachHang u = (from user in _db.ds_khachhang
-                          where user.tendangnhap.ToUpper().Contains(tendangnhap.ToUpper())
+                          where user.tendangnhap.ToUpper().Equals(tendangnhap.ToUpper())
                           && user.id != obj_id
                           select user).FirstOrDefault();
             return u == null ? true : false;
@@ -124,11 +124,11 @@ namespace qdtest.Controllers.ModelController
             this._db.SaveChanges();
             return true;
         }
-        public int timkiem_count(String id = "", String tendangnhap = "", String tendaydu = "", String email = "", String sdt = "", String diachi = "", String forgot_password_session="", String active = "")
+        public int timkiem_count(String id = "", String tendangnhap = "", String tendaydu = "", List<LoaiKhachHang> loaikhachhang_list = null, int diem_from = 0, int diem_to = 0, String email = "", String sdt = "", String diachi = "", String forgot_password_session = "", String active = "")
         {
-            return timkiem(id, tendangnhap, tendaydu, email, sdt, diachi, forgot_password_session ,active).Count;
+            return timkiem(id, tendangnhap, tendaydu, loaikhachhang_list,diem_from , diem_to,email, sdt, diachi, forgot_password_session ,active).Count;
         }
-        public List<KhachHang> timkiem(String id = "", String tendangnhap = "", String tendaydu = "", String email = "", String sdt = "", String diachi = "", String forgot_password_session="" ,String active = "", String order_by="id", Boolean order_desc=true, int start_point=0, int count=-1)
+        public List<KhachHang> timkiem(String id = "", String tendangnhap = "", String tendaydu = "", List<LoaiKhachHang> loaikhachhang_list = null, int diem_from=0, int diem_to=0, String email = "", String sdt = "", String diachi = "", String forgot_password_session="" ,String active = "", String order_by="id", Boolean order_desc=true, int start_point=0, int count=-1)
         {
             List<KhachHang> obj_list = new List<KhachHang>();
             //find by LIKE element
@@ -145,6 +145,20 @@ namespace qdtest.Controllers.ModelController
                 //find by id
                 int id_i = TextLibrary.ToInt(id);
                 obj_list = obj_list.Where(x => x.id == id_i).ToList();
+            }
+            //filter by List
+            if (loaikhachhang_list != null && loaikhachhang_list.Count > 0)
+            {
+                //build list id
+                List<int> lkh_id_list = new List<int>();
+                lkh_id_list = loaikhachhang_list.Select(x => x.id).ToList();
+                //query
+                obj_list = obj_list.Where(x => lkh_id_list.Contains(x.loaikhachhang.id)).ToList();
+            }
+            //Filter by diem
+            if (diem_from > 0 || diem_to > 0)
+            {
+                obj_list = obj_list.Where(x => x.diem >= diem_from && x.diem <= diem_to).ToList();
             }
             //filter by session
             if (!forgot_password_session.Equals(""))
@@ -220,7 +234,7 @@ namespace qdtest.Controllers.ModelController
         }
         public Boolean generate_forgot_password_session(String email, out String session_output)
         {
-            KhachHang obj = this.timkiem("", "", "", email).FirstOrDefault();
+            KhachHang obj = this.timkiem("","","",null,0,0,email).FirstOrDefault();
             String random = DateTime.Now.ToString() + DateTime.Now.Millisecond;
             String session = TextLibrary.GetSHA1HashData(random);
             session_output = session;
@@ -236,7 +250,7 @@ namespace qdtest.Controllers.ModelController
         }
         public Boolean set_password_by_session(int obj_id, String session, String new_pass)
         {
-            KhachHang obj = this.timkiem(obj_id.ToString(), "", "", "", "", "", session).FirstOrDefault();
+            KhachHang obj = this.timkiem(obj_id.ToString(),"","",null,0,0,"","","",session).FirstOrDefault();
             if (obj != null)
             {
                 this.set_password(obj.id, new_pass);

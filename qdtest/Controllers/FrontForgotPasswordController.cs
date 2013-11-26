@@ -43,7 +43,7 @@ namespace qdtest.Controllers
         {
             Debug.WriteLine("Request change password from session " + session);
             KhachHangController ctr = new KhachHangController();
-            KhachHang obj = ctr.timkiem("", "", "","", "", "", session).FirstOrDefault();
+            KhachHang obj = ctr.timkiem("","","",null,0,0,"","","",session).FirstOrDefault();
             if(obj!=null)
             {
                 ViewBag.khachhang_264 = obj;

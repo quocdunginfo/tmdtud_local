@@ -2,6 +2,7 @@
     var KhachHang_List = (List<qdtest.Models.KhachHang>)ViewBag.KhachHang_List;
     var timkiem_khachhang = (HttpCookie)ViewBag.timkiem_khachhang;
     var pagination = (qdtest.Models.Pagination)ViewBag.pagination;
+    var LoaiKhachHang_List = (List<qdtest.Models.LoaiKhachHang>)ViewBag.LoaiKhachHang_List;
 }
 <div id="main">
     <div id="content">
@@ -170,7 +171,7 @@
                             <col width="200px" />
                             <col />
                             <col width="200px" />
-                            <col width="150px" />
+                            <col width="180px" />
                             <col width="30px" />
                             <col width="52px" />
                             <thead>
@@ -201,7 +202,7 @@
                                             <img border="0" src="../img/admin/up.gif" /></a>
                                     </th>
                                     <th>
-                                        <span class="title_box">Email </span>
+                                        <span class="title_box">Loại khách hàng </span>
                                         <br />
                                         <a href="index.php?controller=AdminEmployees&employeeOrderby=email&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
                                             <img border="0" src="../img/admin/down.gif" /></a>
@@ -209,7 +210,7 @@
                                             <img border="0" src="../img/admin/up.gif" /></a>
                                     </th>
                                     <th>
-                                        <span class="title_box">Số điện thoại </span>
+                                        <span class="title_box">Điểm tích lũy </span>
                                         <br />
                                         <a href="index.php?controller=AdminEmployees&employeeOrderby=profile&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
                                             <img border="0" src="../img/admin/down.gif" /></a>
@@ -240,10 +241,19 @@
                                         <input type="text" class="filter" name="khachhang_tendaydu" value="@timkiem_khachhang["tendaydu"]" style="width:95%"/>
                                     </td>
                                     <td>
-                                        <input type="text" class="filter" name="khachhang_email" value="@timkiem_khachhang["email"]" style="width:95%"/>
+                                        <select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="khachhang_loaikhachhang_id">
+                                            <option value="" @if (timkiem_khachhang["loaikhachhang_id"].Equals("")) { <text>selected="selected"</text>}>(Tất cả)</option>
+                                            @foreach (var item in LoaiKhachHang_List)
+                                            {
+                                            <option value="@item.id" @if (item.id.ToString().Equals(timkiem_khachhang["loaikhachhang_id"]))
+                                                                     { <text>selected="selected"</text>}>@item.ten @if (!item.active) { <text>(active=no)</text>}</option>
+                                            }
+                                        </select>
                                     </td>
-                                    <td>
-                                        <input type="text" class="filter" name="khachhang_sdt" value="@timkiem_khachhang["sdt"]" style="width:95%"/>
+                                    <td class="right">từ
+                                        <input type="text" class="filter" name="khachhang_diem_from" value="@timkiem_khachhang["diem_from"]" style="width: 65%"><br />
+                                        đến
+                                        <input type="text" class="filter" name="khachhang_diem_to" value="@timkiem_khachhang["diem_to"]" style="width: 65%">
                                     </td>
                                     <td class="center">
                                         <select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="khachhang_active">
@@ -262,7 +272,7 @@
                             <tbody>
                                 @foreach (var item in KhachHang_List)
                                 {
-                                    <tr class=" row_hover">
+                                    <tr class=" row_hover" @if(item.bad) {<text> style="background-color:#ebebeb;" </text> }>
                                         
                                         <td class="pointer center" onclick="document.location = '@Url.Action("Edit", "AdminKhachHangs", new { id = item.id })'">
                                             @item.id
@@ -274,10 +284,13 @@
                                             @item.tendaydu
                                         </td>
                                         <td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminKhachHangs", new { id = item.id })'">
-                                            @item.email
+                                           @if (item.loaikhachhang != null)
+                                           {
+                                               @item.loaikhachhang.ten
+                                           }
                                         </td>
                                         <td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminKhachHangs", new { id = item.id })'">
-                                            @item.sdt
+                                            @item.diem
                                         </td>
                                         <td class="pointer center" onclick="document.location = '@Url.Action("Edit", "AdminKhachHangs", new { id = item.id })'">
                                             <a href="@Url.Action("Edit", "AdminKhachHangs", new { id = item.id })" title="">
@@ -309,12 +322,13 @@
                             </tbody>
                         </table>
                         <p>
-                            <input type="submit" class="button" name="submitBulkdeleteemployee" value="Delete selected" onclick="return confirm('Delete selected items?');" />
+                            *Ghi chú:
+                            <br />
+                            +Nền xám: Khách hàng xấu
                         </p>
                     </td>
                 </tr>
             </table>
-            <input type="hidden" name="token" value="0eb4238fbc37dd9ef96cdfa5f4b6b90c" />
         </form>
 
         <div class="leadin">

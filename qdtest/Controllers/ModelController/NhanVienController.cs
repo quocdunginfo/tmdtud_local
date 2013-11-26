@@ -89,7 +89,7 @@ namespace qdtest.Controllers.ModelController
         public Boolean can_use_email(int obj_id, String email)
         {
             NhanVien u = (from user in _db.ds_nhanvien
-                          where user.email.ToUpper().Contains(email.ToUpper())
+                          where user.email.ToUpper().Equals(email.ToUpper())
                           && user.id!=obj_id
                           select user).FirstOrDefault();
             return u == null ? true : false;
@@ -97,7 +97,7 @@ namespace qdtest.Controllers.ModelController
         public Boolean can_use_tendangnhap(int obj_id, String tendangnhap)
         {
             NhanVien u = (from user in _db.ds_nhanvien
-                          where user.tendangnhap.ToUpper().Contains(tendangnhap.ToUpper())
+                          where user.tendangnhap.ToUpper().Equals(tendangnhap.ToUpper())
                           && user.id != obj_id
                           select user).FirstOrDefault();
             return u == null ? true : false;

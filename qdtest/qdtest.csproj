@@ -133,6 +133,7 @@
     <Compile Include="Controllers\FrontSanPhamController.cs" />
     <Compile Include="Controllers\FrontSanPhamDetailController.cs" />
     <Compile Include="Controllers\FrontTimKiemController.cs" />
+    <Compile Include="Controllers\ModelController\LoaiKhachHangController.cs" />
     <Compile Include="Controllers\ModelController\PhanHoiController.cs" />
     <Compile Include="Controllers\ModelController\TinhTPController.cs" />
     <Compile Include="Controllers\ModelController\DonHangController.cs" />

@@ -26,8 +26,9 @@ namespace qdtest.Controllers
             this.timkiem_khachhang["tendangnhap"] = "";
             this.timkiem_khachhang["tendaydu"] = "";
             this.timkiem_khachhang["active"] = "";
-            this.timkiem_khachhang["email"] = "";
-            this.timkiem_khachhang["sdt"] = "";
+            this.timkiem_khachhang["loaikhachhang_id"] = "";
+            this.timkiem_khachhang["diem_from"] = "0";
+            this.timkiem_khachhang["diem_to"] = "0";
             this.timkiem_khachhang["diachi"] = "";
             this.timkiem_khachhang["max_item_per_page"] = "5";
         }
@@ -40,6 +41,8 @@ namespace qdtest.Controllers
                 return this._fail_permission("khachhang_view");
             }
             KhachHangController ctr = new KhachHangController();
+            LoaiKhachHangController ctr_lkh = new LoaiKhachHangController();
+            List<LoaiKhachHang> lkh_list = ctr_lkh.timkiem(timkiem_khachhang["loaikhachhang_id"]);
             //pagination
                 int max_item_per_page = TextLibrary.ToInt(this.timkiem_khachhang["max_item_per_page"]);//get from setting
                 Pagination pg = new Pagination();
@@ -50,28 +53,30 @@ namespace qdtest.Controllers
                         timkiem_khachhang["id"],
                         timkiem_khachhang["tendangnhap"],
                         timkiem_khachhang["tendaydu"],
-                        timkiem_khachhang["email"],
-                        timkiem_khachhang["sdt"],
-                        timkiem_khachhang["diachi"],
+                        lkh_list,
+                        TextLibrary.ToInt(timkiem_khachhang["diem_from"]),
+                        TextLibrary.ToInt(timkiem_khachhang["diem_to"]),
+                        "","","","",
                         timkiem_khachhang["active"]
                         )
                     );
                 pg.update();
             //Chọn danh sách nhân viên để hiển thị theo cookies tìm kiếm
             ViewBag.KhachHang_List = ctr.timkiem(
-                timkiem_khachhang["id"],
-                timkiem_khachhang["tendangnhap"],
-                timkiem_khachhang["tendaydu"],
-                timkiem_khachhang["email"],
-                timkiem_khachhang["sdt"],
-                timkiem_khachhang["diachi"],
-                "",
-                timkiem_khachhang["active"], "id", true, pg.start_point, pg.max_item_per_page
+                    timkiem_khachhang["id"],
+                    timkiem_khachhang["tendangnhap"],
+                    timkiem_khachhang["tendaydu"],
+                    lkh_list,
+                    TextLibrary.ToInt(timkiem_khachhang["diem_from"]),
+                    TextLibrary.ToInt(timkiem_khachhang["diem_to"]),
+                    "", "", "", "",
+                    timkiem_khachhang["active"], "id", true, pg.start_point, pg.max_item_per_page
                 );
             //set search cookies
             ViewBag.timkiem_khachhang = this.timkiem_khachhang;
             ViewBag.Title += " - Quản lý";
             ViewBag.pagination = pg;
+            ViewBag.LoaiKhachHang_List = ctr_lkh.timkiem();
             return View();
         }
         [HttpPost]
@@ -89,8 +94,9 @@ namespace qdtest.Controllers
                 this.timkiem_khachhang["id"] = TextLibrary.ToString(Request["khachhang_id"]);
                 this.timkiem_khachhang["tendangnhap"] = TextLibrary.ToString(Request["khachhang_tendangnhap"]);
                 this.timkiem_khachhang["tendaydu"] = TextLibrary.ToString(Request["khachhang_tendaydu"]);
-                this.timkiem_khachhang["email"] = TextLibrary.ToString(Request["khachhang_email"]);
-                this.timkiem_khachhang["sdt"] = TextLibrary.ToString(Request["khachhang_sdt"]);
+                this.timkiem_khachhang["loaikhachhang_id"] = TextLibrary.ToString(Request["khachhang_loaikhachhang_id"]);
+                this.timkiem_khachhang["diem_from"] = TextLibrary.ToString(Request["khachhang_diem_from"]);
+                this.timkiem_khachhang["diem_to"] = TextLibrary.ToString(Request["khachhang_diem_to"]);
                 this.timkiem_khachhang["active"] = TextLibrary.ToString(Request["khachhang_active"]);
                 this.timkiem_khachhang["max_item_per_page"] = TextLibrary.ToString(Request["khachhang_max_item_per_page"]);
                 //this.timkiem_khachhang["diachi"] = TextLibrary.ToString(Request["khachhang_diachi"]);
@@ -114,7 +120,15 @@ namespace qdtest.Controllers
             }
             else
             {
-                this.timkiem_khachhang = CookieLibrary.Base64Decode(Request.Cookies.Get("timkiem_khachhang"));
+                try
+                {
+                    this.timkiem_khachhang = CookieLibrary.Base64Decode(Request.Cookies.Get("timkiem_khachhang"));
+                }
+                catch (Exception)
+                {
+                    this.khoitao_cookie();
+                    Response.Cookies.Add(CookieLibrary.Base64Encode(this.timkiem_khachhang));
+                }
             }
             
             //set active tab

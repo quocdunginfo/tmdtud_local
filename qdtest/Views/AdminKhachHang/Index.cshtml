@@ -3,6 +3,8 @@
     //ViewBag.ActiveTab
     var State = (List<String>)ViewBag.State;
     var KhachHang = (qdtest.Models.KhachHang)ViewBag.KhachHang;
+    var LoaiKhachHang_List = (List<qdtest.Models.LoaiKhachHang>)ViewBag.LoaiKhachHang_List;
+    var add_mode = qdtest._Library.TextLibrary.ToBoolean(ViewBag.add_mode);
 }
 <div id="main">
 	<div id="content">
@@ -106,12 +108,44 @@
                         @if(State.Contains("tendangnhap_fail")) { <text> Không hợp lệ</text> }
                         else if (State.Contains("tendangnhap_exist_fail"))
                         {
-                            @:Tên đăng nhập bị trùng với khách hàng khách
+                            @:Tên đăng nhập bị trùng với khách hàng khác
                         }
                     </span>
 				</div>
 				<div class="clear">
 				</div>
+                <label>Nhóm khách hàng:</label>
+				<div class="margin-form">
+					@if(add_mode)
+                    {
+                    <select name="khachhang_loaikhachhang_id" class="" id="id_profile">
+						@foreach(var item in LoaiKhachHang_List)
+                        {
+                        <text>
+                        <option value="@item.id" @if(KhachHang.loaikhachhang!=null && KhachHang.loaikhachhang.id==item.id) {<text>selected="selected"</text>}>@item.ten</option>
+                        </text>
+                        }
+					</select>
+                    } 
+                    else
+                    {
+                        if (KhachHang.loaikhachhang != null)
+                        {
+                             <div style="font-size:14px; font-weight:bold; padding-top:3px;color:#585a69">@KhachHang.loaikhachhang.ten</div>
+                        }
+                    }
+				</div>
+				<div class="clear">
+				</div>
+                @if(!add_mode)
+                {
+                <label>Điểm tích lũy:</label>
+				<div class="margin-form">
+					<div style="font-size:14px; font-weight:bold; padding-top:3px;color:#585a69">@KhachHang.diem</div>
+				</div>
+				<div class="clear">
+				</div>
+                }
 				<label>Tên đầy đủ:</label>
 				<div class="margin-form">
 					<input name="khachhang_tendaydu" Value="@KhachHang.tendaydu" class="" size="33" type="text">
