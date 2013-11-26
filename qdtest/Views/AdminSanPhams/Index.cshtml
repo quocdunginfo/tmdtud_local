@@ -3,6 +3,8 @@
     var timkiem_sanpham = (HttpCookie)ViewBag.timkiem_sanpham;
     var SanPham_List = (List<qdtest.Models.SanPham>)ViewBag.SanPham_List;
     var pagination = (qdtest.Models.Pagination)ViewBag.pagination;
+    var HangSX_List = (List<qdtest.Models.HangSX>)ViewBag.HangSX_List;
+    var NhomSanPham2_List = (List<qdtest.Models.NhomSanPham2>)ViewBag.NhomSanPham2_List;
 }
 <div id="main">
 	<div id="content">
@@ -163,11 +165,11 @@
 					<table class="table employee" cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom:10px;">
 					<col width="10px"/>
 					<col width="25px"/>
-					<col width="250px"/>
-                    <col width="150px"/>
+					<col width="100px"/>
+                    <col width="100px"/>
 					<col />
-					<col width="300px"/>
-					<col width="150px"/>
+					<col width="200px"/>
+					<col width="250px"/>
 					<col width="30px"/>
 					<col width="52px"/>
 					<thead>
@@ -179,21 +181,51 @@
 							<span class="title_box">
 							ID </span>
 							<br/>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=id_employee&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/down.gif"/></a>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=id_employee&employeeOrderway=asc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/up_d.gif"/></a>
+							@{
+                                string desc_suffix = "down_d.gif";
+                                string asc_suffix = "up_d.gif";
+                                if(timkiem_sanpham["order_by"].ToLower().Equals("id"))
+                                {
+                                    if (timkiem_sanpham["order_desc"].ToLower().Equals("1"))
+                                    {
+                                        desc_suffix = "down.gif";
+                                    }
+                                    else
+                                    {
+                                        asc_suffix = "up.gif";
+                                    }
+                                }
+                            }
+                            <a href="@Url.Action("OrderBy", "AdminSanPhams", new { order_by="id", order_desc="1" })">
+                                <img border="0" src="../img/admin/@desc_suffix"></a>
+                            <a href="@Url.Action("OrderBy", "AdminSanPhams", new { order_by="id", order_desc="0" })">
+                                <img border="0" src="../img/admin/@asc_suffix"></a>
 						</th>
 						<th>
 							<span class="title_box">
 							Mã SP </span>
-							<br/>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=lastname&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/down.gif"/></a>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=lastname&employeeOrderway=asc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/up.gif"/></a>
+                            <br />
+							@{
+                                desc_suffix = "down_d.gif";
+                                asc_suffix = "up_d.gif";
+                                if(timkiem_sanpham["order_by"].ToLower().Equals("masp"))
+                                {
+                                    if (timkiem_sanpham["order_desc"].ToLower().Equals("1"))
+                                    {
+                                        desc_suffix = "down.gif";
+                                    }
+                                    else
+                                    {
+                                        asc_suffix = "up.gif";
+                                    }
+                                }
+                            }
+                            <a href="@Url.Action("OrderBy", "AdminSanPhams", new { order_by="masp", order_desc="1" })">
+                                <img border="0" src="../img/admin/@desc_suffix"></a>
+                            <a href="@Url.Action("OrderBy", "AdminSanPhams", new { order_by="masp", order_desc="0" })">
+                                <img border="0" src="../img/admin/@asc_suffix"></a>
 						</th>
-                        <th>
+                        <th class="center">
 							<span class="title_box">
 							Hình ảnh </span>
 						</th>
@@ -201,37 +233,97 @@
 							<span class="title_box">
 							Tên </span>
 							<br/>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=firstname&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/down.gif"/></a>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=firstname&employeeOrderway=asc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/up.gif"/></a>
+							@{
+                                desc_suffix = "down_d.gif";
+                                asc_suffix = "up_d.gif";
+                                if(timkiem_sanpham["order_by"].ToLower().Equals("ten"))
+                                {
+                                    if (timkiem_sanpham["order_desc"].ToLower().Equals("1"))
+                                    {
+                                        desc_suffix = "down.gif";
+                                    }
+                                    else
+                                    {
+                                        asc_suffix = "up.gif";
+                                    }
+                                }
+                            }
+                            <a href="@Url.Action("OrderBy", "AdminSanPhams", new { order_by="ten", order_desc="1" })">
+                                <img border="0" src="../img/admin/@desc_suffix"></a>
+                            <a href="@Url.Action("OrderBy", "AdminSanPhams", new { order_by="ten", order_desc="0" })">
+                                <img border="0" src="../img/admin/@asc_suffix"></a>
 						</th>
 						<th>
 							<span class="title_box">
-							Mô tả </span>
-							<br/>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=email&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/down.gif"/></a>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=email&employeeOrderway=asc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/up.gif"/></a>
+							Hãng sản xuất </span>
+                            <br />
+							@{
+                                desc_suffix = "down_d.gif";
+                                asc_suffix = "up_d.gif";
+                                if(timkiem_sanpham["order_by"].ToLower().Equals("hangsx"))
+                                {
+                                    if (timkiem_sanpham["order_desc"].ToLower().Equals("1"))
+                                    {
+                                        desc_suffix = "down.gif";
+                                    }
+                                    else
+                                    {
+                                        asc_suffix = "up.gif";
+                                    }
+                                }
+                            }
+                            <a href="@Url.Action("OrderBy", "AdminSanPhams", new { order_by="hangsx", order_desc="1" })">
+                                <img border="0" src="../img/admin/@desc_suffix"></a>
+                            <a href="@Url.Action("OrderBy", "AdminSanPhams", new { order_by="hangsx", order_desc="0" })">
+                                <img border="0" src="../img/admin/@asc_suffix"></a>
 						</th>
 						<th>
 							<span class="title_box">
-							Loại </span>
-							<br/>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=profile&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/down.gif"/></a>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=profile&employeeOrderway=asc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/up.gif"/></a>
+							Nhóm sản phẩm </span>
+                            <br />
+							@{
+                                desc_suffix = "down_d.gif";
+                                asc_suffix = "up_d.gif";
+                                if(timkiem_sanpham["order_by"].ToLower().Equals("nhomsanpham"))
+                                {
+                                    if (timkiem_sanpham["order_desc"].ToLower().Equals("1"))
+                                    {
+                                        desc_suffix = "down.gif";
+                                    }
+                                    else
+                                    {
+                                        asc_suffix = "up.gif";
+                                    }
+                                }
+                            }
+                            <a href="@Url.Action("OrderBy", "AdminSanPhams", new { order_by="nhomsanpham", order_desc="1" })">
+                                <img border="0" src="../img/admin/@desc_suffix"></a>
+                            <a href="@Url.Action("OrderBy", "AdminSanPhams", new { order_by="nhomsanpham", order_desc="0" })">
+                                <img border="0" src="../img/admin/@asc_suffix"></a>
 						</th>
 						<th class="center">
 							<span class="title_box">
 							Active </span>
 							<br/>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=active&employeeOrderway=desc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/down.gif"/></a>
-							<a href="index.php?controller=AdminEmployees&employeeOrderby=active&employeeOrderway=asc&token=0eb4238fbc37dd9ef96cdfa5f4b6b90c">
-							<img border="0" src="../img/admin/up.gif"/></a>
+							@{
+                                desc_suffix = "down_d.gif";
+                                asc_suffix = "up_d.gif";
+                                if(timkiem_sanpham["order_by"].ToLower().Equals("active"))
+                                {
+                                    if (timkiem_sanpham["order_desc"].ToLower().Equals("1"))
+                                    {
+                                        desc_suffix = "down.gif";
+                                    }
+                                    else
+                                    {
+                                        asc_suffix = "up.gif";
+                                    }
+                                }
+                            }
+                            <a href="@Url.Action("OrderBy", "AdminSanPhams", new { order_by="active", order_desc="1" })">
+                                <img border="0" src="../img/admin/@desc_suffix"></a>
+                            <a href="@Url.Action("OrderBy", "AdminSanPhams", new { order_by="active", order_desc="0" })">
+                                <img border="0" src="../img/admin/@asc_suffix"></a>
 						</th>
 						<th class="center">
 							Tác vụ<br/>&nbsp;
@@ -259,10 +351,27 @@
 							<input type="text" class="filter" name="sanpham_ten" value="@timkiem_sanpham["ten"]" style="width:95%"/>
 						</td>
 						<td>
-							<input type="text" class="filter" name="sanpham_mota" value="@timkiem_sanpham["mota"]" style="width:95%"/>
+							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="sanpham_hangsx_id" style="width:95%;">
+								<option value="" @if(timkiem_sanpham["hangsx_id"].Equals("")) { <text>selected="selected"</text>}>(Tất cả)</option>
+                                @foreach(var item in HangSX_List)
+                                {
+                                <option value="@item.id" @if(item.id.ToString().Equals(timkiem_sanpham["hangsx_id"])) { <text>selected="selected"</text>}>@item.ten @if (!item.active) { <text>(active=no)</text>}</option>
+                                }
+							</select>
 						</td>
                         <td>
-
+                            <select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="sanpham_nhomsanpham_id" style="width:95%;">
+								<option value="" @if(timkiem_sanpham["nhomsanpham_id"].Equals("")) { <text>selected="selected"</text>}>(Tất cả)</option>
+                                @foreach(var item in NhomSanPham2_List)
+                                {
+                                    String pre_fix = "";
+                                    for (int i = 0; i < item.level; i++)
+                                    {
+                                        pre_fix += "--";
+                                    }
+                                <option value="@item.id" @if(item.id.ToString().Equals(timkiem_sanpham["nhomsanpham_id"])) { <text>selected="selected"</text>}>@pre_fix @item.ten @if (!item.active) { <text>(active=no)</text>}</option>
+                                }
+							</select>
                         </td>
 						<td class="center">
 							<select onchange="$('#submitFilterButtonemployee').focus();$('#submitFilterButtonemployee').click();" name="sanpham_active">
@@ -302,10 +411,10 @@
 							 @item.ten
 						</td>
 						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminSanPhams", new { id = item.id })'">
-							 @item._get_mota_lite()
+							 @item.hangsx.ten
 						</td>
 						<td class="pointer " onclick="document.location = '@Url.Action("Edit", "AdminSanPhams", new { id = item.id })'">
-							 
+							 @item.nhomsanpham.ten
 						</td>
 						<td class="pointer center" onclick="document.location = '@Url.Action("Active", "AdminSanPhams", new { id = item.id })'">
 							<a href="@Url.Action("Active", "AdminSanPhams", new { id = item.id })" title="Đảo ngược active">

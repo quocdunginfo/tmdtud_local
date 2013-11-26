@@ -82,7 +82,7 @@ namespace qdtest.Controllers
                 timkiem_donhang["thanhtoan_tructuyen"],
                 timkiem_donhang["trangthai"],
                 timkiem_donhang["active"],
-                "id",
+                timkiem_donhang["order_by"],
                 TextLibrary.ToBoolean(timkiem_donhang["order_desc"])
                 ,pg.start_point,pg.max_item_per_page
                 );
@@ -175,7 +175,7 @@ namespace qdtest.Controllers
                 try{
                     this.timkiem_donhang = CookieLibrary.Base64Decode(Request.Cookies.Get("timkiem_donhang"));
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     this.khoitao_cookie();
                     Response.Cookies.Add(CookieLibrary.Base64Encode(this.timkiem_donhang));

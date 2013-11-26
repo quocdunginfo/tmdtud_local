@@ -97,7 +97,7 @@ namespace qdtest._Library
                 this.receive_html += "<br>";
                 this.receive_html += "Giảm giá: " + obj._get_giamgia_tuloaikh() + "VNĐ";
                 this.receive_html += "<br>";
-                this.receive_html += "Tổng tiền phải thanh toán: " + obj._get_tongtien_include_phivanchuyen() + "VNĐ";
+                this.receive_html += "Tổng tiền phải thanh toán: " + obj._get_tongtien_include_phivanchuyen_giamgia_tuloaikh() + "VNĐ";
                 this.receive_html += "<hr>";
                 if (obj.thanhtoan_tructuyen)
                 {

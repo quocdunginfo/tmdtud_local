@@ -386,11 +386,11 @@
                                     </td>
                                     <td class="pointer right" onclick="document.location = '@Url.Action("Index","AdminDonHang", new {id=item.id})'">
                                         <b>
-                                            @item.tongtien
-                                        </b>
+                                            @item._get_tongtien()
+                                        </b> VNĐ
                                     </td>
                                     <td class="pointer" onclick="document.location = '@Url.Action("Index","AdminDonHang", new {id=item.id})'">
-                                        <span class="color_field" style="background-color:#575757; color: white">
+                                        <span class="color_field" style="background-color:@if(item.thanhtoan_tructuyen){<text>#00129C</text>} else{<text>#575757</text>}; color: white">
                                             @if (item.thanhtoan_tructuyen)
                                             {
                                                 @:Thanh toán trực tuyến
@@ -402,7 +402,7 @@
                                         </span>
                                     </td>
                                     <td class="pointer" onclick="document.location = '@Url.Action("Index","AdminDonHang", new {id=item.id})'">
-                                        <span class="color_field" style="background-color:#575757; color: white">
+                                        <span class="color_field" style="background-color: @if(item.trangthai.Equals("dabihuy")){<text>#C90000</text>} else{<text>#575757</text>} ; color: white">
                                             @item._get_trangthai()
                                         </span>
                                     </td>

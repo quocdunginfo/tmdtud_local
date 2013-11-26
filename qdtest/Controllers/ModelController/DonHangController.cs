@@ -177,7 +177,11 @@ namespace qdtest.Controllers.ModelController
                 }
                 else if (order_by.ToLower().Equals("khachhang.tendaydu"))
                 {
-                    obj_list = obj_list.OrderByDescending(x => x.khachhang.tendaydu).ToList();
+                    List<DonHang> kh_notnull = obj_list.Where(x => x.khachhang != null && x.khachhang_nhanvien==null).OrderByDescending(x=>x.khachhang.tendaydu).ToList();
+                    List<DonHang> nv_notnull = obj_list.Where(x => x.khachhang_nhanvien != null && x.khachhang==null).OrderByDescending(x => x.khachhang_nhanvien.tendaydu).ToList();
+                    List<DonHang> nvkh_null = obj_list.Where(x => x.khachhang_nhanvien == null && x.khachhang == null).OrderByDescending(x => x.id).ToList();
+                    List<DonHang> nvkh_notnull = obj_list.Where(x => x.khachhang_nhanvien != null && x.khachhang != null).OrderByDescending(x => x.id).ToList();
+                    obj_list = kh_notnull.Concat(nvkh_notnull).Concat(nv_notnull).Concat(nvkh_null).ToList();
                 }
                 else if (order_by.ToLower().Equals("tongtien"))
                 {
@@ -204,7 +208,11 @@ namespace qdtest.Controllers.ModelController
                 }
                 else if (order_by.ToLower().Equals("khachhang.tendaydu"))
                 {
-                    obj_list = obj_list.OrderBy(x => x.khachhang.tendaydu).ToList();
+                    List<DonHang> kh_notnull = obj_list.Where(x => x.khachhang != null && x.khachhang_nhanvien == null).OrderBy(x => x.khachhang.tendaydu).ToList();
+                    List<DonHang> nv_notnull = obj_list.Where(x => x.khachhang_nhanvien != null && x.khachhang == null).OrderBy(x => x.khachhang_nhanvien.tendaydu).ToList();
+                    List<DonHang> nvkh_null = obj_list.Where(x => x.khachhang_nhanvien == null && x.khachhang == null).OrderBy(x => x.id).ToList();
+                    List<DonHang> nvkh_notnull = obj_list.Where(x => x.khachhang_nhanvien != null && x.khachhang != null).OrderBy(x => x.id).ToList();
+                    obj_list = kh_notnull.Concat(nvkh_notnull).Concat(nv_notnull).Concat(nvkh_null).ToList();
                 }
                 else if (order_by.ToLower().Equals("tongtien"))
                 {

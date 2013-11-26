@@ -404,7 +404,7 @@ namespace qdtest.Controllers
                     {
                         obj.id = sanpham_obj.ds_chitietsp.Max(x => x.id) + 1;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         obj.id = 1;
                     }
@@ -462,16 +462,16 @@ namespace qdtest.Controllers
 
                 //active only
                 NhomSanPhamController ctr_nhom = new NhomSanPhamController();
-                ViewBag.NhomSanpham2_ListAll = ctr_nhom.timkiem("", "", "", "1");
+                ViewBag.NhomSanpham2_ListAll = ctr_nhom.timkiem();
                 //active only
                 HangSXController ctr_hangsx = new HangSXController();
-                ViewBag.HangSX_ListAll = ctr_hangsx.timkiem("", "", "1");
+                ViewBag.HangSX_ListAll = ctr_hangsx.timkiem();
                 //
                 KichThuocController ctr_kichthuoc = new KichThuocController();
-                ViewBag.KichThuoc_ListAll = ctr_kichthuoc.timkiem("", "", "", "1");
+                ViewBag.KichThuoc_ListAll = ctr_kichthuoc.timkiem();
                 //
                 MauSacController ctr_mausac = new MauSacController();
-                ViewBag.MauSac_ListAll = ctr_mausac.timkiem("", "", "", "1");
+                ViewBag.MauSac_ListAll = ctr_mausac.timkiem();
                 ViewBag.ChiTietSP = new ChiTietSP();//may be override by action
         }
         [NonAction]

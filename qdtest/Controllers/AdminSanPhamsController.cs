@@ -25,12 +25,14 @@ namespace qdtest.Controllers
             this.timkiem_sanpham["id"] = "";
             this.timkiem_sanpham["ten"] = "";
             this.timkiem_sanpham["masp"] = "";
-            this.timkiem_sanpham["mota"] = "";
             this.timkiem_sanpham["active"] = "";
             this.timkiem_sanpham["gia_from"] = "-1";
             this.timkiem_sanpham["gia_to"] = "-1";
-            this.timkiem_sanpham["hangsx_ten"] = "";
-            this.timkiem_sanpham["nhomsanpham_ten"] = "";
+            this.timkiem_sanpham["hangsx_id"] = "";
+            this.timkiem_sanpham["nhomsanpham_id"] = "";
+            this.timkiem_sanpham["order_by"] = "id";
+            this.timkiem_sanpham["order_desc"] = "1";
+            this.timkiem_sanpham["nhomsanpham_id"] = "";
             this.timkiem_sanpham["max_item_per_page"] = "5";
         }
         [HttpGet]
@@ -42,6 +44,11 @@ namespace qdtest.Controllers
                 return this._fail_permission("sanpham_view");
             }
             SanPhamController ctr = new SanPhamController();
+            NhomSanPhamController ctr_nhom = new NhomSanPhamController();
+            HangSXController ctr_hangsx = new HangSXController();
+            List<HangSX> hangsx_list = ctr_hangsx.timkiem(timkiem_sanpham["hangsx_id"]);
+            NhomSanPham nhom_obj = ctr_nhom.get_by_id(TextLibrary.ToInt(timkiem_sanpham["nhomsanpham_id"]));
+            List<NhomSanPham> nhomsanpham_list = ctr_nhom.get_tree2(nhom_obj);
             //pagination
                 int max_item_per_page = TextLibrary.ToInt(this.timkiem_sanpham["max_item_per_page"]);
                 Pagination pg = new Pagination();
@@ -52,10 +59,10 @@ namespace qdtest.Controllers
                         timkiem_sanpham["id"],
                         timkiem_sanpham["masp"],
                         timkiem_sanpham["ten"],
-                        timkiem_sanpham["mota"],
+                        "",
                         TextLibrary.ToInt(timkiem_sanpham["gia_from"]),
                         TextLibrary.ToInt(timkiem_sanpham["gia_to"]),
-                        null, null, timkiem_sanpham["active"]
+                        hangsx_list, nhomsanpham_list, timkiem_sanpham["active"]
                         )
                     );
                 pg.update();
@@ -65,15 +72,17 @@ namespace qdtest.Controllers
                 timkiem_sanpham["id"],
                 timkiem_sanpham["masp"],
                 timkiem_sanpham["ten"],
-                timkiem_sanpham["mota"],
+                "",
                 TextLibrary.ToInt( timkiem_sanpham["gia_from"]),
                 TextLibrary.ToInt(timkiem_sanpham["gia_to"]),
-                null, null, timkiem_sanpham["active"],"id",true, pg.start_point, max_item_per_page
+                hangsx_list, nhomsanpham_list, timkiem_sanpham["active"], timkiem_sanpham["order_by"], TextLibrary.ToBoolean(timkiem_sanpham["order_desc"]), pg.start_point, max_item_per_page
                 );
             //set search cookies
             ViewBag.timkiem_sanpham = this.timkiem_sanpham;
             ViewBag.Title += " - Quản lý";
             ViewBag.pagination = pg;
+            ViewBag.NhomSanPham2_List = ctr_nhom.timkiem();
+            ViewBag.HangSX_List = ctr_hangsx.timkiem();
             return View();
         }
         
@@ -92,12 +101,11 @@ namespace qdtest.Controllers
                 this.timkiem_sanpham["id"] = TextLibrary.ToString(Request["sanpham_id"]);
                 this.timkiem_sanpham["masp"] = TextLibrary.ToString(Request["sanpham_masp"]);
                 this.timkiem_sanpham["ten"] = TextLibrary.ToString(Request["sanpham_ten"]);
-                this.timkiem_sanpham["mota"] = TextLibrary.ToString(Request["sanpham_mota"]);
                 this.timkiem_sanpham["gia_from"] = TextLibrary.ToString(Request["sanpham_gia_from"]);
                 this.timkiem_sanpham["gia_to"] = TextLibrary.ToString(Request["sanpham_gia_to"]);
                 this.timkiem_sanpham["active"] = TextLibrary.ToString(Request["sanpham_active"]);
-                this.timkiem_sanpham["hangsx_ten"] = TextLibrary.ToString(Request["sanpham_hangsx_ten"]);
-                this.timkiem_sanpham["nhomsanpham_ten"] = TextLibrary.ToString(Request["sanpham_nhomsanpham_ten"]);
+                this.timkiem_sanpham["hangsx_id"] = TextLibrary.ToString(Request["sanpham_hangsx_id"]);
+                this.timkiem_sanpham["nhomsanpham_id"] = TextLibrary.ToString(Request["sanpham_nhomsanpham_id"]);
                 this.timkiem_sanpham["max_item_per_page"] = TextLibrary.ToString(Request["sanpham_max_item_per_page"]);
                 //this.timkiem_sanpham["diachi"] = TextLibrary.ToString(Request["sanpham_diachi"]);
             }
@@ -120,7 +128,15 @@ namespace qdtest.Controllers
             }
             else
             {
-                this.timkiem_sanpham = CookieLibrary.Base64Decode(Request.Cookies.Get("timkiem_sanpham"));
+                try
+                {
+                    this.timkiem_sanpham = CookieLibrary.Base64Decode(Request.Cookies.Get("timkiem_sanpham"));
+                }
+                catch (Exception)
+                {
+                    this.khoitao_cookie();
+                    Response.Cookies.Add(CookieLibrary.Base64Encode(this.timkiem_sanpham));
+                }
             }
             
             //set active tab
@@ -198,6 +214,15 @@ namespace qdtest.Controllers
             ctr._db.SaveChanges();
             //redirect
             return RedirectToAction("Index","AdminSanPhams");
+        }
+        [HttpGet]
+        public ActionResult OrderBy(string order_by = "id", string order_desc = "1")
+        {
+            this.timkiem_sanpham["order_by"] = order_by;
+            this.timkiem_sanpham["order_desc"] = order_desc;
+            Response.Cookies.Add(CookieLibrary.Base64Encode(this.timkiem_sanpham));
+
+            return RedirectToAction("Index", "AdminSanPhams");
         }
     }
 }

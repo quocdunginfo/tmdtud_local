@@ -81,7 +81,7 @@ namespace qdtest.Controllers
                 {
                     this.timkiem_loainhanvien = CookieLibrary.Base64Decode(Request.Cookies.Get("timkiem_loainhanvien"));
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     this.khoitao_cookie();
                     Response.Cookies.Add(CookieLibrary.Base64Encode(this.timkiem_loainhanvien));

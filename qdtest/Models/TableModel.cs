@@ -129,7 +129,7 @@ namespace qdtest.Models
                 tmp = TextLibrary.HTML_Strip(tmp);
                 tmp = TextLibrary.Unicode_Substring(tmp, max_length);
                 return tmp+"...";
-            }catch(Exception ex)
+            }catch(Exception)
             {
                 return this.mota+"...";
             }

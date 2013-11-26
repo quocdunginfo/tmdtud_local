@@ -119,6 +119,7 @@ namespace qdtest.Controllers
             ViewBag.State = this._state;
             ViewBag.LoaiNhanVien = obj;
             ViewBag.Title += " - Submit";
+            ViewBag.Quyen_ListAll = ctr._db.ds_quyen.ToList();
             return View("Index");
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

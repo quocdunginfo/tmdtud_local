@@ -80,7 +80,7 @@ namespace qdtest._Library
 
                 return result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return text;
             }

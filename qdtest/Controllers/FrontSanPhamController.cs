@@ -136,7 +136,7 @@ namespace qdtest.Controllers
                 {
                     this.front_sanpham = CookieLibrary.Base64Decode(Request.Cookies.Get("front_sanpham"));
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     this.khoitao_cookie();
                     this.luu_cookie();

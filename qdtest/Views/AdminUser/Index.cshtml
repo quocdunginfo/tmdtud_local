@@ -7,6 +7,13 @@
 }
 <div id="main">
 	<div id="content">
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('table.employee .filter').keypress(function (event) {
+                    formSubmit(event, 'submitFilterButtonemployee')
+                })
+            });
+	    </script>
 		<div class="toolbar-placeholder">
 			<div class="toolbarBox toolbarHead">
 				<ul class="cc_button">

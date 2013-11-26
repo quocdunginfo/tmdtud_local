@@ -120,8 +120,9 @@ namespace qdtest.Controllers.ModelController
                 obj_list = obj_list.Where(x => x.gia >= gia_from && x.gia<=gia_to).ToList();
             }
             //filter by HangSX List
-            if (hangsx_list != null)
+            if (hangsx_list != null && hangsx_list.Count>0)
             {
+                Debug.WriteLine("co tim theo hang");
                 //build list id
                 List<int> hangsx_id_list = new List<int>();
                 hangsx_id_list= hangsx_list.Select(x => x.id).ToList();
@@ -129,8 +130,9 @@ namespace qdtest.Controllers.ModelController
                 obj_list = obj_list.Where(x => hangsx_id_list.Contains(x.hangsx.id)).ToList();
             }
             //filter by NhomSanPham List
-            if (nhomsanpham_list != null)
+            if (nhomsanpham_list != null && nhomsanpham_list.Count > 0)
             {
+                Debug.WriteLine("co tim theo nhom");
                 //build list id
                 List<int> nhomsanpham_id_list = new List<int>();
                 nhomsanpham_id_list = nhomsanpham_list.Select(x => x.id).ToList();
@@ -194,22 +196,41 @@ namespace qdtest.Controllers.ModelController
             {
                 if (order_desc)
                 {
-                    obj_list = obj_list.OrderByDescending(x => x.nhomsanpham.ten).ToList();
+                    List<SanPham> nhom_notnull= obj_list.Where(x=>x.nhomsanpham!=null).OrderByDescending(x=>x.nhomsanpham.ten).ToList();
+                    List<SanPham> nhom_null = obj_list.Where(x => x.nhomsanpham == null).OrderByDescending(x => x.id).ToList();
+                    obj_list = nhom_notnull.Concat(nhom_null).ToList();
                 }
                 else
                 {
-                    obj_list = obj_list.OrderBy(x => x.nhomsanpham.ten).ToList();
+                    List<SanPham> nhom_notnull = obj_list.Where(x => x.nhomsanpham != null).OrderBy(x => x.nhomsanpham.ten).ToList();
+                    List<SanPham> nhom_null = obj_list.Where(x => x.nhomsanpham == null).OrderBy(x => x.id).ToList();
+                    obj_list = nhom_notnull.Concat(nhom_null).ToList();
                 }
             }
             else if (order_by.Equals("hangsx"))
             {
                 if (order_desc)
                 {
-                    obj_list = obj_list.OrderByDescending(x => x.hangsx.ten).ToList();
+                    List<SanPham> hsx_notnull = obj_list.Where(x => x.hangsx != null).OrderByDescending(x => x.hangsx.ten).ToList();
+                    List<SanPham> hsx_null = obj_list.Where(x => x.hangsx == null).OrderByDescending(x => x.id).ToList();
+                    obj_list = hsx_notnull.Concat(hsx_null).ToList();
                 }
                 else
                 {
-                    obj_list = obj_list.OrderBy(x => x.hangsx.ten).ToList();
+                    List<SanPham> hsx_notnull = obj_list.Where(x => x.hangsx != null).OrderBy(x => x.hangsx.ten).ToList();
+                    List<SanPham> hsx_null = obj_list.Where(x => x.hangsx == null).OrderBy(x => x.id).ToList();
+                    obj_list = hsx_notnull.Concat(hsx_null).ToList();
+                }
+            }
+            else if (order_by.Equals("active"))
+            {
+                if (order_desc)
+                {
+                    obj_list = obj_list.OrderByDescending(x => x.active).ToList();
+                }
+                else
+                {
+                    obj_list = obj_list.OrderBy(x => x.active).ToList();
                 }
             }
 

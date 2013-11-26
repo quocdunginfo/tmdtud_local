@@ -134,20 +134,17 @@
 			</div>
 		</div>
 		<div class="leadin">
-			<div class="cat_bar2">
-				 &nbsp;<img src="../img/admin/home.gif" alt="">
-				Home
-			</div>
+			
 		</div>
 		
         <form id="category_form" name="category_form" action="@Url.Action("Submit","AdminLoaiNhanVien")" method="post">
             <fieldset id="fieldset_0">
-	            <legend> <img src="../img/admin/nav-user.gif" alt="Employees"> Thông tin hãng sản xuất</legend>
+	            <legend> <img src="../img/admin/nav-user.gif" alt="Employees"> Thông tin nhóm quyền hạn</legend>
                 <input name="loainhanvien_id" type="hidden" value="@LoaiNhanVien.id" type="text">
                 <label>Tên</label>
 	            <div class="margin-form">
 		            <input name="loainhanvien_ten" id="lastname" value="@LoaiNhanVien.ten" class="" size="33" type="text">
-                    <sub>*</sub>
+                    <sub style="color:red">*</sub>
                     <span style="color: red;">
                         @if(State.Contains("ten_fail")) { <text> Không hợp lệ</text> }
                     </span>
