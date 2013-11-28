@@ -19,7 +19,7 @@
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -1979,8 +1979,7 @@
     <Content Include="Content\tinymce-4-0-4\skins\lightgray\fonts\readme.md" />
     <Content Include="Content\admin\modules\gamification\data\data_EN_USD_US.json" />
     <Content Include="Content\admin\modules\gamification\prestashop.pub" />
-    <None Include="Properties\PublishProfiles\QWERT.pubxml" />
-    <None Include="Properties\PublishProfiles\XYZ.pubxml" />
+    <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
