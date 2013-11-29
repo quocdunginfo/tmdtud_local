@@ -12,7 +12,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>qdtest</RootNamespace>
-    <AssemblyName>qdtest</AssemblyName>
+    <AssemblyName>CuaHangBanGiay</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -352,6 +352,7 @@
     <Content Include="Content\admin\admin2109\Catalog_Categories.html" />
     <Content Include="Content\admin\admin2109\Catalog_Products.html" />
     <Content Include="Content\admin\admin2109\Catalog_Products_Edit.html" />
+    <Content Include="Content\admin\admin2109\html.html" />
     <Content Include="Content\admin\admin2109\index.html" />
     <Content Include="Content\admin\admin2109\Orders.html" />
     <Content Include="Content\admin\admin2109\themes\default\css\admin.css" />
@@ -708,6 +709,9 @@
     <Content Include="Content\admin\img\admin\warn2.png" />
     <Content Include="Content\admin\img\admin\warning.gif" />
     <Content Include="Content\admin\img\admin\world.gif" />
+    <Content Include="Content\admin\img\admin\_customer_manager.png" />
+    <Content Include="Content\admin\img\admin\_shopping_cart.png" />
+    <Content Include="Content\admin\img\admin\_user_manager.png" />
     <Content Include="Content\admin\img\admin\___info-ca.gif" />
     <Content Include="Content\admin\img\bg_500.png" />
     <Content Include="Content\admin\img\bg_loader.png" />
@@ -1783,13 +1787,17 @@
     <Content Include="Content\front\css\slimbox2.css" />
     <Content Include="Content\front\css\templatemo_style.css" />
     <Content Include="Content\front\images\2co.gif" />
+    <Content Include="Content\front\images\404.jpg" />
     <Content Include="Content\front\images\arrows.png" />
     <Content Include="Content\front\images\bullets.png" />
     <Content Include="Content\front\images\closelabel.gif" />
+    <Content Include="Content\front\images\icon_new.gif" />
     <Content Include="Content\front\images\loading.gif" />
     <Content Include="Content\front\images\login.png" />
     <Content Include="Content\front\images\menu-outline.gif" />
+    <Content Include="Content\front\images\new.gif" />
     <Content Include="Content\front\images\nextlabel.gif" />
+    <Content Include="Content\front\images\no_image.jpg" />
     <Content Include="Content\front\images\paypal.gif" />
     <Content Include="Content\front\images\prevlabel.gif" />
     <Content Include="Content\front\images\product\01.jpg" />
@@ -1832,6 +1840,7 @@
     <Content Include="Content\front\js\logging.js" />
     <Content Include="Content\front\js\slimbox2.js" />
     <Content Include="Content\online_payment\online_payment.png" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -1967,6 +1976,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\admin\css\.htaccess" />
     <Content Include="Content\admin\js\.htaccess" />
+    <Content Include="Content\admin\modules\gamification\data\data_EN_USD_US.json" />
+    <Content Include="Content\admin\modules\gamification\prestashop.pub" />
     <Content Include="Content\admin\themes\.htaccess" />
     <Content Include="Content\admin_login\scss\style.scss" />
     <Content Include="Content\tinymce-4-0-4\langs\readme.md" />
@@ -1977,9 +1988,7 @@
     <Content Include="Content\tinymce-4-0-4\skins\lightgray\fonts\icomoon.ttf" />
     <Content Include="Content\tinymce-4-0-4\skins\lightgray\fonts\icomoon.woff" />
     <Content Include="Content\tinymce-4-0-4\skins\lightgray\fonts\readme.md" />
-    <Content Include="Content\admin\modules\gamification\data\data_EN_USD_US.json" />
-    <Content Include="Content\admin\modules\gamification\prestashop.pub" />
-    <None Include="Properties\PublishProfiles\test.pubxml" />
+    <None Include="Properties\PublishProfiles\MVC3NET45.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -1998,7 +2007,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

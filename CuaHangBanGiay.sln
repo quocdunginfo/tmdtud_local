@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "qdtest", "qdtest\qdtest.csproj", "{69216953-D7F5-40E4-B0F7-7EB47B7FD02D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CuaHangBanGiay", "qdtest\CuaHangBanGiay.csproj", "{69216953-D7F5-40E4-B0F7-7EB47B7FD02D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
