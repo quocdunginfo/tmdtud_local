@@ -37,7 +37,7 @@
                        {
                       @:<div class="product_box">
                        }
-                       <p style="background:url(@Url.Content(_Template_Path+"/images/icon_new.gif"));width: 44px;height: 44px;"></p>
+                      <div class="new-icon"><img src="@Url.Content(_Template_Path+"/images/icon_new.gif")" style="width:58px;height:60px"/></div>
             	        <a href="@Url.Action("Index","FrontSanPhamDetail",new { id = item.id})"><img src="@Url.Content("~/_Upload/HinhAnh/"+item._get_hinhanh_macdinh().duongdan_thumb)" style="max-width:200px; height:150px;z-index:-1" alt="Shoes @i" /></a>
                         <a href="@Url.Action("Index","FrontSanPhamDetail",new { id = item.id})"><h3>@item.ten</h3></a>
                         <p class="product_price">@item.gia đ</p>

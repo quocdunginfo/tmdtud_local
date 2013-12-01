@@ -292,6 +292,7 @@ width: 80px;
                                 foreach (var item in SanPham_BestSeller)
                                 {
                                 <div class="bs_box">
+                                    <div class="icon-hot"><img src="@Url.Content(_Template_Path+"images/hot.gif")"/></div>
                                     <a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })">
                                         <img src="@Url.Content("~/_Upload/HinhAnh/" + item._get_hinhanh_macdinh().duongdan_thumb)" alt="image" style="max-width:60px; max-height:60px" /></a>
                                     <h4><a href="@Url.Action("Index", "FrontSanPhamDetail", new { id = item.id })">@item.ten</a></h4>

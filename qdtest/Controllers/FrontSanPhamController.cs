@@ -19,7 +19,7 @@ namespace qdtest.Controllers
             List<NhomSanPham> loaisp_list = new List<NhomSanPham>();
             NhomSanPham2 loaisp = new NhomSanPham2();
             List<List<SanPham>> splist = new List<List<SanPham>>();
-            if (id_loaisp == 0 || level_loaisp == 0)
+            if (id_loaisp == 0 || level_loaisp == 0 )
             {
                 NhomSanPham tmp;
                 if (id_loaisp != 0)
@@ -27,10 +27,18 @@ namespace qdtest.Controllers
                     tmp = ctr2.get_by_id(id_loaisp);
                     loaisp.Load_From(tmp);
                     loaisp.level = level_loaisp;
-                    foreach (NhomSanPham item in tmp.ds_nhomcon)
+                    if (tmp.ds_nhomcon.Count == 0)
                     {
-                        loaisp_list.Add(item);
-                        splist.Add(ctr.timkiem_dequy(item, "1", 0, 3));
+                        loaisp_list.Add(tmp);
+                        splist.Add(ctr.timkiem("","","","",0,0,null,loaisp_list,"1","id",true,0,-1));
+                    }
+                    else
+                    {
+                        foreach (NhomSanPham item in tmp.ds_nhomcon)
+                        {
+                            loaisp_list.Add(item);
+                            splist.Add(ctr.timkiem_dequy(item, "1", 0, 3));
+                        }
                     }
                 }
                 else
