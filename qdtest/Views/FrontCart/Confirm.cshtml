@@ -102,32 +102,33 @@
     <div class="cleaner h40"></div>
     <!-- thông tin người nhận -->
     <div id="contact_form" style="width:auto">
-        <h4>Thông tin người nhận</h4>    
+        <h3 style="border-bottom:double 1px #2f2f2f;padding:5px;width:660px">Thông tin người nhận</h3>    
         <form method="post" name="contact" action="@Url.Action("Payment","FrontCart")" onsubmit="document.location='@Url.Action("Payment","FrontCart")'">
 
                 <label style="width:auto">Họ và tên:</label>
-                <input type="text" class="required input_field" value="@giohang.nguoinhan_ten" style="float:left; border:none;" readonly="readonly">
+                <input type="text" class="required input_field" value="@giohang.nguoinhan_ten" style="float:left; box-shadow: 0px 0px 2px grey;" readonly="readonly">
                 
                 <div class="cleaner h10"></div>
 
                 <label style="width:auto">Số điện thoại:</label>
-                <input type="text" class="input_field" value="@giohang.nguoinhan_sdt" style="float:left; border:none;" readonly="readonly">
+                <input type="text" class="input_field" value="@giohang.nguoinhan_sdt" style="float:left; box-shadow: 0px 0px 2px grey;" readonly="readonly">
                 
                 <div class="cleaner h10"></div>
 
                 <label style="width:auto">Địa chỉ:</label>
-                <input type="text" class="input_field" value="@giohang.nguoinhan_diachi" style="float:left; border:none;" readonly="readonly">
+                <input type="text" class="input_field" value="@giohang.nguoinhan_diachi" style="float:left; box-shadow: 0px 0px 2px grey;" readonly="readonly">
                 
                 <div class="cleaner h10"></div>
                 <label style="width:auto">Tỉnh/Thành Phố:</label>
-                 <input type="text" class="input_field" value="@giohang.nguoinhan_diachi_tinhtp.ten" style="float:left; border:none;" readonly="readonly">
+                 <input type="text" class="input_field" value="@giohang.nguoinhan_diachi_tinhtp.ten" style="float:left; box-shadow: 0px 0px 2px grey;" readonly="readonly">
                 <div class="cleaner h10"></div>
                 <label style="width:auto">Hình thức thanh toán</label>
-                <input type="text" class="input_field" value="@if(giohang.thanhtoan_tructuyen) {<text>Thanh toán trực tuyến qua OnePay</text>} else {<text>Thanh toán tại nhà</text>}" style="float:left; border:none;" readonly="readonly">
+                <input type="text" class="input_field" value="@if(giohang.thanhtoan_tructuyen) {<text>Thanh toán trực tuyến qua OnePay</text>} else {<text>Thanh toán tại nhà</text>}" style="float:left;box-shadow: 0px 0px 2px grey;" readonly="readonly">
                 
                 <div class="cleaner h10"></div>
-               <input class="submit_btn" type="button" value="Hoàn tất đơn hàng" onclick="document.location='@Url.Action("Payment","FrontCart")'">
-                            <input type="button"  class="submit_btn" value="Trở về" onclick="window.location.href='@Url.Action("Checkout","FrontCart")    '">
+               <input class="submit_btn" type="button" value="Hoàn tất đơn hàng" onclick="document.location='@Url.Action("Payment","FrontCart")'" style="width: 150px;float: right;margin-right: 405px;">
+               <input type="button"  class="submit_btn" value="Trở về" onclick="window.location.href='@Url.Action("Checkout","FrontCart")'"style="width:80px">
+                <div class="cleaner h10"></div>
             </form>
         </div>
     <div class="cleaner h40"></div>

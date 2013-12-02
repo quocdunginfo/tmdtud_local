@@ -25,7 +25,7 @@
         if (loaisp != null && loaisp.level > 0)
         {
        <div class="sapxep" >
-            	<h1>@loaisp.ten</h1>
+            	<h1>@loaisp.ten (Có @ViewBag.Result_Count sản phẩm)</h1>
         <form method="post" action="@Url.Action("Submit", "FrontSanPham", new { id = loaisp.id, level = loaisp.level })"  class="form">
             <div><label>Sắp xếp theo </label><label class="mylabel"><select name="front_sanpham_orderby" onchange="submit()">
                             <option value="id" @if (front_sanpham["front_orderby"].Equals("id"))
@@ -47,22 +47,25 @@
                             <option value="1" @if (front_sanpham["front_desc"].Equals("1"))
                                               {<text>selected</text>}>Giảm dần</option>
                         </select></label></div>
-                    <div style="margin-top:10px"><label>Hiển thị </label><label class="mylabel"><select name="front_sanpham_max_item_per_page" onchange="submit()" style="margin-left:10px;margin-right:5px">
+                    <div style="margin-top:10px;float:left"><label>Hiển thị </label><label class="mylabel"><select name="front_sanpham_max_item_per_page" onchange="submit()" style="margin-left:10px;margin-right:5px">
                             @{
                                               for (int j = 1; j <= 10; j++)
                                               {<option value="@j" @if (int.Parse(front_sanpham["front_max_item_per_page"]) == j)
                                                                   {<text>selected</text>}>@j</option>}
                             }
-                        </select></label>sản phẩm /trang
-        <label style="padding-left:250px">Hiển thị trang</label><label class="mylabel" ><select name="front_current_page" onchange="submit()" style="margin-right:5px;margin-left: 10px;width:50px">
+                        </select></label>sản phẩm /trang</div></form>
+        <div style="margin-top:10px">
+          <form method="post" action="@Url.Action("Index", "FrontSanPham", new { id_loaisp = loaisp.id, level_loaisp = loaisp.level })"  class="form">
+        <label style="padding-left:250px">Hiển thị trang</label><label class="mylabel" >
+        <select name="front_current_page" onchange="submit()" style="margin-right:5px;margin-left: 10px;width:50px">
                             @{
                                               for (int j = 1; j <= ViewBag.Total_Page; j++)
                                               {<option value="@j" @if (ViewBag.Current_Page == j)
                                                                   {<text>selected="selected"</text>}>@j</option>}
                             }
-                        </select></label>/ @ViewBag.Total_Page trang</div>
-               </form>
-    </div>
+                        </select></label>/ @ViewBag.Total_Page trang</form></div>
+          <div class="cleaner"></div>      
+           </div>
     <br />
        <div class="ketquatimkiem">
                 @{
@@ -128,11 +131,11 @@
                                               }
                                               if (ViewBag.Current_Page - 2 > 1)
                                               {
-                            <a href="@Url.Action("Index", "FrontTimKiem", new { page = 1 })" style="text-align:center">[Trang đầu]</a>
+                            <a href="@Url.Action("Index", "FrontSanPham", new { page = 1,id_loaisp=loaisp.id,level_loaisp=loaisp.level })" style="text-align:center">[Trang đầu]</a>
                                               }
                                               if (ViewBag.CanPrevPage == true)
                                               {
-                            <a href="@Url.Action("Index", "FrontTimKiem", new { page = ViewBag.Current_Page - 1 })" style="text-align:center">[Trước]</a>
+                            <a href="@Url.Action("Index", "FrontSanPham", new { page = ViewBag.Current_Page - 1,id_loaisp=loaisp.id,level_loaisp=loaisp.level })" style="text-align:center">[Trước]</a>
                                               }
                                               if (ViewBag.Current_Page - 2 > 1)
                                               {
@@ -143,26 +146,26 @@
                                               {
                                                   if (ViewBag.Current_Page == tmp)
                                                   {
-                                <a href="@Url.Action("Index", "FrontTimKiem", new { page = tmp })" style="text-align:center"><b><u>@tmp</u></b></a>
+                                <a href="@Url.Action("Index", "FrontSanPham", new { page = tmp,id_loaisp=loaisp.id,level_loaisp=loaisp.level })" style="text-align:center"><b><u>@tmp</u></b></a>
                                                   }
                                                   else
                                                   {
-                                <a href="@Url.Action("Index", "FrontTimKiem", new { page = tmp })" style="text-align:center">@tmp</a>
+                                <a href="@Url.Action("Index", "FrontSanPham", new { page = tmp,id_loaisp=loaisp.id,level_loaisp=loaisp.level })" style="text-align:center">@tmp</a>
                                                   }
                                               }
 
 
-                                              if (ViewBag.Current_Page + 1 < ViewBag.Total_page)
+                                              if (ViewBag.Current_Page + 2 < ViewBag.Total_page)
                                               {
                             <a href="#">...</a>
                                               }
                                               if (ViewBag.CanNextPage == true)
                                               {
-                            <a href="@Url.Action("Index", "FrontTimKiem", new { page = ViewBag.Current_Page + 1 })" style="text-align:center">[Tiếp]</a>
+                            <a href="@Url.Action("Index", "FrontSanPham", new { page = ViewBag.Current_Page + 1,id_loaisp=loaisp.id,level_loaisp=loaisp.level })" style="text-align:center">[Tiếp]</a>
                                               }
-                                              if (ViewBag.Current_Page + 1 < ViewBag.Total_page)
+                                              if (ViewBag.Current_Page + 2 < ViewBag.Total_page)
                                               {
-                            <a href="@Url.Action("Index", "FrontTimKiem", new { page = ViewBag.Total_Page })" style="text-align:center">[Trang cuối]</a>
+                            <a href="@Url.Action("Index", "FrontSanPham", new { page = ViewBag.Total_Page,id_loaisp=loaisp.id,level_loaisp=loaisp.level })" style="text-align:center">[Trang cuối]</a>
                                               }
                     }   
             </div>

@@ -1791,6 +1791,7 @@
     <Content Include="Content\front\images\arrows.png" />
     <Content Include="Content\front\images\bullets.png" />
     <Content Include="Content\front\images\closelabel.gif" />
+    <Content Include="Content\front\images\giaygal11.png" />
     <Content Include="Content\front\images\icon_new.gif" />
     <Content Include="Content\front\images\loading.gif" />
     <Content Include="Content\front\images\login.png" />
@@ -1820,6 +1821,11 @@
     <Content Include="Content\front\images\slider\02.jpg" />
     <Content Include="Content\front\images\slider\03.jpg" />
     <Content Include="Content\front\images\slider\04.jpg" />
+    <Content Include="Content\front\images\slider\05.jpg" />
+    <Content Include="Content\front\images\slider\06.jpg" />
+    <Content Include="Content\front\images\slider\07.jpg" />
+    <Content Include="Content\front\images\slider\08.jpg" />
+    <Content Include="Content\front\images\slider\09.jpg" />
     <Content Include="Content\front\images\templatemo_addtocart.png" />
     <Content Include="Content\front\images\templatemo_body.jpg" />
     <Content Include="Content\front\images\templatemo_body_top.jpg" />
