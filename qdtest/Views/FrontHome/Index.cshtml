@@ -7,13 +7,20 @@
 <div id="content" class="float_r">
         	<div id="slider-wrapper">
                 <div id="slider" class="nivoSlider">
-                    <img src="@Url.Content(_Template_Path + "images/slider/02.jpg")" alt="" />
-                    <a href="#"><img src="@Url.Content(_Template_Path + "images/slider/01.jpg")" alt="" title="This is an example of a caption" /></a>
-                    <img src="@Url.Content(_Template_Path + "images/slider/03.jpg")" alt="" />
+                    <img src="@Url.Content(_Template_Path + "images/slider/01.gif")" alt=""  />
+                 
+                    <img src="@Url.Content(_Template_Path + "images/slider/02.jpg")" alt="" title="#htmlcaption" />
+                    <a href="@Url.Action("Index", "FrontSanPham", new { id_loaisp = 1, level_loaisp = 0 })"><img src="@Url.Content(_Template_Path + "images/slider/03.jpg")" alt="" title="#htmlcaption" /></a>
                     <img src="@Url.Content(_Template_Path + "images/slider/04.jpg")" alt="" title="#htmlcaption" />
+                    <img src="@Url.Content(_Template_Path + "images/slider/05.jpg")" alt="" title="#htmlcaption"  />
+                    <img src="@Url.Content(_Template_Path + "images/slider/06.jpg")" alt="" title="#htmlcaption"/>
+                     <img src="@Url.Content(_Template_Path + "images/slider/07.jpg")" alt="" title="#htmlcaption"/>
+                     <img src="@Url.Content(_Template_Path + "images/slider/08.jpg")" alt="" title="#htmlcaption"  />
+                     <img src="@Url.Content(_Template_Path + "images/slider/09.jpg")" alt="" title="#htmlcaption"/>
+                  
                 </div>
-                <div id="htmlcaption" class="nivo-html-caption">
-                    <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+                <div id="htmlcaption" class="nivo-html-caption" style="margin-bottom:10px">
+                    <strong>BigFoot</strong> hân hạnh phục vụ quý khách. Click vào <a href="@Url.Action("Index", "FrontSanPham", new { id_loaisp = 0, level_loaisp = 0 })">đây</a> để xem sản phẩm của chúng tôi.
                 </div>
             </div>
             <script type="text/javascript" src="@Url.Content(_Template_Path + "js/jquery-1.4.3.min.js")"></script>
@@ -23,7 +30,8 @@
                     $('#slider').nivoSlider();
                 });
             </script>
-        	<h1>Sản phẩm mới</h1>
+            <div class="cleaner"></div>      	
+            <h1 style="margin-top:40px">Sản phẩm mới</h1>
                 @{
                     var i=1;
                    foreach(var item in SanPhamNew_List)

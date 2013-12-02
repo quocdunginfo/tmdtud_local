@@ -8,7 +8,7 @@
     var front_timkiem_sanpham = (HttpCookie)ViewBag.front_timkiem_sanpham;
 }
 <div id="content" class="float_r">
-    <div class="timkiemnangcao" style="width:550px">
+    <div class="timkiemnangcao" style="width:690px">
         <h2>Kết quả tìm kiếm (Có @ViewBag.Result_Count sản phẩm)</h2>
         <form method="post" action="@Url.Action("Submit", "FrontTimKiem")"  class="form" style="width:650px">
             <label style="width:100px; display:inline-block">Tên sản phẩm:</label>
@@ -88,7 +88,7 @@
                     </select>
                 </label>
             </div>
-            <div>
+                 <div style="margin-top:10px;float:left">
                 <label>Hiển thị </label>
                 <label class="mylabel">
                     <select name="front_sanpham_max_item_per_page" onchange="submit()">
@@ -99,7 +99,9 @@
                         }
                     </select>
                 </label>
-                sản phẩm /trang
+                sản phẩm /trang</div></form>
+        <div style="margin-top:10px;float:right;margin-right:40px">
+        <form method="post" action="@Url.Action("Index", "FrontTimKiem")"  class="form">
         <label style="float:right">
             Hiển thị trang 
             <label class="mylabel">
@@ -111,11 +113,10 @@
                     }
                 </select>
             </label>
-            / @ViewBag.Total_Page trang</label>
+            / @ViewBag.Total_Page trang</label></form></div>
             <div style="clear:both"></div>
             </div>
-        </form>
-    </div>
+        
     <br />
     <div class="ketquatimkiem">
         @{
@@ -207,7 +208,7 @@
                 }
 
 
-                if (ViewBag.Current_Page + 1 < ViewBag.Total_page)
+                if (ViewBag.Current_Page + 2 < ViewBag.Total_page)
                 {
                 <a href="#">...</a>
                 }
@@ -215,7 +216,7 @@
                 {
                 <a href="@Url.Action("Index", "FrontTimKiem", new { page = ViewBag.Current_Page + 1 })" style="text-align:center">[Tiếp]</a>
                 }
-                if (ViewBag.Current_Page + 1 < ViewBag.Total_page)
+                if (ViewBag.Current_Page + 2 < ViewBag.Total_page)
                 {
                 <a href="@Url.Action("Index", "FrontTimKiem", new { page = ViewBag.Total_Page })" style="text-align:center">[Trang cuối]</a>
                 }

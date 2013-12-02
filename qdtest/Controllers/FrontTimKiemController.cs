@@ -83,7 +83,9 @@ namespace qdtest.Controllers
                 this.front_timkiem_sanpham["front_nhomsanpham_id"] = TextLibrary.ToString(Request["front_sanpham_nhomsanpham_id"]);
                 this.front_timkiem_sanpham["front_max_item_per_page"] = TextLibrary.ToString(Request["front_sanpham_max_item_per_page"]);
                 this.front_timkiem_sanpham["front_orderby"] = TextLibrary.ToString(Request["front_sanpham_orderby"]);
-                this.front_timkiem_sanpham["front_desc"] = TextLibrary.ToString(Request["front_sanpham_desc"]); ;
+                this.front_timkiem_sanpham["front_desc"] = TextLibrary.ToString(Request["front_sanpham_desc"]);
+
+             //   if (!TextLibrary.ToString(Request["front_current_page"]).Equals("")) page = TextLibrary.ToInt(Request["front_current_page"]);
             }
             //Save respone cookies
             Response.Cookies.Add(CookieLibrary.Base64Encode(this.front_timkiem_sanpham));

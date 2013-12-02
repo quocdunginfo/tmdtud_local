@@ -103,6 +103,7 @@ namespace qdtest.Controllers
         [HttpPost]
         public ActionResult Submit(int id,int level)
         {
+            int page=1;
             //get search value
             if (!TextLibrary.ToString(Request["front_submit_reset"]).Equals(""))
             {
@@ -116,11 +117,12 @@ namespace qdtest.Controllers
                 this.front_sanpham["front_max_item_per_page"] = TextLibrary.ToString(Request["front_sanpham_max_item_per_page"]);
                 this.front_sanpham["front_orderby"] = TextLibrary.ToString(Request["front_sanpham_orderby"]);
                 this.front_sanpham["front_desc"] = TextLibrary.ToString(Request["front_sanpham_desc"]); ;
+                if (TextLibrary.ToString(Request["front_sanpham_current_page"]) != "") page = (TextLibrary.ToInt(Request["front_sanpham_current_page"]));
             }
             //Save respone cookies
             Response.Cookies.Add(CookieLibrary.Base64Encode(this.front_sanpham));
             //redirect
-            return RedirectToAction("Index", "FrontSanPham", new {id_loaisp=id,level_loaisp=level });
+            return RedirectToAction("Index", "FrontSanPham", new {page=page, id_loaisp=id,level_loaisp=level });
         }
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
