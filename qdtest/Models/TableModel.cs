@@ -693,7 +693,7 @@ namespace qdtest.Models
         {
             return TextLibrary.ToCommaStringNumber(this.__get_tongtien_include_phivanchuyen());
         }
-        public Boolean _huy_don_hang()
+        public Boolean _huy_don_hang(BanGiayDBContext db)
         {
             if (this.trangthai.Equals("dabihuy"))
             {
@@ -705,6 +705,13 @@ namespace qdtest.Models
             foreach (var item in this.ds_chitiet_donhang)
             {
                 item.chitietsp.soluong += item.soluong;
+            }
+            //Trừ lại điểm khách hàng
+            if (this.khachhang != null)
+            {
+                this.khachhang.diem -= this.tongtien / 10000;
+                this.khachhang._Update_LoaiKhachHang(db);
+
             }
             return true;
         }

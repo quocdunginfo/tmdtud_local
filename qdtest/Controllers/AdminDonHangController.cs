@@ -55,7 +55,7 @@ namespace qdtest.Controllers
             string trangthai = TextLibrary.ToString(Request["donhang_trangthai"]);
             if (trangthai.Equals("dabihuy"))
             {
-                obj._huy_don_hang();
+                obj._huy_don_hang(ctr._db);
             }
             else
             {
