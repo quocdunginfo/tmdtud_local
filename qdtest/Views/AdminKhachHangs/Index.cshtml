@@ -272,7 +272,7 @@
                             <tbody>
                                 @foreach (var item in KhachHang_List)
                                 {
-                                    <tr class=" row_hover" @if(item.bad) {<text> style="background-color:#ebebeb;" </text> }>
+                                    <tr class=" row_hover" @if(item.bad) {<text> style="background-color:lightpink;" </text> }>
                                         
                                         <td class="pointer center" onclick="document.location = '@Url.Action("Edit", "AdminKhachHangs", new { id = item.id })'">
                                             @item.id
@@ -324,7 +324,7 @@
                         <p>
                             *Ghi chú:
                             <br />
-                            +Nền xám: Khách hàng xấu
+                            +Nền đỏ: Khách hàng xấu
                         </p>
                     </td>
                 </tr>
