@@ -58,6 +58,7 @@ namespace qdtest._Library
         }
         public static List<int> ToListInt(String input, Char separator = ',')
         {
+            input = ToString(input);//loc null
             string[] tmp= input.Split(separator);
             List<int> re = new List<int>();
             foreach (var item in tmp)
