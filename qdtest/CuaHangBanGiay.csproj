@@ -125,6 +125,7 @@
     <Compile Include="Controllers\AdminSanPhamController.cs" />
     <Compile Include="Controllers\AdminHangSXController.cs" />
     <Compile Include="Controllers\AdminHangSXsController.cs" />
+    <Compile Include="Controllers\FrontAboutController.cs" />
     <Compile Include="Controllers\FrontForgotPasswordController.cs" />
     <Compile Include="Controllers\FrontCartController.cs" />
     <Compile Include="Controllers\FrontContactController.cs" />
@@ -1826,6 +1827,7 @@
     <Content Include="Content\front\images\slider\07.jpg" />
     <Content Include="Content\front\images\slider\08.jpg" />
     <Content Include="Content\front\images\slider\09.jpg" />
+    <Content Include="Content\front\images\spirte_contact.png" />
     <Content Include="Content\front\images\templatemo_addtocart.png" />
     <Content Include="Content\front\images\templatemo_body.jpg" />
     <Content Include="Content\front\images\templatemo_body_top.jpg" />
@@ -2110,6 +2112,7 @@
     <Content Include="Views\FrontForgotPassword\Index.cshtml" />
     <Content Include="Views\FrontForgotPassword\Request_Password_Change.cshtml" />
     <Content Include="Views\FrontForgotPassword\Request_Password_Change_Submit.cshtml" />
+    <Content Include="Views\FrontAbout\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\admin\img\cms\" />
