@@ -198,7 +198,7 @@
 					<colgroup>
                         <col width="10px">
 					    <col width="20px">
-					    <col width="200px">
+					    <col width="300px">
 					    <col>
                         <col width="100px">
 					    <col width="100px">
@@ -276,7 +276,7 @@
 							        @item.tieude
 						        </td>
 						        <td class="pointer " onclick="document.location = '@Url.Action("Reply","AdminPhanHois", new {id=item.id})'">
-							         @item._get_noidung_lite()
+							         @item._get_noidung_lite(200)
 						        </td>
 						        <td class="pointer" onclick="document.location = '@Url.Action("Reply","AdminPhanHois", new {id=item.id})'">
 							        @item._get_nguoigui_ten()
@@ -310,14 +310,14 @@
                 <legend> <img src="../img/admin/nav-user.gif" alt="Employees"> Trả lời phản hồi qua email </legend>
                 <label>Email người nhận: </label>
 	            <div class="margin-form">
-		            <input name="email" value="@phanhoi._get_nguoigui_email()" class="" size="33" type="text">
+		            <input name="email" value="@phanhoi._get_nguoigui_email()" class="" size="45" type="text">
 	            </div>
 	            <div class="clear">
 	            </div>
 	
 	            <label>Tiêu đề: </label>
 	            <div class="margin-form">
-		            <input name="tieude" value="[Re]: @phanhoi.tieude " size="33" type="text">
+		            <input name="tieude" value="[Re]: @phanhoi.tieude " style="width:690px" type="text">
 	            </div>
 	            <div class="clear">
 	            </div>
@@ -342,7 +342,7 @@
                         });
                     </script>
 
-                    <textarea name="noidung" id="noidung_email">Nhân viên [@nhanvien.tendaydu] trả lời phản hồi từ khách hàng</textarea>
+                    <textarea name="noidung" id="noidung_email">[Bạn đã hỏi với nội dung sau:]<br />@phanhoi.noidung<br /><hr />Nhân viên [@nhanvien.tendaydu] trả lời phản hồi từ khách hàng như sau:</textarea>
 				</div>
 				<div class="clear">
 				</div>
