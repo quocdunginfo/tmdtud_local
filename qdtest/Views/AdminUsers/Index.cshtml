@@ -233,7 +233,7 @@
 					<tbody>
                     @foreach(var item in User_List)
                     {
-					<tr class=" row_hover">
+					<tr class=" row_hover" @if(item.bad) {<text> style="background-color:lightpink;" </text> }>
 						<td class="center">
 						</td>
 						<td class="pointer center" onclick="document.location = '@Url.Action("Edit", "AdminUsers", new { id = item.id })'">
@@ -280,6 +280,11 @@
                     }
 					</tbody>
 					</table>
+                    <p>
+                            *Ghi chú:
+                            <br />
+                            +Nền đỏ: nhân viên xấu
+                        </p>
 				</td>
 			</tr>
 			</table>
