@@ -1793,7 +1793,11 @@
     <Content Include="Content\front\images\bullets.png" />
     <Content Include="Content\front\images\closelabel.gif" />
     <Content Include="Content\front\images\giaygal11.png" />
+    <Content Include="Content\front\images\hot.gif" />
     <Content Include="Content\front\images\icon_new.gif" />
+    <Content Include="Content\front\images\icon_new2.gif" />
+    <Content Include="Content\front\images\icon_newk.gif" />
+    <Content Include="Content\front\images\icon_newss.gif" />
     <Content Include="Content\front\images\loading.gif" />
     <Content Include="Content\front\images\login.png" />
     <Content Include="Content\front\images\menu-outline.gif" />
@@ -1818,8 +1822,11 @@
     <Content Include="Content\front\images\refresh.png" />
     <Content Include="Content\front\images\register.png" />
     <Content Include="Content\front\images\remove_x.gif" />
+    <Content Include="Content\front\images\slider\01.gif" />
     <Content Include="Content\front\images\slider\01.jpg" />
+    <Content Include="Content\front\images\slider\02.gif" />
     <Content Include="Content\front\images\slider\02.jpg" />
+    <Content Include="Content\front\images\slider\03.gif" />
     <Content Include="Content\front\images\slider\03.jpg" />
     <Content Include="Content\front\images\slider\04.jpg" />
     <Content Include="Content\front\images\slider\05.jpg" />
@@ -1827,6 +1834,7 @@
     <Content Include="Content\front\images\slider\07.jpg" />
     <Content Include="Content\front\images\slider\08.jpg" />
     <Content Include="Content\front\images\slider\09.jpg" />
+    <Content Include="Content\front\images\slider\loading.gif" />
     <Content Include="Content\front\images\spirte_contact.png" />
     <Content Include="Content\front\images\templatemo_addtocart.png" />
     <Content Include="Content\front\images\templatemo_body.jpg" />
